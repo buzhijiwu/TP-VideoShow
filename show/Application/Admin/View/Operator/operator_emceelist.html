@@ -1,0 +1,96 @@
+<extend name="Public:list" />
+<block name="title"></block>
+<block name="css"></block>
+
+<block name="main">
+  <div id="searchid">
+    <form name="searchform" action="/Admin/Operator/operator_emceelist" method="get" >
+      <table width="100%" cellspacing="0" class="search-form">
+        <tbody>
+          <tr>
+            <td><div class="explain-col">
+                {:lan('USERNAME', 'Admin')}/{:lan('NICKNAME', 'Admin')}/{:lan('ROOMNO', 'Admin')}：
+                <input type="text" name="keyword" class="input-text" value="{$keyword}" />
+                {:lan('LIVE_TIME_RECENTLY', 'Admin')}：
+                <input type="text" name="start_time" id="start_time" value="{$Think.get.start_time}" size="10" class="date" readonly>
+                &nbsp;<script type="text/javascript">     Calendar.setup({
+                weekNumbers: false,
+                  inputField : "start_time",
+                  trigger    : "start_time",
+                  dateFormat: "%Y-%m-%d",
+                  showTime: false,
+                  minuteStep: 1,
+                  onSelect   : function() {this.hide();}
+                });
+                </script>- &nbsp;
+                <input type="text" name="end_time" id="end_time" value="{$Think.get.end_time}" size="10" class="date" readonly>
+                &nbsp;<script type="text/javascript">     Calendar.setup({
+                weekNumbers: false,
+                  inputField : "end_time",
+                  trigger    : "end_time",
+                  dateFormat: "%Y-%m-%d",
+                  showTime: false,
+                  minuteStep: 1,
+                  onSelect   : function() {this.hide();}
+                });
+                </script>                
+                <input type="hidden" name="userid" class="input-text" value="{$userid}" />                
+                <input type="submit" name="search" class="button" value="{:lan('SEARCH', 'Admin')}" />
+              </div></td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+  <style>
+  #myform th, #myform td { text-align: center;}
+  </style>
+  <form name="myform" id="myform" action="" method="post" >
+    <div class="table-list">
+      <table width="100%">
+        <thead>
+          <tr>
+            <th width="40">{:lan('SYS_NUMBER', 'Admin')}</th>
+            <th>{:lan('USERNAME', 'Admin')}</th>            
+            <th>{:lan('NICKNAME', 'Admin')}</th>
+            <th>{:lan('ROOMNO', 'Admin')}</th>
+            <th>{:lan('EMCEE_HEADPIC', 'Admin')}</th>
+            <th>{:lan('EM_GRADE', 'Admin')}</th>
+            <th>{:lan('NO_SETTLEMENT_MONEY', 'Admin')}</th>
+            <th>{:lan('LIVE_TIME_RECENTLY', 'Admin')}</th>  
+            <th>{:lan('LIVING_STATUS', 'Admin')}</th>
+            <th>{:lan('OPERATION', 'Admin')}</th>                        
+          </tr>
+        </thead>
+        <tbody>
+          <volist name="data" id="v" key="k">
+          <tr>
+            <td>{$k}</td>
+            <td>{$v.username}</td>            
+            <td>{$v.nickname}</td>
+            <td>{$v.roomno}</td>            
+            <td><img width="100" src="{$Think.config.IMAGE_BASE_URL}{$v.smallheadpic}"></td>
+            <td>{$v.emceelevel}</td>   
+            <td>{$v.nosettlementmoney}</td>  
+            <td>{$v.starttime}</td>  
+            <td>
+            <eq name="v.isliving" value="1">
+            {:lan('LIVE_IN', 'Admin')}
+            <else />
+            {:lan('NO_LIVE', 'Admin')}
+            </eq>
+            </td>            
+            <td>
+              <a href="{:U('Admin/Show/user_audit_edit/modify_operator/1/id/'.$v['userid'])}">{:lan('MODIFY_OPERATOR', 'Admin')}</a>
+            </td>            
+          </tr>
+          </volist>
+        </tbody>
+      </table>
+      <div id="pages">{$page}</div>
+    </div>
+  </form>
+</block>
+
+<block name="js">
+</block>

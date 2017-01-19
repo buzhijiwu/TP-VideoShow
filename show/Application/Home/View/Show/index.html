@@ -1,0 +1,163 @@
+<!doctype html>
+<html>
+<head>
+
+	<!--公用meta-->
+	<include file="Public:meta" />
+
+	<title>{:lan("SHOW_LIST", "Home")}</title>
+
+</head>
+<body>
+<!--公用头部-->
+<include file="Public:header" />
+
+<!--主要内容-->
+<div class="common-wrap">
+	<div class="show-main">
+		<div class="width clear">
+			<!--左侧-->
+			<div class="left">
+				<!--左侧banner-->
+				<div class="ck-slide show">
+					<ul class="ck-slide-wrapper">
+						<foreach name="showrollpic" item="srp" key="k">
+							<if condition="$k eq 0">
+								<li>
+									<a href="{$srp['linkurl']}">
+										<img src="{$Think.config.IMAGE_BASE_URL}{$srp['picpath']}" width="900px" height="250px" alt="" />
+									</a>
+								</li>
+								<else />
+								<li class="dis-none">
+									<a href="{$srp['linkurl']}">
+										<img src="{$Think.config.IMAGE_BASE_URL}{$srp['picpath']}" width="900px" height="250px" alt="" />
+									</a>
+								</li>
+							</if>
+						</foreach>
+					</ul>
+					<a href="javascript:;" class="ctrl-slide ck-prev"></a>
+					<a href="javascript:;" class="ctrl-slide ck-next"></a>
+					<div class="ck-slidebox">
+						<div class="slideWrap">
+							<ul class="dot-wrap">
+								<foreach name="showrollpic" item="srp" key="k">
+									<if condition="$k eq 0">
+										<li class="currentLp">
+											<em>{$k}</em>
+										</li>
+										<else />
+										<li>
+											<em>{$k}</em>
+										</li>
+									</if>
+								</foreach>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<!--左侧列表-->
+				<ul class="show-common-list clear">
+					<foreach name="allEmcees" item="emcee" key="k">
+						<li class="list">
+							<a href="{:U('/'.$emcee['showroomno'])}">
+								<eq name="emcee[isliving]" value="1">
+									<img src="{$Think.config.IMAGE_BASE_URL}/Public/Public/Images/Emcee/Video.png" class="icon-play"/>
+								</eq>
+								<img class="header-img" src="{$Think.config.IMAGE_BASE_URL}{$emcee['bigheadpic']}" />
+								<div class="line1 clear">
+									<p class="em-name" title="{$emcee['nickname']}">{$emcee['nickname']}</p>
+									<eq name="emcee[isliving]" value="1">
+										<eq name="emcee['livetype']" value="2">
+											<i class="iconfont pc-icon on-live">&#xe61a;</i>
+										<else/>
+											<i class="iconfont app-icon on-live">&#xe619;</i>
+										</eq>
+									<else/>
+										<eq name="emcee['livetype']" value="2">
+											<i class="iconfont pc-icon">&#xe61a;</i>
+										<else/>
+											<i class="iconfont app-icon">&#xe619;</i>
+										</eq>
+									</eq>
+									<p class="common-em em{$emcee['emceelevel']}"></p>
+								</div>
+								<p class="line2">
+									<i class="iconfont">&#xe600;</i>
+									<span>{$emcee['totalaudicount']}</span>
+								</p>
+								<div class="dark"></div>
+							</a>
+							<div class="common-family">
+								<p>{:lan("FAMILY_NAME", "Home")}</p>
+								<a class="family-style" href="{$emcee['familydetailurl']}">
+									{$emcee['familybadgeshow']}
+								</a>
+							</div>
+						</li>
+					</foreach>
+				</ul>
+
+				<!--加载更多-->
+				<p id="loadmorediv" class="common-loadMore">{$rolldownloadmore}</p>
+			</div>
+
+			<!--右侧-->
+			<div class="right">
+				<!--右侧banner-->
+				<div class="ck-slide ck">
+					<ul class="ck-slide-wrapper">
+						<foreach name="lunboFiveEmcees" item="fe" key="m">
+							<if condition="$m eq 0">
+								<li>
+									<a href="{:U('/'.$fe['showroomno'])}">
+										<img src="{$Think.config.IMAGE_BASE_URL}{$fe['bigheadpic']}" />
+									</a>
+									<i></i>
+								</li>
+								<else />
+								<li class="dis-none">
+									<a href="{:U('/'.$fe['showroomno'])}">
+										<img src="{$Think.config.IMAGE_BASE_URL}{$fe['bigheadpic']}" />
+									</a>
+								</li>
+							</if>
+						</foreach>
+					</ul>
+					<a href="javascript:;" class="ctrl-slide ck-prev"></a>
+					<a href="javascript:;" class="ctrl-slide ck-next"></a>
+				</div>
+
+				<!--公用公告-->
+				<include file="Public:announce" />
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+<!--共用底部-->
+<include file="Public:bottom" />
+
+<!-- 共用登录-->
+<include file="Public:login" />
+
+<!--共用弹框-->
+<include file="Public:alert" />
+
+<!--共用js-->
+<include file="Public:javascript" />
+<script>
+	var pageno = 1,
+			isLast = false;
+	$(window).scroll(function () {
+		common.scrollLoad("{$categoryid}","{:lan(\"FAMILY_NAME\", \"Home\")}","{$rolldownloadmore}");
+	})
+</script>
+</body>
+</html>

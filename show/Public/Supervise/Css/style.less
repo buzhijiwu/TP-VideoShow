@@ -1,0 +1,435 @@
+/*定义公用样式*/
+@main-color:#fa4d85;
+@main-hover-color:#d83476;
+@main-bgColor:#f1f4f8;
+.txt-over{
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.border-radius(@radius){
+  border-radius: @radius;
+  -moz-border-radius: @radius;
+  -webkit-border-radius: @radius;
+}
+
+
+//左侧列表
+.supervise-menu{
+  width: 260px;
+  background-image: url("/Public/Supervise/Image/left-bg.jpg");
+  background-size: 100%;
+  padding-top: 25px;
+  height: 100%;
+  float: left;
+  position: relative;
+  z-index: 10;
+  .top{
+    border-bottom: 1px solid #999;
+    padding-bottom: 20px;
+    .logo{
+      width:65px;
+      height: 65px;
+      display: block;
+      margin: 0 auto;
+    }
+    .title{
+      margin-top: 25px;
+      text-align: center;
+      font-size: 30px;
+      color: @main-color;
+    }
+    .name{
+      margin-top: 15px;
+      font-size: 18px;
+      color: #fff;
+      text-align: center;
+    }
+    .logout{
+      margin-top: 20px;
+      border: 1px solid @main-color;
+      color: @main-color;
+      height: 35px;
+      width: 180px;
+      margin-left: 40px;
+      .border-radius(4px);
+      font-size: 16px;
+      &:hover{
+        background-color: @main-color;
+        border-color: @main-color;
+        color: #fff;
+      }
+    }
+  }
+  .list{
+    padding-top: 20px;
+    li{
+      height: 60px;
+      line-height: 60px;
+      padding-left: 35px;
+      color: #9d9d9d;
+      font-size: 18px;
+      &:hover{
+        cursor:pointer;
+        background-color: rgba(0,0,0,0.3);
+        color: #fff;
+      }
+      &.active{
+        background-color: rgba(0,0,0,0.3);
+        color: #fff;
+      }
+      .num{
+        float: right;
+        margin-right: 10px;
+        height: 30px;
+        padding: 0 10px;
+        .border-radius(10px);
+        background-color: rgba(150,150,150,0.3);
+        line-height: 30px;
+        margin-top: 15px;
+        color: #fff;
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+
+//右侧框架
+.mian-right{
+  float: left;
+  width: 100%;
+  padding-left: 260px;
+  margin-left: -260px;
+  height: 100%;
+  overflow: hidden;
+  iframe{
+    border: none;
+  }
+}
+
+.list-main{
+  padding: 20px 30px;
+  .header{
+    height: 60px;
+    padding-left: 30px;
+    background-color: #fff;
+    box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.2);
+    .border-radius(5px);
+    &.fixed{
+      position: fixed;
+      top:0;
+      left: 30px;
+      z-index: 99;
+    }
+    .btn{
+    float: left;
+    margin-top: 15px;
+    height: 30px;
+    button{
+      padding:0 20px;
+      border-right: 1px solid #ccc;
+      height: 30px;
+      line-height: 30px;
+      font-size: 18px;
+      color: #666;
+      &:last-child{
+        border-right: none;
+      }
+      &.active{
+        color: @main-color;
+      }
+    }
+  }
+    .search{
+      float: left;
+      margin-top: 10px;
+      height: 40px;
+      width: 240px;
+      border: 1px solid #eee;
+      .border-radius(5px);
+      margin-left: 15px;
+      .search-input{
+        height: 40px;
+        line-height: 40px;
+        padding-left: 15px;
+        font-size: 14px;
+        width: 200px;
+      }
+      .search-submit{
+        font-size: 22px;
+        color: @main-color;
+        font-weight: bold;
+      }
+    }
+    .search-table{
+      float: left;
+      width: 380px;
+      tr{
+        td{
+          line-height: 60px;
+          input{
+            border: 1px solid #eee;
+            height: 30px;
+            padding-left: 5px;
+            .border-radius(4px);
+          }
+        }
+      }
+    }
+  }
+  .main{
+    margin-top: 20px;
+    background-color: #fff;
+    padding: 25px;
+    box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.2);
+    .border-radius(5px);
+    &.pc-list{
+      padding:25px 10px;
+      .list{
+        li{
+          width: 240px;
+          height: 250px;
+          margin: 0 10px 25px 10px;
+          >object{
+            margin-left:0;
+          }
+        }
+      }
+    }
+    .list{
+      li{
+        float: left;
+        width: 195px;
+        height: 420px;
+        margin: 0 25px 25px 25px;
+        border: 1px solid #ccc;
+        text-align: center;
+        overflow: hidden;
+        >object{
+          margin-left: -85px;
+        }
+        .name{
+          font-size: 16px;
+          color: #666;
+          margin-top: 10px;
+        }
+        .btn{
+          font-size: 14px;
+          color: #999;
+          a{
+            color: #666;
+            &:hover{
+              color: @main-color;
+            }
+          }
+          .stop-live{
+            font-size:32px;
+            color: @main-color;
+          }
+        }
+      }
+    }
+    .supervise-page{
+      text-align: center;
+      button{
+        padding: 2px 10px;
+        .border-radius(2px);
+        border: 1px solid #ddd;
+        color: #666;
+        &.active{
+          background-color: @main-color;
+          color: #fff;
+          border-color: @main-color;
+        }
+      }
+    }
+  }
+
+}
+.report-table-list{
+  text-align: center;
+  margin-top: 20px;
+  background-color: #fff;
+  box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.2);
+  .border-radius(5px);
+  tr{
+    &:nth-child(even){
+      background-color: #f5f5f5;
+    }
+    th{
+      font-weight: normal;
+      padding: 10px 0;
+      border-bottom: 1px solid #ddd;
+      border-top: 1px solid #ddd;
+    }
+    td{
+      padding: 10px 0;
+      border-bottom: 1px solid #ddd;
+      a:hover{
+        color: @main-color;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+.DynarchCalendar-topCont{
+  width: 260px;
+}
+.subnav{
+  float: left;
+  height: 40px;
+  line-height: 40px;
+  margin-top: 10px;
+  span,button{
+    height: 40px;
+    line-height: 40px;
+  }
+  button{
+    margin: 0 15px;
+    .border-radius(3px);
+    padding: 0 15px;
+    border: 1px solid @main-color;
+    color: @main-color;
+    &:hover{
+      background-color: @main-color;
+      color: #fff;
+    }
+  }
+}
+//举报、禁播弹框
+.liveroom-report-alert-wrap{
+  position: fixed;
+  top: 0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 99;
+  .liveroom-report-alert{
+    width: 480px;
+    padding: 20px;
+    background-color: rgba(255,255,255,0.9);
+    position: absolute;
+    left: 50%;
+    margin-left: -240px;
+    font-size: 14px;
+    top: 150px;
+    .border-radius(10px);
+    //举报
+    .report-alert{
+      .title{
+        height: 45px;
+        line-height: 45px;
+        text-align: center;
+        font-size: 18px;
+      }
+      .list{
+        li{
+          float: left;
+          height: 30px;
+          line-height: 30px;
+          padding: 0 20px;
+          border: 1px solid #cccccc;
+          margin: 5px 6px;
+          &.active{
+            border-color: @main-color;
+            color: @main-color;
+          }
+          &:hover{
+            cursor: pointer;
+          }
+        }
+      }
+    }
+    //禁播
+    .ban-alert{
+      .line{
+        text-align: center;
+        padding: 3px 0;
+        .right{
+          width: 150px;
+          text-align: center;
+          height: 28px;
+          border: 1px solid #ccc;
+          color: #666;
+        }
+      }
+    }
+
+    .other-cause{
+      width: 430px;
+      height: 100px;
+      padding: 5px 10px;
+      border: 1px solid #ccc;
+      margin-top: 15px;
+      margin-left: 5px;
+      color: #666;
+      &:focus{
+        outline-offset:-2px;
+        outline: @main-color auto 5px;
+      }
+    }
+    .bottom{
+      margin-top: 20px;
+      text-align: center;
+      .button{
+        height: 30px;
+        padding: 0 30px;
+        color: #fff;
+        background-color: @main-color;
+        margin: 0 10px;
+        .border-radius(4px);
+        &:hover{
+          background-color: @main-hover-color;
+        }
+      }
+    }
+    .close-report{
+      position: absolute;
+      right: 10px;
+      top:10px;
+      font-size: 20px;
+      color: @main-color;
+      &:hover{
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+
+/*公用页码*/
+.common-page{
+  text-align: center;
+  left: 50%;
+  padding: 20px 0;
+  .current{
+    display: inline-block;
+    padding: 0 5px;
+    height: 25px;
+    .border-radius(2px);
+    text-align: center;
+    line-height: 25px;
+    margin: 0 2px;
+    background-color: @main-color;
+    color: #fff;
+    border: 1px solid @main-color;
+  }
+  a{
+    display: inline-block;
+    .border-radius(2px);
+    border: 1px solid #ddd;
+    color: #999;
+    text-align: center;
+    line-height: 25px;
+    margin: 0 2px;
+    padding: 0 5px;
+    height: 25px;
+    &.active{
+      background-color: @main-color;
+      color: #fff;
+      border: 1px solid @main-color;
+    }
+  }
+}

@@ -1,0 +1,34 @@
+﻿<xml version="1.0" encoding="UTF-8">
+    <showlist>
+		<authenfailed>cam域名没经过授权！请联系官网 www.waashow.com 进行授权!</authenfailed>
+		<playpath>播放路径流:</playpath>
+	    <lackvedio>缺少视频或音频设备，请检查</lackvedio>
+        <notroomhost>你不是此房间的主人</notroomhost>
+        <authfailretry>验证失败，请重试</authfailretry>
+        <camforbid>您不允许使用摄像头!</camforbid>
+        <camoccupy>摄像头被其它程序占用,请检查</camoccupy>
+        <contactadmin>下播失败，请联系管理员</contactadmin>
+        <liveendroom>直播结束 房间号:</liveendroom>
+        <fillamount>请填写收费数额</fillamount>
+        <fillpassword>请填写房间密码</fillpassword>
+        <neterrortry>网络似乎有问题，请重试</neterrortry>
+        <cutpicsavefail>截图保存失败</cutpicsavefail>
+        <kindremind>温馨提示：用OBS的先推再配置播放器 不用OBS直接配置播放器</kindremind>
+        <confirmbtntxt>确 定</confirmbtntxt>
+        <choosevedioh>请选择视频设备</choosevedioh>
+        <choosevoiceh>请选择音频设备</choosevoiceh>
+		<createalive>请您创建一个直播</createalive>
+		<publicsee>公开(任何人都可以随意观看)</publicsee>
+		<chargesee>收费(观众需要付费才能观看，您需要消耗100秀币)</chargesee>
+		<privatesee>私有(观众需要知道您的密码才能观看，您需要消耗50个秀币)</privatesee>
+		<startlive>开始直播</startlive>
+		<previewing>预览中 ...</previewing>
+		<takephoto>拍摄照片</takephoto>
+		<clearview>清晰画面</clearview>
+		<normalview>普通画面</normalview>
+		<userview>观众画面</userview>
+		<finishlive>结束直播</finishlive>
+		<setamount>请设定需要观众支付的秀币数量</setamount>
+		<inputpassword>输入密码</inputpassword>
+    </showlist>
+</xml>

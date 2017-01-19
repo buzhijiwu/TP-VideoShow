@@ -1,0 +1,136 @@
+<extend name="Public:list" />
+<block name="title"></block>
+<block name="css"></block>
+
+<block name="main">
+<style type="text/css">	
+html{_overflow-y:scroll}
+</style>
+<div id="closeParentTime" style="display:none"></div>
+<div class="pad-10">
+  <div class="content-menu ib-a blue line-x"><a href="javascript:;"><em>{:lan('SMASHINGEGGS_WINNING_RECORD', 'Admin')}</em></a></div>
+  <div id="searchid">
+    <form name="searchform" action="/Admin/Show/game_order" method="get">
+    <table width="100%" cellspacing="0" class="search-form">
+      <tbody>
+        <tr>
+          <td><div class="explain-col"> {:lan('TIME', 'Admin')}：
+              <input type="text" name="start_time" id="start_time" value="<neq name="Think.get.start_time" value="">{$Think.get.start_time}</neq>" size="10" class="date input-text" readonly="">
+              &nbsp;<script type="text/javascript">			Calendar.setup({
+			weekNumbers: false,
+		    inputField : "start_time",
+		    trigger    : "start_time",
+		    dateFormat: "%Y-%m-%d",
+		    showTime: false,
+		    minuteStep: 1,
+		    onSelect   : function() {this.hide();}
+			});
+        </script>- &nbsp;
+              <input type="text" name="end_time" id="end_time" value="<neq name="Think.get.end_time" value="">{$Think.get.end_time}</neq>" size="10" class="date input-text" readonly="">
+              &nbsp;<script type="text/javascript">			Calendar.setup({
+			weekNumbers: false,
+		    inputField : "end_time",
+		    trigger    : "end_time",
+		    dateFormat: "%Y-%m-%d",
+		    showTime: false,
+		    minuteStep: 1,
+		    onSelect   : function() {this.hide();}
+			});
+        </script>
+        	{:lan('USERID', 'Admin')}：
+                <input name="userid" class="input-text" value="{$Think.get.userid}" type="text">
+              <input type="submit" name="search" class="button" value="{:lan('BTN_SEARCH', 'Admin')}">
+            </div></td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+  </div>
+  <div class="table-list">
+    <table width="100%">
+      <thead>
+        <tr>
+          <th width="150">{:lan('USERID', 'Admin')}</th>
+          <th width="100">{:lan('USER', 'Admin')}</th>
+          <th width="100">{:lan('REWARD', 'Admin')}</th>
+          <th width="150">{:lan('WINNING_TIME', 'Admin')}</th>
+          <th width="100"></th>
+          <th width="100"></th>
+          <th width="100"></th>
+          <th width="100"></th>
+        </tr>
+      </thead>
+      <tbody>
+      	<volist name="data.list" id="v">
+        <tr>
+          <td align="center">{$v.targetid}</td>
+          <td align="center">{$v.username}</td>
+          <td align="center">{$v.amount}</td>
+          <td align="center">{$v.createtime}</td>
+          <td align="center"></td>
+          <td align="center"></td>
+          <td align="center"></td>
+          <td align="center"></td>
+        </tr>
+				</volist>
+      </tbody>
+    </table>
+    <div id="pages"> {$data.page} </div>
+  </div>
+</div>
+<div style="z-index: 1000000; visibility: hidden;" id="" class="ui_dialog_wrap ">
+  <div style="z-index: 1000000;" class="ui_overlay">
+    <div></div>
+  </div>
+  <div style="" class="ui_dialog">
+    <table class="">
+      <tbody>
+        <tr>
+          <td class="ui_border ui_td_00"></td>
+          <td class="ui_border ui_td_01"></td>
+          <td class="ui_border ui_td_02"></td>
+        </tr>
+        <tr>
+          <td class="ui_border ui_td_10"></td>
+          <td class="ui_td_11"><table class="ui_dialog_main">
+              <tbody>
+                <tr>
+                  <td class="ui_title_wrap"><div class="ui_title">
+                      <div class="ui_title_text"></div>
+                      <a accesskey="c" href="#" class="ui_close">×</a></div></td>
+                </tr>
+                <tr>
+                  <td class="ui_content_wrap"><div class="ui_content"></div>
+                    <div class="ui_loading_tip">Loading..</div></td>
+                </tr>
+                <tr>
+                  <td class="ui_bottom_wrap"><div class="ui_bottom">
+                      <div class="ui_btns"></div>
+                      <div class="ui_resize"></div>
+                    </div></td>
+                </tr>
+              </tbody>
+            </table></td>
+          <td class="ui_border ui_td_12"></td>
+        </tr>
+        <tr>
+          <td class="ui_border ui_td_20"></td>
+          <td class="ui_border ui_td_21"></td>
+          <td class="ui_border ui_td_22"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="z-index: 1000001;" class="ui_move_temp">
+    <div></div>
+  </div>
+</div>
+</block>
+
+<block name="js">
+<script type="text/javascript">
+function confirm_delete(){
+	if(confirm("{:lan('CONFIRM_DELETE', 'Admin')}")) $('#myform').submit();
+}
+</script>
+</block>

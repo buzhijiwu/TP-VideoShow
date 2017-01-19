@@ -1,0 +1,85 @@
+<tagLib name="html" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>{:lan('ADMIN_MAN_TITLE', 'Admin')}</title>
+    <link href="__PUBLIC__/Public/statics/css/reset.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/Public/statics/css/system.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/Public/statics/css/table_form.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles1.css" title="styles1" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles2.css" title="styles2" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles3.css" title="styles3" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles4.css" title="styles4" media="screen" />
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/admin_common.js"></script>
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/styleswitch.js"></script>
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/formvalidator.js" charset="UTF-8"></script>
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/formvalidatorregex.js" charset="UTF-8"></script>
+    <script type="text/javascript">
+        window.focus();
+    </script>
+</head>
+<body>
+<style type="text/css">
+    html{_overflow-y:scroll}
+</style>
+<form action="{:U('Admin/DefaultParameter/save')}" method="post" id="myform">
+    <div class="pad-10">
+        <div class="col-tab">
+            <ul class="tabBut cu-li">
+                <li id="tab_setting_1" class="on" onclick="SwapTab('setting','on','',4,1);">{:lan('DEFAULT_PARAMETER', 'Admin')}</li>
+            </ul>
+            <div id="div_setting_1" class="contentList pad-10">
+                <table width="100%"  class="table_form">
+                    <tr>
+                        <th>{:lan('SIGNFLAG_EMCEE_RATIO', 'Admin')}：</th>
+                        <td class="y-bg">
+                            <input type="text" class="input-text" name="signflag_emcee_ratio" value="{$default_parameter['signflag_emcee_ratio']}"/>
+                            <div class="onShow">{:lan('SIGNFLAG_EMCEE_RATIO_TIPS', 'Admin')}</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>{:lan('EMCEE_BASE_RATIO', 'Admin')}：</th>
+                        <td class="y-bg">
+                            <input type="text" class="input-text" name="emcee_base_ratio" value="{$default_parameter['emcee_base_ratio']}"/>
+                            <div class="onShow">{:lan('EMCEE_BASE_RATIO_TIPS', 'Admin')}</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>{:lan('VND_RATIO', 'Admin')}：</th>
+                        <td class="y-bg">
+                            <input type="text" class="input-text" name="vnd_ratio" value="{$default_parameter['vnd_ratio']}"/>
+                            <div class="onShow">{:lan('VND_RATIO_TIPS', 'Admin')}</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>{:lan('SETTLEMENT_TRADE_TYPE', 'Admin')}：</th>
+                        <td class="y-bg">
+                            <input type="text" class="input-text" name="settlement_trade_type" value="{$default_parameter['settlement_trade_type']}"/>
+                            <div class="onShow">{:lan('SETTLEMENT_TRADE_TYPE_TIPS', 'Admin')}</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>{:lan('FAMILY_FIRST_MONTH_RATIO', 'Admin')}：</th>
+                        <td class="y-bg">
+                            <input type="text" class="input-text" name="family_first_month_ratio" value="{$default_parameter['family_first_month_ratio']}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>{:lan('OPERATE_RATIO', 'Admin')}：</th>
+                        <td class="y-bg">
+                            <input type="text" class="input-text" name="operator_ratio" value="{$default_parameter['operator_ratio']}"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="bk15"></div>
+            <input name="dosubmit" type="submit" value="{:lan('SUBMIT_BUTTION', 'Admin')}" class="button">
+        </div>
+    </div>
+</form>
+</body>
+</html>

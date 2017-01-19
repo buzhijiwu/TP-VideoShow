@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="shortcut icon" href="/Public/Public/Images/favicon.ico"/>
+    <link href="__PUBLIC__/Home/Css/zh/reset.css?time=20160627.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/Home/Css/zh/common.css?time=20160627.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/Supervise/Css/style.css?time=20160627.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <title>{:lan('VIDEO_INSPECTOR_BACKGROUND', 'Supervise')}</title>
+</head>
+<body>
+
+<input type="hidden" value="{$Think.config.IMAGE_BASE_URL}" id="baseUrl">
+<div class="supervise-menu">
+    <div class="top">
+        <img src="/Public/Supervise/Image/logo.png" class="logo">
+        <h2 class="title">{:lan('VIDEO_INSPECTOR_BACKGROUND', 'Supervise')}</h2>
+        <h4 class="name">{$hello}，<span>{$username}</span></h4>
+        <button class="logout" onclick="window.location.href='{:U(logout)}'">{:lan('QUIT_SYSTEM', 'Supervise')}</button>
+    </div>
+    <ul class="list">
+        <li class="active" data-src="{:U('/Supervise/SuperviseList/app_list')}">{:lan('INSPECTOR_LIST', 'Supervise')}</li>
+        <li class="clear" data-src="{:U('/Supervise/Treated/pending_report')}">
+            {:lan('PENDING_REPORT', 'Supervise')}
+            <!-- <gt name="pending_report_count" value="0">
+            <span class="num">{$pending_report_count}</span>
+            </gt> -->
+        </li>
+        <li data-src="/Supervise/Treated/violation_record">{:lan('VIOLATION_RECORD', 'Supervise')}</li>
+    </ul>
+</div>
+
+
+<div class="mian-right">
+    <iframe src="{:U('/Supervise/SuperviseList/app_list')}" width="100%" height="100%" id="iframe"></iframe>
+</div>
+
+<script type="text/javascript" src="/Public/Tools/Js/jquery/jquery-1.8.3.min.js"></script>
+<script src="/Public/Supervise/Js/parent.js"></script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+<head>
+    <!--公用meta-->
+    <include file="Public:meta" />
+
+    <title>{:lan('GET_PASSWORD', 'Home')}</title>
+
+</head>
+
+<body>
+<!--公用头部-->
+<include file="Public:header" />
+
+<!--主要内容-->
+<div class="common-wrap">
+    <div class="width">
+        <div class="findPassword-main">
+            <h1 class="title">
+                <span class="square"></span>
+                <span class="txt">{:lan('GET_PASSWORD', 'Home')}</span>
+            </h1>
+
+            <table>
+                <tr>
+                    <td class="td1">
+                        {:lan('ADDRESS_COUNTRY', 'Home')}:
+                    </td>
+                    <td class="td2">
+                        <div class="country">
+                            <div class="choiced _target _choiced">
+                                <p data-value="{$countryinfo.countryno}">
+                                    {$countryinfo.countryname} (+{$countryinfo.countryno})
+                                </p>
+                            </div>
+                            <div class="options dis-none _options">
+                                <volist name="country" id="cou">
+                                    <p data-value="{$cou.countryno}">
+                                        {$cou.countryname} (+{$cou.countryno})
+                                    </p>
+                                </volist>
+                            </div>
+                            <i class="iconfont select-down _target">&#xe604;</i>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td1">
+                        {:lan('WAASHOW_ACCOUNT', 'Home')}:
+                    </td>
+                    <td class="td2">
+                        <input type="text"
+                               id="fgusername"
+                               name="username"
+                               placeholder="{:lan('INPUT_YOUR_USERNAME', 'Home')}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td1">
+                        {:lan('MOBILE_VERIFYCODE', 'Home')}:
+                    </td>
+                    <td class="td2">
+                        <input type="text"
+                               class="checkcode"
+                               id="checkcode"
+                               placeholder="{:lan('PLEASE_INPUT_VERIFYCODE', 'Home')}"/>
+                        <button class="setCode"
+                                id="findSetCode"
+                                onclick="findPwd.findPwdGetCode('{:lan(\'SEND_VERIFYCODE\', \'Home\')}','{$sendagain}');">
+                            {:lan('SEND_VERIFYCODE', 'Home')}
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td1">
+                        {:lan('NEW_PASSWORD', 'Home')}:
+                    </td>
+                    <td class="td2">
+                        <input type="password"
+                               id="fgnewpwd"
+                               placeholder="{:lan('PLEASE_SET_PASSWORD', 'Home')}"
+                               name="password" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td1">
+                        {:lan('CONFIRM_PASSWORD', 'Home')}:
+                    </td>
+                    <td class="td2">
+                        <input type="password"
+                               id="fgconfirmpwd"
+                               placeholder="{:lan('PLEASE_SET_PASSWORD_AGEIN', 'Home')}"
+                               name="confirmpwd"/>
+                    </td>
+                </tr>
+            </table>
+
+            <p class="findPassword-error-msg"></p>
+
+            <input type="button"
+                   class="findPwd-sub"
+                   onclick="findPwd.findPwdSub()"
+                   value="{:lan('HOME_SUBMIT', 'Home')}"/>
+        </div>
+    </div>
+</div>
+
+<!--共用底部-->
+<include file="Public:bottom" />
+
+<!-- 共用登录-->
+<include file="Public:login" />
+
+<!--共用弹框-->
+<include file="Public:alert" />
+
+<!--共用js-->
+<include file="Public:javascript" />
+</body>
+</html>

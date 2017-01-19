@@ -1,0 +1,241 @@
+<!doctype html>
+<html>
+<head>
+  <!--公用meta-->
+  <include file="Public:meta" />
+
+  <title>Family</title>
+
+</head>
+<body>
+<!--公用头部-->
+<include file="Public:header" />
+
+
+<input id="familyid" type="hidden" value="{$data[family][familyid]}"/>
+<!--主要内容-->
+<div class="common-wrap">
+  <div class="familyDetail-mian">
+    <div class="width clear">
+      <!--左侧-->
+      <div class="left">
+        <div class="top clear">
+          <div class="left1 clear">
+            <img src="{$data['family']['familylogosrc']}" class="family-img">
+            <div class="right2">
+              <p class="family-name" title="{$data['family']['familyname']}">
+                {$data['family']['familyname']}
+              </p>
+              <p class="common-family">
+                <span>{:lan("FAMILY_BADGE", "Home")}</span>
+                <span class="family-style" href="{$v.href}">
+                    {$data['family']['badgehtml']}
+                </span>
+              </p>
+              <p class="line">
+                <span class="td1">{:lan('FAMILY_EMCEES', 'Home')}:</span>
+                <span class="td2">{$data['family']['emceesNum']}</span>
+              </p>
+              <p class="line">
+                <span class="td1" >{:lan('FAMILY_MEMBER', 'Home')}:</span>
+                <span class="td2" >{$data['family']['memberNum']}</span>
+              </p>
+              <if condition="$data[family][familyid] eq $_SESSION[familyid]">
+                <button id='quitfamily' href="#" class="join-btn" onclick="family.joinFamily(0)" >{:lan('FAMILY_QUIT', 'Home')}</button>
+                <else/>
+                <button id='joinfamily' href="#" class="join-btn" onclick="family.joinFamily(1)" >{:lan('FAMILY_JOIN', 'Home')}</button>
+              </if>
+            </div>
+          </div>
+          <div class="right1">
+            <div class="info clear">
+              <a href="/Userhomepage/index/userid/{$data['family']['userinfo']['userid']}.html" class="header-img">
+                <img src="{$Think.config.IMAGE_BASE_URL}{$data['family']['userinfo']['smallheadpic']}">
+              </a>
+              <div class="right2">
+                <p>{:lan('FAMILY_USER', 'Home')}</p>
+                <a href="/Userhomepage/index/userid/{$data['family']['userinfo']['userid']}.html">
+                  {$data['family']['userinfo']['nickname']}
+                </a>
+                <span class="common-us us{$data['family']['userinfo']['userlevel']}"></span>
+              </div>
+            </div>
+            <div class="describe">
+              <p class="describe-title">{:lan('FAMILY_INFO', 'Home')}</p>
+              <p class="txt">{$data['family']['familyinfo']}</p>
+            </div>
+          </div>
+        </div>
+        <div class="down">
+          <p class="tab">
+            <span class="active">{:lan('FAMILY_EMCEES', 'Home')}</span>
+            <span>{:lan('FAMILY_MEMBER', 'Home')}</span>
+          </p>
+          <!--主播-->
+          <div class="family-tab-list">
+            <eq name="emcee0" value="">
+            <!--无成员-->
+            <div class="common-no-data">
+              <img src="/Public/Public/Images/newImage/common/al-cry.png">
+              <h1>{:lan('FAMILY_NO_EM', 'Home')}</h1>
+            </div>
+            <p class="common-loadMore dis-none" id="loadmorediv1">{$rolldownloadmore}</p>            
+            <else />
+            <!--有主播-->
+            <ul class="show-common-list clear">
+              <volist name="data.emcees" id="v">
+                <li class="list">
+                  <a href="{:U('/'.$v['roomno'])}">
+                    <eq name="v[isliving]" value="1">
+                      <div class="icon-play">LIVE</div>
+                    </eq>
+                    <img class="header-img" src="{$Think.config.IMAGE_BASE_URL}{$v.bigheadpic}" />
+                    <div class="line1 clear">
+                      <eq name="v[isliving]" value="1">
+                        <eq name="v[livetype]" value="2">
+                          <i class="iconfont pc-icon on-live">&#xe61a;</i>
+                          <else/>
+                          <i class="iconfont app-icon on-live">&#xe619;</i>
+                        </eq>
+                        <else/>
+                        <eq name="v[livetype]" value="2">
+                          <i class="iconfont pc-icon">&#xe61a;</i>
+                          <else/>
+                          <i class="iconfont app-icon">&#xe619;</i>
+                        </eq>
+                      </eq>
+                      <p class="em-name" title="{$v.nickname}">{$v.nickname}</p>
+                      <p class="look-num">
+                        <i class="iconfont">&#xe600;</i>
+                        <span class="count" title="{$v.totalaudicount}">{$v.totalaudicount}</span>
+                      </p>
+                    </div>
+                    <div class="dark iconfont">
+                      &#xe63f;
+                    </div>
+                  </a>
+                </li>
+              </volist>
+            </ul>
+            <p class="common-loadMore" id="loadmorediv1">{$rolldownloadmore}</p>
+            </eq>
+          </div>
+
+          <!--成员-->
+          <div class="family-tab-list dis-none user">
+            <eq name="member0" value="">
+            <!--无成员-->
+            <div class="common-no-data">
+              <img src="/Public/Public/Images/newImage/common/al-cry.png">
+              <h1>{:lan('FAMILY_NO_ME', 'Home')}</h1>
+            </div>
+            <p class="common-loadMore dis-none" id="loadmorediv2">{$rolldownloadmore}</p>
+            <else />
+
+            <!--有成员-->
+            <ul class="show-common-list clear">
+              <volist name="data.member" id="v">
+                <li class="list">
+                  <a href="{$v.homepageurl}">
+                    <img class="header-img" src="{$Think.config.IMAGE_BASE_URL}{$v.smallheadpic}" />
+                    <div class="line1 clear">
+                      <p class="em-name" title="{$v.nickname}">
+                        {$v.nickname}
+                      </p>
+                      <span class="common-us us{$v.userlevel}"></span>
+                    </div>
+                  </a>
+                </li>
+              </volist>
+            </ul>
+            <p class="common-loadMore" id="loadmorediv2">{$rolldownloadmore}</p>
+            </eq>
+          </div>
+        </div>
+      </div>
+      <div class="right">
+
+        <!--主播收入榜-->
+        <div class="common-billboard">
+          <h2 class="title">{:lan('EMCEE_EARN_TOP', 'Home')}</h2>
+          <ul class="list">
+            <volist name="data.emceesEarn" id="v" key="k">
+              <li>
+                <a href="{:U('/'.$v[roomno])}">
+                  <p class="num">
+                    <img src="/Public/Public/Images/Ranklist/{$k}.png" />
+                  </p>
+                  <p class="head-img">
+                    <img class="smallheadimg" src="{$Think.config.IMAGE_BASE_URL}{$v.smallheadpic}" />
+                  </p>
+                  <p class="name" title="{$v.nickname}">
+                    <span>{$v.nickname}</span>
+                  </p>
+                  <p class="level">
+                    <span class="common-em em{$v.emceelevel}"></span>
+                  </p>
+                </a>
+                <img src="/Public/Public/Images/Background/Room/down_line_shadow.png" class="down-line">
+              </li>
+            </volist>
+          </ul>
+        </div>
+
+        <!--成员贡献榜-->
+        <div class="common-billboard">
+          <h2 class="title">{:lan('MEMBER_CONTRIBUTE_TOP', 'Home')}</h2>
+          <ul class="list">
+            <volist name="data.memberRich" id="v" key="k">
+              <li>
+                <a href="/Userhomepage/index/userid/{$v.userid}.html">
+                  <p class="num">
+                    <img src="/Public/Public/Images/Ranklist/{$k}.png" />
+                  </p>
+                  <p class="head-img">
+                    <img class="smallheadimg" src="{$Think.config.IMAGE_BASE_URL}{$v.smallheadpic}" />
+                  </p>
+                  <p class="name" title="{$v.nickname}">
+                    <span>{$v.nickname}</span>
+                  </p>
+                  <p class="level">
+                    <span class="common-us us{$v.userlevel}"></span>
+                  </p>
+                </a>
+                <img src="/Public/Public/Images/Background/Room/down_line_shadow.png" class="down-line">
+              </li>
+            </volist>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!--共用底部-->
+<include file="Public:bottom" />
+
+<!-- 共用登录-->
+<include file="Public:login" />
+
+<!--共用弹框-->
+<include file="Public:alert" />
+
+<!--共用js-->
+<include file="Public:javascript" />
+<script>
+  var pagenoEm = 1,
+          pagenoUs = 1,
+          isLastEm = false,
+          isLastUs = false;
+  $(window).scroll(function () {
+    if($(".show-common-list").eq(0).is(":hidden")){
+      family.scrollUsLoad("{$data[family][familyid]}");
+    }else{
+      family.scrollEmLoad("{$data[family][familyid]}");
+    }
+  })
+</script>
+</body>
+</html>

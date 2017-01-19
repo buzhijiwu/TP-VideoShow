@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style"  />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="shortcut icon" href="/Public/Public/Images/favicon.ico"/>
+    <link href="__PUBLIC__/Home/Css/{:getLanguage()}/app/reset.css?time=20160810.css" rel="stylesheet" type="text/css" />
+    <link  href="__PUBLIC__/Home/Css/{:getLanguage()}/app/common.css?time=20160810.css" rel="stylesheet" type="text/css">
+    <link  href="__PUBLIC__/Home/Css/{:getLanguage()}/layout.css?time=20160810.css" rel="stylesheet" type="text/css">
+    <link  href="__PUBLIC__/Home/Css/{:getLanguage()}/app/active.css?time=20160810.css" rel="stylesheet" type="text/css">
+
+    <title>Send iPhonePlus</title>
+
+</head>
+<body>
+<!--main-->
+<div class="iphone-main-app">
+
+    <img class="header-title" src="/Public/Public/Images/Activity/iPhone/iPhone-app-header.jpg">
+
+    <img class="title1" src="/Public/Public/Images/Activity/iPhone/iPhone-app-title1.png">
+
+    <div class="rule">
+        <p class="yellow">TÌM KIẾM CHỦ NHÂN DUY NHẤT CỦA CHIẾC IP6PLUS</p>
+        <p class="orange ma-t-12">THỜI GIAN : </p>
+        <p class="ma-t-12">00h00 ngày 15/08/2016 cho đến 00h00 ngày 31/08/2016</p>
+        <p class="orange ma-t-12">ĐIỀU KIỆN ĐỂ NHẬN IP6PLUS:</p>
+        <p class="ma-t-12">1/ Sở hữu tối thiểu 1500 icon IP6PLUS (trong khoảng thời gian diễn ra event)</p>
+        <p class="ma-t-12">2/ Đứng nhất bảng những người nhận nhiều icon IP6PLUS nhất (Sau khi vượt qua điều kiện 1)</p>
+        <p class="ma-t-12">Sau khi kết thúc ngày cuối cùng của event “SƯU TẦM ICON – NHẬN NGAY IP6 PLUS” Công ty Waashow sẽ công bố giải thưởng và chủ nhân của chiếc IP6PLUS sẽ được trao giải sau một tuần kể từ ngày kết thúc. </p>
+        <p class="ma-t-12"><span class="red">Lưu ý: </span>Người đoạt giải sẽ chụp hình cùng đại diện công ty cũng như công ty waashow có toàn quyền sử dụng hình ảnh cho việc truyền thông, quảng cáo. </p>
+    </div>
+
+    <img class="title2" src="/Public/Public/Images/Activity/iPhone/iPhone-app-title2.png">
+
+    <table>
+        <thead>
+        <tr>
+            <th class="td1">Xếp hạng</th>
+            <th class="td2">Idols</th>
+            <th class="td3">Quà tặng nhận được</th>
+        </tr>
+        </thead>
+        <tbody>
+        <volist name="IphoneActivity" id="vo" key="k">
+        <tr>
+            <td class="td1">
+                <div class="header-img" href="#">
+                    <img src="{$Think.config.IMAGE_BASE_URL}{$vo.smallheadpic}">
+                    <span class="rank <lt name='k' value='4'>top</lt>">{$k}</span>
+                </div>
+            </td>
+            <td class="td2">
+                <span class="common-em em{$vo.emceelevel}"></span>
+                <span class="name">{$vo.nickname}</span>
+            </td>
+            <td class="td3">
+                {$vo.giftcount}
+            </td>
+        </tr>
+        </volist>
+        </tbody>
+    </table>
+</div>
+
+<input name="userid" id="userid" type="hidden" value="{$userid}" />
+
+<!--共用js-->
+<include file="Public:javascript" />
+
+
+<!--app弹框-->
+<include file="Public:appAlert" />
+
+</body>
+</html>

@@ -1,0 +1,111 @@
+/*盒子模型*/
+*,*:after,*:before{
+    box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+}
+html,body{
+    height: 100%;
+    font-family:"PingFang SC","Helvetica Neue", Helvetica, "Microsoft Yahei", "WenQuanYi Micro Hei", Arial,Verdana,sans-serif ;
+}
+body,ol,ul,h1,h2,h3,h4,h5,h6,p,th,td,dl,dd,label,
+form,fieldset,legend,input,textarea,select,button{
+    margin:0;
+    padding:0;
+    border:0;
+    background-color: transparent;
+    font-family:"PingFang SC","Helvetica Neue", Helvetica, "Microsoft Yahei", "WenQuanYi Micro Hei", Arial,Verdana,sans-serif ;
+
+}
+input:focus,button:focus,select:focus{
+    outline: none;
+}
+input[type=checkbox],input[type=radio]{
+    vertical-align: baseline;
+    position: relative;
+    top: 2px;
+}
+/*input的type=number时候清除右边箭头*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button{
+    -webkit-appearance: none !important;
+    margin: 0;
+}
+input[type="number"]{-moz-appearance:textfield;}
+ul,li{
+    list-style: none;
+}
+h1,h2,h3,h4,h5,h6,i,b,strong,p,div{
+    font-weight: normal;
+    word-wrap: break-word;
+}
+/*清除ios系统input效果*/
+input[type=button],input[type=submit],input[type=file],button {
+    cursor: pointer;
+    -webkit-appearance: none;
+}
+body{
+    background:transparent;
+    -webkit-text-size-adjust:100%;
+    font-size: 12px;
+    position: relative;
+    color: #666;
+}
+a{
+    text-decoration:none;
+    color:#666;
+    font-style: normal;
+}
+a:hover{
+    cursor: pointer
+}
+table{
+    table-layout: fixed;
+    width: 100%;
+    border-collapse:collapse;
+    border-spacing:0;
+}
+/*清除样式*/
+.clearIn,.clear:after{
+    display:block;
+    font-size:0;
+    content:" ";
+    clear:both;
+    height:0;
+    border: none;
+    padding: 0;
+    margin: 0;
+    overflow:auto;
+    float: none;
+    zoom:1;
+}
+/*隐藏*/
+.dis-none{
+    display: none;
+}
+
+
+@font-face {
+    font-family: 'iconfont';
+    src: url('//at.alicdn.com/t/font_1469000339_759898.eot'); /* IE9*/
+    src: url('//at.alicdn.com/t/font_1469000339_759898.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('//at.alicdn.com/t/font_1469000339_759898.woff') format('woff'), /* chrome、firefox */
+    url('//at.alicdn.com/t/font_1469000339_759898.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+    url('//at.alicdn.com/t/font_1469000339_759898.svg#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+
+/*@font-face {font-family: "iconfont";
+    src: url('../../../Public/Public/iconfont/iconfont.eot?t=1468999030'); !* IE9*!
+    src: url('../../../Public/Public/iconfont/iconfont.eot?t=1468999030#iefix') format('embedded-opentype'), !* IE6-IE8 *!
+    url('../../../Public/Public/iconfont/iconfont.woff?t=1468999030') format('woff'), !* chrome, firefox *!
+    url('../../../Public/Public/iconfont/iconfont.ttf?t=1468999030') format('truetype'), !* chrome, firefox, opera, Safari, Android, iOS 4.2+*!
+    url('../../../Public/Public/iconfont/iconfont.svg?t=1468999030#iconfont') format('svg'); !* iOS 4.1- *!
+}*/
+
+.iconfont {
+    font-family:"iconfont" !important;
+    font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    vertical-align:baseline;
+}

@@ -1,0 +1,86 @@
+<extend name="Public:list" />
+<block name="title"></block>
+<block name="css"></block>
+
+<block name="main">
+<div class="subnav">
+  <div class="content-menu ib-a blue line-x">
+  	<a href="__URL__/user_type/type/2"><em>{:lan('MANAGEMENT_TYPE', 'Admin')}</em></a><span>|</span>
+  	<a href="javascript:;" class="on"><em>{:lan('ADD_TYPE', 'Admin')}</em></a>
+  </div>
+</div>
+<style type="text/css">
+	html{_overflow-y:scroll}
+</style>
+<form name="myform" id="myform" action="" method="post">
+  <div class="pad-10">
+    <div class="col-tab">
+      <ul class="tabBut cu-li">
+        <li id="tab_setting_1" class="on">{:lan('BASIC_OPTIONS', 'Admin')}</li>
+      </ul>
+      <div id="div_setting_1" class="contentList pad-10">
+        <table width="100%" class="table_form ">
+          <tbody>
+          	<eq name="Think.get.pid" value="">
+            <tr>
+              <th width="200">{:lan('HIGHER_TYPE', 'Admin')}：</th>
+              <td><select name="parentid">
+                  <option value="0">≡ {:lan('TOP_TYPE', 'Admin')} ≡</option>
+                  <volist name="data.cate" id="v">
+                  	<option value="{$v.categoryid}" <eq name="data.parentid" value="v.categoryid">selected="selected"</eq>>{$v.categoryname}</option>
+                  </volist>
+                </select></td>
+            </tr>
+            <else/>
+            <input type="hidden" name="parentid" value="{$Think.get.pid}">
+            </eq>
+            <tr>
+              <th width="200">{:lan('CATEGORY', 'Admin')}：</th>
+              <td><select name="type">
+                  <option value="2">PC & APP</option>
+                  <option value="0">PC</option>
+                  <option value="1">APP</option>
+                </select></td>
+            </tr>
+            <tr>
+              <th>{:lan('TYPE_NO', 'Admin')}：</th>
+              <td><input type="text" name="categoryid" id="categoryid" class="input-text" value="{$data.categoryid}" <neq name="data.categoryid" value="">disabled</neq>></td>
+            </tr>
+            <tr>
+              <th>{:lan('TYPE_NAME', 'Admin')}：</th>
+              <td><input type="text" name="categoryname" id="categoryname" class="input-text" value="{$data.categoryname}"></td>
+            </tr>
+            <tr>
+              <th width="200">{:lan('SORT', 'Admin')}：</th>
+              <td>
+                <input type="text" name="sort" class="input-text" value="{$data.sort}" />
+              </td>
+            </tr>             
+            <tr>
+              <th width="200">{:lan('IS_SHOW', 'Admin')}：</th>
+              <td><select name="athomepage">
+                  	<option value="1" <eq name="data.athomepage" value="1">selected="selected"</eq>>{:lan('YES', 'Admin')}</option>
+              		<option value="0" <eq name="data.athomepage" value="0">selected="selected"</eq>>{:lan('NO', 'Admin')}</option>
+                </select>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="bk15"></div>
+      <input name="dosubmit" type="submit" value="{:lan('SUBMIT_BUTTION', 'Admin')}" class="button">
+      <input type="hidden" name="id" value="{$data.id}">
+    </div>
+  </div>
+</form>
+<!--table_form_off--><script language="JavaScript"><!--
+	window.top.$('#display_center_id').css('display','none');
+
+	//--></script>
+</block>
+
+<block name="js">
+<script language="JavaScript">
+	window.top.$('#display_center_id').css('display','none');
+</script>
+</block>

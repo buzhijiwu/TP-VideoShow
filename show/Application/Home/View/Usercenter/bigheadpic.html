@@ -1,0 +1,45 @@
+<extend name="base" />
+<block name="menu">
+<div class="nav-list clear">
+	<a href="__URL__/setting">{:lan('BASE_INFO', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+	<a href="__URL__/smallheadpic">{:lan('EDIT_HEAD_PIC', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+    <a href="__URL__/bigheadpic" class="active">{:lan('EMCEE_HEADPIC', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+	<a href="__URL__/modifypwd">{:lan('EDIT_PASSWORD', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+</div>
+</block>
+
+<block name="main">
+<!-- 主播头像设置 -->
+
+	<input type="hidden" value="{$Think.config.IMAGE_BASE_URL}{$bigheadpic}" id="bigpic">
+	<div class="right-em-img">
+
+		<div class="top clear">
+			<div class="canvas-wrap">
+				<canvas id="mianCanvas" class="mian-canvas" width="0" height="0"></canvas>
+				<canvas id="shadeCanvas" class="shade-canvas" width="0" height="0"></canvas>
+			</div>
+
+			<div class="img-wrap">
+				<img id="hiddenImg">
+			</div>
+
+			<canvas class="preview-canvas" id="previewCanvas" width="150" height="150"></canvas>
+		</div>
+
+		<form id="imgForm" class="img-form">
+			<div class="file-wrap">
+				<input class="file" type="file" id="file" name="bigheadpic" accept="image/png, image/jpeg">
+			</div>
+			<p class="upload-btn">{:lan('SELECT_PIC', 'Home')}</p>
+			<p id="rotate" class="rotate iconfont">&#xe643;</p>
+			<button type="submit" id="submit" class="submit">{:lan('HOME_SUBMIT', 'Home')}</button>
+		</form>
+
+
+		<p class="info">{:lan('SAVE_HEADPIC_TIPS', 'Home')}</p>
+
+
+	</div>
+	<script type="text/javascript" src="/Public/Home/Js/imgUpLoadCanvas.js"></script>
+</block>

@@ -1,0 +1,58 @@
+<extend name="Public:list" />
+<block name="title">123</block>
+<block name="css"></block>
+
+<block name="main">
+<form name="myform" id="myform" action="__URL__/delAll" method="post" >
+    <div class="table-list">
+      <table width="100%">
+        <thead>
+          <tr>
+          	<th width="16">
+          		<input type="checkbox" value="" id="check_box" onclick="selectall('ids[]');">		
+          	</th>
+      		<th width="40">ID</th><th align="">{:lan('APPLY_PERSON', 'Admin')}</th>
+      		<th align="center">{:lan('APPLY_PERSON_LEVEL', 'Admin')}</th>
+      		<th align="center">{:lan('FAMILY_NAME', 'Admin')}</th>
+      		<th align="center">{:lan('APPROVE_TIME', 'Admin')}</th>
+      		<th align="center">{:lan('APPROVE_STATUS', 'Admin')}</th>
+      		<th width="120">{:lan('BTN_OPERATION', 'Admin')}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <volist name="data.list" id="v">
+            <tr>
+              <td align="center"><input class="inputcheckbox " name="ids[]" value="{$v.familyid}" type="checkbox"></td>
+              <td align='center'>{$v.familyid}</td>
+              <td align='center'>{$v.userinfo.nickname}</td>
+              <td align='center'>{$v.userinfo.userlevel}</td>
+              <td align="center">{$v.familyname}</td>
+              <td align='center'>{$v.approvetime}</td>
+              <td align="center">
+              	<switch name="v.status">    
+              		<case value="0">{:lan('WAIT_APPROVE', 'Admin')}</case>
+              		<case value="1">{:lan('PASS_APPROVE', 'Admin')}</case>
+              		<case value="2">{:lan('REJECT_APPROVE', 'Admin')}</case>
+              	</switch>
+			  </td>
+              <td align='center'><a href="__URL__/updata/id/{$v.familyid}">{:lan('BTN_APPROVE', 'Admin')}</a></td>
+            </tr>
+          </volist>
+        </tbody>
+      </table>
+      <div class="btn">
+        <label for="check_box">{:lan('BTN_ALL', 'Admin')}/{:lan('BTN_CANCEL', 'Admin')}</label>
+        <input type="button" class="button" value="{:lan('BTN_DELETE', 'Admin')}" onClick="myform.action='__URL__/delAll/';return confirm_delete()"/>
+      </div>
+      <div id="pages">{$data.page}</div>
+    </div>
+</form>
+</block>
+
+<block name="js">
+<script type="text/javascript">
+function confirm_delete(){
+	if(confirm('确认删除吗？')) $('#myform').submit();
+}
+</script>
+</block>

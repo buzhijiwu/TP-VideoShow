@@ -1,0 +1,645 @@
+<extend name="Public:list" />
+<block name="title"></block>
+<block name="css"></block>
+<block name="main">
+
+    <p id="language" style="display: none">{:getLanguage()}</p>
+    <input type="hidden" value="{$data.user.userid}" id="userid">
+    <script>
+        /*$(function(){
+
+            $.formValidator.initConfig({formid:"upForm",autotip:true,onerror:function(msg,obj){window.top.art.dialog({content:msg,lock:true,width:'200',height:'50'}, function(){this.close();$(obj).focus();})}});
+            $("#password").formValidator({
+                        onshow:"{:lan('ADMIN_PASSWORD', 'Admin')}",
+                        onfocus:"{:lan('ADMIN_PASSWORD', 'Admin')}",
+                        oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"})
+                    .inputValidator({min:1,onerror:"{:lan('ADMIN_PASSWORD', 'Admin')}"});
+            $("#username").formValidator({
+                        onshow:"{:lan('NICKNAME', 'Admin')}",
+                        onfocus:"{:lan('NICKNAME', 'Admin')}",
+                        oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"})
+                    .inputValidator({min:1,onerror:"{:lan('NICKNAME', 'Admin')}"});
+            $("#interest").formValidator({
+                        onshow:"{:lan('HOBBY', 'Admin')}",
+                        onfocus:"{:lan('HOBBY', 'Admin')}",
+                        oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"})
+                    .inputValidator({min:1,onerror:"{:lan('HOBBY', 'Admin')}"});
+            $("#userinfo").formValidator({
+                        onshow:"{:lan('INTRODUCTION', 'Admin')}",
+                        onfocus:"{:lan('INTRODUCTION', 'Admin')}",
+                        oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"})
+                    .inputValidator({min:1,onerror:"{:lan('INTRODUCTION', 'Admin')}"});
+        })*/
+    </script>
+
+    <style>
+        /*icon-font*/
+        @font-face {font-family: "iconfont";
+            src: url('../../../../Public/Public/iconfont/iconfont.eot?t=1468999090'); /* IE9*/
+            src: url('../../../../Public/Public/iconfont/iconfont.eot?t=1468999090#iefix') format('embedded-opentype'), /* IE6-IE8 */
+            url('../../../../Public/Public/iconfont/iconfont.woff?t=1468999090') format('woff'), /* chrome, firefox */
+            url('../../../../Public/Public/iconfont/iconfont.ttf?t=1468999090') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+            url('../../../../Public/Public/iconfont/iconfont.svg?t=1468999090#iconfont') format('svg'); /* iOS 4.1- */
+        }
+        .iconfont {
+            font-family:"iconfont" !important;
+            font-style:normal;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            vertical-align:middle;
+        }
+        .left {
+            position: relative;
+            padding-left: 45px;
+            margin-top: 30px;
+        }
+        .left .top .canvas-wrap {
+            width: 402px;
+            height: 402px;
+            border: 1px solid #ccc;
+            float: left;
+            background-color: #efefef;
+        }
+        .left .top .canvas-wrap .mian-canvas {
+            background-color: #fff;
+        }
+        .left .top .canvas-wrap .shade-canvas {
+            position: absolute;
+            top: 1px;
+            left: 46px;
+        }
+        .left .top .img-wrap {
+            width: 0;
+            height: 0;
+            overflow: hidden;
+        }
+        .left .top .preview-canvas {
+            float: left;
+            margin-left: 180px;
+            margin-top: 150px;
+            background-color: #efefef;
+            border: 1px solid #ccc;
+        }
+        .left .img-form {
+            position: relative;
+            margin-top: 15px;
+        }
+        .left .img-form .file-wrap {
+            width: 150px;
+            height: 35px;
+            overflow: hidden;
+            display: inline-block;
+        }
+        .left .img-form .file-wrap .file {
+            width: 150px;
+            height: 35px;
+            opacity: 0;
+            position: relative;
+            z-index: 2;
+            font-size: 100px;
+        }
+        .left .img-form .file-wrap:hover {
+            cursor: pointer;
+        }
+        .left .img-form .upload-btn {
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #fff;
+            width: 150px;
+            height: 35px;
+            background-color: #fa4d85;
+            text-align: center;
+            line-height: 35px;
+            z-index: 1;
+            border-radius: 4px;
+        }
+        .left .img-form .rotate {
+            color: #fa4d85;
+            font-size: 32px;
+            font-weight: bold;
+            margin-left: 215px;
+            display: inline-block;
+            vertical-align: top;
+        }
+        .left .img-form .rotate:hover {
+            cursor: pointer;
+            color: #d83476;
+        }
+        .left .img-form .submit {
+            color: #fff;
+            width: 100px;
+            height: 35px;
+            background-color: #fa4d85;
+            text-align: center;
+            line-height: 35px;
+            border-radius: 4px;
+            margin-left: 205px;
+            margin-top: -120px;
+        }
+        .left .img-form .submit:hover {
+            background-color: #d83476;
+        }
+        .left .info {
+            margin-top: 20px;
+            color: #777;
+        }
+
+    </style>
+
+
+  <div class="content-menu ib-a blue line-x"><a><em>{:lan('EDIT_USER', 'Admin')}</em></a></div>
+
+  <form class="pad-10" name="upForm" id="upForm" action="" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="id" value="{$data.user.userid}">
+    <div class="pad_10">
+      <div class="col-tab">
+        <ul class="tabBut cu-li">
+          <li id="tab_setting_1" class="on" onClick="SwapTab('setting','on','',6,1);">{:lan('BASIC_INFO', 'Admin')}</li>
+          <gt name="data.user.isemcee" value="0">
+          <li id="tab_setting_2" onClick="SwapTab('setting','on','',6,2);" class="">{:lan('EMCEE_INFO', 'Admin')}</li>
+          <li id="tab_setting_5" onClick="SwapTab('setting','on','',6,5);" class="">{:lan('BROADCAST_PARAM', 'Admin')}</li>
+          <li id="tab_setting_6" onClick="window.location.href='/Admin/Show/user_audit_edit/id/{$data.user.userid}'" class="">{:lan('SIGN_INFO', 'Admin')}</li>
+          </gt>
+          <!-- 巡查员设置 -->
+          <eq name="data.user.usertype" value="10">
+          <input type="button" style="background-color:#169BD5;margin-left: 20px;" class="button" value="{:lan('CANCEL_INSPECTOR', 'Admin')}" onclick="set_inspector();">
+          <else />
+          <input type="button" style="background-color:#169BD5;margin-left: 20px;" class="button" value="{:lan('SET_AS_INSPECTOR', 'Admin')}" onclick="set_inspector();">          
+          </eq> 
+        </ul>
+        <div id="div_setting_1" style="overflow-y: auto; overflow-x: hidden; display: block;" class="contentList pad-10">
+          <table width="100%" cellspacing="0" class="table_form contentWrap">
+            <tbody>
+              <tr>
+                <th width="80"> {:lan('USERNAME', 'Admin')} </th>
+                <td>{$data.user.username}</td>
+                <input type="hidden" name="user[time]" value="{$time|time}" >
+              </tr>
+              <tr>
+                <th width="80"> {:lan('ADMIN_PASSWORD', 'Admin')} </th>
+                <td><input type="password" name="password" class="input-text" id="password" style="width:150px;">{:lan('DONOT_CHANGEPWD', 'Admin')}</td>
+                <input type="hidden" name="salt" value="{$data.user.salt}" >
+              </tr>
+              <tr>
+                <th width="80"> {:lan('NICKNAME', 'Admin')} </th>
+                <td><input type="text" name="user[nickname]" value="{$data.user.nickname}" id="username" size="50" class="input-text" style="width:150px;"></td>
+              </tr>
+              <tr>
+                <th width="80"> {:lan('SEX', 'Admin')} </th>
+                <td>
+                	<input name="user[sex]" value="0" type="radio" <eq name="data.user.sex|default=0" value="0">checked="checked"</eq>> {:lan('MALE', 'Admin')} &nbsp; 
+                  	<input name="user[sex]" value="1" type="radio" <eq name="data.user.sex" value="1">checked="checked"</eq>> {:lan('FEMALE', 'Admin')} 
+                </td>
+              </tr>
+<!--               <tr>
+                <th width="80"> 所在地 </th>
+                <script type="text/javascript" src="/Public/Public/Js/area/{$data.lan}.js"></script>
+                <td><select onChange="getSubArea(this);" id="selectArea" name="user[provinceid]" class="selectStyle">
+                    <option value="" selected="selected">请选择...</option>
+                  </select>
+                  <select onChange="copyValueToHidden(this.value);" id="selectSubArea" name="user[cityid]" class="selectStyle">
+                    <option value="">请选择...</option>
+                    <option value="1">1</option>
+                  </select>
+                  <input type="hidden" name="area" value="" id="hdResidenceArea">
+                  <input type="hidden" name="user[province]" value="{$data.user.provinceid}">
+                  <input type="hidden" name="user[city]" value="{$data.user.cityid}">
+                  
+                  <script language="javascript">
+						fillArea();
+						user_areas('{$data.user.provinceid}','{$data.user.cityid}');
+					</script>
+                </td>
+              </tr> -->
+              <tr>
+                <th width="80"> {:lan('BIRTHDAY', 'Admin')} </th>
+                <td><input type="text" name="user[birthday]" id="birthday" value="{$data.user.birthday|default=date('Y-m-d')}" size="50" style="width:150px;" class="input-text">
+                  <script type="text/javascript">					
+                Calendar.setup({
+					weekNumbers: false,
+					inputField : "birthday",
+					trigger    : "birthday",
+					dateFormat: "%Y-%m-%d",
+					showTime: false,
+					minuteStep: 1,
+					onSelect   : function() {this.hide();}
+					});
+					</script></td>
+              </tr>
+              <tr>
+                <th width="80"> {:lan('HOBBY', 'Admin')} </th>
+                <td><input type="text" name="user[interest]" id="interest" value="{$data.user.interest}" size="50" class="input-text"></td>
+              </tr>
+              <tr>
+                <th width="80"> {:lan('INTRODUCTION', 'Admin')} </th>
+                <td><textarea name="user[userinfo]" style="height: 60px;width:310px;; visibility:inherit" id="userinfo">{$data.user.userinfo}</textarea></td>
+              </tr>
+<!--               <tr>
+                <th width="80"> {:lan('ROOM_MANAGE', 'Admin')} </th>
+                <td>
+                	<input name="user[isroomadmin]" value="1" type="radio" <eq name="data.user.isroomadmin" value="1">checked="checked"</eq>> {:lan('YES', 'Admin')} &nbsp; 
+                  	<input name="user[isroomadmin]" value="0" type="radio" <eq name="data.user.isroomadmin|default=0" value="0">checked="checked"</eq>> {:lan('NO', 'Admin')} 
+                </td>
+              </tr> -->
+              <tr>
+                <th width="80"> {:lan('FAMILY_MANAGEMENT', 'Admin')}  </th>
+                <td>
+                	<input name="user[usertype]" value="20" type="radio" <eq name="data.user.usertype" value="20">checked="checked"</eq>> {:lan('YES', 'Admin')} &nbsp; 
+                  	<input name="user[usertype]" value="0" type="radio" <eq name="data.user.usertype|default=0" value="0">checked="checked"</eq>> {:lan('NO', 'Admin')} 
+                </td>
+              </tr>
+              <tr>
+                <th width="80"> {:lan('VIRTUAL_AUDIENCE', 'Admin')} </th>
+                <td>
+                	<input name="user[isvirtual]" value="1" type="radio" <eq name="data.user.isvirtual" value="1">checked="checked"</eq>> {:lan('YES', 'Admin')} &nbsp; 
+                  	<input name="user[isvirtual]" value="0" type="radio" <eq name="data.user.isvirtual|default=0" value="0">checked="checked"</eq>> {:lan('NO', 'Admin')} 
+                </td>
+              </tr>
+              <tr>
+                  <td colspan="2">{:lan('USER_VIRTUAL_PROPS', 'Admin')}：</td>
+              </tr>
+              <!--用户拥有的VIP-->
+              <notempty name="data.vip">
+                  <tr>
+                      <th width="80"> VIP </th>
+                      <td>
+                          <table>
+                              <volist name="data.vip" id="v">
+                                  <tr>
+                                      <td>{$v.vipname}</td>
+                                      <td>{:lan('DUE_TIME', 'Admin')}：{$v.expiretime}</td>
+                                  </tr>
+                              </volist>
+                          </table>
+                      </td>
+                  </tr>
+              </notempty>
+              <!--用户拥有的座驾-->
+              <notempty name="data.equipment">
+                  <tr>
+                      <th width="80"> {:lan('CAR', 'Home')} </th>
+                      <td>
+                          <table>
+                              <volist name="data.equipment" id="v">
+                                  <tr>
+                                      <td>{$v.commodityname}</td>
+                                      <td>{:lan('DUE_TIME', 'Admin')}：{$v.expiretime}</td>
+                                  </tr>
+                              </volist>
+                          </table>
+                      </td>
+                  </tr>
+              </notempty>
+              <tr>
+                  <td colspan="2">{:lan('SET_VIRTUAL_PROPS', 'Admin')}：</td>
+              </tr>
+              <!--设置VIP-->
+              <tr>
+                  <th width="80"> VIP </th>
+                  <td>
+                      <select name="free_vip[vipid]" class="selectStyle">
+                          <option value="0">{:lan('NOTHING', 'Admin')}</option>
+                          <volist name="data.vipdefinition" id="v">
+                              <option  value="{$v.vipid}">{$v.vipname}</option>
+                          </volist>
+                      </select>
+                      &nbsp; {:lan('VALID_DAYS', 'Admin')}
+                      <input name="free_vip[validdays]" value="0" style="width:60px;">
+                      &nbsp; {:lan('LANGUAGE_TYPE', 'Admin')}
+                      <select name="free_vip[lantype]" class="selectStyle">
+                          <option  value="vi">vi</option>
+                          <option  value="en">en</option>
+                          <option  value="zh">zh</option>
+                      </select>
+                  </td>
+              </tr>
+              <!--设置座驾-->
+              <tr>
+                  <th width="80"> {:lan('CAR', 'Home')} </th>
+                  <td>
+                      <select name="free_equipment[commodityid]" class="selectStyle">
+                          <option value="0">{:lan('NOTHING', 'Admin')}</option>
+                          <volist name="data.commodities" id="v">
+                              <option  value="{$v.commodityid}">{$v.commodityname}</option>
+                          </volist>
+                      </select> &nbsp; {:lan('VALID_DAYS', 'Admin')}
+                      <input name="free_equipment[validdays]" value="0" style="width:60px;">
+                      &nbsp; {:lan('LANGUAGE_TYPE', 'Admin')}
+                      <select name="free_equipment[lantype]" class="selectStyle">
+                          <option  value="vi">vi</option>
+                          <option  value="en">en</option>
+                          <option  value="zh">zh</option>
+                      </select>
+                  </td>
+              </tr>
+              <!--赠送免费礼物-->
+              <tr>
+                  <td colspan="2">{:lan('PRESENT_FREE_GIFT', 'Admin')}：{:lan('NUMBER', 'Home')}<input name="free_gift_count" value="0" style="width:60px;">{:lan('SEATUNIT', 'Home')}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <gt name="data.user.isemcee" value="0">
+        <div id="div_setting_2" style="overflow-y: auto; overflow-x: hidden; display: none;" class="contentList pad-10">
+          <table width="100%" cellspacing="0" class="table_form contentWrap">
+            <tbody>
+              <!-- <tr>
+                <th width="80"> {:lan('ROOM_PIC', 'Admin')} </th>
+                <td><input type="file" name="emcee[emceepic]" id="emceepic" style="width:200px;height:25px">
+                  340*260{:lan('BEST', 'Admin')}</td>
+              </tr> -->
+              <tr>
+                <th width="80"> {:lan('EMCEE_BIG_PIC', 'Admin')} </th>
+                <td class="td2" style="position: relative">
+
+                </td>
+              </tr>              
+              <tr>
+                <th width="80"> {:lan('EMCEE_TYPE', 'Admin')} </th>
+                <td><select name="emcee[categoryid]">
+                    <option value="0"> {:lan('PLZ_SELECT_TYPE', 'Admin')} </option>
+                    <volist name="data.cate" id="v">
+                      <option value="{$v.categoryid}" <eq name="data.emcee.categoryid" value="$v.categoryid">selected="selected"</eq>>{$v.categoryname}</option>
+                      <volist name="v.sub" id="o">
+                        <option value="{$o.categoryid}" <eq name="data.emcee.categoryid" value="$v.categoryid">selected="selected"</eq>>├─{$o.categoryname}</option>
+                      </volist>
+                    </volist>
+                  </select></td>
+              </tr>
+              <!-- <tr>
+                <th width="80"> {:lan('RECOMMEND', 'Admin')} </th>
+                <td>
+                  <input name="emcee[recommend]" value="1" type="radio" <eq name="data.emcee.recommend" value="1">checked="checked"</eq>>
+                  {:lan('YES', 'Admin')}&nbsp;&nbsp;&nbsp;&nbsp;
+                  <input name="emcee[recommend]" value="0" type="radio" <eq name="data.emcee.recommend|default=0" value="0">checked="checked"</eq>>
+                  {:lan('NO', 'Admin')} 
+                </td>
+              </tr> -->
+              <tr>
+                <th width="80"> {:lan('SORT_NO', 'Admin')} </th>
+                <td>
+                  <input type="text" name="emcee[recommend]" value="{$data.emcee.recommend|default=0}" size="50" style="width:100px;" class="input-text">
+                </td>
+              </tr>              
+              <tr>
+                <th width="80"> {:lan('CURRENT_STATE', 'Admin')} </th>
+                <td><input name="emcee[isliving]" value="1" type="radio" <eq name="data.emcee.isliving" value="1">checked="checked"</eq>> 
+                  {:lan('LIVE_IN', 'Admin')}&nbsp;&nbsp;&nbsp;&nbsp;
+                  <input name="emcee[isliving]" value="0" type="radio" <eq name="data.emcee.isliving|default=0" value="0">checked="checked"</eq>>
+                  {:lan('NO_LIVE', 'Admin')}</td>
+              </tr>
+              <tr>
+                <th width="80"> {:lan('ROOM_ACCOMMODATION', 'Admin')} </th>
+                <td><input type="text" name="emcee[maxonline]" value="{$data.emcee.maxonline|default=100}" size="50" style="width:100px;" class="input-text">
+                  </td>
+              </tr>
+              <tr>
+                <th width="80"> {:lan('VIRTUAL_TOURIST', 'Admin')} </th>
+                <td><input type="text" name="emcee[maxvirtual]" value="{$data.emcee.maxvirtual|default=0}" size="50" style="width:100px;" class="input-text">
+                  </td>
+              </tr>
+              <tr>
+                <th width="80"> {:lan('SERVER', 'Admin')} </th>
+                <td><select name="emcee[serverip]">
+                	<volist name="data.server" id="v" >
+                    <option value="{$v.serverid}" <eq name="data.emcee.serverip" value="$v.serverid">selected="selected"</eq> >{$v.servername}</option>
+					</volist>
+                  </select></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="div_setting_4" style="overflow-y: auto; overflow-x: hidden; display: none;" class="contentList pad-10">
+          <table width="100%" cellspacing="0" class="table_form contentWrap">
+            <tbody>
+              <tr>
+                <th width="80">{:lan('CONTRACT_NO', 'Admin')} </th>
+                <td><input type="text" name="contract[contractno]" <eq name="data.contract.contractno" value="">value="0"<else />value="{$data.contract.contractno}"</eq> size="50"  class="input-text" style="width:150px;"></td>
+              </tr>
+              <tr>
+                <th width="80">{:lan('CONTRACT_NAME', 'Admin')}</th>
+                <td><input type="text" name="contract[contractname]" value="{$data.contract.contractname}" size="50"  class="input-text" style="width:150px;"></td>
+              </tr>
+              <tr>
+                <th width="80">{:lan('CONTRACT_CONTENT', 'Admin')} </th>
+                <td><input type="text" name="contract[contractcontent]" value="{$data.contract.contractcontent}" size="50"  class="input-text" style="width:150px;"></td>
+              </tr>
+              <tr>
+                <th width="80">{:lan('EFFECTIVE_TIME', 'Admin')} </th>
+                <td><input type="text" id="t1" name="contract[effectivetime]" value="{$data.contract.effectivetime|default=date('Y-m-d')}" size="50"  class="input-text" style="width:150px;"></td>
+              </tr>
+              <tr>
+                <th width="80">{:lan('DUE_TIME', 'Admin')} </th>
+                <td><input type="text" id="t2" name="contract[expiretime]" value="{$data.contract.expiretime|default=date('Y-m-d')}" size="50"  class="input-text" style="width:150px;"></td>
+              </tr>
+              <tr>
+                <th width="80">{:lan('SIGN_TIME', 'Admin')} </th>
+                <td><input type="text" id="t3" name="contract[signtime]" value="{$data.contract.signtime|default=date('Y-m-d')}" size="50"  class="input-text" style="width:150px;"></td>
+              </tr>
+              <script type="text/javascript">					
+      		Calendar.setup({
+				weekNumbers: false,
+				inputField : "t1",
+				trigger    : "t1",
+				dateFormat: "%Y-%m-%d",
+				showTime: false,
+				minuteStep: 1,
+				onSelect : function() {this.hide();}
+			});
+			Calendar.setup({
+				weekNumbers: false,
+				inputField : "t2",
+				trigger    : "t2",
+				dateFormat: "%Y-%m-%d",
+				showTime: false,
+				minuteStep: 1,
+				onSelect : function() {this.hide();}
+			});
+			Calendar.setup({
+				weekNumbers: false,
+				inputField : "t3",
+				trigger    : "t3",
+				dateFormat: "%Y-%m-%d",
+				showTime: false,
+				minuteStep: 1,
+				onSelect : function() {this.hide();}
+			});
+			</script>
+            </tbody>
+          </table>
+        </div>
+        <div id="div_setting_5" style="overflow-y: auto; overflow-x: hidden; display: none;" class="contentList pad-10">
+          <table width="100%" cellspacing="0" class="table_form contentWrap">
+            <tbody>
+              <tr>
+                <th width="80"> fps </th>
+                <td><input name="pz[fps]" size="5" value="{$data.emcee.fps|default=150}" type="text" class="input-text"></td>
+              </tr>
+              <tr>
+                <th width="80"> {:lan('MAX_BIT_RATE', 'Admin')} </th>
+                <td><input name="pz[maxbandwidth]" value="{$data.emcee.maxbandwidth|default=0}" type="text" class="input-text"></td>
+              </tr>
+              <tr>
+                <th width="80"> {:lan('QUALITY', 'Admin')} </th>
+                <td><input name="pz[quality]" value="{$data.emcee.quality|default=95}" type="text" class="input-text"></td>
+              </tr>
+              <tr>
+                <th width="80"> {:lan('KEY_FRAME_INTERVAL', 'Admin')} </th>
+                <td><input name="pz[interframespace]" value="{$data.emcee.interframespace|default=60}" type="text" class="input-text"></td>
+              </tr>
+              <tr>
+                <th width="80"> {:lan('RESOLUTION_HEIGHT', 'Admin')} </th>
+                <td><input name="pz[height]" value="{$data.emcee.height|default=640}" type="text" class="input-text"></td>
+              </tr>
+              <tr>
+                <th width="80"> {:lan('RESOLUTION_WIDTH', 'Admin')} </th>
+                <td><input name="pz[width]" value="{$data.emcee.width|default=480}" type="text" class="input-text"></td>
+                <input name="pz[time]" value="{$time|time}" type="hidden" class="input-text">
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        </gt>
+        <div class="bk10"></div>
+        <div class="btn">
+          <input type="button" class="button" name="dosubmit" value="{:lan('SAVE', 'Admin')}" style="width:100px;height:40px;" id="submit_form">
+        </div>
+        <div class="g-ft">
+        </div>
+      </div>
+    </div>
+  </form>
+    <div class="left">
+        <div class="top clear">
+            <div class="canvas-wrap">
+                <canvas id="mianCanvas" class="mian-canvas" width="0" height="0"></canvas>
+                <canvas id="shadeCanvas" class="shade-canvas" width="0" height="0"></canvas>
+            </div>
+
+            <div class="img-wrap">
+                <img id="hiddenImg">
+            </div>
+
+            <canvas class="preview-canvas" id="previewCanvas" width="150" height="150"></canvas>
+        </div>
+
+        <form id="imgForm" class="img-form">
+            <div class="file-wrap">
+                <input class="file" type="file" id="file" name="bigheadpic" accept="image/png, image/jpeg">
+            </div>
+            <p class="upload-btn">{:lan('SELECT_PIC', 'Home')}</p>
+            <p id="rotate" class="rotate iconfont">&#xe643;</p>
+            <button type="submit" id="submit" class="submit">{:lan('HOME_SUBMIT', 'Home')}</button>
+        </form>
+
+
+        <p class="info">{:lan('SAVE_HEADPIC_TIPS', 'Home')}</p>
+    </div>
+    <input type="hidden" value="{$Think.config.IMAGE_BASE_URL}{$bigheadpic}" id="bigpic">
+</block>
+<block name="js"> 
+  <script type="text/javascript">function SwapTab(name,cls_show,cls_hide,cnt,cur){
+    for(i=1;i<=cnt;i++){
+		if(i==cur){
+			 $('#div_'+name+'_'+i).show();
+			 $('#tab_'+name+'_'+i).attr('class',cls_show);
+		}else{
+			 $('#div_'+name+'_'+i).hide();
+			 $('#tab_'+name+'_'+i).attr('class',cls_hide);
+		}
+	}
+}
+
+function showsmtp(obj,hiddenid){
+	hiddenid = hiddenid ? hiddenid : 'smtpcfg';
+	var status = $(obj).val();
+	if(status == 1) $("#"+hiddenid).show();
+	else  $("#"+hiddenid).hide();
+}
+function test_mail() {
+	var mail_type = $('input[checkbox=mail_type][checked]').val();
+    $.post('?m=admin&c=setting&a=public_test_mail&mail_to='+$('#mail_to').val(),{mail_type:mail_type,mail_server:$('#mail_server').val(),mail_port:$('#mail_port').val(),mail_user:$('#mail_user').val(),mail_password:$('#mail_password').val(),mail_auth:$('#mail_auth').val(),mail_auth:$('#mail_auth').val(),mail_from:$('#mail_from').val()}, function(data){
+	alert(data);
+	});
+}
+
+</script> 
+
+<script src="__PUBLIC__/Tools/Js/jquery/jquery-1.8.3.min.js"></script>
+<!-- <script src="__PUBLIC__/Home/Js/imghover.js"></script>
+<script src="__PUBLIC__/Home/Js/Right.js"></script>
+<script src="__PUBLIC__/Home/Js/slide.js"></script> -->
+<script type="text/javascript" src="/Public/Home/Js/common.js?v=20160910"></script>
+<script type="text/javascript" src="/Public/Admin/Js/imgUpLoadCanvas.js?v=20160910"></script>
+
+<script>
+    function set_inspector(){
+      var userid = {$data.user.userid};
+        $.ajax({
+            type: "post",
+            url: "/Admin/Show/set_inspector/",
+            dataType: "json",
+            data: {userid:userid},
+            success: function (result) {
+                if (confirm(result.message)) {
+                    switch(result.status)
+                    {
+                        case 1:
+                            var type = 1;//设为巡查员
+                            break;
+                        default:
+                            var type = 2;//取消巡查员
+                    }                  
+                    $.ajax({
+                        type: "post",
+                        url: "/Admin/Show/set_inspector/",
+                        dataType: "json",
+                        data: {type:type,userid:userid},
+                        success: function (res) {
+                            switch(res.status)
+                            {
+                                case 1:
+                                    alert(res.message);
+                                    window.location.href = '/Admin/Show/user_edit/id/'+userid;
+                                    break;
+                                default:
+                                    alert("{:lan('OPERATION_FAILED', 'Admin')}");
+                            }                             
+                        },
+                        error: function (e) {
+        
+                        }
+                    });                    
+                }
+            },
+            error: function (e) {
+
+            }
+        });        
+    }
+
+
+    $('#submit_form').on('click', function() {
+        var data = $('#upForm').serialize();
+        $.ajax({
+            type: "post",
+            url: "/Admin/Show/user_edit/",
+            dataType: "json",
+            data: data,
+            success: function (result) {
+                if (result.status == 1) {
+                    alert(result.message);
+                    window.location.href = '/Admin/Show/user_edit/id/'+'{$data.user.userid}';
+                }else{
+                    alert(result.message);
+                }
+            },
+            error: function (e) {
+
+            }
+        });
+    });
+</script>
+
+</block>

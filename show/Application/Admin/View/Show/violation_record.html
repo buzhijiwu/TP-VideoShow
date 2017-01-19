@@ -1,0 +1,376 @@
+<extend name="Public:list" />
+<block name="title"></block>
+<block name="css"></block>
+
+<block name="main">
+<script type="text/javascript" src="__PUBLIC__/Tools/Js/jquery/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/Js/live/show.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/Js/live/swfobject.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/Js/live/player.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/Js/live/chatRoom.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/Js/live/common.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/Js/live/socket.io.js"></script>
+<script type="text/javascript">
+  var _show='';
+</script>
+<style type="text/css">
+/*css样式*/
+.dis-none {
+  display: none;
+}
+.liveroom-report-alert-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 99;
+}
+.liveroom-report-alert-wrap .liveroom-report-alert {
+  width: 480px;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  position: absolute;
+  left: 50%;
+  margin-left: -240px;
+  font-size: 14px;
+  top: 150px;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+}
+.liveroom-report-alert-wrap .liveroom-report-alert .ban-alert .line {
+  text-align: center;
+  padding: 3px 0;
+}
+.liveroom-report-alert-wrap .liveroom-report-alert .ban-alert .line .right {
+  width: 150px;
+  text-align: center;
+  height: 28px;
+  border: 1px solid #ccc;
+  color: #666;
+}
+.liveroom-report-alert-wrap .liveroom-report-alert .other-cause {
+  width: 430px;
+  height: 100px;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  margin-top: 15px;
+  margin-left: 5px;
+  color: #666;
+}
+.liveroom-report-alert-wrap .liveroom-report-alert .other-cause:focus {
+  outline-offset: -2px;
+  outline: #ff5e5c auto 5px;
+}
+.liveroom-report-alert-wrap .liveroom-report-alert .bottom {
+  margin-top: 20px;
+  text-align: center;
+}
+.liveroom-report-alert-wrap .liveroom-report-alert .bottom .button {
+  height: 30px;
+  padding: 0 30px;
+  color: #fff;
+  background-color: #ff5e5c;
+  margin: 0 10px;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+.liveroom-report-alert-wrap .liveroom-report-alert .bottom .button:hover {
+  background-color: #ff3330;
+}
+.liveroom-report-alert-wrap .liveroom-report-alert .close-report {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 20px;
+  color: #ff5e5c;
+}
+.liveroom-report-alert-wrap .liveroom-report-alert .close-report:hover {
+  cursor: pointer;
+}  
+</style>
+<div class="liveroom-report-alert-wrap dis-none">
+    <div class="liveroom-report-alert dis-none">
+        <!--禁播-->
+        <div class="ban-alert dis-none">
+            <div class="line1 line">
+                <span class="left">{:lan('VIOLATION_REASON', 'Home')}：</span>
+                <select class="right" name="type">
+                    <volist name="baninfo.reason" id="v">
+                        <option value="{$v.key}">{$v.value}</option>
+                    </volist>
+                </select>
+            </div>
+            <div class="line2 line">
+                <span class="left">{:lan('VIOLATION_LEVEL', 'Home')}：</span>
+                <select class="right" name="violatelevel">
+                    <volist name="baninfo.level" id="v">
+                        <option value="{$v.key}">{$v.value}</option>
+                    </volist>
+                </select>
+            </div>
+            <div class="line3 line">
+                <span class="left">{:lan('BAN_TIME', 'Home')}：</span>
+                <select class="right" name="bantime">
+                    <volist name="baninfo.time" id="v">
+                        <option value="{$v.key}">{$v.value}</option>
+                    </volist>
+                </select>
+            </div>
+            <div class="line4 line">
+                <span class="left">{:lan('PUNISH_MONEY', 'Home')}：</span>
+                <select class="right" name="banmoney">
+                    <volist name="baninfo.money" id="v">
+                        <option value="{$v.key}">{$v.value}</option>
+                    </volist>
+                </select>
+            </div>
+        </div>
+        <span class="close-report iconfont">X</span>
+        <textarea placeholder="{:lan('PLZ_INPUT_REASON', 'Home')}" class="other-cause dis-none" name="content"></textarea>
+        <div class="bottom">
+            <button class="button no">{:lan('CANCEL', 'Home')}</button>
+            <button class="button yes">{:lan('SURE', 'Home')}</button>
+        </div>
+    </div>
+</div>
+
+  <div id="searchid">
+    <form name="searchform" action="/Admin/Show/violation_record" method="get" >
+      <table width="100%" cellspacing="0" class="search-form">
+        <tbody>
+          <tr>
+            <td><div class="explain-col"> {:lan('PROCESS_TIME', 'Admin')}：
+               <input type="text" name="start_time" id="start_time" value="<eq name='Think.get.start_time' value=''>{$now}<else />{$Think.get.start_time}</eq>" size="10" class="date" readonly>
+                &nbsp;<script type="text/javascript">     Calendar.setup({
+      weekNumbers: false,
+        inputField : "start_time",
+        trigger    : "start_time",
+        dateFormat: "%Y-%m-%d",
+        showTime: false,
+        minuteStep: 1,
+        onSelect   : function() {this.hide();}
+      });
+        </script>- &nbsp;
+                <input type="text" name="end_time" id="end_time" value="<eq name='Think.get.end_time' value=''>{$now}<else />{$Think.get.end_time}</eq>" size="10" class="date" readonly>
+                &nbsp;<script type="text/javascript">     Calendar.setup({
+      weekNumbers: false,
+        inputField : "end_time",
+        trigger    : "end_time",
+        dateFormat: "%Y-%m-%d",
+        showTime: false,
+        minuteStep: 1,
+        onSelect   : function() {this.hide();}
+      });
+        </script>
+                {:lan('REPORTED_USER', 'Admin')}
+                <input name="keyword" type="text" class="input-text" onfocus="if(this.value='{:lan('USERNAME', 'Admin')}/{:lan('NICKNAME', 'Admin')}/{:lan('ROOMNO', 'Admin')}')this.value=''" onblur="onb();" <neq name="{keyword}" value="">value="{$keyword}"<else />value="{:lan('USERNAME', 'Admin')}/{:lan('NICKNAME', 'Admin')}/{:lan('ROOMNO', 'Admin')}"</neq> />
+                <input type="submit" name="search" class="button" value="{:lan('SEARCH', 'Admin')}" />
+              </div></td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+  <style>
+  #myform th, #myform td { text-align: center;}
+  </style>
+  <input type="hidden" id="adminid" name="processadminid" value="{$adminid}" />
+  <form name="myform" id="myform" action="" method="post" >
+    <div class="table-list">
+      <table width="100%">
+        <thead>
+          <tr>
+            <th width="40">{:lan('SYS_NUMBER', 'Admin')}</th>
+            <th>{:lan('REPORT_TIME', 'Admin')}</th>            
+            <th>{:lan('REPORTED_USERNAME', 'Admin')}</th>
+            <th>{:lan('REPORTED_NICKNAME', 'Admin')}</th>  
+            <th>{:lan('ROOMNO', 'Admin')}</th>             
+            <th>{:lan('BAN_TIME', 'Admin')}</th>  
+            <th>{:lan('PUNISH_MONEY', 'Admin')}</th>                        
+            <th>{:lan('PROCESS_TIME', 'Admin')}</th>
+            <th>{:lan('OPERATOR', 'Admin')}</th>            
+            <th>{:lan('OPERATION', 'Admin')}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <volist name="data" id="v" key="k">
+          <tr>
+            <td>{$k}</td>
+            <td>{$v.createtime}</td>            
+            <td>{$v.username}</td>
+            <td>{$v.nickname}</td>
+            <td>{$v.showroomno}</td>            
+            <eq name="v.bantime" value="-1">
+            <td>{:lan('NO_UPPER_LIMIT', 'Admin')}</td>            
+            <else />
+            <td>{$v.bantime}</td>
+            </eq>
+            <td>{$v.punishmoney}</td>            
+            <td>{$v.processtime}</td>
+            <td>{$v.operation}</td>            
+            <td>
+              <eq name="v.isopen" value="0">
+              <a href="javascript:;" onclick="openlive({$v.banid});">{:lan('ENABLE', 'Admin')}</a> | 
+              <else />
+              <a href="javascript:;">{:lan('ALREADY_ENABLE', 'Admin')}</a> |               
+              </eq>
+              <a href="javascript:;" class="ban-open" data-banid="{$v.banid}" data-userid="{$v.userid}" onclick="notejsInit({$v.showroomno});">{:lan('MODIFY', 'Admin')}</a>                
+              <neq name="v.id" value="">
+              | <a href="{:U('Admin/Show/violation_record_detail/banid/'.$v['banid'])}">{:lan('REDIS_KEY_DETAIL', 'Admin')}</a>
+              </neq>
+              <neq name="v.pic" value="">
+                  | <a href="{:U('Supervise/Treated/violation_pic/banid/'.$v['banid'])}" target="_blank">{:lan('VIEW_EVIDENCE', 'Admin')}</a>
+              </neq>              
+            </td>            
+          </tr>
+          </volist>
+        </tbody>
+      </table>
+      <div id="pages">{$page}</div>
+    </div>
+    <input type="hidden" id="waachnodepath" value="{$chatNodePath}"/>
+  </form>
+</block>
+
+<block name="js">
+<script type="text/javascript" src="__PUBLIC__/Home/Js/live/chatClient.js"></script>
+<script src="__PUBLIC__/Home/Js/live/liveChat.js"></script>
+<!-- <script type="text/javascript" src="__PUBLIC__/Home/Js/common.js"></script> -->
+<script type="text/javascript">
+function notejsInit(showroomno){
+  //wlSocket.nodejsInit();
+  var data =  new Object();
+  data.roomnum  = showroomno;
+  data.ugoodnum = showroomno;
+  data.equipment = 'pc';
+  data.userid = '19';
+
+  socket.emit('adminUserCnn', data);   
+}
+</script>
+<script type="text/javascript">
+function onb(){
+  if ($("input[name='keyword']").val() == '') {
+    var a = "{:lan('USERNAME', 'Admin')}/{:lan('NICKNAME', 'Admin')}/{:lan('ROOMNO', 'Admin')}";
+    $("input[name='keyword']").val(a);
+  }
+}
+function openlive(banid) {
+  if(confirm("{:lan('ENABLE', 'Admin')}?")){
+    $.ajax({
+        url:"{:U('Admin/Show/open_live')}",
+        type:"POST",
+        data:{banid:banid},
+        success: function (res) {
+          var data = JSON.parse(res);
+           if (data.status == 1) {
+               alert(data.message);
+               window.location.href=window.location.href; 
+           }
+        },
+        error: function (res) {
+            console.log(res);
+        }
+    })    
+  }  
+}
+
+$(function () {
+    //禁播展现
+    $(".ban-open").each(function(index){
+      $(".ban-open").eq(index).bind("click",function () {
+        $(".liveroom-report-alert").removeClass("dis-none");
+        $(".liveroom-report-alert .ban-alert").removeClass("dis-none");
+        $(".liveroom-report-alert .ban-alert .line .right").val(0);
+        $(".liveroom-report-alert-wrap").removeClass("dis-none");
+        $(".liveroom-report-alert .report-alert").addClass("dis-none");
+
+          //提交
+        $(".liveroom-report-alert .bottom .button.yes").bind("click",function(){
+        if($(".liveroom-report-alert .ban-alert").is(":hidden")){
+    
+        }else{
+            var banType = $("select[name='type']").val();
+            var banContent = $.trim($("textarea[name='content']").val()); 
+            if(banType == 7 && banContent.length <= 0){
+                $("textarea[name='content']").focus();
+            }else{
+                var data = $("#adminid,select[name='type'],textarea[name='content'],select[name='violatelevel'],select[name='bantime'],select[name='banmoney'],input[name='reportid[]']").serialize();
+                data = data+'&banid='+$(".ban-open").eq(index).attr('data-banid')+"&reporteduid="+$(".ban-open").eq(index).attr('data-userid');
+                $.ajax({
+                    url:"{:U('Admin/Show/doBan')}",
+                    type:"POST",
+                    data:data,
+                    success: function (res) {
+                        $(".liveroom-report-alert .report-alert").addClass("dis-none");
+                        $(".liveroom-report-alert").addClass("dis-none");
+                        $(".liveroom-report-alert .ban-alert").addClass("dis-none");
+                        $(".liveroom-report-alert .other-cause").addClass("dis-none").val("");
+                        $(".liveroom-report-alert-wrap").addClass("dis-none");
+                        $(".liveroom-report-alert .bottom .button.yes").unbind("click");
+                        var data = JSON.parse(res);
+                        if(data.status == 1){
+                            if (data.livetype == 2) {
+                                //pc直播
+                                Chat.doStopLive($(".ban-open").eq(index).attr('data-userid'));
+                            }else{
+                                Chat.doStopLive($(".ban-open").eq(index).attr('data-userid'));
+                            } 
+                            alert(data.message);
+                            window.location.href=window.location.href; 
+                        }else{
+                            alert(data.message);
+                        }
+                    },
+                    error: function (res) {
+                        console.log(res);
+                    }
+                })
+            }          
+        }
+        })
+      })
+    })
+
+    $(".ban-open").click(function(){
+        $(".liveroom-report-alert").removeClass("dis-none");
+        $(".liveroom-report-alert .ban-alert").removeClass("dis-none");
+        $(".liveroom-report-alert .ban-alert .line .right").val(0);
+        $(".liveroom-report-alert-wrap").removeClass("dis-none");
+        $(".liveroom-report-alert .report-alert").addClass("dis-none");
+    });
+    //关闭
+    function closeAlert(){
+        $(".liveroom-report-alert .report-alert").addClass("dis-none");
+        $(".liveroom-report-alert").addClass("dis-none");
+        $(".liveroom-report-alert .ban-alert").addClass("dis-none");
+        $(".liveroom-report-alert .other-cause").addClass("dis-none").val("");
+        $(".liveroom-report-alert-wrap").addClass("dis-none");
+        $(".liveroom-report-alert .bottom .button.yes").unbind("click");
+    }
+    
+    $(".liveroom-report-alert .close-report").click(closeAlert);
+    $(".liveroom-report-alert .bottom .button.no").click(closeAlert);
+    
+    //禁播提交
+
+
+
+
+    
+    
+    //禁播原因选择
+    $(".liveroom-report-alert .ban-alert .line1 .right").change(function(){
+        if($(this).val() == 7){
+            $(".liveroom-report-alert .other-cause").removeClass("dis-none");
+        }else{
+            $(".liveroom-report-alert .other-cause").addClass("dis-none");
+        }
+    })  
+});
+</script>
+</block>

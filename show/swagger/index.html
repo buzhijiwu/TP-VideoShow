@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Swagger UI</title>
+    <base target="_blank" />
+</head>
+<style type="text/css">
+    div {
+        padding: 6px;
+    }
+    a {
+        font-size: 16px;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 20px 0 20px 40px;
+    }
+    a:link {color:green;}
+    a:visited {color:green;}
+</style>
+<body>
+<div>
+    <div>
+        <a style="font-size:20px;background: transparent url(./images/logo_small.png) no-repeat left center;">Demo：</a>
+        <a href="/swagger/json.html?json=demo">示例文档</a>
+    </div>
+
+    <!--PC端接口-->
+    <div>
+        <a style="font-size:20px;background: transparent url(./images/logo_small.png) no-repeat left center;">PC端：</a>
+    </div>
+    <table cellpadding="2">
+        <tr><td colspan="3"><hr></td></tr>
+
+        <tr>
+            <td rowspan="10">
+                <a href="/swagger/json.html?json=PC_SportGame">
+                    运动会游戏
+                </a>
+            </td>
+        </tr>
+        <tr><td>/Home/Currency/getUserInfo</td><td>获取用户信息</td></tr>
+        <tr><td>/Home/Currency/getCurrencyExchangeRule</td><td>获取货币兑换规则</td></tr>
+        <tr><td>/Home/Currency/currencyExchange</td><td>秀豆秀币兑换</td></tr>
+        <tr><td>/Home/SportGame/openGame</td><td>打开游戏界面</td></tr>
+        <tr><td>/Home/SportGame/grabBanker</td><td>用户抢庄</td></tr>
+        <tr><td>/Home/SportGame/userStake</td><td>用户押注</td></tr>
+        <tr><td>/Home/SportGame/waitingReward</td><td>开奖倒计时,等待结算</td></tr>
+        <tr><td>/Home/SportGame/gameOverExchangeStatus</td><td>游戏结束，改变游戏状态</td></tr>
+        <tr><td>/Home/SportGame/gameSettlement</td><td>游戏结算</td></tr>
+
+        <tr><td colspan="3"><hr></td></tr>
+
+        <tr>
+            <td rowspan="2">
+                <a href="/swagger/json.html?json=PC_EmceeList">
+                    PC端主播列表
+                </a>
+            </td>
+        </tr>
+        <tr><td>/Home/Index/loadMoreHotEmcees</td><td>获取热门主播</td></tr>
+
+        <tr><td colspan="3"><hr></td></tr>
+
+        <tr>
+            <td rowspan="3">
+                <a href="/swagger/json.html?json=PC_User">
+                    PC端用户相关
+                </a>
+            </td>
+        </tr>
+        <tr><td>/Home/Index/getUserFriendList</td><td>获取用户关注主播列表</td></tr>
+        <tr><td>/Home/Usercenter/boundphone</td><td>用户绑定手机号</td></tr>
+
+        <tr><td colspan="3"><hr></td></tr>
+    </table>
+
+    <!--APP端接口-->
+    <div>
+        <a style="font-size:20px;background: transparent url(./images/logo_small.png) no-repeat left center;">APP端：</a>
+        <a href="/swagger/code.php">[ APP返回码 ]</a>
+    </div>
+    <table cellpadding="2">
+        <tr><td colspan="3"><hr></td></tr>
+
+        <tr>
+            <td rowspan="9">
+                <a href="/swagger/json.html?json=APP_System">
+                    系统相关
+                </a>
+            </td>
+        </tr>
+        <tr><td>getSystemInfo</td><td>获取系统信息</td></tr>
+        <tr><td>getTopList</td><td>获取排行榜数据</td></tr>
+        <tr><td>getMallInformation</td><td>获取APP商城信息</td></tr>
+        <tr><td>getRollpic</td><td>获取轮播图</td></tr>
+        <tr><td>searchEmcee</td><td>搜索主播</td></tr>
+        <tr><td>topSearchEmcee</td><td>热搜推荐</td></tr>
+        <tr><td>getNearbyEmcces</td><td>获取附近主播</td></tr>
+        <tr><td>getIndexEmcees</td><td>获取首页主播</td></tr>
+
+        <tr><td colspan="3"><hr></td></tr>
+
+        <tr>
+            <td rowspan="19">
+                <a href="/swagger/json.html?json=APP_User">
+                    用户相关
+                </a>
+            </td>
+        </tr>
+        <tr><td>getMyInformation</td><td>获取我的个人信息</td></tr>
+        <tr><td>getUserInfoByUserid</td><td>获取用户信息</td></tr>
+        <tr><td>getPrivileges</td><td>获取特权信息</td></tr>
+        <tr><td>getShareInfo</td><td>获取分享信息</td></tr>
+        <tr><td>getMyTasks</td><td>获取用户所参与的任务</td></tr>
+        <tr><td>getMyVipinfos</td><td>获取用户VIP信息</td></tr>
+        <tr><td>getMyMessages</td><td>获取用户消息记录</td></tr>
+        <tr><td>getFriendEmcees</td><td>获取用户关注列表支持分页查询</td></tr>
+        <tr><td>getMyFamily</td><td>获取用户家族信息</td></tr>
+        <tr><td>getMySeeHistory</td><td>获取用户观看历史</td></tr>
+        <tr><td>getMyEquipments</td><td>获取用户的固定资产例如座驾信息</td></tr>
+        <tr><td>getBuyRecord</td><td>获取购买记录</td></tr>
+        <tr><td>getRechargeRecord</td><td>获取用户充值记录</td></tr>
+        <tr><td>modifyUseEquipment</td><td>修改用户座驾</td></tr>
+        <tr><td>modifyUserInfo</td><td>修改用户昵称</td></tr>
+        <tr><td>modifyHeadPic</td><td>修改用户头像</td></tr>
+        <tr><td>delOrReadMessage</td><td>删除消息,或将消息设置为已读</td></tr>
+        <tr><td>getUserBalance</td><td>获取用户余额</td></tr>
+
+        <tr><td colspan="3"><hr></td></tr>
+
+        <tr>
+            <td rowspan="9">
+                <a href="/swagger/json.html?json=APP_Spend">
+                    消费相关
+                </a>
+            </td>
+        </tr>
+        <tr><td>buyVip</td><td>购买VIP</td></tr>
+        <tr><td>buyEquipment</td><td>购买座驾</td></tr>
+        <tr><td>buyNiceno</td><td>购买靓号</td></tr>
+        <tr><td>buyGuard</td><td>购买守护</td></tr>
+        <tr><td>buySeat</td><td>购买沙发</td></tr>
+        <tr><td>sendGift</td><td>赠送礼物</td></tr>
+        <tr><td>sendFreeGift</td><td>赠送免费礼物</td></tr>
+        <tr><td>sendFlyScreen</td><td>发送飞屏</td></tr>
+
+        <tr><td colspan="3"><hr></td></tr>
+
+        <tr>
+            <td rowspan="10">
+                <a href="/swagger/json.html?json=APP_LoginRegister">
+                    登录注册相关
+                </a>
+            </td>
+        </tr>
+        <tr><td>doregister</td><td>注册</td></tr>
+        <tr><td>dologin</td><td>登录</td></tr>
+        <tr><td>thirdPartyLogin</td><td>第三方登录</td></tr>
+        <tr><td>checkUserLoginStatus</td><td>验证用户登录状态</td></tr>
+        <tr><td>sendVietnamSms</td><td>发送越南短信验证码</td></tr>
+        <tr><td>modifyPassword</td><td>修改密码</td></tr>
+        <tr><td>forgetPassword</td><td>忘记密码</td></tr>
+        <tr><td>getCountryno</td><td>获取国家码列表</td></tr>
+        <tr><td>checkUsernameRegister</td><td>验证用户名是否存在</td></tr>
+
+        <tr><td colspan="3"><hr></td></tr>
+
+        <tr>
+            <td rowspan="6">
+                <a href="/swagger/json.html?json=APP_PushOrPullFlow">
+                    开播推拉流相关
+                </a>
+            </td>
+        </tr>
+        <tr><td>createAPPLiveroom</td><td>开始直播</td></tr>
+        <tr><td>stopAPPLiveroom</td><td>停止直播</td></tr>
+        <tr><td>enterToLiveRoom</td><td>进入直播间，获取APP拉流端地址</td></tr>
+        <tr><td>banAction</td><td>禁播操作接口</td></tr>
+        <tr><td>doBan</td><td>禁播接口</td></tr>
+
+        <tr><td colspan="3"><hr></td></tr>
+
+        <tr>
+            <td rowspan="15">
+                <a href="/swagger/json.html?json=APP_Liveroom">
+                    直播间相关
+                </a>
+            </td>
+        </tr>
+        <tr><td>getMyGuard</td><td>获取主播守护</td></tr>
+        <tr><td>getGuardAndSeat</td><td>获取守护和沙发</td></tr>
+        <tr><td>getSaleGiftsAndBalance</td><td>获取礼物列表和用户余额</td></tr>
+        <tr><td>addForbid</td><td>拉黑用户</td></tr>
+        <tr><td>recordShutup</td><td>禁言</td></tr>
+        <tr><td>recordKick</td><td>踢人</td></tr>
+        <tr><td>addOrDelFriend</td><td>添加取消关注</td></tr>
+        <tr><td>checkIsFriend</td><td>判断用户是否已关注</td></tr>
+        <tr><td>checkIsShutup</td><td>判断用户是否被禁言</td></tr>
+        <tr><td>checkIsKick</td><td>验证用户是否被踢出</td></tr>
+        <tr><td>addSharerecord</td><td>添加用户分享记录</td></tr>
+        <tr><td>addSeehistory</td><td>添加观看记录</td></tr>
+        <tr><td>addFeedback</td><td>添加用户反馈</td></tr>
+        <tr><td>addReport</td><td>添加用户举报</td></tr>
+
+        <tr><td colspan="3"><hr></td></tr>
+
+        <tr>
+            <td rowspan="9">
+                <a href="/swagger/json.html?json=APP_Recharge">
+                    充值相关
+                </a>
+            </td>
+        </tr>
+        <tr><td>getRechargeChannels</td><td>获取充值渠道</td></tr>
+        <tr><td>userRecharge</td><td>用户充值（仅IOS用）</td></tr>
+        <tr><td>rechargeLog</td><td>充值日志（仅IOS用）</td></tr>
+        <tr><td>rechbycallingcard</td><td>通过充值卡和游戏卡充值（仅安卓用）</td></tr>
+        <tr><td>rechargeByBank</td><td>通过LOCALBANK充值（仅安卓用）</td></tr>
+        <tr><td>rechargeByVisa</td><td>通过VISA充值（仅安卓用）</td></tr>
+        <tr><td>rechargeByAlipay</td><td>通过支付宝充值</td></tr>
+        <tr><td>rechargeByPaypal</td><td>通过paypal充值</td></tr>
+
+        <tr><td colspan="3"><hr></td></tr>
+    </table>
+</div>
+</body>
+</html>

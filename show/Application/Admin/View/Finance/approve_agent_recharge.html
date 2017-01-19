@@ -1,0 +1,131 @@
+<tagLib name="html" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>{:lan('ADMIN_MAN_TITLE', 'Admin')}</title>
+    <link href="__PUBLIC__/Public/statics/css/reset.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/Public/statics/css/system.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/Public/statics/css/table_form.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/Public/statics/css/dialog.css" rel="stylesheet" type="text/css" />
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/dialog.js"></script>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles1.css" title="styles1" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles2.css" title="styles2" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles3.css" title="styles3" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles4.css" title="styles4" media="screen" />
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/admin_common.js"></script>
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/styleswitch.js"></script>
+
+</head>
+<body>
+<style type="text/css">
+    html{_overflow-y:scroll}
+</style><div id="closeParentTime" style="display:none"></div>
+<div class="pad-10">
+
+    <div id="searchid" style="display:block">
+        <form name="searchform" action="/Admin/Finance/approve_agent_recharge" method="get" >
+            <table width="100%" cellspacing="0" class="search-form">
+                <tbody>
+                <tr>
+                    <td>
+                        <div class="explain-col">
+                            {:lan('TRANSACTION_TIME', 'Admin')}：
+                            <link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/js/calendar/jscal2.css"/>
+                            <link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/js/calendar/border-radius.css"/>
+                            <link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/js/calendar/win2k.css"/>
+                            <script type="text/javascript" src="__PUBLIC__/Public/statics/js/calendar/calendar.js"></script>
+                            <script type="text/javascript" src="__PUBLIC__/Public/statics/js/calendar/lang/en.js"></script><input type="text" name="start_time" id="start_time" value="{$_GET['start_time']}" size="10" class="date" readonly>&nbsp;<script type="text/javascript">
+                            Calendar.setup({
+                                weekNumbers: false,
+                                titleFormat: "%Y-%b",
+                                inputField : "start_time",
+                                trigger    : "start_time",
+                                dateFormat: "%Y-%m-%d",
+                                showTime: false,
+                                minuteStep: 1,
+                                onSelect   : function() {this.hide();}
+                            });
+                        </script>- &nbsp;<input type="text" name="end_time" id="end_time" value="{$_GET['end_time']}" size="10" class="date" readonly>&nbsp;<script type="text/javascript">
+                            Calendar.setup({
+                                weekNumbers: false,
+                                titleFormat: "%Y-%b",
+                                inputField : "end_time",
+                                trigger    : "end_time",
+                                dateFormat: "%Y-%m-%d",
+                                showTime: false,
+                                minuteStep: 1,
+                                onSelect   : function() {this.hide();}
+                            });
+                        </script>
+                            {:lan('TRANSACTION_NO', 'Admin')}：
+                            <input name="orderno" type="text" class="input-text" value="{$_GET['orderno']}" />
+                            {:lan('USER_NAME_LABEL', 'Admin')}：
+                            <input name="username" type="text" class="input-text" value="{$_GET['username']}" />
+                            {:lan('AGENT_NAME', 'Admin')}：
+                            <input name="agentname" type="text" class="input-text" value="{$_GET['agentname']}" />
+                            <input type="submit" name="search" class="button" value="{:lan('BTN_SEARCH', 'Admin')}" />
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+
+    <div class="table-list">
+        <table width="100%">
+            <thead>
+            <tr>
+                <th width="16"><input type="checkbox" value="" id="check_box" onclick="selectall('rechargeids[]');"></th>
+                <th width="100">{:lan('USERNAME', 'Admin')}</th>
+                <th width="100">{:lan('TRANSACTION_NO', 'Admin')}</th>
+                <th width="150">{:lan('TRANSACTION_TIME', 'Admin')}</th>
+                <th width="100">{:lan('VIRTUAL_MONEY', 'Admin')}</th>
+                <th width="100">{:lan('LOCAL_CURRENCY', 'Admin')}</th>
+                <th width="100">{:lan('LOCAL_UNIT', 'Admin')}</th>
+                <th width="100">{:lan('RECHARGE_AGENT', 'Admin')}</th>
+                <th width="100">{:lan('RECHARGE_APPROVE_STATUS', 'Admin')}</th>
+                <th width="100">{:lan('OPERATION', 'Admin')}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <volist name="recharges" id="vo">
+                <tr>
+                    <td align="center"><input class="inputcheckbox " name="rechargeids[]" value="{$vo['rechargeid']}" type="checkbox"></td>
+                    <td align="center">{$vo['username']}</td>
+                    <td align='center'>{$vo['orderno']}</td>
+                    <td align="center">{$vo['rechargetime']}</td>
+                    <td align='center'><span style="" >{$vo['showamount']}</span></td>
+                    <td align='center'>{$vo['amount']}</td>
+                    <td align='center'>{$vo['localunit']}</td>
+                    <td align='center'>{$vo['agentname']}</td>
+                    <td align='center'>
+                        <if condition="$vo['status']=='0'">
+                            <span style="color:red;">{:lan('RECHARGE_APPROVE_NO_PASS', 'Admin')}</span>
+                            <elseif condition="$vo['status']=='1'"/>
+                            <span style="color:green;">{:lan('RECHARGE_APPROVE_PASS', 'Admin')}</span>
+                            <elseif condition="$vo['status']=='2'"/>
+                            {:lan('RECHARGE_WAIT_APPROVE', 'Admin')}
+                        </if>
+                    </td>
+                    <td align='center'>
+                        <if condition="$vo['status']=='2'">
+                            <a href="javascript:confirmurl('__URL__/approve_agent_recharge_result/status/1/rechargeid/{$vo['rechargeid']}/return/{$_SERVER["REQUEST_URI"]|base64_encode}', '{:lan('CONFIRM_APPROVE_PASS', 'Admin')}')">{:lan('RECHARGE_APPROVE_PASS', 'Admin')}</a>
+                            <a href="javascript:confirmurl('__URL__/approve_agent_recharge_result/status/0/rechargeid/{$vo['rechargeid']}/return/{$_SERVER["REQUEST_URI"]|base64_encode}', '{:lan('CONFIRM_APPROVE_NO_PASS', 'Admin')}')">{:lan('RECHARGE_APPROVE_NO_PASS', 'Admin')}</a>
+                        </if>
+                    </td>
+                </tr>
+            </volist>
+
+            </tbody>
+        </table>
+
+        <div id="pages">{$page}</div>
+    </div>
+    <input type="hidden" id="return" name="return" value="{$_SERVER["REQUEST_URI"]|base64_encode}" >
+</div>
+</body>
+</html>

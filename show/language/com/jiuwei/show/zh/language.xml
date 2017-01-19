@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+    <showlist>
+        <authenfailed>show域名未经过授权，请联系www.waashow.com</authenfailed>
+		<networkissue>网络异常,连接服务器失败</networkissue>
+		<rejectconnect>连接请求被拒绝</rejectconnect>
+		<closeconreq>连接请求被关闭</closeconreq>
+		<streamissue>流媒体网络异常,连接服务器失败</streamissue>
+		<rejectstream>流媒体连接请求被拒绝</rejectstream>
+		<closestream>流媒体连接请求被关闭</closestream>
+		<usewebsee>请通过网页来观看直播</usewebsee>
+		<errrefresh>读取房间信息错误，请刷新页面</errrefresh>
+		<nolive>当前没有直播</nolive>
+    </showlist>

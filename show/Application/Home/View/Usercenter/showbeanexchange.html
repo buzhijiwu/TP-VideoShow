@@ -1,0 +1,77 @@
+<extend name="base" />
+
+<block name="menu">
+    <div class="nav-list clear">
+        <a href="__URL__/recivegift">{:lan('RECIVE_LIST', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+        <a href="__URL__/sendgift">{:lan('SEND_GIFT', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+        <a href="__URL__/rechargelist">{:lan('RECHARGE_RECORD', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+        <a href="__URL__/consumelist">{:lan('CONSUME_RECORD', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+        <a href="__URL__/showbeanexchange" class="active">{:lan('EXCHANGE_SHOW_BEAN_RECORD', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+        <a href="__URL__/showmoneyexchange">{:lan('EXCHANGE_SHOW_MONEY_RECORD', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+    </div>
+</block>
+
+<block name="main">
+    <div class="right-mybill-main">
+        <!--无收入-->
+        <eq name="exchangeRecord[0]" value="">
+            <div class="common-no-data">
+                <img src="/Public/Public/Images/newImage/common/al-cry.png">
+                <h1>{:lan('NO_EXCHANGE_RECORD', 'Home')}</h1>
+
+                <!--laydate的bug，需要加id，否则报错-->
+                <a id="start" class="dis-none"></a>
+                <a id="end" class="dis-none"></a>
+            </div>
+            <else />
+            <!-- 有纪录 -->
+            <form name="query" action="" method="get" id="query" class="query" >
+
+
+
+                <p class="table-title">
+                    {:lan('QUERY_TIME', 'Home')}：
+                    <input name="start" id="start" class="laydate-icon" placeholder="{$starttime}"/> {:lan('TO', 'Home')}
+                    <input name="end" id="end" class="laydate-icon" placeholder="{$endtime}"/>
+                    <button class="query-btn">{:lan('QUERY', 'Home')}</button>
+                    <neq name="Think.get.time" placeholder=""><button class="btn-no">{:lan('CANCEL', 'Home')}</button></neq>
+                </p>
+                <table class="table-list">
+                    <thead>
+                    <tr>
+                        <th>{:lan('SPEND_SHOW_MONEY', 'Home')}</th>
+                        <th>{:lan('EXCHANGE_SHOW_BEAN', 'Home')}</th>
+                        <th>{:lan('TRADE_TIME', 'Home')}</th>
+                        <th>{:lan('TRANSACTION_STATUS', 'Home')}</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <volist name="exchangeRecord" id="vo">
+                        <tr>
+                            <td>{$vo['showmoney']}</td>
+                            <td>{$vo['showbean']}</td>
+                            <td>{$vo['addtime']}</td>
+                            <td>
+                                <if condition="$vo['status']=='1'">
+                                    {:lan('SUCCESSFUL', 'Admin')}
+                                    <elseif condition="$vo['status']=='0'" />
+                                    {:lan('PENDING', 'Admin')}
+                                    <else /> 
+                                    {:lan('FAILED', 'Admin')}                                
+                                </if>                                
+                            </td>
+                        </tr>
+                    </volist>
+                    </tbody>
+                </table>
+            </form>
+            {$page}
+        </eq>
+    </div>
+    <script>
+        $(function () {
+            userCenter.timeChoice();
+        })
+    </script>
+</block>

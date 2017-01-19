@@ -1,0 +1,34 @@
+<xml version="1.0" encoding="UTF-8">
+    <showlist>
+        <authenfailed>cam Tên miền chưa được ủy quyền！Vui lòng liên hệ với trang chủ www.waashow.com để ủy quyền!</authenfailed>
+		<playpath>Các đường link :</playpath>
+	    <lackvedio>Thiếu video hoặc các thiết bị âm thanh，vui lòng kiểm tra</lackvedio>
+        <notroomhost>Bạn không phải chủ sở hữu của phòng này</notroomhost>
+        <authfailretry>Xác nhận thất bại, xin thử lại</authfailretry>
+        <camforbid>Bạn không được phép sử dụng Camera!</camforbid>
+        <camoccupy>Camera bị chương trình khác chiếm dụng, vui lòng kiểm tra </camoccupy>
+        <contactadmin>Phát thất bại，Vui lòng liên hệ với admin</contactadmin>
+        <liveendroom>Kết quả phát trực tiếp  Số phòng:</liveendroom>
+        <fillamount>Vui lòng điền vào mục lệ phí </fillamount>
+        <fillpassword>Vui lòng nhập mật mã phòng</fillpassword>
+        <neterrortry>Kết nối mạng có vấn đề, vui lòng thử lại</neterrortry>
+        <cutpicsavefail>Lưu ảnh chụp màn hình thất bại</cutpicsavefail>
+        <kindremind>Lời khuyên:Dùng máy nghe nhạc OBS đã được cài đặt lại cấu hình, không dùng cấu hình trực tiếp máy OBS</kindremind>
+        <confirmbtntxt>Xác nhận</confirmbtntxt>
+        <choosevedioh>Vui lòng chọn thiết bị Video</choosevedioh>
+        <choosevoiceh>Vui lòng chọn thiết bị âm thanh</choosevoiceh>
+		<createalive>Mời bạn tạo một live show</createalive>
+		<publicsee>Công khai(tất cả mọi người đều xem được)</publicsee>
+		<chargesee>Thu phí(Người vào xem cần phải trả phí,bạn phải tiêu tốn 100xu)</chargesee>
+		<privatesee>Riêng tư (Người vào xem cần phải biết mật khẩu của bạn, bạn phải tiêu tốn 50 xu)</privatesee>
+		<startlive>Bắt đầu truyền hình trực tiếp</startlive>
+		<previewing>Xem trước ...</previewing>
+		<takephoto>Chụp ảnh</takephoto>
+		<clearview>Hình ảnh sắc nét</clearview>
+		<normalview>Hình ảnh bình thường</normalview>
+		<userview>Xem ảnh</userview>
+		<finishlive>Kết thúc truyền hình trực tiếp</finishlive>
+		<setamount>Vui lòng cài đặt số xu phải trả để vào xem</setamount>
+		<inputpassword>Nhập mật mã</inputpassword>
+    </showlist>
+</xml>

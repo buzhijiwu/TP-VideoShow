@@ -1,0 +1,1965 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "返回值说明：{'status':状态码,'message':提示信息,'datalist':返回的数据};"
+  },
+  "tags": [
+    {"name": "User","description": "用户"}
+  ],
+  "paths": {
+    "/api.php/Api/getMyInformation": {
+      "post": {
+        "tags": ["User"],
+        "operationId": "getMyInformation",
+        "consumes": [ "application/json"],
+        "produces": ["application/json"],
+        "summary": "获取我的个人信息",
+        "description": "获取我的个人信息",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userid",
+            "description": "用户userid",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "properties": {
+                "status": {
+                  "description": "状态码",
+                  "type":"integer"
+                },
+                "message": {
+                  "description": "返回消息",
+                  "type":"string"
+                },
+                "datalist": {
+                  "description": "用户信息",
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "properties": {
+                        "userid": {
+                          "description": "用户ID",
+                          "type": "string"
+                        },
+                        "userno": {
+                          "description": "用户号码",
+                          "type": "string"
+                        },
+                        "username": {
+                          "description": "用户名",
+                          "type": "string"
+                        },
+                        "roomno": {
+                          "description": "房间号",
+                          "type": "string"
+                        },
+                        "niceno": {
+                          "description": "靓号",
+                          "type": "string"
+                        },
+                        "nickname": {
+                          "description": "昵称",
+                          "type": "string"
+                        },
+                        "userlevel": {
+                          "description": "用户等级",
+                          "type": "string"
+                        },
+                        "smallheadpic": {
+                          "description": "用户小头像",
+                          "type": "string"
+                        },
+                        "bigheadpic": {
+                          "description": "主播封面头像",
+                          "type": "string"
+                        },
+                        "isemcee": {
+                          "description": "是否主播：0不是、1是",
+                          "type": "string"
+                        },
+                        "status": {
+                          "description": "用户状态 0：正常 1：删除 2:主播未审核 3:审核中 4:审核未通过 5:审核通过",
+                          "type": "string"
+                        },
+                        "token": {
+                          "description": "APP登陆注册TOKEN唯一字段",
+                          "type": "string"
+                        },
+                        "countrycode": {
+                          "description": "国家码",
+                          "type": "string"
+                        },
+                        "usertype": {
+                          "description": "用户类型 0普通用户 10房间管理员 20家族管理员 30运营 40应用商店渠道商",
+                          "type": "string"
+                        },
+                        "birthday": {
+                          "description": "生日",
+                          "type": "string"
+                        },
+                        "sex": {
+                          "description": "性别",
+                          "type": "string"
+                        },
+                        "showroomno": {
+                          "description": "显示的房间号，有靓号显示靓号，没有靓号显示房间号",
+                          "type": "string"
+                        },
+                        "vipid": {
+                          "description": "会员id 1：高级会员 2：至尊会员",
+                          "type": "string"
+                        },
+                        "emceeinfo": {
+                          "description": "主播信息",
+                          "schema": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/definitions/EmceeInfo"
+                            }
+                          }
+                        },
+                        "equipmentinfo": {
+                          "description": "当前用户正在使用的座驾信息",
+                          "schema": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/definitions/EquipmentInfo"
+                            }
+                          }
+                        },
+                        "balance": {
+                          "description": "秀币余额",
+                          "type": "string"
+                        },
+                        "spendmoney": {
+                          "description": "用户花的钱",
+                          "type": "string"
+                        },
+                        "earnmoney": {
+                          "description": "主播赚的钱",
+                          "type": "string"
+                        },
+                        "point": {
+                          "description": "用户积分",
+                          "type": "string"
+                        },
+                        "tasknumber": {
+                          "description": "任务数量",
+                          "type": "string"
+                        },
+                        "friendcount": {
+                          "description": "粉丝数量",
+                          "type": "string"
+                        },
+                        "equipnumber": {
+                          "description": "座驾数量",
+                          "type": "string"
+                        },
+                        "messages": {
+                          "description": "消息数量",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "参数有误"
+          },
+          "500": {
+            "description": "请求异常"
+          },
+          "400001": {
+            "description": "您还未登陆，请登陆"
+          }
+        }
+      }
+    },
+    "/api.php/Api/getUserInfoByUserid": {
+      "post": {
+        "tags": ["User"],
+        "operationId": "getUserInfoByUserid",
+        "consumes": [ "application/json"],
+        "produces": ["application/json"],
+        "summary": "根据userid获取用户信息",
+        "description": "根据userid获取用户信息",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userid",
+            "description": "用户userid",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "properties": {
+                "status": {
+                  "description": "状态码",
+                  "type":"integer"
+                },
+                "message": {
+                  "description": "返回消息",
+                  "type":"string"
+                },
+                "datalist": {
+                  "description": "用户信息",
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "properties": {
+                        "userid": {
+                          "description": "用户ID",
+                          "type": "string"
+                        },
+                        "userno": {
+                          "description": "用户号码",
+                          "type": "string"
+                        },
+                        "username": {
+                          "description": "用户名",
+                          "type": "string"
+                        },
+                        "roomno": {
+                          "description": "房间号",
+                          "type": "string"
+                        },
+                        "niceno": {
+                          "description": "靓号",
+                          "type": "string"
+                        },
+                        "nickname": {
+                          "description": "昵称",
+                          "type": "string"
+                        },
+                        "userlevel": {
+                          "description": "用户等级",
+                          "type": "string"
+                        },
+                        "smallheadpic": {
+                          "description": "用户小头像",
+                          "type": "string"
+                        },
+                        "bigheadpic": {
+                          "description": "主播封面头像",
+                          "type": "string"
+                        },
+                        "isemcee": {
+                          "description": "是否主播：0不是、1是",
+                          "type": "string"
+                        },
+                        "status": {
+                          "description": "用户状态 0：正常 1：删除 2:主播未审核 3:审核中 4:审核未通过 5:审核通过",
+                          "type": "string"
+                        },
+                        "token": {
+                          "description": "APP登陆注册TOKEN唯一字段",
+                          "type": "string"
+                        },
+                        "countrycode": {
+                          "description": "国家码",
+                          "type": "string"
+                        },
+                        "usertype": {
+                          "description": "用户类型 0普通用户 10房间管理员 20家族管理员 30运营 40应用商店渠道商",
+                          "type": "string"
+                        },
+                        "birthday": {
+                          "description": "生日",
+                          "type": "string"
+                        },
+                        "sex": {
+                          "description": "性别",
+                          "type": "string"
+                        },
+                        "showroomno": {
+                          "description": "显示的房间号，有靓号显示靓号，没有靓号显示房间号",
+                          "type": "string"
+                        },
+                        "vipid": {
+                          "description": "会员id 1：高级会员 2：至尊会员",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "参数有误"
+          },
+          "500": {
+            "description": "请求异常"
+          },
+          "400001": {
+            "description": "您还未登陆，请登陆"
+          }
+        }
+      }
+    },
+    "/api.php/Api/getPrivileges": {
+      "post": {
+        "tags": ["User"],
+        "operationId": "getPrivileges",
+        "consumes": [ "application/json"],
+        "produces": ["application/json"],
+        "summary": "获取特权信息",
+        "description": "获取特权信息",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "type",
+            "description": "类型, 0 VIP 1 守护",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "拥有者的id, 如：vipid,守护id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "userid",
+            "description": "当前用户userid",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "properties": {
+                "status": {
+                  "description": "状态码",
+                  "type":"integer"
+                },
+                "message": {
+                  "description": "返回消息",
+                  "type":"string"
+                },
+                "privileges": {
+                  "description": "特权信息",
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "properties": {
+                        "privilegekey": {
+                          "description": "特权键值",
+                          "type": "string"
+                        },
+                        "value": {
+                          "description": "特权值",
+                          "type": "string"
+                        },
+                        "privilegename": {
+                          "description": "特权名",
+                          "type": "string"
+                        },
+                        "description": {
+                          "description": "特权描述",
+                          "type": "string"
+                        },
+                        "valuedesc4app": {
+                          "description": "针对app的特权值描述",
+                          "type": "string"
+                        },
+                        "iconpath": {
+                          "description": "图标路径",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "myvips": {
+                  "description": "我的会员列表",
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "properties": {
+                        "vipid": {
+                          "description": "购买的VIP的ID",
+                          "type": "string"
+                        },
+                        "expiretime": {
+                          "description": "失效时间",
+                          "type": "string"
+                        },
+                        "vipname": {
+                          "description": "VIP名称",
+                          "type": "string"
+                        },
+                        "appsmallviplogo": {
+                          "description": "app端vip小图标",
+                          "type": "string"
+                        },
+                        "appbigviplogo": {
+                          "description": "app端vip大图标",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "参数有误"
+          },
+          "500": {
+            "description": "请求异常"
+          }
+        }
+      }
+    },
+    "/api.php/Api/getShareInfo": {
+      "post": {
+        "tags": ["User"],
+        "operationId": "getShareInfo",
+        "consumes": [ "application/json"],
+        "produces": ["application/json"],
+        "summary": "获取分享信息",
+        "description": "获取分享信息",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userid",
+            "description": "用户ID",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "emceeuserid",
+            "description": "主播的用户ID",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "properties": {
+                "status": {
+                  "description": "状态码",
+                  "type":"integer"
+                },
+                "message": {
+                  "description": "返回消息",
+                  "type":"string"
+                },
+                "sharepath": {
+                  "description": "分享路径",
+                  "type":"string"
+                },
+                "sharetitle": {
+                  "description": "分享标题",
+                  "type":"string"
+                },
+                "sharedesc": {
+                  "description": "分享描述",
+                  "type":"string"
+                },
+                "isdefault": {
+                  "description": "是否分享默认内容：0否，1是",
+                  "type":"string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "参数有误"
+          },
+          "500": {
+            "description": "请求异常"
+          }
+        }
+      }
+    },
+    "/api.php/Api/getMyTasks": {
+      "post": {
+        "tags": ["User"],
+        "operationId": "getMyTasks",
+        "consumes": [ "application/json"],
+        "produces": ["application/json"],
+        "summary": "获取用户所参与的任务",
+        "description": "获取用户所参与的任务",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userid",
+            "description": "用户ID",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "pageno",
+            "description": "页码",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "pagesize",
+            "description": "每页长度",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "properties": {
+                "status": {
+                  "description": "状态码",
+                  "type":"integer"
+                },
+                "message": {
+                  "description": "返回消息",
+                  "type":"string"
+                },
+                "is_end": {
+                  "description": "是否结束加载[0:继续加载 1:结束加载]",
+                  "type":"integer"
+                },
+                "datalist": {
+                  "description": "任务列表",
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "properties": {
+                        "taskid": {
+                          "description": "所做任务的TASKID",
+                          "type": "string"
+                        },
+                        "status": {
+                          "description": "任务状态 0 接收任务 1任务成功 2任务进行中 3任务失败 ",
+                          "type": "string"
+                        },
+                        "award": {
+                          "description": "获得奖励金额",
+                          "type": "string"
+                        },
+                        "starttime": {
+                          "description": "任务开始时间",
+                          "type": "string"
+                        },
+                        "finishtime": {
+                          "description": "任务结束时间",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "参数有误"
+          },
+          "500": {
+            "description": "请求异常"
+          },
+          "400001": {
+            "description": "您还未登陆，请登陆"
+          }
+        }
+      }
+    },
+    "/api.php/Api/getMyVipinfos": {
+      "post": {
+        "tags": ["User"],
+        "operationId": "getMyVipinfos",
+        "consumes": [ "application/json"],
+        "produces": ["application/json"],
+        "summary": "获取用户VIP信息",
+        "description": "获取用户VIP信息",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userid",
+            "description": "用户ID",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "properties": {
+                "status": {
+                  "description": "状态码",
+                  "type":"integer"
+                },
+                "message": {
+                  "description": "返回消息",
+                  "type":"string"
+                },
+                "datalist": {
+                  "description": "VIP信息",
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "properties": {
+                        "vipid": {
+                          "description": "购买的VIP的ID",
+                          "type": "string"
+                        },
+                        "spendmoney": {
+                          "description": "购买花掉的费用 ",
+                          "type": "string"
+                        },
+                        "myvipid": {
+                          "description": "我所购买的VIP的序列ID",
+                          "type": "string"
+                        },
+                        "expiretime": {
+                          "description": "失效时间",
+                          "type": "string"
+                        },
+                        "vipname": {
+                          "description": "VIP名称",
+                          "type": "string"
+                        },
+                        "vipdesc": {
+                          "description": "VIP描述",
+                          "type": "string"
+                        },
+                        "vipprice": {
+                          "description": "VIP价格",
+                          "type": "string"
+                        },
+                        "appsmallviplogo": {
+                          "description": "app端小的图标",
+                          "type": "string"
+                        },
+                        "appbigviplogo": {
+                          "description": "app端大的图标",
+                          "type": "string"
+                        },
+                        "ishot": {
+                          "description": "是否热门 0 不是 1 是",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "参数有误"
+          },
+          "500": {
+            "description": "请求异常"
+          },
+          "400001": {
+            "description": "您还未登陆，请登陆"
+          }
+        }
+      }
+    },
+    "/api.php/Api/getMyMessages": {
+      "post": {
+        "tags": ["User"],
+        "operationId": "getMyMessages",
+        "consumes": [ "application/json"],
+        "produces": ["application/json"],
+        "summary": "获取用户消息记录",
+        "description": "获取用户消息记录",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userid",
+            "description": "用户ID",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "pageno",
+            "description": "页码",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "pagesize",
+            "description": "每页长度",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "lantype",
+            "description": "语言类型",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "properties": {
+                "status": {
+                  "description": "状态码",
+                  "type":"integer"
+                },
+                "message": {
+                  "description": "返回消息",
+                  "type":"string"
+                },
+                "is_end": {
+                  "description": "是否结束加载[0:继续加载 1:结束加载]",
+                  "type":"integer"
+                },
+                "datalist": {
+                  "description": "VIP信息",
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "properties": {
+                        "messageid": {
+                          "description": "消息id",
+                          "type": "string"
+                        },
+                        "userid": {
+                          "description": "收到消息的USERID",
+                          "type": "string"
+                        },
+                        "messagetype": {
+                          "description": "消息类型 0：系统消息 1：好友消息",
+                          "type": "string"
+                        },
+                        "title": {
+                          "description": "消息标题",
+                          "type": "string"
+                        },
+                        "content": {
+                          "description": "消息内容",
+                          "type": "string"
+                        },
+                        "lantype": {
+                          "description": "语言类型",
+                          "type": "string"
+                        },
+                        "read": {
+                          "description": "用户是否已经读该消息 0:未读 1：已读",
+                          "type": "string"
+                        },
+                        "createtime": {
+                          "description": "消息通知时间",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "message_count": {
+                  "description": "消息数",
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "properties": {
+                        "total_count": {
+                          "description": "总消息数",
+                          "type": "string"
+                        },
+                        "unread_count": {
+                          "description": "未读消息数 ",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "参数有误"
+          },
+          "500": {
+            "description": "请求异常"
+          },
+          "400001": {
+            "description": "您还未登陆，请登陆"
+          }
+        }
+      }
+    },
+    "/api.php/Api/getFriendEmcees": {
+      "post": {
+        "tags": ["User"],
+        "operationId": "getFriendEmcees",
+        "consumes": [ "application/json"],
+        "produces": ["application/json"],
+        "summary": "获取用户关注列表",
+        "description": "获取用户关注列表",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userid",
+            "description": "用户ID",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "pageno",
+            "description": "页码",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "pagesize",
+            "description": "每页长度",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "properties": {
+                "status": {
+                  "description": "状态码",
+                  "type":"integer"
+                },
+                "message": {
+                  "description": "返回消息",
+                  "type":"string"
+                },
+                "is_end": {
+                  "description": "是否结束加载[0:继续加载 1:结束加载]",
+                  "type":"integer"
+                },
+                "datalist": {
+                  "description": "关注主播列表",
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "properties": {
+                        "emceeuserid": {
+                          "description": "关注主播的用户id",
+                          "type": "string"
+                        },
+                        "createtime": {
+                          "description": "关注主播的时间",
+                          "type": "string"
+                        },
+                        "vipid": {
+                          "description": "关注主播的vipid",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "参数有误"
+          },
+          "500": {
+            "description": "请求异常"
+          },
+          "400001": {
+            "description": "您还未登陆，请登陆"
+          }
+        }
+      }
+    },
+    "/api.php/Api/getMyFamily": {
+      "post": {
+        "tags": ["User"],
+        "operationId": "getMyFamily",
+        "consumes": [ "application/json"],
+        "produces": ["application/json"],
+        "summary": "获取用户家族信息",
+        "description": "获取用户家族信息",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userid",
+            "description": "用户ID",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "properties": {
+                "status": {
+                  "description": "状态码",
+                  "type":"integer"
+                },
+                "message": {
+                  "description": "返回消息",
+                  "type":"string"
+                },
+                "datalist": {
+                  "description": "用户家族信息",
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "properties": {
+                        "familyid": {
+                          "description": "家族序列ID",
+                          "type": "string"
+                        },
+                        "userid": {
+                          "description": "家族长用户Id",
+                          "type": "string"
+                        },
+                        "familyname": {
+                          "description": "家族名称",
+                          "type": "string"
+                        },
+                        "familyinfo": {
+                          "description": "家族介绍",
+                          "type": "string"
+                        },
+                        "familylogosrc": {
+                          "description": "家族logo图片路径",
+                          "type": "string"
+                        },
+                        "familyheadpic": {
+                          "description": "家族小头像",
+                          "type": "string"
+                        },
+                        "familybadge": {
+                          "description": "家族徽章底色图片路径",
+                          "type": "string"
+                        },
+                        "badgecontent": {
+                          "description": "家族徽章上内容",
+                          "type": "string"
+                        },
+                        "emceecount": {
+                          "description": "家族下面主播数",
+                          "type": "string"
+                        },
+                        "usercount": {
+                          "description": "家族下面普通用户数",
+                          "type": "string"
+                        },
+                        "totalcount": {
+                          "description": "家族总人数",
+                          "type": "string"
+                        },
+                        "status": {
+                          "description": "状态 0：初始状态，待审核 1：审核通过 2：审核不通过",
+                          "type": "string"
+                        },
+                        "approvetime": {
+                          "description": "审核时间",
+                          "type": "string"
+                        },
+                        "leadername": {
+                          "description": "家族长名称",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "参数有误"
+          },
+          "500": {
+            "description": "请求异常"
+          },
+          "400001": {
+            "description": "您还未登陆，请登陆"
+          }
+        }
+      }
+    },
+    "/api.php/Api/getMySeeHistory": {
+      "post": {
+        "tags": ["User"],
+        "operationId": "getMySeeHistory",
+        "consumes": [ "application/json"],
+        "produces": ["application/json"],
+        "summary": "获取用户观看历史",
+        "description": "获取用户观看历史",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userid",
+            "description": "用户ID",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "pageno",
+            "description": "页码",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "pagesize",
+            "description": "每页长度",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "properties": {
+                "status": {
+                  "description": "状态码",
+                  "type":"integer"
+                },
+                "message": {
+                  "description": "返回消息",
+                  "type":"string"
+                },
+                "is_end": {
+                  "description": "是否结束加载[0:继续加载 1:结束加载]",
+                  "type":"integer"
+                },
+                "datalist": {
+                  "description": "观看历史记录",
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "properties": {
+                        "emceeuserid": {
+                          "description": "被看的主播用户ID",
+                          "type": "string"
+                        },
+                        "lastseetime": {
+                          "description": "最后一次观看的时间",
+                          "type": "string"
+                        },
+                        "vipid": {
+                          "description": "被看的主vipid",
+                          "type": "string"
+                        },
+                        "isfriend": {
+                          "description": "是否已关注被看的主播",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "参数有误"
+          },
+          "500": {
+            "description": "请求异常"
+          },
+          "400001": {
+            "description": "您还未登陆，请登陆"
+          }
+        }
+      }
+    },
+    "/api.php/Api/getMyEquipments": {
+      "post": {
+        "tags": ["User"],
+        "operationId": "getMyEquipments",
+        "consumes": [ "application/json"],
+        "produces": ["application/json"],
+        "summary": "获取用户的固定资产例如座驾信息",
+        "description": "获取用户的固定资产例如座驾信息",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userid",
+            "description": "用户ID",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "pageno",
+            "description": "页码",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "pagesize",
+            "description": "每页长度",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "properties": {
+                "status": {
+                  "description": "状态码",
+                  "type":"integer"
+                },
+                "message": {
+                  "description": "返回消息",
+                  "type":"string"
+                },
+                "is_end": {
+                  "description": "是否结束加载[0:继续加载 1:结束加载]",
+                  "type":"integer"
+                },
+                "datalist": {
+                  "description": "座驾信息",
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "properties": {
+                        "equipid": {
+                          "description": "用户购买的座驾的序列ID",
+                          "type": "string"
+                        },
+                        "commodityid": {
+                          "description": "用户购买的COMMODITYID",
+                          "type": "string"
+                        },
+                        "expiretime": {
+                          "description": "失效时间",
+                          "type": "string"
+                        },
+                        "isused": {
+                          "description": "是否在使用 0：不在 1：在",
+                          "type": "string"
+                        },
+                        "spendmoney": {
+                          "description": "购买所花的钱",
+                          "type": "string"
+                        },
+                        "commoditytype": {
+                          "description": "商品分类 1 car",
+                          "type": "string"
+                        },
+                        "commodityname": {
+                          "description": "商品名称",
+                          "type": "string"
+                        },
+                        "commoditydesc": {
+                          "description": "商品描述",
+                          "type": "string"
+                        },
+                        "commodityprice": {
+                          "description": "商品价格",
+                          "type": "string"
+                        },
+                        "pcsmallpic": {
+                          "description": "pc小图",
+                          "type": "string"
+                        },
+                        "appsmallpic": {
+                          "description": "app小图",
+                          "type": "string"
+                        },
+                        "appbigpic": {
+                          "description": "app大图",
+                          "type": "string"
+                        },
+                        "commodityflashid": {
+                          "description": "商城商品Flash文件名的ID字段",
+                          "type": "string"
+                        },
+                        "commodityswf": {
+                          "description": "商品FLASH动画路径",
+                          "type": "string"
+                        },
+                        "ishot": {
+                          "description": "是否热门 0：不是热门 1：热门",
+                          "type": "string"
+                        },
+                        "sort": {
+                          "description": "排序字段",
+                          "type": "string"
+                        },
+                        "createtime": {
+                          "description": "商品创建时间",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "参数有误"
+          },
+          "500": {
+            "description": "请求异常"
+          },
+          "400001": {
+            "description": "您还未登陆，请登陆"
+          }
+        }
+      }
+    },
+    "/api.php/Api/getBuyRecord": {
+      "post": {
+        "tags": ["User"],
+        "operationId": "getBuyRecord",
+        "consumes": [ "application/json"],
+        "produces": ["application/json"],
+        "summary": "获取用户消费记录",
+        "description": "获取用户消费记录",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userid",
+            "description": "用户ID",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "pageno",
+            "description": "页码",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "pagesize",
+            "description": "每页长度",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "properties": {
+                "status": {
+                  "description": "状态码",
+                  "type":"integer"
+                },
+                "message": {
+                  "description": "返回消息",
+                  "type":"string"
+                },
+                "is_end": {
+                  "description": "是否结束加载[0:继续加载 1:结束加载]",
+                  "type":"integer"
+                },
+                "datalist": {
+                  "description": "消费记录",
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "properties": {
+                        "spendid": {
+                          "description": "消费序列id",
+                          "type": "string"
+                        },
+                        "userid": {
+                          "description": "购买用户id",
+                          "type": "string"
+                        },
+                        "targetid": {
+                          "description": "赠送用户id",
+                          "type": "string"
+                        },
+                        "familyid": {
+                          "description": "家族id",
+                          "type": "string"
+                        },
+                        "tradetype": {
+                          "description": "交易类型 0: 获得礼物 1: 送礼物 2: 购买商品 3: 结算 4:购买沙发 5:付费房间，6：购买靓号 7:vip 8.发飞屏 9.购买守护",
+                          "type": "string"
+                        },
+                        "giftid": {
+                          "description": "礼物id",
+                          "type": "string"
+                        },
+                        "giftname": {
+                          "description": "礼物名称",
+                          "type": "string"
+                        },
+                        "gifticon": {
+                          "description": "礼物图标",
+                          "type": "string"
+                        },
+                        "giftprice": {
+                          "description": "礼物单价",
+                          "type": "string"
+                        },
+                        "giftcount": {
+                          "description": "礼物数量",
+                          "type": "string"
+                        },
+                        "spendamount": {
+                          "description": "总的waashow虚拟币",
+                          "type": "string"
+                        },
+                        "tradetime": {
+                          "description": "交易时间",
+                          "type": "string"
+                        },
+                        "status": {
+                          "description": "交易状态 1:成功 0：失败",
+                          "type": "string"
+                        },
+                        "content": {
+                          "description": "交易相关记录",
+                          "type": "string"
+                        },
+                        "partitionid": {
+                          "description": "分区id",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "参数有误"
+          },
+          "500": {
+            "description": "请求异常"
+          },
+          "400001": {
+            "description": "您还未登陆，请登陆"
+          }
+        }
+      }
+    },
+    "/api.php/Api/getRechargeRecord": {
+      "post": {
+        "tags": ["User"],
+        "operationId": "getRechargeRecord",
+        "consumes": [ "application/json"],
+        "produces": ["application/json"],
+        "summary": "获取用户充值记录",
+        "description": "获取用户充值记录",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userid",
+            "description": "用户ID",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "pageno",
+            "description": "页码",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "pagesize",
+            "description": "每页长度",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "properties": {
+                "status": {
+                  "description": "状态码",
+                  "type":"integer"
+                },
+                "message": {
+                  "description": "返回消息",
+                  "type":"string"
+                },
+                "is_end": {
+                  "description": "是否结束加载[0:继续加载 1:结束加载]",
+                  "type":"integer"
+                },
+                "datalist": {
+                  "description": "充值记录",
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "properties": {
+                        "rechargerecord": {
+                          "description": "充值记录",
+                          "schema": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/definitions/RechargeRecord"
+                            }
+                          }
+                        },
+                        "balance": {
+                          "description": "用户秀币余额",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "参数有误"
+          },
+          "500": {
+            "description": "请求异常"
+          },
+          "400001": {
+            "description": "您还未登陆，请登陆"
+          }
+        }
+      }
+    },
+    "/api.php/Api/modifyUseEquipment": {
+      "post": {
+        "tags": ["User"],
+        "operationId": "modifyUseEquipment",
+        "consumes": [ "application/json"],
+        "produces": ["application/json"],
+        "summary": "修改用户的座驾",
+        "description": "修改用户的座驾",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userid",
+            "description": "用户ID",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "newequipid",
+            "description": "新座驾id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "oldequipid",
+            "description": "原座驾id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "properties": {
+                "status": {
+                  "description": "状态码",
+                  "type":"integer"
+                },
+                "message": {
+                  "description": "返回消息",
+                  "type":"string"
+                }
+              }
+            }
+          },
+          "-1": {
+            "description": "系统繁忙"
+          },
+          "400": {
+            "description": "参数有误"
+          },
+          "500": {
+            "description": "请求异常"
+          },
+          "400001": {
+            "description": "您还未登陆，请登陆"
+          }
+        }
+      }
+    },
+    "/api.php/Api/modifyUserInfo": {
+      "post": {
+        "tags": ["User"],
+        "operationId": "modifyUserInfo",
+        "consumes": [ "application/json"],
+        "produces": ["application/json"],
+        "summary": "修改用户信息",
+        "description": "修改用户信息",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userid",
+            "description": "用户ID",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "nickname",
+            "description": "昵称",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "sex",
+            "description": "性别",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "birthday",
+            "description": "生日",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "properties": {
+                "status": {
+                  "description": "状态码",
+                  "type":"integer"
+                },
+                "message": {
+                  "description": "返回消息",
+                  "type":"string"
+                }
+              }
+            }
+          },
+          "-1": {
+            "description": "系统繁忙"
+          },
+          "400": {
+            "description": "参数有误"
+          },
+          "500": {
+            "description": "请求异常"
+          },
+          "400001": {
+            "description": "您还未登陆，请登陆"
+          },
+          "401001": {
+            "description": "您输入的内容含有非法字符"
+          },
+          "401002": {
+            "description": "昵称应该为1-50位之间"
+          },
+          "401005": {
+            "description": "您输入的昵称含有违禁字符"
+          }
+        }
+      }
+    },
+    "/api.php/Api/delOrReadMessage": {
+      "post": {
+        "tags": ["User"],
+        "operationId": "delOrReadMessage",
+        "consumes": [ "application/json"],
+        "produces": ["application/json"],
+        "summary": "删除消息,或将消息设置为已读",
+        "description": "删除消息,或将消息设置为已读",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userid",
+            "description": "用户ID",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "messageids",
+            "description": "消息id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "type",
+            "description": "操作类型 0 删除 1 设为已读",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "properties": {
+                "status": {
+                  "description": "状态码",
+                  "type":"integer"
+                },
+                "message": {
+                  "description": "返回消息",
+                  "type":"string"
+                }
+              }
+            }
+          },
+          "-1": {
+            "description": "系统繁忙"
+          },
+          "400": {
+            "description": "参数有误"
+          },
+          "500": {
+            "description": "请求异常"
+          },
+          "400001": {
+            "description": "您还未登陆，请登陆"
+          }
+        }
+      }
+    },
+    "/api.php/Api/modifyHeadPic": {
+      "post": {
+        "tags": ["User"],
+        "operationId": "modifyHeadPic",
+        "consumes": [ "application/json"],
+        "produces": ["application/json"],
+        "summary": "修改用户头像",
+        "description": "修改用户头像",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userid",
+            "description": "用户ID",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "type",
+            "description": "设1:表示修改大头像，其他值表示修改小头像",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "properties": {
+                "status": {
+                  "description": "状态码",
+                  "type":"integer"
+                },
+                "message": {
+                  "description": "返回消息",
+                  "type":"string"
+                },
+                "headpicpath": {
+                  "description": "小头像路径",
+                  "type":"string"
+                },
+                "bigheadpic": {
+                  "description": "大图像路径",
+                  "type":"string"
+                }
+              }
+            }
+          },
+          "-1": {
+            "description": "系统繁忙"
+          },
+          "400": {
+            "description": "参数有误"
+          },
+          "500": {
+            "description": "请求异常"
+          },
+          "400001": {
+            "description": "您还未登陆，请登陆"
+          },
+          "401003": {
+            "description": "头像上传失败"
+          }
+        }
+      }
+    },
+    "/api.php/Api/getUserBalance": {
+      "post": {
+        "tags": ["User"],
+        "operationId": "getUserBalance",
+        "consumes": [ "application/json"],
+        "produces": ["application/json"],
+        "summary": "获取用户余额",
+        "description": "获取用户余额",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userid",
+            "description": "用户ID",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "properties": {
+                "status": {
+                  "description": "状态码",
+                  "type":"integer"
+                },
+                "message": {
+                  "description": "返回消息",
+                  "type":"string"
+                },
+                "balance": {
+                  "description": "用户秀币余额",
+                  "type":"string"
+                }
+              }
+            }
+          },
+          "-1": {
+            "description": "系统繁忙"
+          },
+          "400": {
+            "description": "参数有误"
+          },
+          "500": {
+            "description": "请求异常"
+          },
+          "400001": {
+            "description": "您还未登陆，请登陆"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "EmceeInfo": {
+      "properties": {
+        "emceeid": {
+          "description": "主播id",
+          "type": "string"
+        },
+        "userid": {
+          "description": "主播用户id",
+          "type": "string"
+        },
+        "emceelevel": {
+          "description": "主播等级",
+          "type": "string"
+        },
+        "livetype": {
+          "description": "直播类型 0：安卓直播 1：IOS直播 2：PC直播",
+          "type": "string"
+        },
+        "liveid": {
+          "description": "直播记录ID",
+          "type": "string"
+        },
+        "isliving": {
+          "description": "是否在直播 0：否 1：是",
+          "type": "string"
+        },
+        "livetime": {
+          "description": "直播时间",
+          "type": "string"
+        },
+        "audiencecount": {
+          "description": "当前观看人数",
+          "type": "string"
+        },
+        "totalaudicount": {
+          "description": "累计观看人数",
+          "type": "string"
+        },
+        "fanscount": {
+          "description": "粉丝数",
+          "type": "string"
+        },
+        "status": {
+          "description": "保留字段",
+          "type": "string"
+        }
+      }
+    },
+    "EquipmentInfo": {
+      "properties": {
+        "equipid": {
+          "description": "用户购买的座驾的序列ID",
+          "type": "string"
+        },
+        "commodityid": {
+          "description": "用户购买的COMMODITYID",
+          "type": "string"
+        },
+        "expiretime": {
+          "description": "失效时间",
+          "type": "string"
+        },
+        "isused": {
+          "description": "是否在使用 0：不在 1：在",
+          "type": "string"
+        },
+        "spendmoney": {
+          "description": "购买所花的钱",
+          "type": "string"
+        },
+        "commoditytype": {
+          "description": "商品分类 1 car",
+          "type": "string"
+        },
+        "commodityname": {
+          "description": "商品名称",
+          "type": "string"
+        },
+        "commoditydesc": {
+          "description": "商品描述",
+          "type": "string"
+        },
+        "commodityprice": {
+          "description": "商品价格",
+          "type": "string"
+        },
+        "pcsmallpic": {
+          "description": "pc小图",
+          "type": "string"
+        },
+        "appsmallpic": {
+          "description": "app小图",
+          "type": "string"
+        },
+        "appbigpic": {
+          "description": "app大图",
+          "type": "string"
+        },
+        "commodityflashid": {
+          "description": "商城商品Flash文件名的ID字段",
+          "type": "string"
+        },
+        "commodityswf": {
+          "description": "商品FLASH动画路径",
+          "type": "string"
+        },
+        "ishot": {
+          "description": "是否热门 0：不是热门 1：热门",
+          "type": "string"
+        },
+        "sort": {
+          "description": "排序字段",
+          "type": "string"
+        },
+        "createtime": {
+          "description": "商品创建时间",
+          "type": "string"
+        }
+      }
+    },
+    "RechargeRecord": {
+      "properties": {
+        "userid": {
+          "description": "充值用户id",
+          "type": "string"
+        },
+        "targetid": {
+          "description": "充值目标用户id（给这个用户充值，如果是给自己充值，那么userid和targetid相同）",
+          "type": "string"
+        },
+        "channelid": {
+          "description": "充值渠道ID",
+          "type": "string"
+        },
+        "sellerid": {
+          "description": "运营商ID 或者游戏厂家ID 或者 银行卡ID",
+          "type": "string"
+        },
+        "rechargetype": {
+          "description": "充值类型 0 充值卡 1游戏卡 2 ATM DEBIT 3 VISA MATER 4 SMS+ 5 INTERNET BANK 6 AGENT 7 Applestore 8 Paypal 9 Oceanpayment 10 Alipay",
+          "type": "string"
+        },
+        "devicetype": {
+          "description": "设备类型 0 安卓  1 iOS  2PC",
+          "type": "string"
+        },
+        "type": {
+          "description": "充值类型 0：用户给自己充值 1：代理给用户充值 2：普通用户给其他人充值 3.管理员给代理商充值; 4.管理员给用户充值",
+          "type": "string"
+        },
+        "orderno": {
+          "description": "订单号",
+          "type": "string"
+        },
+        "amount": {
+          "description": "充值金额",
+          "type": "string"
+        },
+        "showamount": {
+          "description": "waashow的虚拟币",
+          "type": "string"
+        },
+        "rechargetime": {
+          "description": "充值时间",
+          "type": "string"
+        },
+        "status": {
+          "description": "充值状态 0：失败 1：成功 2：处理中",
+          "type": "string"
+        },
+        "ispresent": {
+          "description": "是否是赠送的 0 不是 1是的",
+          "type": "string"
+        },
+        "content": {
+          "description": "充值相关记录",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,34 @@
+﻿<xml version="1.0" encoding="UTF-8">
+    <showlist>
+        <authenfailed>cam domain can not pass the authorization！Please contact www.waashow.com to apply for authorizing</authenfailed>
+		<playpath>Play path stream:</playpath>
+	    <lackvedio>Lack of vodio or void hard, please check!</lackvedio>
+        <notroomhost>You are not the host of room.</notroomhost>
+        <authfailretry>Verify failed,please retry!</authfailretry>
+        <camforbid>You do not permit to use the camera!</camforbid>
+        <camoccupy>Camera is occupied,please check.</camoccupy>
+        <contactadmin>Finish live failed,please contact administrator!</contactadmin>
+        <liveendroom>Live is finished, room No. is :</liveendroom>
+        <fillamount>Please fill the amount</fillamount>
+        <fillpassword>Please fill the room paasword</fillpassword>
+        <neterrortry>Network issue, please retry!</neterrortry>
+        <cutpicsavefail>Save the cutting picture failed.</cutpicsavefail>
+        <kindremind>Warm remind：if you use OBS, please first push,then configure the player, \n if you do not use OBS,push to the player directly.</kindremind>
+        <confirmbtntxt>Confirm</confirmbtntxt>
+        <choosevedioh>Please choose the vedio</choosevedioh>
+        <choosevoiceh>Please choose the voice</choosevoiceh>
+		<createalive>Please create a live</createalive>
+		<publicsee>Public(Everyone can see casually)</publicsee>
+		<chargesee>Charge(If customers want to see the live, they need pay the fee，you need pay 100 show money)</chargesee>
+		<privatesee>Private(If customers want to see the live, they need know the paasword，you need pay 50 show money)</privatesee>
+		<startlive>Start Live</startlive>
+		<previewing>Preview ...</previewing>
+		<takephoto>Take photo</takephoto>
+		<clearview>Clear view</clearview>
+		<normalview>Normal view</normalview>
+		<userview>User view</userview>
+		<finishlive>Finish live</finishlive>
+		<setamount>Please set show money amount</setamount>
+		<inputpassword>Input the password</inputpassword>
+    </showlist>
+</xml>

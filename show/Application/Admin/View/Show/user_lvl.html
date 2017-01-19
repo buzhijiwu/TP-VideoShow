@@ -1,0 +1,65 @@
+<extend name="Public:list" />
+<block name="title"></block>
+<block name="css"></block>
+
+<block name="main">
+<div class="subnav">
+  <div class="content-menu ib-a blue line-x"><a href="javascript:;" class="on"><em>{:lan('EMCEE_LEVEL_SET', 'Admin')}</em></a></div>
+</div>
+<style type="text/css">
+	html{_overflow-y:scroll}
+</style>
+<form name="myform" action="" method="post">
+  <div class="pad_10">
+    <div class="bk10"></div>
+    <div class="table-list">
+      <table cellspacing="0" width="100%">
+        <thead>
+          <tr>
+            <th width="16"><input value="" id="check_box" onClick="selectall('ids[]');" type="checkbox"></th>
+            <th width="38">{:lan('LEVEL_ID', 'Admin')}</th>
+            <th width="150">{:lan('LEVEL_NAME', 'Admin')}</th>
+            <th width="150">{:lan('EARN_LOWER_LIMIT', 'Admin')}</th>
+            <th width="150">{:lan('EARN_UPPER_LIMIT', 'Admin')}</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+        	<volist name="data.list" id="v">
+          <tr>
+            <td align="center"><input class="inputcheckbox " name="ids[]" value="{$v.levelid}" type="checkbox"></td>
+            <td><input name="levelid[]" size="3" value="{$v.levelid}" class="input-text-c input-text" type="text" readonly="readonly"></td>
+            <td><input name="levelname[]" value="{$v.levelname}" class="input-text-c input-text" style="width:150px;" type="text" readonly="readonly"></td>
+            <td><input name="levellow[]" value="{$v.levellow}" class="input-text-c input-text" style="width:150px;" type="text"></td>
+            <td><input name="levelup[]" value="{$v.levelup}" class="input-text-c input-text" style="width:150px;" type="text"></td>
+            <td></td>
+          </tr>
+         </volist>
+<!--           <tr>
+            <td align="center">{:lan('ADD', 'Admin')}</td>
+            <td><input name="add_levelid" value="0" size="3" class="input-text-c input-text" type="text"></td>
+            <td><input name="add_levelname" class="input-text-c input-text" style="width:150px;" type="text"></td>
+            <td><input name="add_levellow" class="input-text-c input-text" style="width:150px;" type="text"></td>
+            <td><input name="add_levelup" class="input-text-c input-text" style="width:150px;" type="text"></td>
+            <input type="hidden" name="add_leveltype" value="0">
+        		<input type="hidden" name="add_lantype" value="{$data['lan']}">
+            <td></td>
+          </tr> -->
+        </tbody>
+      </table>
+      <div class="btn">
+        <label for="check_box">{:lan('ALL_OR_CANCEL', 'Admin')}</label>
+        <input class="button" name="dosubmit" value="{:lan('SAVE', 'Admin')}" type="submit">
+      </div>
+    </div>
+  </div>
+</form>
+</block>
+
+<block name="js">
+<script type="text/javascript">
+<script language="JavaScript">
+	window.top.$('#display_center_id').css('display','none');
+</script>
+</script>
+</block>

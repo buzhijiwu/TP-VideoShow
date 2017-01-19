@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+    <showlist>
+		<nologin>You do not login</nologin>
+		<noenoughvm>Your virtual show money is not enough, pound one time need pay </noenoughvm>
+		<virtualmoney>virtual show money</virtualmoney>
+		<notwinning>Regrettably,not winning</notwinning>
+		<congratulation>Congratulation，Obtain the virtual show money</congratulation>
+		<award>Award</award>
+		<errretry>System error, please retry</errretry>
+		<commuerretry>Communicate failed,please retry</commuerretry>
+		<repeattext>Replay</repeattext>
+		<wantaward>I obtain the award</wantaward>
+		<exittext>Exit</exittext>
+		<winningfirst>Wow，i win a prize,Thank you for your participation,please accept the prize,first prize is 1000 show money</winningfirst>
+        <winningsec>Wow，i win a prize,Thank you for your participation,please accept the prize,second  prize is 500 show money</winningsec>
+		<winningthird>Wow，i win a prize,Thank you for your participation,please accept the prize,third  prize is 200 show money</winningthird>
+		<winningforth>Wow，i win a prize,Thank you for your participation,please accept the prize,fourth  prize is 100 show money</winningforth>
+		<tomorrowretry>You have played the pooud egg game three times today, please come to play it again tomorrow</tomorrowretry>
+		<seetomorrow>See you tomorrow</seetomorrow>
+    </showlist>

@@ -1,0 +1,39 @@
+<extend name="base" />
+
+<block name="menu">
+<div class="nav-list clear">
+	<a href="__URL__/setting">{:lan('BASE_INFO', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+	<a href="__URL__/smallheadpic" class="active">{:lan('EDIT_HEAD_PIC', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+    <a href="__URL__/bigheadpic">{:lan('EMCEE_HEADPIC', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+	<a href="__URL__/modifypwd">{:lan('EDIT_PASSWORD', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+</div>
+</block>
+
+<block name="main">
+    <!-- 用户头像设置 -->
+    <div class="right-user-img">
+        <div class="container">
+            <div class="imageBox">
+                <div class="thumbBox"></div>
+                <div class="spinner" style="display: none"></div>
+            </div>
+            <div class="action">
+                <div class="new-contentarea tc"> <a href="javascript:void(0)" class="upload-img">
+                    <label for="upload-file">{:lan('SELECT_PIC', 'Home')}</label>
+                </a>
+                    <input type="file" class="" name="upload-file" id="upload-file" accept="image/png,image/jpg,image/jpeg"/>
+                </div>
+                <input type="button" id="btnZoomIn" class="Btnsty_peyton" value="+"  >
+                <input type="button" id="btnZoomOut" class="Btnsty_peyton" value="-" >
+            </div>
+            <div class="cropped"></div>
+        </div>
+        <button id="saveheadpic" class="save-header-img">{:lan('SAVE', 'Home')}</button>
+        <p class="info">{:lan('SAVE_HEADPIC_TIPS', 'Home')}</p>
+    </div>
+    <script type="text/javascript">
+        $(function() {
+            userCenter.changeUserImgSub("{$Think.config.IMAGE_BASE_URL}{$smallheadpic}");
+        });
+    </script>
+</block>

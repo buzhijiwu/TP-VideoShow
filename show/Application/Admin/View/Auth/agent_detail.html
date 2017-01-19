@@ -1,0 +1,90 @@
+<extend name="Public:list" />
+<block name="title"></block>
+<block name="css"></block>
+<block name="main">
+    <div class="pad_10">
+        <div class="common-form">
+            <div class="subnav">
+                <div class="content-menu ib-a blue line-x">
+                    <a href="__URL__/agent"><em>{:lan('AGENT_LIST', 'Admin')}</em></a><span>|</span>
+                    <a href="javascript:;" class="on"><em>{:lan('AGENT_DETAIL', 'Admin')}</em></a>
+                </div>
+            </div>
+            <form name="myform" action="" method="post" id="myform">
+                <table class="table_form contentWrap" width="100%">
+                    <tbody>
+                    <tr>
+                        <td width="120">{:lan('AGENT_NAME', 'Admin')}</td>
+                        <td><span>{$data['agentname']}</span></td>
+                    </tr>
+                    <tr>
+                        <td>{:lan('AGENT_TYPE', 'Admin')}</td>
+                        <td><span>{$data['agenttype']}</span></td>
+                    </tr>
+                    <tr>
+                        <td>{:lan('SYS_REALNAME', 'Admin')}</td>
+                        <td><span>{$data['realname']}</span></td>
+                    </tr>
+                    <tr>
+                        <td>{:lan('SYS_TELNUM', 'Admin')}</td>
+                        <td><span>{$data['mobileno']}</span></td>
+                    </tr>
+                    <tr>
+                        <td>{:lan('AGENT_CARD_ID', 'Admin')}</td>
+                        <td><span>{$data['cardid']}</span></td>
+                    </tr>
+                    <tr>
+                        <td>{:lan('SYS_ADDRESS', 'Admin')}</td>
+                        <td><span>{$data['address']}</span></td>
+                    </tr>
+                    <tr>
+                        <td>{:lan('AGENT_CONTACT_NO', 'Admin')}</td>
+                        <td><span>{$data['contactno']}</span></td>
+                    </tr>
+                    <tr>
+                        <td>{:lan('AGENT_BANK_ID', 'Admin')}</td>
+                        <td><span>{$data['bankid']}</span></td>
+                    </tr>
+                    <tr>
+                        <td>{:lan('AGENT_BANK_NAME', 'Admin')}</td>
+                        <td><span>{$data['bankname']}</span></td>
+                    </tr>
+                    <tr>
+                        <td>{:lan('AGENT_BACCOUT_NAME', 'Admin')}</td>
+                        <td><span>{$data['baccoutname']}</span></td>
+                    </tr>
+                    <tr>
+                        <td>{:lan('AGENT_SUBBANK', 'Admin')}</td>
+                        <td><span>{$data['subbank']}</span></td>
+                    </tr>
+                    <tr>
+                        <td>{:lan('AGENT_COMPANY_NAME', 'Admin')}</td>
+                        <td><span>{$data['companyname']}</span></td>
+                    </tr>
+                    <tr>
+                        <td>{:lan('AGENT_LIMIT_AMOUNT', 'Admin')}</td>
+                        <td><span>{$data['limitamount']}</span></td>
+                    </tr>
+                    <tr>
+                        <td>{:lan('AGENT_USE_AMOUNT', 'Admin')}</td>
+                        <td><span>{$data['useamount']}</span></td>
+                    </tr>
+                    <tr>
+                        <td>{:lan('SYS_LASTLOGINTIME', 'Admin')}</td>
+                        <td><span>{$data['lastlogintime']}</span></td>
+                    </tr>
+                    <tr>
+                        <td>{:lan('SYS_LASTLOGINIP', 'Admin')}</td>
+                        <td><span>{$data['lastloginip']}</span></td>
+                    </tr>
+                    <tr>
+                        <td>{:lan('SYS_ACCOUNTCREATETIME', 'Admin')}</td>
+                        <td><span>{$data['createtime']}</span></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="bk15"></div>
+            </form>
+        </div>
+    </div>
+</block>

@@ -1,0 +1,205 @@
+<!--公用导航-->
+<div class="common-header clear">
+	<!--左边logo和导航-->
+	<div class="left clear">
+		<a href="/Index" class="logo">
+			<img src="<SelfTag:getlogo />">
+		</a>
+		<nav class="nav clear">
+			<SelfTag:navList>
+				<if condition="'/Home/'.CONTROLLER_NAME eq $v['url']">
+					<a id="{$v[menukey]}" class="act analysis" href="{$v['url']}" data-module-name="首页_{$v['menuname']}">{$v['menuname']}</a>
+					<else />
+					<a id="{$v[menukey]}" class="analysis" href="{$v['url']}" data-module-name="首页_{$v['menuname']}">{$v['menuname']}</a>
+				</if>
+			</SelfTag:navList>
+		</nav>
+	</div>
+
+	<!--右边搜索和个人信息-->
+	<div class="right clear">
+
+		<!--语言选择-->
+		<div class="common-choice-language">
+			<div class="choice-language analysis" data-module-name="首页_语言">
+
+			</div>
+			<i class="iconfont">&#xe60c;</i>
+		</div>
+		<span class="header-square"></span>
+
+		<!--登录按钮-->
+		<div class="login">
+			<gt name="Think.session.userid" value="0">
+				<div class="login-btn dis-none">
+					<i class="iconfont">&#xe63e;</i>
+					<span class="dis-none">{:lan("LOGIN", "Home")}</span>
+				</div>
+				<else />
+				<div class="login-btn analysis" data-module-name="首页_登录" onclick="common.showLog()">
+					<i class="iconfont">&#xe63e;</i>
+					<span>{:lan("LOGIN", "Home")}</span>
+				</div>
+			</gt>
+
+			<!--登录之后-->
+			<div class="login-detail">
+
+
+			<gt name="Think.session.userid" value="0">
+				<div class="info">
+			<else />
+				<div class="info dis-none">
+			</gt>
+						<!--导航上的头像-->
+					<eq name="Think.session.smallheadpic" value="">
+						<img class="nav-image" src="/Public/Public/Images/HeadImg/default.png"/>
+						<else />
+						<img class="nav-image" src="{$Think.config.IMAGE_BASE_URL}{$Think.session.smallheadpic}"/>
+					</eq>
+
+					<!--个人信息-->
+					<div class="info-detail">
+						<!--头像、等级-->
+						<div class="section1 clear">
+							<eq name="Think.session.smallheadpic" value="">
+								<img class="head-pic" src="/Public/Public/Images/HeadImg/default.png"/>
+								<else />
+								<img class="head-pic" src="{$Think.config.IMAGE_BASE_URL}{$Think.session.smallheadpic}"/>
+							</eq>
+							<div class="right1 clear">
+								<h3 class="name" id="nickname">{$Think.session.nickname}</h3>
+								<!--<div class="common-progress">
+									<p id="usergrade" style="width:{$Think.session.grade}px">
+									</p>
+								</div>-->
+                                <eq name="Think.session.isemcee" value="1">
+                                    <div class="level common-em em{$Think.session.emceelevel}"></div>
+                                </eq>
+								<div id="userlevel" class="level common-us us{$Think.session.userlevel}"></div>
+								<!--<eq name="Think.session.isemcee" value="1">
+									<div class="level common-em em{$Think.session.nextlevel}"></div>
+									<else/>
+									<div id="userlevel" class="level common-us us{$Think.session.nextlevel}"></div>
+								</eq>-->
+							</div>
+						</div>
+						<!--主页、财富、充值按钮-->
+						<div class="section2 clear">
+							<a id="myhomepage" href="{:U('Userhomepage/index/userid/Think.session.userid')}" class="left">
+								<span class="name">{:lan('PERSONAL_HOMEPAGE', 'Home')}</span>
+							</a>
+							<span class="hr">|</span>
+							<p class="money">
+								<i class="iconfont">&#xe60a;</i>
+								<span id="balance" class="balance">
+									{$Think.session.balance}
+								</span>
+							</p>
+							<a href="{:U('Home/Rechargecenter/index')}" class="charge">
+								{:lan('RECHARGE', 'Home')}
+							</a>
+						</div>
+						<!--个人中心、退出-->
+						<div class="section3 clear">
+							<a href="{:U('Usercenter/index')}" class="user-center analysis" data-module-name="首页_进入个人中心">{:lan('GO_TO_USER_CENTER', 'Home')}</a>
+							<p class="logout" onclick="common.logout()">{:lan('LOGOUT', 'Home')}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<span class="header-square"></span>
+
+		<!--golive按钮-->
+		<gt name="Think.session.userid" value="0">
+				<if condition="$Think.session.bigheadpic neq ''">
+					<a href="/{$Think.session.showroomno}" class="go-live iconfont analysis" data-module-name="首页_开播">&#xe63f;</a>
+					<else />
+					<button class="go-live iconfont" onclick="common.showUpload()">&#xe63f;</button>
+				</if>
+				<else />
+				<button class="go-live iconfont" onclick="common.showLog()">&#xe63f;</button>
+			</gt>
+
+
+
+		<gt name="Think.session.userid" value="0">
+			<div class="header-attention">
+
+				<span class="header-square"></span>
+
+				<i class="iconfont attention analysis" data-module-name="首页_关注">&#xe61f;</i>
+                <gt name="livingnum" value="0">
+				<b class="living-num">{$livingnum}</b>
+				<else />
+				<b class="living-num" style="display: none;">{$livingnum}</b>
+                </gt>
+				<!--关注弹框-->
+				<div class="attention-alert-wrap dis-none">
+					<i class="iconfont close-attention">&#xe61b;</i>
+					<div class="my-attention">
+						<h2 class="title">
+							<span class="square"></span>
+							<span>{:lan('MY_ATTENTION', 'Home')}</span>
+						</h2>
+						<div class="list-wrap">
+							<h2>{:lan('OTHER_ATTENTION', 'Home')}</h2>
+							<ul class="list clear"></ul>
+							<div class="common-scrollBar">
+								<div class="scrollBar"></div>
+							</div>
+						</div>
+					</div>
+					<div class="recommend-attention dis-none">
+						<h2 class="title">
+							<span class="square"></span>
+							<span>{:lan('RECOMMEND_ATTENTION', 'Home')}</span>
+						</h2>
+						<div class="list-wrap">
+							<ul class="list clear"></ul>
+							<div class="common-scrollBar">
+								<div class="scrollBar"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</gt>
+
+
+
+		<span class="header-square"></span>
+
+		<!--搜索框-->
+		<form id="searchemcee"
+			  name="searchemcee"
+			  action="/Index/searchEmcee/"
+			  method="get"
+			  class="search-form clear">
+			<input type="text"
+				   class="search-input"
+				   id="searchcond"
+				   name='searchcond'
+				   autocomplete="off"
+				   placeholder="{:lan('SEARCH_EMCEE_OR_ROOM', 'Home')}"/>
+			<input type="submit" class="search-submit iconfont analysis" value="&#xe640;" data-module-name="首页_搜索" />
+		</form>
+
+		<span class="header-square"></span>
+
+	</div>
+</div>
+
+
+<div class="common-upload-img-wrap dis-none">
+	<div class="upload-img-main">
+		<p class="info">{:lan('UPLOAD_INFO', 'Home')}</p>
+		<a href="{:U('Home/Usercenter/bigheadpic')}" class="upload-btn">{:lan('UPLOAD_IMG_BTN', 'Home')}</a>
+		<i class="iconfont" onclick="common.closeUpload()">&#xe61b;</i>
+	</div>
+</div>
+
+
+<input type="hidden" value="{$Think.session.userid}" id="userid">

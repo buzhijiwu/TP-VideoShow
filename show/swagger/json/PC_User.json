@@ -1,0 +1,151 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "<h2>返回值说明</h2>接口调用成功：{'code':200,'data':返回的数据};<br/>接口调用失败：{'code':状态码,'msg':错误信息};"
+    },
+    "tags": [
+        {"name": "UserFriend","description": "用户关注"},
+        {"name": "UserInfo","description": "用户信息"}
+    ],
+    "paths": {
+        "/Home/Index/getUserFriendList": {
+            "post": {
+                "tags": ["UserFriend"],
+                "operationId": "getUserFriendList",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "获取用户关注主播列表",
+                "description": "用户存在关注主播，返回关注主播列表，以关注时间倒序，在线主播排前面；<br />用户不存在关注主播,返回推荐主播列表（所有在线主播+10个不在线主播，屏蔽自己、被删除主播、测试主播、被禁播主播、无主播封面主播），按累计观看人数倒序排序。",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "userid",
+                        "description": "用户userid",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "请求成功",
+                        "schema": {
+                            "properties": {
+                                "friendcount": {
+                                    "description": "用户关注主播数",
+                                    "type": "integer"
+                                }, 
+                                "livingnum": {
+                                    "description": "关注主播在线数",
+                                    "type": "integer"
+                                },                                                                
+                                "data": {
+                                    "description": "主播列表数据",
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "userid": {
+                                                    "description": "主播userid",
+                                                    "type": "integer"
+                                                },
+                                                "nickname": {
+                                                    "description": "主播昵称",
+                                                    "type": "string"
+                                                },  
+                                                "bigheadpic": {
+                                                    "description": "主播封面头像",
+                                                    "type": "string"
+                                                }, 
+                                                "isliving": {
+                                                    "description": "是否在直播[0:否 1:是]",
+                                                    "type": "integer"
+                                                },                                                                                                                                             
+                                                "totalaudicount": {
+                                                    "description": "累计总关注人数",
+                                                    "type": "integer"
+                                                },
+                                                "roomno": {
+                                                    "description": "用户房间号",
+                                                    "type": "string"
+                                                },
+                                                "niceno": {
+                                                    "description": "用户靓号",
+                                                    "type": "string"
+                                                },                                                
+                                                "showroomno": {
+                                                    "description": "显示的房间号，靓号存在显示靓号，不存在显示房间号",
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Home/Usercenter/boundphone": {
+            "post": {
+                "tags": ["UserInfo"],
+                "operationId": "boundphone",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "用户绑定手机号",
+                "description": "用户绑定手机号",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "ischeck",
+                        "description": "ischeck传1，验证手机号；传其他，绑定手机操作",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "userid",
+                        "description": "用户userid",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "countryno",
+                        "description": "用户选择的国家码",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "userno",
+                        "description": "用户输入的手机号",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "verifycode",
+                        "description": "短信验证码",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "请求成功"
+                    },
+                    "0": {
+                        "description": "验证码错误，请重试"
+                    },
+                    "2": {
+                        "description": "此手机号已被绑定"
+                    },
+                    "-1": {
+                        "description": "系统繁忙[更新数据库操作失败返回此状态码]"
+                    }
+                }
+            }
+        }
+    }
+}

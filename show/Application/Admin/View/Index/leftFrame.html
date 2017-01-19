@@ -1,0 +1,24 @@
+<volist name="secondMenus" id="secondMenu">
+<h3 class="f14 switchs"><span class="cu on" title="展开与收缩"></span>{$secondMenu['menuname']}</h3>
+<ul>
+	<volist name="secondMenu['thirdMenu']" id="thirdMenu">
+	<li id="_MP{$thirdMenu['menuid']}" class="sub_menu"><a href="javascript:_MP({$thirdMenu['menuid']},'{$thirdMenu['url']}');" hidefocus="true" style="outline:none;">{$thirdMenu['menuname']}</a></li>
+	</volist>
+</ul>
+</volist>
+
+<script type="text/javascript">
+$(".switchs").each(function(i){
+	var ul = $(this).next();
+	$(this).click(
+	function(){
+		if(ul.is(':visible')){
+			ul.hide();
+			$(this).find('span').removeClass('on');
+				}else{
+			ul.show();
+			$(this).find('span').addClass('on');
+		}
+	})
+});
+</script>

@@ -1,0 +1,101 @@
+<extend name="Public:list" />
+<block name="title"></block>
+<block name="css"></block>
+
+<block name="main">
+<style type="text/css">
+	html{_overflow-y:scroll}
+</style>
+<script type="text/javascript"><!--
+	$(function(){
+		SwapTab('setting','on','',4,1);
+		$.formValidator.initConfig({formid:"myform",autotip:true,onerror:function(msg,obj){window.top.art.dialog({content:msg,lock:true,width:'200',height:'50'}, function(){this.close();$(obj).focus();})}});		
+		
+		$("#emceededuct").formValidator({onshow:"请输入主播分成百分比",onfocus:"请输入主播分成百分比"}).inputValidator({onerror:"输入有误"}).regexValidator({regexp:"num",datatype:"enum",onerror:"分成百分比为数字"});
+		$("#emceeagentdeduct").formValidator({onshow:"请输入主播代理分成百分比",onfocus:"请输入主播代理分成百分比"}).inputValidator({onerror:"输入有误"}).regexValidator({regexp:"num",datatype:"enum",onerror:"分成百分比为数字"});
+		$("#payagentdeduct").formValidator({onshow:"请输入充值代理分成百分比",onfocus:"请输入充值代理分成百分比"}).inputValidator({onerror:"输入有误"}).regexValidator({regexp:"num",datatype:"enum",onerror:"分成百分比为数字"});
+
+	})
+//--></script>
+<form action="/Admin/index.php/Index/save_redbagset/" method="post" id="myform">
+  <input name="id" value="1" type="hidden">
+  <div class="pad-10">
+    <div class="col-tab">
+      <ul class="tabBut cu-li">
+        <li id="tab_setting_1" class="on" onclick="SwapTab('setting','on','',4,1);">红包设置</li>
+      </ul>
+      <div id="div_setting_1" class="contentList pad-10">
+        <table class="table_form" width="100%">
+          <tbody>
+            <tr>
+              <th>普通用户每</th>
+              <td class="y-bg"><input class="input-text" name="gethbinterval" id="gethbinterval" size="5" value="5" type="text">
+                分钟获得1个红包，
+                每天最多
+                <input class="input-text" name="maxdaygethb" id="maxdaygethb" size="5" value="55" type="text">
+                个 </td>
+            </tr>
+            <tr>
+              <th>VIP用户每</th>
+              <td class="y-bg"><input class="input-text" name="vip_gethbinterval" id="vip_gethbinterval" size="5" value="1" type="text">
+                分钟获得1个红包，
+                每天最多
+                <input class="input-text" name="vip_maxdaygethb" id="vip_maxdaygethb" size="5" value="65" type="text">
+                个 </td>
+            </tr>
+            <tr>
+              <th>会员送出</th>
+              <td class="y-bg"><input class="input-text" name="sendhb" id="sendhb" size="5" value="10" type="text">
+                红包，
+                富豪等级相应提高
+                <input class="input-text" name="spendcoin" id="spendcoin" size="5" value="10" type="text">
+                币 </td>
+            </tr>
+            <tr>
+              <th>签约主播每</th>
+              <td class="y-bg"><input class="input-text" name="gethb" id="gethb" size="5" value="10" type="text">
+                红包，
+                兑换
+                <input class="input-text" name="changecoin" id="changecoin" size="5" value="10" type="text">
+                币 </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="bk15"></div>
+      <input name="dosubmit" value="提交" class="button" type="submit">
+    </div>
+  </div>
+  <input name="__hash__" value="bb214c9ee00c33423ce14f5e037069d1_17b573fafc694c5eca9db3db3236ecd1" type="hidden">
+</form>
+
+</block>
+
+<block name="js">
+<script type="text/javascript">function SwapTab(name,cls_show,cls_hide,cnt,cur){
+    for(i=1;i<=cnt;i++){
+		if(i==cur){
+			 $('#div_'+name+'_'+i).show();
+			 $('#tab_'+name+'_'+i).attr('class',cls_show);
+		}else{
+			 $('#div_'+name+'_'+i).hide();
+			 $('#tab_'+name+'_'+i).attr('class',cls_hide);
+		}
+	}
+}
+
+function showsmtp(obj,hiddenid){
+	hiddenid = hiddenid ? hiddenid : 'smtpcfg';
+	var status = $(obj).val();
+	if(status == 1) $("#"+hiddenid).show();
+	else  $("#"+hiddenid).hide();
+}
+function test_mail() {
+	var mail_type = $('input[checkbox=mail_type][checked]').val();
+    $.post('?m=admin&c=setting&a=public_test_mail&mail_to='+$('#mail_to').val(),{mail_type:mail_type,mail_server:$('#mail_server').val(),mail_port:$('#mail_port').val(),mail_user:$('#mail_user').val(),mail_password:$('#mail_password').val(),mail_auth:$('#mail_auth').val(),mail_auth:$('#mail_auth').val(),mail_from:$('#mail_from').val()}, function(data){
+	alert(data);
+	});
+}
+
+</script>
+</block>

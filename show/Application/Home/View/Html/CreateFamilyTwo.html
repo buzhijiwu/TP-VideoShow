@@ -1,0 +1,345 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Cache-Control" content="no-siteapp"/>
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>创建家族</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<link href="../../../../Public/Home/Css/header.css" rel="stylesheet" type="text/css" />
+<link href="../../../../Public/Home/Css/footer.css" rel="stylesheet" type="text/css"./>
+<link rel="stylesheet" href="../../../../Public/Home/Css/zh/common.css">
+<link href="../../../../Public/Home/Css/zh/CreateFamily.css" rel="stylesheet" type="text/css"/>
+<script src="../../../../Public/Tools/Js/jquery/jquery-1.8.3.min.js"></script>
+<script  src="../../../../Public/Home/Js/imghover.js"></script>
+<script src="../../../../Public/Home/Js/Login.js"></script>
+<script src="../../../../Public/Home/Js/Right.js"></script>
+<title>创建家族</title>
+</head>
+<script type="text/javascript">
+//下面用于图片上传预览功能
+function setImagePreview(avalue) {
+var docObj=document.getElementById("doc");
+
+var imgObjPreview=document.getElementById("preview");
+if(docObj.files &&docObj.files[0])
+{
+//火狐下，直接设img属性
+imgObjPreview.style.display = 'block';
+imgObjPreview.style.width = '150px';
+imgObjPreview.style.height = '180px';
+//imgObjPreview.src = docObj.files[0].getAsDataURL();
+
+//火狐7以上版本不能用上面的getAsDataURL()方式获取，需要一下方式
+imgObjPreview.src = window.URL.createObjectURL(docObj.files[0]);
+}
+else
+{
+//IE下，使用滤镜
+docObj.select();
+var imgSrc = document.selection.createRange().text;
+var localImagId = document.getElementById("localImag");
+//必须设置初始大小
+localImagId.style.width = "150px";
+localImagId.style.height = "180px";
+//图片异常的捕捉，防止用户修改后缀来伪造图片
+try{
+localImagId.style.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+localImagId.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = imgSrc;
+}
+catch(e)
+{
+alert("您上传的图片格式不正确，请重新选择!");
+return false;
+}
+imgObjPreview.style.display = 'none';
+document.selection.empty();
+}
+return true;
+}
+</script>
+<!--setImagePreview2-->
+<script type="text/javascript">
+//下面用于图片上传预览功能
+function setImagePreview2(avalue) {
+var docObj=document.getElementById("doc2");
+
+var imgObjPreview=document.getElementById("preview2");
+if(docObj.files &&docObj.files[0])
+{
+//火狐下，直接设img属性
+imgObjPreview.style.display = 'block';
+imgObjPreview.style.width = '150px';
+imgObjPreview.style.height = '180px';
+//imgObjPreview.src = docObj.files[0].getAsDataURL();
+
+//火狐7以上版本不能用上面的getAsDataURL()方式获取，需要一下方式
+imgObjPreview.src = window.URL.createObjectURL(docObj.files[0]);
+}
+else
+{
+//IE下，使用滤镜
+docObj.select();
+var imgSrc = document.selection.createRange().text;
+var localImagId = document.getElementById("localImag2");
+//必须设置初始大小
+localImagId.style.width = "150px";
+localImagId.style.height = "180px";
+//图片异常的捕捉，防止用户修改后缀来伪造图片
+try{
+localImagId.style.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+localImagId.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = imgSrc;
+}
+catch(e)
+{
+alert("您上传的图片格式不正确，请重新选择!");
+return false;
+}
+imgObjPreview.style.display = 'none';
+document.selection.empty();
+}
+return true;
+}
+</script>
+<!--setImagePreview3-->
+<script type="text/javascript">
+//下面用于图片上传预览功能
+function setImagePreview3(avalue) {
+var docObj=document.getElementById("doc3");
+
+var imgObjPreview=document.getElementById("preview3");
+if(docObj.files &&docObj.files[0])
+{
+//火狐下，直接设img属性
+imgObjPreview.style.display = 'block';
+imgObjPreview.style.width = '150px';
+imgObjPreview.style.height = '180px';
+//imgObjPreview.src = docObj.files[0].getAsDataURL();
+
+//火狐7以上版本不能用上面的getAsDataURL()方式获取，需要一下方式
+imgObjPreview.src = window.URL.createObjectURL(docObj.files[0]);
+}
+else
+{
+//IE下，使用滤镜
+docObj.select();
+var imgSrc = document.selection.createRange().text;
+var localImagId = document.getElementById("localImag3");
+//必须设置初始大小
+localImagId.style.width = "150px";
+localImagId.style.height = "180px";
+//图片异常的捕捉，防止用户修改后缀来伪造图片
+try{
+localImagId.style.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+localImagId.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = imgSrc;
+}
+catch(e)
+{
+alert("您上传的图片格式不正确，请重新选择!");
+return false;
+}
+imgObjPreview.style.display = 'none';
+document.selection.empty();
+}
+return true;
+}
+</script>
+<body>
+<!--<div id="navtopbox">
+  <div class="head">
+    <div class="logo" > <img  src="../../../../Public/Public/Images/Logo/pcweblog.png" width="159" height="54" style="float:left"/>
+      <div class="nav" style="float:left">
+        <ul class="navbar">
+          <li class="act"><a href="#">首页</a></li>
+          <li><a  href="#">秀场</a></li>
+          <li><a href="#">排行榜</a></li>
+          <li><a href="#">商城</a></li>
+          <li><a href="#">家族</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class=" navbaright" style="float:right; ">
+      <ul>
+        <li>
+          <div class="search">
+            <input type="text" class="searchinput txt"  value="搜索主播或者房间号"/>
+            <span class="sr"> <img src="../../../../Public/Public/Images/Navi/fdg.png"/></span></div>
+        </li>
+        <li class="deng" > <a href="#" class="lo"><img src="../../../../Public/Public/Images/Navi/show.png"/></a>
+          <p class="pn" style="display:none">Join</p>
+        </li>
+        <li class="deng" > <a href="javascript:showDiv()"><img src="../../../../Public/Public/Images/Navi/login.png" class="lover"/></a>
+          <p class="pn" style="display:none">Login</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>-->
+<!--head end-->
+<div class="g-cf">
+  <div class="w">
+    <div class="fl">
+      <p><i>Step1</i>创建家族第一步</p>
+      <div class="success">
+        <h3>创建条件</h3>
+      </div>
+      <p><i>Step2</i>创建家族第二步</p>
+      <div  class="active">
+        <h3>填写资料</h3>
+      </div>
+      <p><i>Step3</i>创建家族第三步</p>
+      <div>
+        <h3>等待审核</h3>
+      </div>
+      <p><i>Step4</i>创建家族第四步</p>
+      <div>
+        <h3>完成申请</h3>
+      </div>
+    </div>
+    <div class="fr2" >
+      <p class="m-hd">个人资料</p>
+      <form>
+        <table>
+          <tr>
+            <td class="tl">用户ID:</td>
+            <td><lable>小灵猫XXXX</lable></td>
+          </tr>
+          <tr>
+            <td class="tl">姓名：</td>
+            <td><input type="text" placeholder="请输入真实姓名" class="tdr"><span>*</span></td>
+          </tr>
+          <tr>
+            <td class="tl">性别：</td>
+            <td>
+                <label>
+                    <input type="radio" name="sex" value="男" checked="checked"/> 男
+                </label>
+                <label>
+                    <input type="radio" name="sex" value="女" class="sex"/> 女
+                </label>
+            </td>
+          </tr>
+          <tr>
+            <td class="tl">身份证：</td>
+            <td><input type="text" placeholder="请输入身份证号" class="tdr" />
+              <span>*</span></td>
+          </tr>
+          <tr>
+            <td class="tl">手机号：</td>
+            <td><input type="tel" placeholder="请输入手机号"  class="tdr"/>
+              <span>*</span></td>
+          </tr>
+          <tr>
+            <td class="tl">邮箱：</td>
+            <td ><input type="email" placeholder="请输入邮箱号" class="tdr"/>
+              <span>*</span></td>
+          </tr>
+          <tr>
+            <td class="tl">银行账户：</td>
+            <td><input type="text"  placeholder="请输入银行账号" class="tdr" />
+              <span>* 银行账号的姓名必须与本人姓名一致</span></td>
+          </tr>
+          <tr>
+            <td class="tl">开户银行:</td>
+            <td><select class="select">
+                <option value='129'>中国工商银行</option>
+                <option value='130'>中国招商银行</option>
+                <option value='131'>中国建设银行</option>
+                <option value='132'>中国农业银行</option>
+                <option value='133'>中国银行</option>
+                <option value='134'>中国上海浦东发展银行</option>
+                <option value='135'>中国交通银行</option>
+                <option value='136'>中国民生银行</option>
+                <option value='137'>中国光大银行</option>
+                <option value='138'>中国广东发展银行</option>
+                <option value='139'>中国中信银行</option>
+                <option value='140'>中国华夏银行</option>
+                <option value='141'>中国兴业银行</option>
+                <option value='142'>中国邮政储蓄银行</option>
+                <option value='143'>其它</option>
+              </select>
+                <span>*</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="tl">开户地:</td>
+            <td><select class="select2">
+                <option >1</option>
+                <option >2</option>
+                <option >3</option>
+              </select>
+              省
+              <select  class="select2">
+                <option >1</option>
+                <option >2</option>
+                <option >3</option>
+              </select>
+                <span>*</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="tl">支行或分行名称:</td>
+            <td ><input  type="text"  placeholder="请输入支行或分行名称" class="tdr"/>
+              <span>*</span></td>
+          </tr>
+        </table>
+      </form>
+      <div class="inf">
+        <p class="fid"><i>身份证正面：</i></p>
+        <div id="localImag" class="fid3"><img id="preview" src=""/></div>
+        <p class="fid"><i>示例:</i></p>
+        <p class="fid2"><img src="../../../../Public/Public/Images/CreateFamily/ID1.png"/></p>
+        <p class="fid"><span> * 证件全部信息清晰无遮挡</span></p>
+        <div>
+<input type="file"   name="file" id="doc"  onchange="javascript:setImagePreview();" accept="image/*">
+          <span>* 限jpg/jpeg/png,500k以内</span>
+          </div>
+      </div>
+      <div  class="inf">
+        <p class="fid"><i>身份证反面：</i></p>
+        <div id="localImag2" class="fid3"><img id="preview2" src=""/></div>
+        <p class="fid"><i>事例:</i></p>
+        <p class="fid2"><img src="../../../../Public/Public/Images/CreateFamily/ID2.png"/></p>
+        <p class="fid">
+            <span>
+                * 证件全部信息清晰无遮挡<br/>
+                * 有效期半年以内
+            </span>
+
+        </p>
+
+           <div>
+<input type="file"   name="file" id="doc2"  onchange="javascript:setImagePreview2();" accept="image/*">
+          <span>* 限jpg/jpeg/png,500k以内</span>
+           </div>
+      </div>
+      <p class="m-hd">家族资料</p>
+      <div class="fd" >
+        <p>
+          <label>家族名称：</label>
+          <input type="text" placeholder="请输入家族名称" class="fdiput"/>
+          <span> * 已被注册</span></p>
+        <p>
+          <label>家族徽章：</label>
+          <input type="text" placeholder="请输入4位英文字母 如：ABCD" maxlength="4"  class="fdiput"/>
+          <span>* 已被注册</span></p>
+        <p class="fd1">家族头像:</p>
+       <p id="localImag3" class="fd2"><img id="preview3" src=""/></p>
+        <p class="fd1">事例:</p>
+        <p class="fd3"><img src="../../../../Public/Public/Images/CreateFamily/logo.png"/></p>
+        <div>
+<input type="file" name="file" id="doc3"  onchange="javascript:setImagePreview3();" accept="image/*">
+          <span> * 限jpg/jpeg/png,500k以内</span></div>
+      </div>
+      <div class="m-bt">
+        <input  type="button" value="下一步"  class="nextstep"/>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="g-ft">1111222222222222</div>
+</body>
+</html>

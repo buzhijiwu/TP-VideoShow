@@ -1,0 +1,139 @@
+<tagLib name="html" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=7" />
+<title>{:lan('ADMIN_MAN_TITLE', 'Admin')}</title>
+<link href="__PUBLIC__/Public/statics/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Public/statics/css/system.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Public/statics/css/table_form.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Public/statics/css/dialog.css" rel="stylesheet" type="text/css" />
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/dialog.js"></script>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles1.css" title="styles1" media="screen" />
+<link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles2.css" title="styles2" media="screen" />
+<link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles3.css" title="styles3" media="screen" />
+<link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles4.css" title="styles4" media="screen" />
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/jquery.min.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/admin_common.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/styleswitch.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/formvalidator.js" charset="UTF-8"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/formvalidatorregex.js" charset="UTF-8"></script>
+
+<script charset="utf-8" src="__PUBLIC__/Tools/Js/Kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="__PUBLIC__/Tools/Js/Kindeditor/lang/en.js"></script><script>	var editor;
+	KindEditor.ready(function(K) {
+		editor = K.create('textarea[name="content"]', {
+			resizeType : 1,
+			allowPreviewEmoticons : false,
+			allowImageUpload : true,
+			items : [
+				'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+				'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+				'insertunorderedlist', '|', 'emoticons', 'image', 'link', 'source']
+		});
+	});
+</script>
+<script type="text/javascript">
+	window.focus();
+</script>
+</head>
+<body>
+<style type="text/css">
+	html{_overflow-y:scroll}
+</style><div id="closeParentTime" style="display:none"></div>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function ResumeError() { 
+	return true; 
+} 
+window.onerror = ResumeError;
+if(window.top.$("#current_pos").data('clicknum')==1) {
+	window.top.$("#current_pos").data('clicknum',0);
+}
+
+function checkForm(obj, type) {
+	if (upForm.videopath.value == '' && $("#video").attr("src") == "") {
+		alert("{:lan('PLZ_CHOOSE_UPLOAD_FILES', 'Admin')}");
+        upForm.videopath.focus();
+		return false;
+	}
+
+}
+
+$(function () {
+	$(".bottom-button").change(function () {
+		$(".file-path").html($(".bottom-button").val());
+	})
+})
+
+//-->
+</SCRIPT>
+<div class="pad-lr-10">
+	<div class="pad-10">
+		<div class="content-menu ib-a line-x"><a href="javascript:;" class=on><em>{:lan('UPLOAD_VIDEO', 'Admin')}</em></a></div>
+	</div>
+
+	<form name="upForm" id="upForm" action="__URL__/upload_video/" enctype='multipart/form-data' method="post" onsubmit="return checkForm(this)">
+	<input type="hidden" name="rollpicid" value="{$_GET['rollpicid']}"/>
+	<div class="pad_10">
+		<div style='overflow-y:auto;overflow-x:hidden' class='scrolltable'>
+			<table width="100%" cellspacing="0" class="table_form contentWrap">
+
+				<tr>
+					<th width="80"> 
+					    {:lan('TITLE', 'Admin')}	  
+					</th>
+					<td><input type="text" name="title" id="title" value="{$data['title']}" size="50"></td>
+				</tr>
+				<tr>
+					<th width="80"> 
+					    <span style="color: red;">*</span> {:lan('VIDEO_TYPE','Admin')}  
+					</th>
+					<td>
+						<select name="type">
+							<option value="0" <eq name="data.type" value="0">selected="selected"</eq>>{:lan('SINGING_CONTEST', 'Admin')}</option>
+						</select>
+					</td>
+				</tr>				
+				<tr>
+					<th width="100" style="vertical-align: top;padding-top: 13px;">
+					    <span style="color: red;">*</span> {:lan('VIDEO','Admin')}  
+					</th>
+					<td>
+						<div class="input-group">
+							<button class="top-button"> {:lan('UPLOAD_FILES','Admin')} </button>
+							<input type="file" name="videopath" accept="video/mp4" value="" size="50" class="bottom-button">
+							<span>（{:lan('MP4_FORMAT', 'Admin')},{:lan('VIDEO_LIMIT', 'Admin')}）</span>
+							<p class="file-path"></p>
+						</div>
+						<br>
+						<if condition="$data['url'] neq ''">
+                            <video width="320" height="240" controls>
+                              <source src="{$data['url']}" type="video/mp4">
+                              <object data="{$data['url']}" width="320" height="240">
+                                <embed src="{$data['url']}" width="320" height="240">
+                              </object> 
+                            </video>
+						<else />
+							<embed src="" id="video" style="display: none;"></embed>
+						</if>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="bk10"></div>
+		<div class="btn">
+		    <input type="hidden" name="userid" value="{$data.userid}" />		    
+			<input type="submit" class="button" name="dosubmit" value="{:lan('SAVE', 'Admin')}" style="width:100px;height:40px;" />
+			<if condition="$data['url'] neq ''">
+			<a href="{:U('Admin/Show/del_video/emceeuserid/'.$data['userid'])}" style="width: 100px;height: 40px;display: inline-block;">
+			<input type="button" class="button" value="{:lan('BTN_DELETE', 'Admin')}" style="width:100px;height:40px;" />
+			</a>
+			</if>
+		</div> 
+	</div>
+	</form>
+</div>
+</body>
+</html>

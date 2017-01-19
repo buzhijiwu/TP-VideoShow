@@ -1,0 +1,826 @@
+/*定义公用样式*/
+.txt-over {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.width {
+  width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.min-width {
+  width: 100%;
+  min-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.mayActive-body {
+  background-image: url("/Public/Public/Images/mayActive/app-bg.jpg");
+}
+.mayActive-main-pc {
+  background-image: url("/Public/Public/Images/mayActive/may-bg-zh.jpg");
+  background-position: top left;
+  background-size: 1200px 4050px;
+  padding-top: 1830px;
+  background-repeat: no-repeat;
+}
+.mayActive-main-pc .section {
+  padding-bottom: 60px;
+  margin-right: auto;
+  margin-left: auto;
+  width: 980px;
+  /*.click-load-more{
+      height: 40px;
+      text-align: center;
+      width: 180px;
+      line-height: 40px;
+      .border-radius(4px);
+      background-color: #b753eb;
+      color: #fff;
+      font-size: 18px;
+      margin-top: 55px;
+      margin-left: auto;
+      margin-right: auto;
+      &:hover{
+        background-color: #8427a2;
+        cursor: pointer;
+      }
+    }*/
+}
+.mayActive-main-pc .section .active-icon {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  background-size: 40px auto;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.mayActive-main-pc .section .active-icon.icon-em {
+  background-image: url("/Public/Public/Images/mayActive/icon-em.jpg");
+}
+.mayActive-main-pc .section .active-icon.icon-us {
+  background-image: url("/Public/Public/Images/mayActive/icon-us.jpg");
+}
+.mayActive-main-pc .section .active-icon.icon-click {
+  background-image: url("/Public/Public/Images/mayActive/icon-click.jpg");
+  background-size: 30px 30px;
+}
+.mayActive-main-pc .section .title {
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+}
+.mayActive-main-pc .section .title span {
+  font-size: 30px;
+  color: #8427a2;
+  font-weight: 600;
+}
+.mayActive-main-pc .section .tab-btn {
+  height: 50px;
+  line-height: 50px;
+  margin-top: 40px;
+}
+.mayActive-main-pc .section .tab-btn p {
+  float: left;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  color: #8427a2;
+  font-size: 22px;
+  width: 23%;
+  margin: 0 1%;
+  text-align: center;
+}
+.mayActive-main-pc .section .tab-btn p:first-child {
+  margin-left: 0;
+  width: 24%;
+}
+.mayActive-main-pc .section .tab-btn p:last-child {
+  margin-right: 0;
+  width: 24%;
+}
+.mayActive-main-pc .section .tab-btn p:hover {
+  cursor: pointer;
+}
+.mayActive-main-pc .section .tab-btn p.active {
+  background-color: #8427a2;
+  color: #fff;
+}
+.mayActive-main-pc .section .list-title {
+  margin-top: 40px;
+}
+.mayActive-main-pc .section .list-title th {
+  font-weight: normal;
+  font-size: 20px;
+  color: #fff;
+  background-color: #8427a2;
+  height: 35px;
+  vertical-align: middle;
+}
+.mayActive-main-pc .section .list-title th.td1 {
+  width: 25%;
+}
+.mayActive-main-pc .section .list-title th.td2 {
+  width: 50%;
+}
+.mayActive-main-pc .section .list-title th.td3 {
+  width: 25%;
+}
+.mayActive-main-pc .section .list-main {
+  min-height: 800px;
+}
+.mayActive-main-pc .section .list-main table tr {
+  height: 80px;
+}
+.mayActive-main-pc .section .list-main table tr .td1 {
+  width: 25%;
+}
+.mayActive-main-pc .section .list-main table tr .td2 {
+  width: 50%;
+}
+.mayActive-main-pc .section .list-main table tr .td3 {
+  width: 25%;
+}
+.mayActive-main-pc .section .list-main table tr:nth-child(even) {
+  background-color: #f1ddfb;
+}
+.mayActive-main-pc .section .list-main table tr:nth-child(odd) {
+  background-color: #fff;
+}
+.mayActive-main-pc .section .list-main table tr td {
+  text-align: center;
+  padding: 10px 0;
+}
+.mayActive-main-pc .section .list-main table tr td.td1.top1 {
+  padding: 20px 0 5px 0;
+  background-image: url("/Public/Public/Images/mayActive/top1-bg.png");
+  background-size: 36px auto;
+  background-repeat: no-repeat;
+  background-position: 100px 10px;
+}
+.mayActive-main-pc .section .list-main table tr td.td1 span {
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  background-color: #b753eb;
+  color: #fff;
+  line-height: 36px;
+  text-align: center;
+  font-size: 24px;
+}
+.mayActive-main-pc .section .list-main table tr td.td1 span.top-color {
+  background-color: #fbcc30;
+}
+.mayActive-main-pc .section .list-main table tr td.td2 {
+  text-align: left;
+  padding-left: 85px;
+}
+.mayActive-main-pc .section .list-main table tr td.td2 a {
+  display: block;
+}
+.mayActive-main-pc .section .list-main table tr td.td2 a img {
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  margin-right: 55px;
+}
+.mayActive-main-pc .section .list-main table tr td.td2 a span {
+  margin-right: 5px;
+  font-size: 16px;
+  color: #ba6ed2;
+  margin-top: -5px;
+}
+.mayActive-main-pc .section .list-main table tr td.td3 span {
+  font-size: 18px;
+  color: #ba6ed2;
+}
+.mayActive-main-pc .section .click-load-more {
+  text-align: center;
+  color: #8427a2;
+  font-size: 18px;
+  margin-top: 30px;
+  line-height: 50px;
+}
+.mayActive-main-pc .section .click-load-more:hover {
+  cursor: pointer;
+}
+.mayActive-main-pc .section .loading {
+  width: 200px;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 200px;
+}
+.may-sing-main {
+  margin-top: 20px;
+  background-color: #0d1136 ;
+  padding-bottom: 30px;
+}
+.may-sing-main .title {
+  height: 800px;
+  background-image: url("/Public/Public/Images/Activity/maySing/sing-title.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 1200px 800px;
+}
+.may-sing-main .tab-btn {
+  margin: 30px auto;
+  padding: 0 55px;
+  width: 1000px;
+}
+.may-sing-main .tab-btn button {
+  height: 70px;
+  width: 420px;
+  border-radius: 7px;
+  -moz-border-radius: 7px;
+  -webkit-border-radius: 7px;
+  background-color: #313a93;
+  color: #fff;
+  box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.5);
+  font-size: 26px;
+  font-weight: bold;
+}
+.may-sing-main .tab-btn button:first-child {
+  margin-right: 45px;
+}
+.may-sing-main .tab-btn button.active {
+  background-color: #fff;
+  color: #313a93;
+}
+.may-sing-main .sing-list-wrap {
+  padding: 0 20px;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding-bottom: 30px;
+}
+.may-sing-main .sing-list-wrap .list {
+  float: left;
+  width: 350px;
+  margin-right: 55px;
+}
+.may-sing-main .sing-list-wrap .list:nth-child(3n) {
+  margin-right: 0;
+}
+.may-sing-main .sing-list-wrap .list .top-list {
+  line-height: 120px;
+  height: 120px;
+  font-size: 30px;
+  color: #fff;
+  text-align: center;
+}
+.may-sing-main .sing-list-wrap .list .top-list span {
+  color: #FF5e5c;
+  font-size: 30px;
+}
+.may-sing-main .sing-list-wrap .list .list-main {
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid #aaa;
+}
+.may-sing-main .sing-list-wrap .list .list-main:nth-child(3n) {
+  margin-right: 0;
+}
+.may-sing-main .sing-list-wrap .list .list-main .line1 {
+  width: 350px;
+  height: 280px;
+  overflow: hidden;
+  position: relative;
+  display: block;
+}
+.may-sing-main .sing-list-wrap .list .list-main .line1:hover {
+  cursor: pointer;
+}
+.may-sing-main .sing-list-wrap .list .list-main .line1:hover .name {
+  color: #f4378c;
+}
+.may-sing-main .sing-list-wrap .list .list-main .line1 img {
+  width: 350px;
+}
+.may-sing-main .sing-list-wrap .list .list-main .line1 .iconfont {
+  position: absolute;
+  display: block;
+  width: 70px;
+  height: 70px;
+  text-align: center;
+  line-height: 70px;
+  font-size: 60px;
+  color: rgba(0, 0, 0, 0.6);
+  top: 50%;
+  left: 50%;
+  margin-top: -35px;
+  margin-left: -35px;
+}
+.may-sing-main .sing-list-wrap .list .list-main .line1 .name {
+  line-height: 35px;
+  height: 35px;
+  font-size: 16px;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  bottom: 0;
+  width: 350px;
+  padding-left: 10px;
+  padding-right: 10px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.may-sing-main .sing-list-wrap .list .list-main .line2 {
+  line-height: 40px;
+  height: 40px;
+  font-size: 16px;
+  background-color: #fff;
+  padding-left: 10px;
+  border-bottom: 2px dashed #FF5e5c;
+}
+.may-sing-main .sing-list-wrap .list .list-main .line2 span {
+  color: #FF5e5c;
+}
+.may-sing-main .sing-list-wrap .list .list-main .line3 {
+  background-color: #fff;
+  padding: 20px 10px;
+}
+.may-sing-main .sing-list-wrap .list .list-main .line3 .left {
+  float: left;
+  width: 50%;
+  text-align: center;
+}
+.may-sing-main .sing-list-wrap .list .list-main .line3 .left button {
+  height: 30px;
+  line-height: 30px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #FF5e5c;
+  width: 100px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+.may-sing-main .sing-list-wrap .list .list-main .line3 .left button:hover {
+  background-color: #d83476;
+}
+.may-sing-main .sing-list-wrap .list .list-main .line3 .left .num {
+  margin-top: 20px;
+  font-size: 14px;
+  line-height: 20px;
+  height: 40px;
+}
+.may-sing-main .sing-rule {
+  text-align: center;
+}
+.may-sing-main .sing-rule img {
+  width: 1000px;
+}
+.may-sing-main .loading-more {
+  display: block;
+  margin: 40px auto 20px auto;
+  width: 620px;
+  height: 60px;
+  background-color: #313a93;
+  color: #fff;
+  font-weight: bold;
+  font-size: 30px;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+}
+.may-sing-main .loading-more:hover {
+  background-color: #fff;
+  color: #313a93 ;
+}
+.sing-play-main {
+  padding-top: 30px;
+}
+.sing-play-main .left {
+  float: left;
+  width: 768px;
+  height: 576px;
+}
+.sing-play-main .right {
+  float: right;
+  width: 350px;
+  background-color: #ed9c9b;
+  height: 576px;
+  text-align: center;
+  border-radius: 8px;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+}
+.sing-play-main .right .header-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border: 4px solid #f4378c;
+  margin: 40px 0 20px 0;
+}
+.sing-play-main .right .name {
+  height: 80px;
+  margin-top: 20px;
+  line-height: 20px;
+  color: #fff;
+  font-size: 20px;
+}
+.sing-play-main .right .line2 {
+  line-height: 126px;
+  height: 126px;
+  font-size: 20px;
+  background-color: #fff;
+  padding-left: 10px;
+  border-bottom: 2px dashed #FF5e5c;
+}
+.sing-play-main .right .line2 span {
+  color: #FF5e5c;
+}
+.sing-play-main .right .line3 {
+  background-color: #fff;
+  padding: 50px 10px;
+}
+.sing-play-main .right .line3 .left1 {
+  float: left;
+  width: 50%;
+  text-align: center;
+}
+.sing-play-main .right .line3 .left1 button {
+  height: 30px;
+  line-height: 30px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #FF5e5c;
+  width: 100px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+.sing-play-main .right .line3 .left1 button:hover {
+  background-color: #d83476;
+}
+.sing-play-main .right .line3 .left1 .num {
+  margin-top: 20px;
+  font-size: 16px;
+  line-height: 20px;
+  height: 40px;
+}
+.dragon-boat-main {
+  background-image: url("/Public/Public/Images/Activity/dragonBoat/dragon-bg.jpg");
+  padding-bottom: 50px;
+}
+.dragon-boat-main .title {
+  background-image: url("/Public/Public/Images/Activity/dragonBoat/dragon-title.jpg");
+  height: 490px;
+}
+.dragon-boat-main .tab-btn-top {
+  margin: 100px auto 30px auto;
+  padding: 0 55px;
+  width: 1000px;
+}
+.dragon-boat-main .tab-btn-top button {
+  height: 70px;
+  width: 420px;
+  border-radius: 7px;
+  -moz-border-radius: 7px;
+  -webkit-border-radius: 7px;
+  background-color: #9fc644;
+  color: #fff;
+  box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.5);
+  font-size: 26px;
+  font-weight: bold;
+}
+.dragon-boat-main .tab-btn-top button:first-child {
+  margin-right: 45px;
+}
+.dragon-boat-main .tab-btn-top button.active {
+  background-color: #fff;
+  color: #9fc644;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .em-title {
+  margin-top: 70px;
+  height: 60px;
+  text-align: center;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .em-title img {
+  width: auto;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .tab-btn {
+  height: 50px;
+  line-height: 50px;
+  margin-top: 40px;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .tab-btn p {
+  float: left;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  color: #9fc644;
+  font-size: 26px;
+  width: 250px;
+  margin: 0 75px;
+  text-align: center;
+  text-shadow: 0 0 5px #ffffff;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .tab-btn p:hover {
+  cursor: pointer;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .tab-btn p.active {
+  background-color: #9fc644;
+  color: #fff;
+  text-shadow: none;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .em-active-list,
+.dragon-boat-main .tab-list.dragon-list-wrap .us-active-list {
+  width: 1050px;
+  margin: 50px auto;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .em-active-list .list-main tr th,
+.dragon-boat-main .tab-list.dragon-list-wrap .us-active-list .list-main tr th {
+  background-color: #9fc644;
+  padding: 12px 0;
+  color: #fff;
+  font-size: 20px;
+  font-weight: normal;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .em-active-list .list-main tr:nth-child(even),
+.dragon-boat-main .tab-list.dragon-list-wrap .us-active-list .list-main tr:nth-child(even) {
+  background-color: #EBF3D9;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .em-active-list .list-main tr:nth-child(odd),
+.dragon-boat-main .tab-list.dragon-list-wrap .us-active-list .list-main tr:nth-child(odd) {
+  background-color: #fff;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .em-active-list .list-main tr td,
+.dragon-boat-main .tab-list.dragon-list-wrap .us-active-list .list-main tr td {
+  text-align: center;
+  padding: 10px 0;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .em-active-list .list-main tr td.td1.top1,
+.dragon-boat-main .tab-list.dragon-list-wrap .us-active-list .list-main tr td.td1.top1 {
+  padding: 20px 0 5px 0;
+  background-image: url("/Public/Public/Images/mayActive/top1-bg.png");
+  background-size: 36px auto;
+  background-repeat: no-repeat;
+  background-position: 108px 10px;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .em-active-list .list-main tr td.td1 span,
+.dragon-boat-main .tab-list.dragon-list-wrap .us-active-list .list-main tr td.td1 span {
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  background-color: #b753eb;
+  color: #fff;
+  line-height: 36px;
+  text-align: center;
+  font-size: 24px;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .em-active-list .list-main tr td.td1 span.top-color,
+.dragon-boat-main .tab-list.dragon-list-wrap .us-active-list .list-main tr td.td1 span.top-color {
+  background-color: #fbcc30;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .em-active-list .list-main tr td.td2,
+.dragon-boat-main .tab-list.dragon-list-wrap .us-active-list .list-main tr td.td2 {
+  text-align: left;
+  padding-left: 85px;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .em-active-list .list-main tr td.td2 a,
+.dragon-boat-main .tab-list.dragon-list-wrap .us-active-list .list-main tr td.td2 a {
+  display: block;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .em-active-list .list-main tr td.td2 a img,
+.dragon-boat-main .tab-list.dragon-list-wrap .us-active-list .list-main tr td.td2 a img {
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  margin-right: 55px;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .em-active-list .list-main tr td.td2 a span,
+.dragon-boat-main .tab-list.dragon-list-wrap .us-active-list .list-main tr td.td2 a span {
+  margin-right: 5px;
+  font-size: 16px;
+  color: #ba6ed2;
+  margin-top: -5px;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .em-active-list .list-main tr td.td2 a .name,
+.dragon-boat-main .tab-list.dragon-list-wrap .us-active-list .list-main tr td.td2 a .name {
+  display: inline-block;
+  width: 250px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .em-active-list .list-main tr td.td3 span,
+.dragon-boat-main .tab-list.dragon-list-wrap .us-active-list .list-main tr td.td3 span {
+  font-size: 18px;
+  color: #ba6ed2;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .em-active-list .list-main tr .td1,
+.dragon-boat-main .tab-list.dragon-list-wrap .us-active-list .list-main tr .td1 {
+  width: 25%;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .em-active-list .list-main tr .td2,
+.dragon-boat-main .tab-list.dragon-list-wrap .us-active-list .list-main tr .td2 {
+  width: 50%;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .em-active-list .list-main tr .td3,
+.dragon-boat-main .tab-list.dragon-list-wrap .us-active-list .list-main tr .td3 {
+  width: 25%;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .em-active-list .list-main tbody .loading,
+.dragon-boat-main .tab-list.dragon-list-wrap .us-active-list .list-main tbody .loading {
+  display: block;
+  width: 200px;
+  height: auto;
+  margin: 100px 425px;
+}
+.dragon-boat-main .tab-list .rule {
+  margin-top: 80px;
+  text-align: center;
+}
+.dragon-boat-main .loading-more {
+  display: block;
+  margin: 40px auto 20px auto;
+  width: 620px;
+  height: 60px;
+  background-color: #9fc644;
+  color: #fff;
+  font-weight: bold;
+  font-size: 30px;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+}
+.dragon-boat-main .loading-more:hover {
+  background-color: #fff;
+  color: #9fc644 ;
+}
+.iphone-main-pc {
+  background-image: url("/Public/Public/Images/Activity/iPhone/iPhone-active-bg.jpg");
+  height: 2326px;
+  background-size: auto 2326px;
+  background-repeat: no-repeat;
+  background-position: left top;
+  padding-top: 1412px;
+  padding-left: 457px;
+}
+.iphone-main-pc table {
+  width: 673px;
+}
+.iphone-main-pc table tr td {
+  height: 80px;
+  vertical-align: middle;
+  font-size: 18px;
+}
+.iphone-main-pc table tr td.td1 {
+  width: 60px;
+}
+.iphone-main-pc table tr td.td1 .header-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+}
+.iphone-main-pc table tr td.td2 {
+  width: 350px;
+  padding-left: 42px;
+}
+.iphone-main-pc table tr td.td2 .name {
+  padding-left: 8px;
+  width: 260px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: #fff;
+  display: inline-block;
+}
+.iphone-main-pc table tr td.td2 .name:hover {
+  color: #f4378c;
+}
+.iphone-main-pc table tr td.td3 {
+  width: 263px;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.ipad-main-pc {
+  background-image: url("/Public/Public/Images/Activity/ipad/ipad-active-bg.jpg");
+  height: 3553px;
+  background-size: auto 3553px;
+  background-repeat: no-repeat;
+  background-position: left top;
+  padding-top: 1570px;
+  padding-left: 457px;
+}
+.ipad-main-pc table {
+  width: 673px;
+}
+.ipad-main-pc table.user {
+  margin-top: 249px;
+}
+.ipad-main-pc table tr td {
+  height: 80px;
+  vertical-align: middle;
+  font-size: 18px;
+}
+.ipad-main-pc table tr td.td1 {
+  width: 60px;
+}
+.ipad-main-pc table tr td.td1 .header-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+}
+.ipad-main-pc table tr td.td2 {
+  width: 350px;
+  padding-left: 42px;
+}
+.ipad-main-pc table tr td.td2 .name {
+  padding-left: 8px;
+  width: 260px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: #fff;
+  display: inline-block;
+}
+.ipad-main-pc table tr td.td2 .name:hover {
+  color: #f4378c;
+}
+.ipad-main-pc table tr td.td3 {
+  width: 263px;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.iphone7-main-pc {
+  background-image: url("/Public/Public/Images/Activity/iPhone7/iPhone7-active-bg.jpg");
+  height: 3553px;
+  background-size: auto 3553px;
+  background-repeat: no-repeat;
+  background-position: left top;
+  padding-top: 1570px;
+  padding-left: 457px;
+}
+.iphone7-main-pc table {
+  width: 673px;
+}
+.iphone7-main-pc table.user {
+  margin-top: 249px;
+}
+.iphone7-main-pc table tr td {
+  height: 80px;
+  vertical-align: middle;
+  font-size: 18px;
+}
+.iphone7-main-pc table tr td.td1 {
+  width: 60px;
+}
+.iphone7-main-pc table tr td.td1 .header-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+}
+.iphone7-main-pc table tr td.td2 {
+  width: 350px;
+  padding-left: 42px;
+}
+.iphone7-main-pc table tr td.td2 .name {
+  padding-left: 8px;
+  width: 260px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: #fff;
+  display: inline-block;
+}
+.iphone7-main-pc table tr td.td2 .name:hover {
+  color: #f4378c;
+}
+.iphone7-main-pc table tr td.td3 {
+  width: 263px;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

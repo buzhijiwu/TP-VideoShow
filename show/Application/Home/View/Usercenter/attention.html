@@ -1,0 +1,49 @@
+<extend name="base" />
+
+<block name="menu">
+	<div class="nav-list clear">
+		<a href="__URL__/seehistory">{:lan('MY_FOOTMARK', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+		<a href="__URL__/attention" class="active">{:lan('MY_ATTENTION', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+		<a href="__URL__/guard">{:lan('MY_GUARD', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+	</div>
+</block>
+
+<block name="main">
+
+
+
+	<!-- 我的关注 -->
+	<div class="right-seehistory-main" >
+
+		<!--无关注-->
+<!-- 		<div class="common-no-data dis-none">
+			<img src="/Public/Public/Images/newImage/common/al-cry.png">
+			<h1>{:lan('NO_ATTENTION', 'Home')}</h1>
+		</div> -->
+		<!--有关注-->
+		<div class="seehistory-list">
+		    <eq name="attentEmcees[0]" value="">
+		    <div class="common-no-data">
+		    	<img src="/Public/Public/Images/newImage/common/al-cry.png">
+		    	<h1>{:lan('NO_ATTENTION', 'Home')}</h1>
+		    </div>		    
+		    <else />		
+			<volist name="attentEmcees" id="vo">
+				<a href="/{$vo[roomno]}.html" class="list">
+					<img src="{$Think.config.IMAGE_BASE_URL}{$vo[bigheadpic]}" class="header-img"/>
+					<div class="line1 clear">
+						<p class="name" title="{$vo[nickname]}">
+							{$vo[nickname]}
+						</p>
+						<span class="common-em em{$vo[emceelevel]}"></span>
+					</div>
+					<p class="line2">
+						{:lan('FANS_COUNT', 'Home')}：{$vo[fanscount]}
+					</p>
+				</a>
+			</volist>
+			</eq>
+		</div>
+		{$page}
+	</div>
+</block>

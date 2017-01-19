@@ -1,0 +1,68 @@
+<extend name="Public:list" />
+<block name="title"></block>
+<block name="css"></block>
+
+<block name="main">
+  <script>
+    $(function(){
+
+      $.formValidator.initConfig({formid:"myform",autotip:true,onerror:function(msg,obj){window.top.art.dialog({content:msg,lock:true,width:'200',height:'50'}, function(){this.close();$(obj).focus();})}});
+      $("#roleid").formValidator({
+                onshow:"{:lan('ROLE_NUMBER', 'Admin')}",
+                onfocus:"{:lan('ROLE_NUMBER', 'Admin')}",
+                oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"})
+              .inputValidator({min:1,onerror:"{:lan('ROLE_NUMBER', 'Admin')}"})
+              .regexValidator({regexp:"num",datatype:"enum",onerror:"{:lan('PLZ_INPUT_NUMBER', 'Admin')}"});
+      $("#rolename").formValidator({
+                onshow:"{:lan('ROLE_NAME', 'Admin')}",
+                onfocus:"{:lan('ROLE_NAME', 'Admin')}",
+                oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"})
+              .inputValidator({min:1,onerror:"{:lan('ROLE_NAME', 'Admin')}"});
+      $("#remark").formValidator({
+                onshow:"{:lan('ROLE_DESCRIPTION', 'Admin')}",
+                onfocus:"{:lan('ROLE_DESCRIPTION', 'Admin')}",
+                oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"})
+              .inputValidator({min:1,onerror:"{:lan('ROLE_DESCRIPTION', 'Admin')}"});
+    })
+  </script>
+
+<div class="subnav">
+  <div class="content-menu ib-a blue line-x"><a href="__URL__/role/"><em>{:lan('ROLE_LIST', 'Admin')}</em></a><span>|</span><a href="javascript:;" class="on"><em>{:lan('ADD_ROLE', 'Admin')}</em></a></div>
+</div>
+<style type="text/css">
+	html{_overflow-y:scroll}
+</style>
+<div class="pad_10">
+  <div class="common-form">
+    <form name="myform" action="" method="post" id="myform">
+		<input name="nicenoid" value="{$data['mid']}" type="hidden">
+		<input name="parentid" type="hidden" value="{$Think.get.pid|default=0}" style=" width: 150px;">
+			
+      <table class="table_form contentWrap" width="100%">
+        <tbody>      
+          <tr>
+            <td width="80">{:lan('ROLE_NUMBER', 'Admin')}</td>
+            <td><input name="roleid" class="input-text" type="text" value="{$data['roleid']}" id="roleid" style=" width: 150px;" <neq name="data.roleid" value="">readonly="readonly"</neq>></td>
+          </tr>
+          <tr>
+            <td>{:lan('ROLE_NAME', 'Admin')}</td>
+            <td><input name="rolename" class="input-text" type="text" value="{$data['rolename']}" id="rolename" style=" width: 150px;"></td>
+          </tr>
+          <tr>
+            <td>{:lan('ROLE_DESCRIPTION', 'Admin')}</td>
+            <td><input name="remark" class="input-text" type="text" value="{$data['remark']}" id="remark" style=" width: 150px;"></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="bk15"></div>
+      <input name="dosubmit" value="{:lan('SUBMIT_BUTTION', 'Admin')}" class="button" type="submit">
+    </form>
+  </div>
+</div>
+</block>
+
+<block name="js">
+<script type="text/javascript">
+
+</script>
+</block>

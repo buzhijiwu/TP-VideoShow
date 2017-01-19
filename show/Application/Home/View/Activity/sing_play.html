@@ -1,0 +1,287 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="shortcut icon" href="/Public/Public/Images/favicon.ico"/>
+    <link href="__PUBLIC__/Home/Css/{:getLanguage()}/reset.css?time=20160509.css" rel="stylesheet" type="text/css" />
+    <link  href="__PUBLIC__/Home/Css/{:getLanguage()}/common.css?time=20160509.css" rel="stylesheet" type="text/css">
+    <link  href="__PUBLIC__/Home/Css/{:getLanguage()}/layout.css?time=20160509.css" rel="stylesheet" type="text/css">
+    <link  href="__PUBLIC__/Home/Css/{:getLanguage()}/active.css?time=20160509.css" rel="stylesheet" type="text/css">
+    <!--<link  href="__PUBLIC__/Home/Css/{:getLanguage()}/layout.less?time=20160426.less" rel="stylesheet" type="text/less">-->
+    <!--<link  href="__PUBLIC__/Home/Css/{:getLanguage()}/active.less?time=20160426.less" rel="stylesheet" type="text/less">-->
+    <!--<script src="__PUBLIC__/Home/Css/{:getLanguage()}/less-1.6.3.min.js"></script>-->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+    <title>Em hát tặng bài hát cho bác Hồ kính yêu</title>
+
+</head>
+<body class="may-sing-body">
+<!--公用头部-->
+<include file="Public:header" />
+
+
+<div class="common-wrap">
+    <div class="width">
+        <div class="sing-play-main clear">
+            <div class="left">
+                <video width="768" height="576" controls="controls">
+                    <source src="{$data.url}" type="video/mp4">
+                </video>
+            </div>
+            <div class="right">
+                <img src="{$data.smallheadpic}" class="header-img">
+                <p class="name">{$data.nickname}</p>
+                <div class="line2">
+                    Tổng số điểm:
+                    <span>{$data.total}</span>
+                </div>
+                <div class="line3 clear">
+                    <div class="left1">
+                        <button class="vote" data-emcuserid="{$data.userid}">Bỏ phiếu</button>
+                        <div class="num">
+                            Đã bỏ phiếu:
+                            <p>{$data.votecount}</p>
+                        </div>
+                    </div>
+                    <div class="left1">
+                        <button class="share" data-emcuserid="{$data.userid}" data-nickname="{$data.nickname}" data-bigheadpic="{$data.bigheadpic}">Chia sẻ</button>
+                        <div class="num">
+                            Đã chia sẽ:
+                            <p>{$data.sharecount}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input name="userid" id="userid" type="hidden" value="{$Think.session.userid}"/>
+
+
+
+<!--共用底部-->
+<include file="Public:bottom" />
+
+<!-- 共用登录-->
+<include file="Public:login" />
+
+<!--共用弹框-->
+<include file="Public:alert" />
+
+<!--共用js-->
+<include file="Public:javascript" />
+
+<script>
+    $(function () {
+        //规则和列表切换
+        $(".may-sing-main .tab-btn").on("click","button", function () {
+            $(this).addClass("active").siblings("button").removeClass("active");
+            $(".may-sing-main .tab-list").eq($(this).index()).removeClass("dis-none")
+                    .siblings(".tab-list").addClass("dis-none");
+        });
+
+
+
+        var userid = $("#userid").val();
+
+        $(".sing-play-main .right .line3 .left1 .vote").on("click",function(){
+
+            var that = $(this);
+            var emceeuserid=that.data('emcuserid');
+            var pointNum = 0,
+                voteNum = 0;
+            if(userid<=0){
+                common.isLog();
+                return false;
+            }
+            $.ajax({
+                url: "{:U('Home/Vote/SingActivityVote')}",
+                data: {'userid':userid,'emceeuserid':emceeuserid},
+                dataType: 'json',
+                type: "post",
+                async:true,
+                success: function(res) {
+                    if(res.status == 1){
+                        common.alertAuto(false,res.message);
+
+                        voteNum = parseInt(that.siblings(".num").find("p").html())+1;
+                        pointNum = parseInt(that.parent().parent().siblings(".line2").find("span").html())+1;
+
+                        that.next(".num").find("p").html(voteNum);
+                        that.parent().parent().siblings(".line2").find("span").html(pointNum);
+                    }else{
+                        common.alertAuto(false,res.message);
+                    }
+                },
+                error: function() {
+                }
+            });
+        })
+
+        var shareTime,now,a;
+        //前端多语言验证
+        var validate = {};
+
+        var validateData = {
+            zh:{
+                mistake2:"分享成功",
+                mistake3:"一个主播每小时只能分享一次",
+                sharecontent1:"我在waashow直播，你在哪儿？",
+                sharecontent2:"我美我在Waashow直播，你丑你在家里睡觉.",
+                sharecontent3:"我正在waashow观看",
+                sharecontent4:"在直播"
+            },
+            vi:{
+                mistake2:"Chia sẽ thành công",
+                mistake3:"Mỗi idols một tiếng chỉ được chia sẽ một lần.",
+                sharecontent1:"tôi đang ở waashow,bạn ở đâu?",
+                sharecontent2:"Mình xinh mình live Waashow, bạn không xinh bạn ở nhà ngủ.",
+                sharecontent3:"Tôi đang ở waashow xem idol ",
+                sharecontent4:" live"
+            },
+            en:{
+                mistake2:"Chia sẽ thành công",
+                mistake3:"Mỗi idols một tiếng chỉ được chia sẽ một lần.",
+                sharecontent1:"tôi đang ở waashow,bạn ở đâu?",
+                sharecontent2:"Mình xinh mình live Waashow, bạn không xinh bạn ở nhà ngủ.",
+                sharecontent3:"Tôi đang ở waashow xem idol ",
+                sharecontent4:" live"
+            }
+        };
+
+        //判断浏览器语言
+        switch ($("#language").text()){
+            case "zh":
+                validate = validateData.zh;
+                break;
+            case "vi":
+                validate = validateData.vi;
+                break;
+            case "en":
+                validate = validateData.en;
+                break;
+        }
+
+        $(".sing-play-main .right .line3 .left1 .share").on("click",function(){
+            var that = $(this);
+            var emceeuserid=that.data('emcuserid');
+            var nickname= that.data('nickname');  
+            var bigheadpic= that.data('bigheadpic');
+
+            if(userid<=0){
+                common.isLog();
+                return false;
+            }
+
+            $.ajax({
+                type: "post",
+                url: "/Home/Share/share_judge",
+                dataType: "json",
+                data: {
+                    'userid'  : userid,
+                    'emceeuserid' : emceeuserid,
+                    'sharetype' : 1,
+                    'is_judge' : 1
+                },
+                success: function (result) {
+                    if(result.status == 1){
+
+                        facebookshare(emceeuserid,nickname,bigheadpic,that);
+
+                    }else{
+                        common.alertAuto(false,result.message);
+                    }
+                },
+                error: function (e) {
+                    common.alertAuto(false,result.message);
+                }
+            });
+        });
+
+        function facebookshare(b,c,d,that){
+            var emceeuserid = b;
+            var nickname = c;
+            var bigheadpic = d;
+            if(userid == emceeuserid){
+                var s = parseInt(Math.random()*2+1);
+                var sharecontent = '';
+                if (s == 1) {
+                    sharecontent = validate.sharecontent1;
+                } else{
+                    sharecontent = validate.sharecontent2;
+                }
+            }
+            else{
+                sharecontent = validate.sharecontent3+nickname+validate.sharecontent4;
+            }
+
+            FB.init({
+                appId      : '1541809749448877',
+                xfbml      : true,
+                version    : 'v2.6',
+            });
+
+            FB.ui({
+                        method: 'feed',
+                        link: 'http://waashow.vn/Home/Share/share?url='+'Home/Activity/sing_play/id/'+emceeuserid+'.html',
+                        picture:'http://waashow.vn'+bigheadpic,
+                        caption: window.location.href,
+                        name: sharecontent,
+                        description:'Waashow',
+                    },
+                    // callback
+                    function(response) {
+                        if (response && !response.error_message) {
+                            // alert('Posting completed.');
+                            $.ajax({
+                                type: "post",
+                                url: "/Home/Share/index",
+                                dataType: "json",
+                                data: {
+                                    'userid'  : userid,
+                                    'emceeuserid' : emceeuserid,
+                                    'shareplat' : 1,
+                                    'sharetype' : 1,
+                                    'devicetype' : 2
+                                },
+                                success: function (result) {
+                                    if(result.status == 1){
+                                        common.alertAuto(false,validate.mistake2);
+
+                                        var shareNum = parseInt(that.siblings(".num").find("p").html())+1;
+                                        var pointNum = parseInt(that.parent().parent().siblings(".line2").find("span").html())+1;
+
+                                        that.next(".num").find("p").html(shareNum);
+                                        that.parent().parent().siblings(".line2").find("span").html(pointNum);
+                                    }else{
+                                        common.alertAuto(false,result.message);
+                                    }
+                                },
+                                error: function (e) {
+                                }
+                            });
+                        } else {
+                            //alert('Error while posting.');
+                        }
+                    }
+            );
+        }
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    })
+</script>
+</body>
+</html>

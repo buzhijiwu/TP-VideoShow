@@ -1,0 +1,40 @@
+<extend name="Public:list" />
+<block name="title">{:lan('ADMIN_MAN_TITLE', 'Admin')}</block>
+<block name="css"></block>
+
+<block name="main">
+    <div class="subnav">
+        <div class="content-menu ib-a blue line-x">
+            <a href="{:U('Admin/RedisManage/index')}"><em>{:lan('RETURN_LIST', 'Admin')}</em></a></div>
+    </div>
+    <table width="50%" cellspacing="0" class="search-form">
+        <tbody>
+        <tr>
+            <td>
+                <div class="explain-col">
+                    <span style="color:red;">{:lan('REDIS_KEY_NAME','Admin')}：</span>{$key}
+                    <div style="float:right;">
+                        <input type="button" onclick="refresh_key('{$key}');" name="search" class="button" value="{:lan('REDIS_KEY_REFRESH', 'Admin')}" />
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <textarea readonly style="width:100%;height:500px;"><php>print_r(json_decode($value,true));</php></textarea>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</block>
+
+<block name="js">
+    <script type="text/javascript">
+        //刷新key
+        function refresh_key(key){
+            if(confirm("{:lan('CONFIRM_REFRESH','Admin')}")){
+                window.location.href = "{:U('Admin/RedisManage/refresh_key/key/"+key+"/')}";
+            }
+        }
+    </script>
+</block>

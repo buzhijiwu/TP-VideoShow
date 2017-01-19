@@ -1,0 +1,90 @@
+<extend name="Public:list" />
+<block name="title"></block>
+<block name="css"></block>
+
+<block name="main">
+<style type="text/css">
+	html{_overflow-y:scroll}
+</style>
+<form action="" method="post" id="myform">
+  <input name="id" value="1" type="hidden">
+  <div class="pad-10">
+    <div class="col-tab">
+      <ul class="tabBut cu-li">
+        <li id="tab_setting_1" >{:lan('SMASHINGEGGS_GAME_SET', 'Admin')}</li>
+      </ul>
+      <div id="div_setting_1" class="contentList pad-10">
+        <table class="table_form" width="100%">
+          <tbody>
+            <tr>
+              <th>{:lan('SMASHINGEGGS_SPEND', 'Admin')}</th>
+              <td class="y-bg"><input class="input-text" name="oncespend" size="5" value="{$data.oncespend|default=0}" type="text"></td>
+            </tr>
+            <tr>
+              <th>{:lan('FIRST_PRIZE', 'Admin')}</th>
+              <td class="y-bg"><input class="input-text" name="firstwin" size="5" value="{$data.firstwin|default=0}" type="text">
+                {:lan('PROBABILITY', 'Admin')}
+                <input class="input-text" name="firstwinratio" size="5" value="{$data.firstwinratio|default=0}" type="text">
+                %</td>
+            </tr>
+            <tr>
+              <th>{:lan('SECOND_PRIZE', 'Admin')}</th>
+              <td class="y-bg"><input class="input-text" name="secondwin" size="5" value="{$data.secondwin|default=0}" type="text">
+                {:lan('PROBABILITY', 'Admin')}
+                <input class="input-text" name="secondwinratio" size="5" value="{$data.secondwinratio|default=0}" type="text">
+                %</td>
+            </tr>
+            <tr>
+              <th>{:lan('THIRD_PRIZE', 'Admin')}</th>
+              <td class="y-bg"><input class="input-text" name="thirdwin" size="5" value="{$data.thirdwin|default=0}" type="text">
+                {:lan('PROBABILITY', 'Admin')}
+                <input class="input-text" name="thirdwinratio" size="5" value="{$data.thirdwinratio|default=0}" type="text">
+                %</td>
+            </tr>
+            <tr>
+              <th>{:lan('FOURTH_PRIZE', 'Admin')}</th>
+              <td class="y-bg"><input class="input-text" name="fourthwin" size="5" value="{$data.fourthwin|default=0}" type="text">
+                {:lan('PROBABILITY', 'Admin')}
+                <input class="input-text" name="fourthwinratio" size="5" value="{$data.fourthwinratio|default=0}" type="text">
+                %</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="bk15"></div>
+      <input name="dosubmit" value="{:lan('SUBMIT_BUTTION', 'Admin')}" class="button" type="submit">
+    </div>
+  </div>
+</form>
+
+</block>
+
+<block name="js">
+<script type="text/javascript">
+function SwapTab(name,cls_show,cls_hide,cnt,cur){
+    for(i=1;i<=cnt;i++){
+		if(i==cur){
+			 $('#div_'+name+'_'+i).show();
+			 $('#tab_'+name+'_'+i).attr('class',cls_show);
+		}else{
+			 $('#div_'+name+'_'+i).hide();
+			 $('#tab_'+name+'_'+i).attr('class',cls_hide);
+		}
+	}
+}
+
+function showsmtp(obj,hiddenid){
+	hiddenid = hiddenid ? hiddenid : 'smtpcfg';
+	var status = $(obj).val();
+	if(status == 1) $("#"+hiddenid).show();
+	else  $("#"+hiddenid).hide();
+}
+function test_mail() {
+	var mail_type = $('input[checkbox=mail_type][checked]').val();
+    $.post('?m=admin&c=setting&a=public_test_mail&mail_to='+$('#mail_to').val(),{mail_type:mail_type,mail_server:$('#mail_server').val(),mail_port:$('#mail_port').val(),mail_user:$('#mail_user').val(),mail_password:$('#mail_password').val(),mail_auth:$('#mail_auth').val(),mail_auth:$('#mail_auth').val(),mail_from:$('#mail_from').val()}, function(data){
+	alert(data);
+	});
+}
+
+</script>
+</block>

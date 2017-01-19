@@ -1,0 +1,78 @@
+<tagLib name="html" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=7" />
+<title>{:C('TITLE_CONTENT')}</title>
+<link href="__PUBLIC__/Public/statics/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Public/statics/css/system.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Public/statics/css/table_form.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles1.css" title="styles1" media="screen" />
+<link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles2.css" title="styles2" media="screen" />
+<link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles3.css" title="styles3" media="screen" />
+<link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles4.css" title="styles4" media="screen" />
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/jquery.min.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/admin_common.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/styleswitch.js"></script>
+<script type="text/javascript">
+	window.focus();
+</script>
+</head>
+<body>
+<div class="subnav">
+    <div class="content-menu ib-a blue line-x">
+        <a href='javascript:;' class="on"><em>角色管理</em></a><span>|</span><a href="{:U('RBAC/addRole')}" ><em>添加角色</em></a>    </div>
+</div>
+<style type="text/css">
+	html{_overflow-y:scroll}
+</style><div class="pad_10">
+<div class="table-list">
+<form name="myform" action="__SELF__" method="post">
+    <table width="100%" cellspacing="0">
+        <thead>
+		<tr>
+		<th width="10%">序号</th>
+		<th width="10%" align="left" >角色英文名</th>
+		<th width="10%" align="left" >角色中文名</th>
+		<th width="15%" >管理操作</th>
+		<th></th>
+		</tr>
+        </thead>
+        <tbody>
+<volist name="roles" id="vo">
+<tr>
+<td width="10%" align="center">
+	<input size="3" name="sort[]" type="text" value="{$vo['sort']}" />
+	<input name="id[]" type="hidden" value="{$vo['id']}" />
+</td>
+<td width="10%" >{$vo['name']}</td>
+<td width="10%" >{$vo['remark']}</td>
+<td width="15%"  align="center">
+<a href="javascript:toNode({$vo['id']}, '{$vo['remark']}')">分配权限</a> | 
+<a href="javascript:edit({$vo['id']}, '{$vo['remark']}', 'edit_adminuser')">修改</a> <!--|--> 
+<!--a href="javascript:confirmurl('__URL__/del_role/adminid/{$vo['id']}', '是否删除该角色?')">删除</a-->
+</td>
+<td></td>
+</tr>
+</volist>
+</tbody>
+</table>
+<input style="margin-left:40px;margin-top:20px;cursor:pointer;" type="submit" value="提 交" />
+</form>
+<include file="./Admin/Tpl/Public/Public/page.html" />
+</div>
+</body>
+</html>
+<script type="text/javascript">
+<!--
+	function edit(id, name,action) {
+		window.top.art.dialog({title:'修改--'+name, id:'edit', iframe:'__URL__/'+action+'/adminid/'+id ,width:'500px',height:'400px'}, 	function(){var d = window.top.art.dialog({id:'edit'}).data.iframe;
+		var form = d.document.getElementById('dosubmit');form.click();return false;}, function(){window.top.art.dialog({id:'edit'}).close()});
+	}
+	function toNode(id, name) {
+		window.top.art.dialog({title:'修改--'+name, id:'edit', iframe:'__URL__/toNode/adminid/'+id ,width:'500px',height:'400px'}, 	function(){var d = window.top.art.dialog({id:'edit'}).data.iframe;
+		var form = d.document.getElementById('dosubmit');form.click();return false;}, function(){window.top.art.dialog({id:'edit'}).close()});
+	}
+//-->
+</script>

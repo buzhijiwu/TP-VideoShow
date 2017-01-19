@@ -1,0 +1,196 @@
+<!doctype html>
+<html>
+<head>
+    <!--公用meta-->
+    <include file="Public:meta" />
+
+    <title>{:lan('APPLY_SIGN', 'Home')}</title>
+
+    <link rel="stylesheet" href="/Public/Tools/Js/cropper/css/style.css" type="text/css" />
+
+
+    <script src="__PUBLIC__/Tools/Js/jquery/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="/Public/Tools/Js/cropper/js/cropbox.js"></script>
+
+</head>
+
+<body>
+<!--公用头部-->
+<include file="Public:header" />
+
+<div class="common-wrap">
+    <div class="width">
+        <div class="applyEm-main applyEm-main2">
+    <div class="top clear">
+        <p class="step">
+            {:lan('INPUT_BASIC_INFO', 'Home')}
+        </p>
+        <p class="step  active">
+            {:lan('APPLY_SIGN', 'Home')}
+        </p>
+        <p class="step">
+            {:lan('APPLY_SUCCESS', 'Home')}
+        </p>
+    </div>
+    <if condition="$Think.session.signflag eq 1">
+        <div class="submited">
+            {:lan('WAIT_AUDIT', 'Home')}
+        </div>
+    <else />
+        <form class="bottom" id="uploadForm" enctype="multipart/form-data" action="/Applyemcee/apply" method="POST">
+            <table class="information">
+                <tr>
+                    <td class="td1">
+                        <span>*</span>
+                        {:lan('SKILL', 'Home')}：
+                    </td>
+                    <td class="td2" id="td2">
+                        <label>
+                            <input type="checkbox" name="skill" value="MC" <volist name="skill_list[0]" id="vo0"><in name="vo0" value="$data.skill">checked</in></volist> />MC
+                        </label>
+                        <label>
+                            <input type="checkbox" name="skill" value="DJ" <volist name="skill_list[1]" id="vo1"><in name="vo1" value="$data.skill">checked</in></volist> />DJ
+                        </label>
+                        <label>
+                            <input type="checkbox" name="skill" value="{:lan('FUNNY', 'Home')}" <volist name="skill_list[2]" id="vo2"><in name="vo2" value="$data.skill">checked</in></volist> />{:lan('FUNNY', 'Home')}
+                        </label>
+                        <label>
+                            <input type="checkbox" name="skill" value="{:lan('SING', 'Home')}" <volist name="skill_list[3]" id="vo3"><in name="vo3" value="$data.skill">checked</in></volist> />{:lan('SING', 'Home')}
+                        </label>
+                        <label>
+                            <input type="checkbox" name="skill" value="{:lan('DANCE', 'Home')}" <volist name="skill_list[4]" id="vo4"><in name="vo4" value="$data.skill">checked</in></volist> />{:lan('DANCE', 'Home')}
+                        </label>
+                        <label>
+                            <input type="checkbox" name="skill" value="{:lan('GAME', 'Home')}" <volist name="skill_list[5]" id="vo5"><in name="vo5" value="$data.skill">checked</in></volist> />{:lan('GAME', 'Home')}
+                        </label>
+                    </td>
+                    <td class="td3">
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td1">
+                        <span>*</span>
+                        {:lan('LIVE_POSTER', 'Home')}：
+                    </td>
+
+                    <td class="td2" style="position: relative">
+                        <div class="left">
+                            <div class="imageBox imageBoxtwo">
+                                <div class="thumbBox thumbBoxtwo"></div>
+                                <div class="spinner" style="display: none"></div>
+
+                            </div>
+                            <div class="action">
+                                <div class="new-contentarea tc"> <a href="javascript:void(0)" class="upload-img">
+                                    <label for="upload-file">{:lan('SELECT_PIC', 'Home')}</label>
+                                </a>
+                                    <input type="file" class="" name="upload-file" id="upload-file" accept="image/png,image/jpg,image/jpeg"/>
+                                </div>
+                                <input type="button" id="btnZoomIn" class="Btnsty_peyton" value="+"  >
+                                <input type="button" id="btnZoomOut" class="Btnsty_peyton" value="-" >
+                            </div>
+                            <div class="cropped croppedtwo" style="left: 350px;top: 10px;"></div>
+
+                        </div>
+
+
+                        <p>({:lan('PIC_DESC', 'Home')})</p>
+
+
+
+                        <p class="td3"></p>
+                    </td>
+                </tr>
+                <tr class="ver-top">
+                    <td class="td1">
+                        <span>*</span>
+                        {:lan('LIVE_TIME', 'Home')}：
+                    </td>
+                    <td class="td2">
+                        <input type="text" placeholder="{:lan('INPUT_LIVE_TIME', 'Home')}" name="livetime" value="{$data.livetime}" id="livetime">
+                        <p>({:lan('INPUT_LIVE_TIME_DESC', 'Home')})</p>
+                    </td>
+                    <td class="td3">
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td1">
+                        {:lan('BANK_NAME', 'Home')}：
+                    </td>
+                    <td class="td2">
+                        <input type="text" placeholder="{:lan('INPUT_BANK_NAME', 'Home')}" name="bankname" value="{$data.bankname}" id="bankname">
+                    </td>
+                    <td class="td3">
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td1">
+                        {:lan('BANK_ADDRESS', 'Home')}：
+                    </td>
+                    <td class="td2">
+                        <input type="text" placeholder="{:lan('INPUT_BANK_ADDRESS', 'Home')}" name="bankaddress" value="{$data.bankaddress}" id="bankaddress">
+                    </td>
+                    <td class="td3">
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td1">
+                        {:lan('SUB_BANK_NAME', 'Home')}：
+                    </td>
+                    <td class="td2">
+                        <input type="text" placeholder="{:lan('INPUT_SUB_BANK_NAME', 'Home')}" name="subbankname" value="{$data.subbankname}" id="subbankname">
+                    </td>
+                    <td class="td3">
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td1">
+                        {:lan('BANK_NO', 'Home')}：
+                    </td>
+                    <td class="td2">
+                        <input type="text" placeholder="{:lan('INPUT_BANK_NO', 'Home')}" name="bankno" value="{$data.bankno}" id="bankno">
+                    </td>
+                    <td class="td3">
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td1">
+                        {:lan('ACCOUNT_NAME', 'Home')}：
+                    </td>
+                    <td class="td2">
+                        <input type="text" placeholder="{:lan('INPUT_ACCOUNT_NAME', 'Home')}" name="accountname" value="{$data.accountname}" id="accountname">
+                    </td>
+                    <td class="td3">
+
+                    </td>
+                </tr>
+            </table>
+            <input type="button" value="{:lan('SUBMIT_APPLY', 'Home')}" id="submit_form" class="apply-submit submit_form2" />
+        </form>
+    </if>
+</div>
+    </div>
+</div>
+<!--共用底部-->
+<include file="Public:bottom" />
+
+<!-- 共用登录-->
+<include file="Public:login" />
+
+<!--共用弹框-->
+<include file="Public:alert" />
+
+<script src="__PUBLIC__/Home/Js/common.js"></script>
+<script>
+    $(function () {
+        applyEm.applySub2('{$data.emceepic}');
+    });
+</script>
+</body>
+</html>

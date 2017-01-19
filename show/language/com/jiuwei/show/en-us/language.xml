@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+    <showlist>
+        <authenfailed>Domain does not pass the authrization,Please contact www.waashow.com</authenfailed>
+		<networkissue>Network issue,connect to server failed</networkissue>
+		<rejectconnect>Reject the connection request</rejectconnect>
+		<closeconreq>Close the connection request</closeconreq>
+		<streamissue>Stream network issue,connect to server failed</streamissue>
+		<rejectstream>Reject the stream connection request</rejectstream>
+		<closestream>Close the stream connection request</closestream>
+		<usewebsee>Please use the web site to see the show</usewebsee>
+		<errrefresh>Obtain room information failed,please refresh the web site</errrefresh>
+		<nolive>There is no live now</nolive>
+    </showlist>

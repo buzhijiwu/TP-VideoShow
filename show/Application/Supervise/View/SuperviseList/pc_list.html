@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="shortcut icon" href="/Public/Public/Images/favicon.ico"/>
+    <link href="/Public/Home/Css/zh/reset.css?time=20160627.css" rel="stylesheet" type="text/css" />
+    <link href="/Public/Home/Css/zh/common.css?time=20160627.css" rel="stylesheet" type="text/css">
+    <link href="/Public/Supervise/Css/style.css?time=20160627.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+    <script type="text/javascript" src="/Public/Tools/Js/jquery/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="/Public/Home/Js/live/show.js"></script>
+    <script type="text/javascript" src="/Public/Home/Js/live/swfobject.js"></script>
+    <script type="text/javascript" src="/Public/Home/Js/live/common.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/Js/live/player.js"></script>
+    <script type="text/javascript" src="/Public/Home/Js/live/chatRoom.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/Js/live/socket.io.js"></script>  
+    <script type="text/javascript">
+        var _show='';
+    </script>      
+
+    <title>{:lan('INSPECTOR_LIST', 'Supervise')}</title>
+</head>
+<body>
+
+<div class="list-main">
+    <div class="header clear">
+        <div class="btn">
+            <button data-src="{:U('/Supervise/SuperviseList/app_list')}">{:lan('APP_LIVE', 'Supervise')}</button>
+            <button class="active" data-src="{:U('/Supervise/SuperviseList/pc_list')}">{:lan('PC_LIVE', 'Supervise')}</button>
+        </div>
+        <div class="search">
+            <input type="text" id="keyword" name="keyword" class="search-input" placeholder="{:lan('USERNAME', 'Supervise')}/{:lan('NICKNAME', 'Supervise')}/{:lan('ROOMNO', 'Supervise')}">
+            <input type="button" value="&#xe640;" class="search-submit iconfont">
+        </div>
+    </div>
+
+    <div class="main pc-list">
+        <ul class="list clear"></ul>
+        <div class="supervise-page"></div>
+    </div>
+</div>
+
+<!--举报弹框-->
+<div class="liveroom-report-alert-wrap dis-none">
+    <form class="liveroom-report-alert" name="upForm" id="upForm" action="/Supervise/Treated/supervise_doban" method="post" enctype='multipart/form-data' onsubmit="return checkForm(this)">
+        <!--禁播-->
+        <div class="ban-alert">
+            <div class="line1 line">
+                <span class="left">{:lan('VIOLATION_REASON', 'Home')}：</span>
+                <select class="right" name="type">
+                    <volist name="baninfo.reason" id="v">
+                        <option value="{$v.key}">{$v.value}</option>
+                    </volist>
+                </select>
+            </div>
+            <div class="line2 line">
+                <span class="left">{:lan('VIOLATION_LEVEL', 'Home')}：</span>
+                <select class="right" name="violatelevel">
+                    <volist name="baninfo.level" id="v">
+                        <option value="{$v.key}">{$v.value}</option>
+                    </volist>
+                </select>
+            </div>
+            <div class="line3 line">
+                <span class="left">{:lan('BAN_TIME', 'Home')}：</span>
+                <select class="right" name="bantime">
+                    <volist name="baninfo.time" id="v">
+                        <option value="{$v.key}">{$v.value}</option>
+                    </volist>
+                </select>
+            </div>
+            <div class="line4 line">
+                <span class="left">{:lan('PUNISH_MONEY', 'Home')}：</span>
+                <select class="right" name="banmoney">
+                    <volist name="baninfo.money" id="v">
+                        <option value="{$v.key}">{$v.value}</option>
+                    </volist>
+                </select>
+            </div>
+            <div class="line5 line">
+                <span class="left">{:lan('UPLOAD_EVIDENCE', 'Home')}：</span>
+                <input type="file" accept="image/*" id="imgFile" class="right" name="imgFile">
+            </div>
+        </div>
+        <span class="close-report iconfont">&#xe61b;</span>
+        <textarea placeholder="{:lan('PLZ_INPUT_REASON', 'Home')}" class="other-cause dis-none" name="content"></textarea>
+        <div class="bottom">
+            <!-- <button class="button no">{:lan('CANCEL', 'Home')}</button> -->
+            <!-- <button class="button yes">{:lan('SURE', 'Home')}</button> -->
+            <input name="no" type="button" class="button no" value="{:lan('CANCEL', 'Home')}" />
+            <input name="dosubmit" type="submit" class="button" value="{:lan('SURE', 'Home')}" />
+            <input name="reporteduid" type="hidden" value="" />            
+            <input type="hidden" id="superviseid" name="superviseid" value="{$Think.session.superviseid}" />
+        </div>
+        <input type="hidden" id="waachnodepath" value="{$chatNodePath}"/>
+    </form>
+</div>
+
+<script type="text/javascript" src="__PUBLIC__/Home/Js/live/chatClient.js"></script>
+<script src="__PUBLIC__/Home/Js/live/liveChat.js"></script>
+<script src="/Public/Supervise/Js/children.js"></script>
+<script>
+
+    playList.videoLoad("pc");
+
+    $(".supervise-page").on("click","button", function () {
+        var index = $(this).index();
+        var prev = $(".supervise-page button.active").html()-1;
+        prev = prev < 1 ? 1 : $(".supervise-page button.active").html()-1;
+        var next = $(".supervise-page button.active").html()-0+1;
+        next = next > $(".supervise-page button").length-2 ? $(".supervise-page button").length-2 : $(".supervise-page button.active").html()-0+1
+
+        if(index == 0){
+            playList.videoLoad("pc",{
+                p:prev,
+                keyword:$("#keyword").val()
+            });
+        }else if(index == $(".supervise-page button").length-1){
+            playList.videoLoad("pc",{
+                p:next,
+                keyword:$("#keyword").val()
+            });
+        }else{
+            playList.videoLoad("pc",{
+                p:index,
+                keyword:$("#keyword").val()
+            });
+        }
+
+    })
+
+    //搜索
+    $(".search-submit").on("click", function () {
+        playList.videoLoad("pc",{
+            keyword:$("#keyword").val()
+        });        
+    })  
+
+    $(function(){
+        $('#keyword').bind('keypress',function(event){
+            if(event.keyCode == "13")    
+            {
+                playList.videoLoad("pc",{
+                    keyword:$("#keyword").val()
+                }); 
+            }
+        });
+    });
+
+    //禁播
+    // $('.liveroom-report-alert-wrap .liveroom-report-alert .bottom .yes').on("click", function () {
+    //     if(!$("#imgFile").val()){
+    //         alert("{:lan('PLEASE_UPLOAD_PIC', 'Home')}");
+    //     }else{
+    //         var file = $('#imgFile').get(0).files[0];
+    //         var reader = new FileReader();
+    //         var path;
+    //         reader.readAsDataURL(file);
+    //         reader.onload = function () {
+    //             var data = $("#superviseid,select[name='type'],textarea[name='content'],select[name='violatelevel'],select[name='bantime'],select[name='banmoney']").serialize();
+    //             data = data+"&reporteduid="+playList._emceeuserid+"&imgFile="+ this.result;
+    //             playList.stopLiveSubmit(data);
+    //         };
+    //     }
+    // })       
+
+    function checkForm(obj, type) {
+        if(!$("#imgFile").val()) {
+            alert("{:lan('PLEASE_UPLOAD_PIC', 'Supervise')}");
+            $("#imgFile").focus();
+            return false;
+        }
+        var banType = $("select[name='type']").val();
+        var banContent = $.trim($("textarea[name='content']").val());
+        if(banType == 7 && banContent.length <= 0){
+            $("textarea[name='content']").focus();
+            return false;
+        }        
+        $("input[name='reporteduid']").val(playList._emceeuserid);
+        if (playList._livetype == 2) {
+            //pc直播
+            Chat.doStopLive(playList._emceeuserid);
+        }else{
+            Chat.doStopLive(playList._emceeuserid);
+        }
+    }   
+
+    function stop_live(id){
+        if (confirm('Confirm stop live?')) {
+            window.location.href = "{:U('Supervise/Treated/stoplive/id/"+id+"')}";                
+        }
+    }       
+</script>
+
+</body>
+</html>

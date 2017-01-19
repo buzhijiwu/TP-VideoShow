@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style"  />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="shortcut icon" href="/Public/Public/Images/favicon.ico"/>
+    <link href="__PUBLIC__/Home/Css/{:getLanguage()}/app/reset.css?time=20161008.css" rel="stylesheet" type="text/css" />
+    <link  href="__PUBLIC__/Home/Css/{:getLanguage()}/app/common.css?time=20161008.css" rel="stylesheet" type="text/css">
+    <link  href="__PUBLIC__/Home/Css/{:getLanguage()}/layout.css?time=20161008.css" rel="stylesheet" type="text/css">
+    <link  href="__PUBLIC__/Home/Css/{:getLanguage()}/app/active.css?time=20161008.css" rel="stylesheet" type="text/css">
+
+    <title>iPhone 7</title>
+
+</head>
+<body>
+<!--main-->
+<div class="ipad-main-app">
+
+    <img class="header-title" src="/Public/Public/Images/Activity/iPhone7/iPhone7-app-header.jpg">
+
+    <img class="title1" src="/Public/Public/Images/Activity/iPhone7/iPhone7-app-title1.png">
+
+    <div class="rule">
+        <p class="orange">THỜI GIAN VÀ ĐIỀU KIỆN</p>
+        <p class="ma-t-12">THỜI GIAN DIỄN RA: BẮT ĐẦU TỪ 00H00P NGÀY 10/10/2016 CHO ĐẾN 23H59P NGÀY 23/10/2016. ĐỐI TƯỢNG: DÀNH CHO TẤT CẢ MỌI NGƯỜI KHI LIVE STREAM BẰNG APP  WAASHOW. </p>
+        <p class="orange">VẬT PHẨM LIÊN QUAN: ICON HÌNH iPhone7 </p>
+        <p class="ma-t-12">Công dụng: tích lũy icon iPhone7 để tham gia đua top nhận thưởng iPhone7</p>
+        <p class="orange">CÁCH THỨC THAM GIA</p>
+        <p class="ma-t-12">Bắt đầu từ 00h00p ngày 10/10/2016, những bạn tham gia live stream bằng app Waashow  ( bất kể user hoặc idol ) đều được tham gia chương trình SƯU TẦM  ICON – ĐƯỢC iPhone7</p>
+        <p> Điều kiện để các bạn nhận được iPhone7 (Phải đạt được 2 điều kiện như dưới)</p>
+        <p class="ma-t-12"><span class="red">Lưu ý: </span>Sở hữu tối thiểu 2666 icon iPhone7. ( trong thời gian diễn ra event ) (ĐÂY LÀ ĐIỀU KIỆN CẦN ĐỂ THAM GIA ĐUA TOP NHẬN iPhone7)</p>
+        <p>Là người đứng nhất bảng sưu tầm icon iPhone7 tại thời điểm kết thúc Event (23H59P NGÀY 23/10/2016). (ĐÂY LÀ ĐIỀU KIỆN ĐỦ ĐỂ NHẬN iPhone7)</p>
+        <p class="orange">PHẦN THƯỞNG</p>
+        <p class="ma-t-12">PHẦN THƯỞNG CHO NGƯỜI SƯU TẦM ĐƯỢC NHIỀU ICON iPhone7 NHẤT TRONG THỜI GIAN DIỄN RA EVENT LÀ MỘT iPhone7 DO CTY WAASHOW TRAO TẶNG!!!</p>
+        <p>NGOÀI RA, CTY QUYẾT ĐỊNH CÓ THÊM 1 GIẢI THƯỞNG CHO NGƯỜI TẶNG NHIỀU QUÀ NHẤT. SAU KHI KẾT THÚC EVENT, NGƯỜI TẶNG QUÀ ( iPhone7 ) NHIỀU NHẤT SẼ ĐƯỢC TẶNG 10% TRÊN TỔNG GIÁ TRỊ QUÀ TẶNG ĐÃ TẶNG TRONG SUỐT THỜI GIAN DIỄN RA EVENT.</p>
+    </div>
+
+    <img class="title2" src="/Public/Public/Images/Activity/iPhone7/iPhone7-app-title2.png">
+
+    <table>
+        <thead>
+        <tr>
+            <th class="td1">Xếp hạng</th>
+            <th class="td2">Idols</th>
+            <th class="td3">Quà tặng nhận được</th>
+        </tr>
+        </thead>
+        <tbody>
+        <volist name="topEmceeGetGift" id="vo" key="k">
+            <tr>
+                <td class="td1">
+                    <div class="header-img">
+                        <img src="{$Think.config.IMAGE_BASE_URL}{$vo.smallheadpic}">
+                        <elt name="k" value="3">
+                            <span class="rank top">{$k}</span>
+                            <else/>
+                            <span class="rank">{$k}</span>
+                        </elt>
+                    </div>
+                </td>
+                <td class="td2">
+                    <span class="common-em em{$vo.emceelevel}"></span>
+                    <span class="name">{$vo.nickname}</span>
+                </td>
+                <td class="td3">
+                    {$vo.total}
+                </td>
+            </tr>
+        </volist>
+        </tbody>
+    </table>
+
+    <img class="title2" src="/Public/Public/Images/Activity/iPhone7/iPhone7-app-title3.png">
+
+    <table>
+        <thead>
+        <tr>
+            <th class="td1">Xếp hạng</th>
+            <th class="td2">User</th>
+            <th class="td3">Số lượng tặng ra</th>
+        </tr>
+        </thead>
+        <tbody>
+        <volist name="topUserSentGift" id="vo" key="k">
+            <tr>
+                <td class="td1">
+                    <div class="header-img">
+                        <img src="{$Think.config.IMAGE_BASE_URL}{$vo.smallheadpic}">
+                        <elt name="k" value="3">
+                            <span class="rank top">{$k}</span>
+                            <else/>
+                            <span class="rank">{$k}</span>
+                        </elt>
+                    </div>
+                </td>
+                <td class="td2">
+                    <span class="common-us us{$vo.userlevel}"></span>
+                    <span class="name">{$vo.nickname}</span>
+                <td class="td3">
+                    {$vo.total}
+                </td>
+            </tr>
+        </volist>
+        </tbody>
+    </table>
+</div>
+
+<input name="userid" id="userid" type="hidden" value="{$userid}" />
+
+<!--共用js-->
+<include file="Public:javascript" />
+
+
+<!--app弹框-->
+<include file="Public:appAlert" />
+
+</body>
+</html>

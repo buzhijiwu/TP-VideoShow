@@ -1,0 +1,141 @@
+<extend name="Public:list" />
+<block name="title"></block>
+<block name="css"></block>
+<block name="main">
+  <script>
+    function checkForm(obj, type) {
+      if (upForm.roomno.value.replace(/(^\s*)|(\s*$)/g, "").length == 0) {
+        alert("{:lan('INPUT_RIGHT_OPERATOR_ROOMID', 'Admin')}");
+        upForm.roomno.focus();
+        return false;
+      }
+      if (upForm.nickname.value.replace(/(^\s*)|(\s*$)/g, "").length == 0) {
+        alert("{:lan('INPUT_RIGHT_OPERATOR_ROOMID', 'Admin')}");
+        upForm.roomno.focus();
+        return false;        
+      }
+      if (upForm.realname.value.replace(/(^\s*)|(\s*$)/g, "").length == 0) {
+        alert("{:lan('OPERATOR_REALNAME_NO_EMPTY', 'Admin')}");
+        upForm.realname.focus();
+        return false;  
+      }
+      if (upForm.userno.value.replace(/(^\s*)|(\s*$)/g, "").length == 0) {
+        alert("{:lan('OPERATOR_CONTACTNO_NO_EMPTY', 'Admin')}");
+        upForm.userno.focus();
+        return false;  
+      }  
+      
+      if ($("#userid").val() == '') {
+        var isadd = true;
+        $.ajax({
+            type: "post",
+            url: "/Admin/Operator/getusertype/",
+            dataType: "json",
+            data: {roomno:upForm.roomno.value},
+            async: false,
+            success: function (result) {
+                if (result.status == 1) {
+                    if (!confirm(result.message)) {
+                        isadd = false;
+                    }
+                }else if (result.status == 0){
+                    alert(result.message);
+                    isadd = false;
+                }else{
+                     
+                }
+            },
+            error: function (e) {
+      
+            }
+        });  
+        if(!isadd){
+          return false;
+        }
+      }
+    }  
+  </script>
+
+  <eq name="data.usertype" value="30">
+  <div class="content-menu ib-a blue line-x"><a><em>{:lan('OPERATOR_EDIT', 'Admin')}</em></a></div>
+  <else />
+  <div class="content-menu ib-a blue line-x"><a><em>{:lan('OPERATOR_ADD', 'Admin')}</em></a></div>  
+  </eq>
+
+  <form class="pad-10" name="upForm" id="upForm" action="__URL__/operator_add" method="post" enctype="multipart/form-data" onSubmit="return checkForm(this)">
+    <input type="hidden" name="operatorid" value="{$data.operatorid}" />
+    <div class="pad_10">
+      <div class="col-tab">
+        <div id="div_setting_1" style="overflow-y: auto; overflow-x: hidden; display: block;" class="contentList pad-10">
+          <table width="100%" cellspacing="0" class="table_form contentWrap">
+            <tbody>
+              <input id="userid" name="userid" type="hidden" value="{$Think.get.userid}" />
+              <neq name="data.usertype" value="30">
+              <tr>
+                <th width="80"> {:lan('OPERATOR_ROOMID', 'Admin')} </th>
+                <td><input type="text" name="roomno" value="{$data.roomno}" onblur="getnick(this.value);" <eq name="data.usertype" value="30">readonly="readonly"</eq> ></td>
+              </tr>
+              <tr>
+                <th width="80"> {:lan('OPERATOR_NICKNAME', 'Admin')} </th>
+                <td><input type="text" name="nickname" value="{$data.nickname}" readonly="readonly"></td>
+              </tr>
+              <else />
+              <input name="roomno" type="hidden" value="{$data.roomno}" />
+              <input name="nickname" type="hidden" value="{$data.nickname}" />
+                            
+              </neq>
+              <tr>
+                <th width="80"> {:lan('OPERATOR_REALNAME', 'Admin')} </th>
+                <td><input type="text" name="realname" value="{$data.realname}" ></td>
+              </tr>
+              <tr>
+                <th width="80"> {:lan('OPERATOR_CONTACTNO', 'Admin')} </th>
+                <td><input type="text" name="userno" value="{$data.userno}" ></td>
+              </tr>                                          
+            </tbody>
+          </table>
+        </div>
+        <div class="bk10"></div>
+        <div class="btn">
+          <input type="submit" class="button" name="dosubmit" value="{:lan('SAVE', 'Admin')}" style="width:100px;height:40px;" id="submit_form">
+        </div>
+        <div class="g-ft">
+        </div>
+      </div>
+    </div>
+  </form>
+</block>
+<block name="js"> 
+<script src="__PUBLIC__/Tools/Js/jquery/jquery-1.8.3.min.js"></script>
+<script>
+    function getnick(roomno){
+        if (roomno != '') {
+            $.ajax({
+                type: "post",
+                url: "/Admin/Operator/getnick/",
+                dataType: "json",
+                data: {roomno:roomno},
+                success: function (result) {
+                    if (result.status == 1) {
+                        $("input[name='nickname']").val(result.nickname);     
+                    }else{
+                        $("input[name='nickname']").val('');    
+                    }
+                },
+                error: function (e) {
+    
+                }
+            });          
+        }else{
+            $("input[name='nickname']").val('');    
+        }
+    }
+
+    $('input[name="userno"]').keydown(function(e) {   {/*不能输入空格   不能输入非数字*/}
+      var shuziOnly150930 = ((e.keyCode<48 || e.keyCode>56) && (e.keyCode<96 || e.keyCode>105)) && e.keyCode!=8 && e.keyCode!=46 && e.keyCode!=37 && e.keyCode!=38 && e.keyCode!=39 && e.keyCode!=40;
+      {/*数字  主键盘   小键盘   回格键   删除键   方向键*/}
+      if(e.keyCode==32) return false;
+      if( shuziOnly150930 ) return false;
+    });    
+</script>
+</block>

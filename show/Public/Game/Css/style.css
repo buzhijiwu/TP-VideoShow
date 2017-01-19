@@ -1,0 +1,294 @@
+/*定义公用样式*/
+.txt-over {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.game-wrap {
+  background-color: rgba(21, 20, 27, 0.9);
+  height: 340px;
+}
+.game-wrap .section1 {
+  width: 100%;
+  padding: 0 3.5%;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  font-size: 14px;
+  position: relative;
+  color: #f4378c;
+}
+.game-wrap .section1 .close-game {
+  position: absolute;
+  display: block;
+  width: 20px;
+  height: 35px;
+  top: 0;
+  right: 3.5%;
+  text-align: center;
+  line-height: 35px;
+  font-size: 16px;
+  color: #f4378c;
+}
+.game-wrap .section1 .close-game:hover {
+  cursor: pointer;
+}
+.game-wrap .section1 .game-question {
+  position: absolute;
+  display: block;
+  width: 20px;
+  height: 35px;
+  top: 0;
+  left: 3.5%;
+  text-align: center;
+  line-height: 35px;
+  font-size: 22px;
+  color: #fff;
+}
+.game-wrap .section1 .game-question:hover {
+  cursor: pointer;
+  color: #f4378c;
+}
+.game-wrap .section2 {
+  position: relative;
+  padding: 0 3.5%;
+}
+.game-wrap .section2 .left {
+  display: table-cell;
+  vertical-align: middle;
+  padding-right: 10px;
+  height: 120px;
+}
+.game-wrap .section2 .left button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  background-color: #f4378c;
+  color: #fff;
+  font-size: 26px;
+}
+.game-wrap .section2 .left button:hover {
+  background-color: #d83476;
+}
+.game-wrap .section2 .left .bankerInfo {
+  text-align: center;
+}
+.game-wrap .section2 .left .bankerInfo .header-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+}
+.game-wrap .section2 .left .bankerInfo p {
+  color: #edb80f;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 50px;
+}
+.game-wrap .section2 .right {
+  display: table-cell;
+  width: 100%;
+  vertical-align: middle;
+  height: 120px;
+  position: relative;
+}
+.game-wrap .section2 .right .ball-wrap {
+  border: 1px solid #f4378c;
+}
+.game-wrap .section2 .right .ball-wrap tr td {
+  vertical-align: middle;
+  height: 40px;
+  text-align: center;
+  border-right: 1px solid #f4378c;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.game-wrap .section2 .right .ball-wrap tr td.ball4,
+.game-wrap .section2 .right .ball-wrap tr td.ball5,
+.game-wrap .section2 .right .ball-wrap tr td.ball6 {
+  border-right: none;
+}
+.game-wrap .section2 .right .ball-wrap tr td.ball5 {
+  border-left: 1px solid #f4378c;
+}
+.game-wrap .section2 .right .ball-wrap tr td.active {
+  background-color: #f4378c;
+}
+.game-wrap .section2 .right .ball-wrap tr td img {
+  width: 26px;
+  height: 26px;
+}
+.game-wrap .section2 .right .ball-wrap tr.tr1 td {
+  border-bottom: 1px solid #f4378c;
+}
+.game-wrap .section2 .right .ball-wrap tr.tr3 td {
+  border-top: 1px solid #f4378c;
+}
+.game-wrap .section2 .right .ball-wrap tr.tr2 td {
+  border-right: none;
+}
+.game-wrap .section2 .right .ball-wrap tr.tr2 td.ball13 {
+  border-right: 1px solid #f4378c;
+}
+.game-wrap .section2 .right .result {
+  position: absolute;
+  top: 50px;
+  left: 17%;
+  width: 68%;
+}
+.game-wrap .section2 .right .result span {
+  display: block;
+  float: left;
+  margin-top: 2px;
+  margin-right: 2px;
+  line-height: 16px;
+  color: #fff;
+  background-color: #f4378c;
+  padding: 1px 5px;
+  font-size: 12px;
+  border-radius: 2px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+}
+.game-wrap .section2 .right .result .new-result {
+  width: 75%;
+  float: left;
+  height: 20px;
+  overflow: hidden;
+}
+.game-wrap .section2 .right .result .new-result img {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  margin: 0 1px;
+}
+.game-wrap .section3 {
+  border-bottom: 1px solid #aaa;
+  padding: 15px 3.5%;
+}
+.game-wrap .section3 .list-wrap {
+  border: 2px solid #f4378c;
+}
+.game-wrap .section3 .list-wrap .list {
+  float: left;
+  width: 20%;
+  border-right: 1px solid #f4378c;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.game-wrap .section3 .list-wrap .list.active {
+  background-color: rgba(244, 54, 140, 0.2);
+}
+.game-wrap .section3 .list-wrap .list:hover {
+  cursor: pointer;
+}
+.game-wrap .section3 .list-wrap .list img {
+  margin-top: 5px;
+  width: 20px;
+  height: 20px;
+}
+.game-wrap .section3 .list-wrap .list .multiple {
+  font-size: 12px;
+  line-height: 16px;
+  color: #edb80f;
+}
+.game-wrap .section3 .list-wrap .list .count {
+  font-size: 14px;
+  line-height: 20px;
+  border-top: 1px solid #f4378c;
+  color: #fff;
+}
+.game-wrap .section3 .list-wrap .list:last-child {
+  border-right: none;
+}
+.game-wrap .section3 .num-wrap {
+  margin-top: 10px;
+}
+.game-wrap .section3 .num-wrap .num {
+  background-color: rgba(0, 0, 0, 0.3);
+  float: left;
+  width: 15%;
+  text-align: center;
+  margin: 0 5%;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  height: 24px;
+  line-height: 24px;
+  font-size: 16px;
+  color: #edb80f;
+  border: 2px solid #f4378c;
+}
+.game-wrap .section3 .num-wrap .num:hover {
+  cursor: pointer;
+  background-color: rgba(244, 54, 140, 0.2);
+}
+.game-wrap .section4 {
+  height: 50px;
+  line-height: 50px;
+  padding: 0 3.5%;
+}
+.game-wrap .section4 .left {
+  float: left;
+}
+.game-wrap .section4 .left span {
+  font-size: 16px;
+  color: #f4378c;
+}
+.game-wrap .section4 .left .exchange {
+  display: inline-block;
+  font-size: 16px;
+  color: #fff;
+}
+.game-wrap .section4 .left .exchange img {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  position: relative;
+  top: -2px;
+  margin-left: 5px;
+}
+.game-wrap .section4 .left .exchange .iconfont {
+  color: #f4378c;
+}
+.game-wrap .section4 .left .exchange:hover {
+  cursor: pointer;
+}
+.game-wrap .section4 .right {
+  float: right;
+  width: 70px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  margin-top: 10px;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  background-color: #f4378c;
+  color: #fff;
+  font-size: 16px;
+}
+.game-wrap .section4 .right:hover {
+  background-color: #d83476;
+  cursor: pointer;
+}
+.game-wrap .section4 .right.disabled {
+  background-color: #ccc;
+}
+.game-wrap .section4 .right.disabled:hover {
+  cursor: no-drop;
+}
+.game-wrap #loading {
+  text-align: center;
+}
+.game-wrap #loading .loadimg {
+  width: 150px;
+  margin-top: 100px;
+}
+.game-wrap #loading p {
+  font-size: 16px;
+  color: #fff;
+}

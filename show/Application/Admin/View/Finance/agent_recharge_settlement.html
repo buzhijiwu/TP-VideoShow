@@ -1,0 +1,144 @@
+<tagLib name="html" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>{:lan('ADMIN_MAN_TITLE', 'Admin')}</title>
+    <link href="__PUBLIC__/Public/statics/css/reset.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/Public/statics/css/system.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/Public/statics/css/table_form.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles1.css" title="styles1" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles2.css" title="styles2" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles3.css" title="styles3" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles4.css" title="styles4" media="screen" />
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/admin_common.js"></script>
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/styleswitch.js"></script>
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/formvalidator.js" charset="UTF-8"></script>
+    <script type="text/javascript">
+        window.focus();
+    </script>
+</head>
+<body>
+<div class="subnav">
+    <div class="content-menu ib-a blue line-x">
+        <a href='javascript:;' class="on"><em>{:lan('SETTLEMENT', 'Admin')}</em></a>    </div>
+</div>
+<style type="text/css">
+    html{_overflow-y:scroll}
+</style>
+<div id="searchid" style="display:none">
+    <form name="searchform" action="/Admin/Finance/agent_recharge_settlement" method="get" >
+        <table width="100%" cellspacing="0" class="search-form">
+            <tbody>
+            <tr>
+                <td>
+                    <div class="explain-col">
+                        {:lan('TRANSACTION_TIME', 'Admin')}：
+                        <link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/js/calendar/jscal2.css"/>
+                        <link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/js/calendar/border-radius.css"/>
+                        <link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/js/calendar/win2k.css"/>
+                        <script type="text/javascript" src="__PUBLIC__/Public/statics/js/calendar/calendar.js"></script>
+                        <script type="text/javascript" src="__PUBLIC__/Public/statics/js/calendar/lang/en.js"></script>
+                        <input type="text" name="start_time" id="start_time" value="{$_GET['start_time']}" size="10" class="date" readonly>&nbsp;<script type="text/javascript">
+                        Calendar.setup({
+                            weekNumbers: false,
+                            inputField : "start_time",
+                            trigger    : "start_time",
+                            dateFormat: "%Y-%m",
+                            showTime: false,
+                            minuteStep: 1,
+                            onSelect   : function() {this.hide();}
+                        });
+                    </script>
+
+                        {:lan('AGENT_NAME', 'Admin')}：
+                        <input name="agentname" type="text" class="input-text" value="{$_GET['agentname']}" />
+                        <input type="submit" name="search" class="button" value="{:lan('BTN_SEARCH', 'Admin')}" />
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+    <script>
+        $('#searchid').css('display','');
+    </script>
+</div>
+<div class="pad_10">
+    <div class="common-form">
+        <form name="myform" action="__URL__/do_agent_recharge_settlement/" method="post" id="myform">
+            <if condition="$settleInfo['havesettle']==0">
+                <table width="100%" class="table_form contentWrap">
+                    <tr>
+                        <td width="130" align="center">{:lan('AGENT_NAME', 'Admin')}</td>
+                        <td>
+                            <input type="hidden" name="agentid"  value="{$settleInfo['agentid']}">
+                            <input type="text" name="agentname"  value="{$settleInfo['agentname']}" readonly="readonly">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="130" align="center">{:lan('EARN_MONTH', 'Admin')}</td>
+                        <td><input type="text" name="earntime"  value="{$settleInfo['earntime']}" readonly="readonly"></td>
+                    </tr>
+                    <tr>
+                        <td width="130" align="center">{:lan('VIRTUAL_MONEY', 'Admin')}</td>
+                        <td><input type="text" name="virtualamount"  value="{$settleInfo['virtualamount']}" readonly="readonly">{:lan('VIRTUAL_UNIT_COIN', 'Admin')}</td>
+
+                    </tr>
+                    <tr>
+                        <td width="130" align="center">{:lan('SETTLEMENT_RATIO', 'Admin')}</td>
+                        <td><input type="text" name="ratio"  value="{$settleInfo['ratio']}" readonly="readonly">%</td>
+                    </tr>
+                    <tr>
+                        <td width="130" align="center">{:lan('CALCULATE_AMOUNT', 'Admin')}</td>
+                        <td><input type="text" name="calamount"  value="{$settleInfo['calamount']}" readonly="readonly">{:lan('LOCAL_CURRENCY_UNIT', 'Admin')}</td>
+                    </tr>
+                    <tr>
+                        <td width="130" align="center">{:lan('REAL_SETTLEMENT_AMOUNT', 'Admin')}</td>
+                        <td><input type="text" name="realamount"  class="input-text" id="realamount" onkeyup="this.value=this.value.replace(/[^\d]/g,'')" onpaste="return false"></input>{:lan('LOCAL_CURRENCY_UNIT', 'Admin')}</td>
+                    </tr>
+                </table>
+                <div class="bk15"></div>
+                <neq name="settleInfo.virtualamount" value="">
+                <input name="dosubmit" type="submit" value="{:lan('SUBMIT_BUTTION', 'Admin')}" class="button">
+                </neq>
+                <elseif condition="$settleInfo['havesettle']==1"/>
+                <table width="100%" class="table_form contentWrap">
+
+                    <div class="content-menu ib-a blue line-x">
+                        <a href='javascript:;' class="on"><em>{:lan('THIS_USER_HAVE_SETTLEMENT', 'Admin')}</em></a>    </div>
+                    <tr>
+                        <td width="130" align="center">{:lan('USERNAME', 'Admin')}</td>
+                        <td><input type="text" name="username"  value="{$settleInfo['agentname']}" readonly="readonly"></td>
+                    </tr>
+                    <tr>
+                        <td width="130" align="center">{:lan('EARN_MONTH', 'Admin')}</td>
+                        <td><input type="text" name="earntime"  value="{$settleInfo['earntime']}" readonly="readonly"></td>
+                    </tr>
+                    <tr>
+                        <td width="130" align="center">{:lan('VIRTUAL_MONEY', 'Admin')}</td>
+                        <td><input type="text" name="virtualamount"  value="{$settleInfo['virtualamount']}" readonly="readonly">{:lan('VIRTUAL_UNIT_COIN', 'Admin')}</td>
+
+                    </tr>
+                    <tr>
+                        <td width="130" align="center">{:lan('SETTLEMENT_RATIO', 'Admin')}</td>
+                        <td><input type="text" name="ratio"  value="{$settleInfo['ratio']}" readonly="readonly">%</td>
+                    </tr>
+                    <tr>
+                        <td width="130" align="center">{:lan('CALCULATE_AMOUNT', 'Admin')}</td>
+                        <td><input type="text" name="calamount"  value="{$settleInfo['calamount']}" readonly="readonly">{:lan('LOCAL_CURRENCY_UNIT', 'Admin')}</td>
+                    </tr>
+                    <tr>
+                        <td width="130" align="center">{:lan('REAL_SETTLEMENT_AMOUNT', 'Admin')}</td>
+                        <td><input type="text" name="realamount"  value="{$settleInfo['realamount']}" readonly="readonly">{:lan('LOCAL_CURRENCY_UNIT', 'Admin')}</td>
+                    </tr>
+                </table>
+            </if>
+        </form>
+    </div>
+</div>
+</body>
+</html>
+

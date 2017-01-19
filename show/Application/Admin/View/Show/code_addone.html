@@ -1,0 +1,58 @@
+<extend name="Public:list" />
+<block name="title"></block>
+<block name="css"></block>
+
+<block name="main">
+
+  <script>
+    $(function(){
+
+      $.formValidator.initConfig({formid:"myform",autotip:true,onerror:function(msg,obj){window.top.art.dialog({content:msg,lock:true,width:'200',height:'50'}, function(){this.close();$(obj).focus();})}});
+      $("#niceno").formValidator({
+                onshow:"{:lan('NICE_NUMBER', 'Admin')}",
+                onfocus:"{:lan('NICE_NUMBER', 'Admin')}",
+                oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"})
+              .inputValidator({min:1,onerror:"{:lan('NICE_NUMBER', 'Admin')}"})
+              .regexValidator({regexp:"num",datatype:"enum",onerror:"{:lan('PLZ_INPUT_NUMBER', 'Admin')}"});
+      $("#price").formValidator({
+                onshow:"{:lan('PRICE', 'Admin')}",
+                onfocus:"{:lan('PRICE', 'Admin')}",
+                oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"})
+              .inputValidator({min:1,onerror:"{:lan('PRICE', 'Admin')}"})
+              .regexValidator({regexp:"num",datatype:"enum",onerror:"{:lan('PLZ_INPUT_NUMBER', 'Admin')}"});
+    })
+  </script>
+<div class="subnav">
+  <div class="content-menu ib-a blue line-x"><a href="__URL__/code_manager/"><em>{:lan('ALL_NICENO_LIST', 'Admin')}</em></a><span>|</span><a href="javascript:;" class="on"><em><neq name="data.niceno" value="">{:lan('EDIT_NICENO', 'Admin')}<else />{:lan('ADD_NICENO', 'Admin')}</neq></em></a></div>
+</div>
+<style type="text/css">
+	html{_overflow-y:scroll}
+</style>
+<div class="pad_10">
+  <div class="common-form">
+    <form name="myform" action="" method="post" id="myform">
+    	<input name="nicenoid" value="{$data['nicenoid']}" type="hidden">
+      <table class="table_form contentWrap" width="100%">
+        <tbody>
+          <tr>
+            <td width="80">{:lan('NICE_NUMBER', 'Admin')}</td>
+            <td><input name="niceno" id="niceno" <neq name="data.niceno" value="">readonly="readonly"</neq> id="niceno" class="input-text" type="text" value="{$data['niceno']}" maxlength="8" minlength="5"></td>
+          </tr>
+          <tr>
+            <td>{:lan('PRICE', 'Admin')}</td>
+            <td><input name="price" id="price" class="input-text" type="text" value="{$data['price']}"></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="bk15"></div>
+      <input name="dosubmit" value="{:lan('SUBMIT_BUTTION', 'Admin')}" class="button" type="submit">
+    </form>
+  </div>
+</div>
+</block>
+
+<block name="js">
+<script type="text/javascript">
+
+</script>
+</block>

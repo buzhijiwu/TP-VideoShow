@@ -1,0 +1,108 @@
+<extend name="Public:list" />
+<block name="title"></block>
+<block name="css"></block>
+
+<block name="main">
+  <div id="searchid">
+    <form name="searchform" action="/Admin/Operator/operator_list" method="get" >
+      <table width="100%" cellspacing="0" class="search-form">
+        <tbody>
+          <tr>
+            <td><div class="explain-col">
+                {:lan('OPERATOR_NAME', 'Admin')}：
+                <input type="text" name="name" class="input-text" value="{$name}" />
+                {:lan('OPERATOR_ROOMID', 'Admin')}/{:lan('NICKNAME', 'Admin')}：
+                <input name="keyword" type="text" class="input-text" value="{$keyword}" />
+                <input type="submit" name="search" class="button" value="{:lan('SEARCH', 'Admin')}" />
+              </div></td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+  <style>
+  #myform th, #myform td { text-align: center;}
+  </style>
+  <form name="myform" id="myform" action="" method="post" >
+    <div class="table-list">
+      <table width="100%">
+        <thead>
+          <tr>
+            <th width="40">{:lan('SYS_NUMBER', 'Admin')}</th>
+            <th>{:lan('OPERATOR_NAME', 'Admin')}</th>            
+            <th>{:lan('OPERATOR_NICKNAME', 'Admin')}</th>
+            <th>{:lan('OPERATOR_ROOMID', 'Admin')}</th>
+            <th>{:lan('OPERATOR_CONTACTNO', 'Admin')}</th>
+            <th>{:lan('ITS_FAMILY', 'Admin')}</th>
+            <th>{:lan('ITS_FREE_EMCEE', 'Admin')}</th>
+            <th>{:lan('OPERATION', 'Admin')}</th>                        
+          </tr>
+        </thead>
+        <tbody>
+          <volist name="data" id="v" key="k">
+          <tr>
+            <td>{$k}</td>
+            <td>{$v.realname}</td>            
+            <td>{$v.nickname}</td>
+            <td>{$v.roomno}</td>            
+            <td>{$v.userno}</td>
+            <td>{$v.familycount}</td>   
+            <td>{$v.emceecount}</td>                     
+            <td>
+              <a href="{:U('Admin/Operator/operator_familylist/userid/'.$v['userid'])}">{:lan('VIEW_ITS_FAMILY', 'Admin')}</a> | 
+              <a href="{:U('Admin/Operator/operator_emceelist/userid/'.$v['userid'])}">{:lan('VIEW_ITS_EMCEE', 'Admin')}</a> | 
+              <a href="{:U('Admin/Operator/operator_add/userid/'.$v['userid'])}">{:lan('MODIFY', 'Admin')}</a> | 
+              <a href="javascript:;" onclick="operator_del({$v.userid});">{:lan('BTN_DELETE', 'Admin')}</a>
+            </td>            
+          </tr>
+          </volist>
+        </tbody>
+      </table>
+      <div id="pages">{$page}</div>
+    </div>
+  </form>
+</block>
+
+<block name="js">
+<script type="text/javascript">
+function operator_del(operatorid){
+  $.ajax({
+      type: "post",
+      url: "/Admin/Operator/operator_del/",
+      dataType: "json",
+      data: {operatorid:operatorid},
+      success: function (result) {
+          if (result.status == 1) {
+              if (confirm(result.msg)) {
+                  $.ajax({
+                      type: "post",
+                      url: "/Admin/Operator/operator_del/",
+                      dataType: "json",
+                      data: {
+                          operatorid:operatorid,
+                          isdelete:1
+                      },
+                      success: function (res) {
+                          if (res.status == 1) {
+                              alert(res.msg);
+                              window.location.href = window.location.href;
+                          }else{
+                              alert(res.msg);
+                          }
+                      },
+                      error: function (e) {
+                  
+                      }                       
+                  });                     
+              }
+          }else{
+              alert(result.msg);
+          }
+      },
+      error: function (e) {
+  
+      }
+  });    
+}
+</script>
+</block>

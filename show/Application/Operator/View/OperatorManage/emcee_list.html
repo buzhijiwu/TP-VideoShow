@@ -1,0 +1,127 @@
+<tagLib name="html" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=7" />
+<title></title>
+<link href="__PUBLIC__/Public/statics/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Public/statics/css/system.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Public/statics/css/table_form.css" rel="stylesheet" type="text/css" />
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Tools/Js/jquery/jquery-1.8.3.min.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/admin_common.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/styleswitch.js"></script>
+
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/js/calendar/jscal2.css"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/js/calendar/border-radius.css"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/js/calendar/win2k.css"/>
+<script type="text/javascript" src="__PUBLIC__/Public/statics/js/calendar/calendar.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Public/statics/js/calendar/lang/en.js"></script>
+
+<script type="text/javascript">
+  window.focus();
+</script>
+</head>
+<body>
+<style type="text/css">
+  html{_overflow-y:scroll}
+</style><div id="main_frameid" class="pad-10 display" style="_margin-right:-12px;_width:98.9%;">
+<script type="text/javascript">
+$(function(){if ($.browser.msie && parseInt($.browser.version) < 7) $('#browserVersionAlert').show();}); 
+</script>
+<div class="explain-col mb10" style="display:none" id="browserVersionAlert">{$userieeight}</div>
+
+  <div id="searchid">
+    <form name="searchform" action="/Operator/OperatorManage/emcee_list" method="get" >
+      <table width="100%" cellspacing="0" class="search-form">
+        <tbody>
+          <tr>
+            <td><div class="explain-col">
+                {:lan('USERNAME', 'Operator')}/{:lan('NICKNAME', 'Operator')}/{:lan('ROOMNO', 'Operator')}：
+                <input type="text" name="keyword" class="input-text" value="{$keyword}" />
+                {:lan('LIVE_TIME_RECENTLY', 'Operator')}：
+                <input type="text" name="start_time" id="start_time" value="{$Think.get.start_time}" size="10" class="date" readonly>
+                &nbsp;<script type="text/javascript">     Calendar.setup({
+                weekNumbers: false,
+                  inputField : "start_time",
+                  trigger    : "start_time",
+                  dateFormat: "%Y-%m-%d",
+                  showTime: false,
+                  minuteStep: 1,
+                  onSelect   : function() {this.hide();}
+                });
+                </script>- &nbsp;
+                <input type="text" name="end_time" id="end_time" value="{$Think.get.end_time}" size="10" class="date" readonly>
+                &nbsp;<script type="text/javascript">     Calendar.setup({
+                weekNumbers: false,
+                  inputField : "end_time",
+                  trigger    : "end_time",
+                  dateFormat: "%Y-%m-%d",
+                  showTime: false,
+                  minuteStep: 1,
+                  onSelect   : function() {this.hide();}
+                });
+                </script>    
+                {:lan('BELONG_TO', 'Operator')}：
+                <select name="family_belong">
+                  <option value="">{:lan('UNLIMITED', 'Operator')}</option>
+                  <volist name="familylist" id="v">
+                  <option value="{$v.familyid}" <eq name="v.familyid" value="$Think.get.family_belong">selected="selected"</eq>>{$v.familyname}</option>
+                  </volist>
+                </select>                            
+                <input type="hidden" name="userid" class="input-text" value="{$userid}" />                
+                <input type="submit" name="search" class="button" value="{:lan('SEARCH', 'Operator')}" />
+              </div></td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+  <style>
+  #myform th, #myform td { text-align: center;}
+  </style>
+  <form name="myform" id="myform" action="" method="post" >
+    <div class="table-list">
+      <table width="100%">
+        <thead>
+          <tr>
+            <th width="40">{:lan('SYS_NUMBER', 'Operator')}</th>
+            <th>{:lan('USERNAME', 'Operator')}</th>            
+            <th>{:lan('NICKNAME', 'Operator')}</th>
+            <th>{:lan('ROOMNO', 'Operator')}</th>
+            <th>{:lan('EMCEE_HEADPIC', 'Operator')}</th>
+            <th>{:lan('EM_GRADE', 'Operator')}</th>
+            <th>{:lan('NO_SETTLEMENT_MONEY', 'Operator')}</th>
+            <th>{:lan('LIVE_TIME_RECENTLY', 'Operator')}</th> 
+            <th>{:lan('EMCEE_FAMILY', 'Operator')}</th>             
+            <th>{:lan('LIVING_STATUS', 'Operator')}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <volist name="data" id="v" key="k">
+          <tr>
+            <td>{$k}</td>
+            <td>{$v.username}</td>            
+            <td>{$v.nickname}</td>
+            <td>{$v.roomno}</td>            
+            <td><img width="100" src="{$Think.config.IMAGE_BASE_URL}{$v.smallheadpic}"></td>
+            <td>{$v.emceelevel}</td>   
+            <td>{$v.nosettlementmoney}</td>  
+            <td>{$v.starttime}</td>  
+            <td>{$v.familyname}</td>            
+            <td>
+            <eq name="v.isliving" value="1">
+            {:lan('LIVE_IN', 'Operator')}
+            <else />
+            {:lan('NO_LIVE', 'Operator')}
+            </eq>
+            </td>            
+          </tr>
+          </volist>
+        </tbody>
+      </table>
+      <div id="pages">{$page}</div>
+    </div>
+  </form>
+</body></html>
+<script type="text/javascript">$("#main_frameid").removeClass("display");</script>

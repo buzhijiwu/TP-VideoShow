@@ -1,0 +1,100 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "<h2>返回值说明</h2>接口调用成功：{'code':200,'data':返回的数据};<br/>接口调用失败：{'code':状态码,'msg':错误信息};"
+    },
+    "tags": [
+        {"name": "HotEmcees","description": "首页热门主播"}
+    ],
+    "paths": {
+        "/Home/Index/loadMoreHotEmcees": {
+            "post": {
+                "tags": ["HotEmcees"],
+                "operationId": "getHotEmcees",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "获取热门主播",
+                "description": "在线主播在前，按累计观看人数的倒序排序(注：不显示被删除主播、测试主播、本人、无头像主播、被禁播主播)",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "pageno",
+                        "description": "页码",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "pagesize",
+                        "description": "每页长度",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "请求成功",
+                        "schema": {
+                            "properties": {
+                                "data": {
+                                    "description": "主播列表数据",
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "userid": {
+                                                    "description": "用户id",
+                                                    "type": "integer"
+                                                },
+                                                "emceelevel": {
+                                                    "description": "主播等级",
+                                                    "type": "integer"
+                                                },  
+                                                "livetype": {
+                                                    "description": "直播类型[0:安卓 1:ios 2:pc]",
+                                                    "type": "integer"
+                                                }, 
+                                                "isliving": {
+                                                    "description": "是否在直播[0:否 1:是]",
+                                                    "type": "integer"
+                                                },                                                                                                                                             
+                                                "nickname": {
+                                                    "description": "用户昵称",
+                                                    "type": "string"
+                                                },
+                                                "bigheadpic": {
+                                                    "description": "主播封面头像",
+                                                    "type": "string"
+                                                },
+                                                "roomno": {
+                                                    "description": "用户房间号",
+                                                    "type": "string"
+                                                },
+                                                "niceno": {
+                                                    "description": "用户靓号",
+                                                    "type": "string"
+                                                },                                                
+                                                "totalaudicount": {
+                                                    "description": "总观看人数",
+                                                    "type": "integer"
+                                                },
+                                                "fanscount": {
+                                                    "description": "主播的用户关注数",
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "is_end": {
+                                    "description": "是否结束加载[0:继续加载 1:结束加载]",
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

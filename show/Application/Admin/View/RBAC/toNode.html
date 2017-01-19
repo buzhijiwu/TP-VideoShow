@@ -1,0 +1,203 @@
+<tagLib name="html" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=7" />
+<title>{:C('TITLE_CONTENT')}</title>
+<link href="__PUBLIC__/Public/statics/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Public/statics/css/system.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Public/statics/css/table_form.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles1.css" title="styles1" media="screen" />
+<link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles2.css" title="styles2" media="screen" />
+<link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles3.css" title="styles3" media="screen" />
+<link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles4.css" title="styles4" media="screen" />
+<js file="__PUBLIC__/Admin/Js/Public/jquery.js" />
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/admin_common.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/styleswitch.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/formvalidator.js" charset="UTF-8"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/formvalidatorregex.js" charset="UTF-8"></script>
+<script type="text/javascript">
+	window.focus();
+</script>
+</head>
+<body>
+<style type="text/css">
+	html{_overflow-y:scroll}
+</style>
+
+<div class="pad_10">
+<div class="common-form">
+<form name="myform" action="__SELF__" method="post" id="myform">
+<input type="hidden" name="id" value="{$_GET['adminid']}"></input>
+
+<table width="100%" class="table_form contentWrap">
+<tr>
+<td width="80">正在为角色</td> 
+<td style="color:red;">{$roleinfo['remark']} <font color="black">分配权限</font></td>
+</tr>
+</table>
+
+<div class="div_1">
+	<foreach name="nodeList" item="v">
+	<div class="node0">
+		<div class="div_1_a"><font><span style="border:0px solid red;display:inline-block;width:8px;height:10px;background:url(__PUBLIC__/Admin/image/ico03.gif) no-repeat;"></span> {$v['menuname']} </font> &nbsp; <label style="font-size:14px;"><input <if condition="in_array($v['id'],$roleNodeList)">checked</if> class="node0_ck" type="checkbox" name="nodeid[]" value="{$v['id']}" />&nbsp;&nbsp;&nbsp;&nbsp;</label></div>
+		<foreach name="v.son" item="v0">
+		<div class="node1">
+			<div class="div_1_b" style="margin-left:20px;margin-top:5px;"><font color="green">&nbsp;<span style="border:0px solid red;display:inline-block;width:8px;height:10px;background:url(__PUBLIC__/Admin/image/ico03.gif) no-repeat;"></span> {$v0['menuname']} </font> &nbsp; <label style="font-size:14px;color:green;"><input <if condition="in_array($v0['id'],$roleNodeList)">checked</if> class="node1_ck" name="nodeid[]" type="checkbox" value="{$v0['id']}" />&nbsp;&nbsp;&nbsp;&nbsp;</label>
+</div>
+			<foreach name="v0.son" item="v1">
+			<div class="node2">
+				<div class="div_1_c" style="margin-left:40px;margin-top:5px;"><font color="purple"> &nbsp;&nbsp; {$v1['menuname']} </font> &nbsp; <label style="font-size:14px;color:pink;"><input <if condition="in_array($v1['id'],$roleNodeList)">checked</if> class="node2_ck" name="nodeid[]" type="checkbox" value="{$v1['id']}" />&nbsp;&nbsp;&nbsp;&nbsp;</label>
+</div>
+			</div>
+			</foreach>
+		</div>
+		</foreach>
+	</div>
+	</foreach>
+</div>
+
+
+
+<style>
+div {border:0px solid red;}
+</style>
+
+<script>
+$('input.subit').click(function(){
+	if(!confirm('确认要提交吗？')) return false;
+	$('#form1').submit();
+});
+</script>
+
+<script>
+$('div.div_1').css({'margin-left':'100px',border:'0px dashed #CCC','min-width':'300px'});
+$('div.div_1_a').css({'margin-top':'20px'});
+$('div.div_1_a font , div.div_1_b font , div.div_1_c font').css({cursor:'pointer'});
+
+
+{/*前面的小箭头图表的收缩与展开*/}
+$(document).on('click','.div_1_a font',function() {
+	if(!$(this).parents('div.node0').find('div.node1').is(':hidden')) {
+		$(this).parents('div.node0').find('span').eq(0).css({'background':'url(__PUBLIC__/Admin/image/ico04.gif) no-repeat'});
+		$(this).parents('div.node0').find('div.node1').slideUp(100);
+	}
+	else {
+		$(this).parents('div.node0').find('span').eq(0).css({'background':'url(__PUBLIC__/Admin/image/ico03.gif) no-repeat'});
+		$(this).parents('div.node0').find('div.node1').slideDown(100);
+	}
+});
+$(document).on('click','.div_1_b font',function() {
+	if(!$(this).parents('div.node1').find('div.node2').is(':hidden')) {
+		$(this).parents('div.node1').find('span').eq(0).css({'background':'url(__PUBLIC__/Admin/image/ico04.gif) no-repeat'});
+		$(this).parents('div.node1').find('div.node2').slideUp(100);
+	}
+	else {
+		$(this).parents('div.node1').find('span').eq(0).css({'background':'url(__PUBLIC__/Admin/image/ico03.gif) no-repeat'});
+		$(this).parents('div.node1').find('div.node2').slideDown(100);
+	}
+});
+
+
+{/*选择右边的选框*/}
+$(document).on('click','input.node2_ck',function() {  {/*第三层*/}
+	var $thi = $(this);
+	var $parentObj = $thi.parents('div.node1').eq(0);
+	
+	if( $(this).get(0).checked ) {
+		$parentObj.find('input.node1_ck').eq(0).get(0).checked = true;
+		//$('input.node0_ck').get(0).checked = true;
+		$(this).parents('div.node0').eq(0).find('input.node0_ck').eq(0).get(0).checked = true;
+	} else {
+		var flag = false;
+		$.each($parentObj.find('input.node2_ck'),function(i,v) {
+			if($(this).get(0).checked) {
+				flag = true;
+				return false;
+			}
+		});
+		if(flag) {
+			$parentObj.find('input.node1_ck').eq(0).get(0).checked = true;
+			//$('input.node0_ck').get(0).checked = true;
+			$(this).parents('div.node0').eq(0).find('input.node0_ck').eq(0).get(0).checked = true;
+		}
+		else {
+			$parentObj.find('input.node1_ck').eq(0).get(0).checked = false;
+			var flag = false;
+			$.each($('input[type=checkbox]').not('.node0_ck'),function(i,v) {
+				if($(this).get(0).checked) {
+					flag = true;
+					return false;
+				}
+			});
+			if(flag) {
+				//$('input.node0_ck').get(0).checked = true;
+				$(this).parents('div.node0').eq(0).find('input.node0_ck').eq(0).get(0).checked = true;
+			}
+			else {
+				//$('input.node0_ck').get(0).checked = false;
+				$(this).parents('div.node0').eq(0).find('input.node0_ck').eq(0).get(0).checked = false;
+			}
+		}
+	}
+});
+
+
+$(document).on('click','input.node1_ck',function() {  {/*第二层*/}
+	var $thi = $(this);
+	var $parentObj = $thi.parents('div.node1').eq(0);
+	if( $(this).get(0).checked ) {
+		$.each($parentObj.find('input.node2_ck'),function(i,v) {
+			$(this).get(0).checked = true;
+		});
+		//$('input.node0_ck').get(0).checked = true;
+		$(this).parents('div.node0').eq(0).find('input.node0_ck').eq(0).get(0).checked = true;
+	} else {
+		$.each($parentObj.find('input.node2_ck'),function(i,v) {
+			$(this).get(0).checked = false;
+		});
+		var flag = false;
+		$.each($('input[type=checkbox]').not('.node0_ck'),function(i,v) {
+			if($(this).get(0).checked) {
+				flag = true;
+				return false;
+			}
+		});
+		if(flag) {
+//			$('input.node0_ck').get(0).checked = true;
+			$(this).parents('div.node0').eq(0).find('input.node0_ck').eq(0).get(0).checked = true;
+		}
+		else {
+//			$('input.node0_ck').get(0).checked = false;
+			$(this).parents('div.node0').eq(0).find('input.node0_ck').eq(0).get(0).checked = false;
+		}
+	}
+});
+
+$(document).on('click','input.node0_ck',function() {  {/*第一层*/}
+	if( $(this).get(0).checked ) {
+		/*$.each($('div.div_1 input[type=checkbox]'),function(i,v) {
+			$(this).get(0).checked = true;
+		});*/
+		$(this).parents('div.node0').eq(0).find('input[type=checkbox]').each(function() {
+			$(this).get(0).checked = true;
+		});
+	} else {
+		/*$.each($('div.div_1 input[type=checkbox]'),function(i,v) {
+			$(this).get(0).checked = false;
+		});*/
+		$(this).parents('div.node0').eq(0).find('input[type=checkbox]').each(function() {
+			$(this).get(0).checked = false;
+		});
+	}
+});
+</script>
+
+    <div class="bk15"></div>
+    <input name="dosubmit" type="submit" value="提交" class="dialog" id="dosubmit">
+</form>
+</div>
+</div>
+</body>
+</html>

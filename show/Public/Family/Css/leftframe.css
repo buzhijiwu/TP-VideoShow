@@ -1,0 +1,21 @@
+@CHARSET "UTF-8";
+
+/*主体样式*/
+.left_menu{margin-right:12px;_margin-right:10px;padding:12px;_padding:12px 0 12px 12px;width:110px; position:relative; display:block;}
+.left_menu_on{ width:0; padding:0;}
+.left_menu_on div{ visibility:hidden;_display:none}
+.left_menu h3{font-weight: 700;color: #275d96;border-bottom:1px solid #d9e4ea; line-height:24px; height:24px; margin-bottom:4px;_width:112px;_margin-right:12px}
+
+.left_menu ul li{width:122px;color:#666; display:block;_margin-right:2px}
+.left_menu ul li a{line-height:24px;padding-left:8px;display:block;text-decoration: none;background-color:#f7fbfc;_width:100px;}
+.left_menu ul li a:hover,
+	.left_menu ul li.on,.left_menu h3 span{background: url(../images/admin_img/left_menu.png) no-repeat;text-decoration: none}
+	.left_menu ul li.on{width:104px; height:29px; padding-left:20px; margin:0}
+	.left_menu ul li.on a{ height:29px; line-height:29px; background:none; padding:0; display:block}
+	.left_menu ul li.on a:hover{background:none}
+.left_menu ul li a:hover{background-position: left -38px}
+.left_menu a.open,.left_menu a.close{background: url(../images/admin_img/left_menu_openClose.png) no-repeat 3px center;width:10px; display:block; position:absolute; z-index:100; height:auto; right:-11px; top:0}
+.left_menu a.open:hover,.left_menu a.close:hover{ background-color:#d6e1e4}
+.left_menu a.close{background-position:right center}
+.left_menu h3 span{background-position: left -78px; display:block; float:right; height:14px; width:14px; margin-top:5px}
+.left_menu h3 span.on{background-position: -33px -78px;}

@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+    <!--公用meta-->
+    <include file="Public:meta" />
+
+    <title>{:lan('WAASHOW_RECHARGE_PROTOCOL', 'Home')}</title>
+
+<style>
+
+</style>
+
+
+
+</head>
+<body>
+<!--公用头部-->
+<include file="Public:header" />
+
+<div class="common-wrap">
+    <div class="width">
+        <div class="register-agreement">
+            <if condition="$lantype=='zh'">
+                <include file="Agreement:rechargeAgreement_zh" />
+            <elseif condition="$lantype=='en'"/>
+                <include file="Agreement:rechargeAgreement_en" />
+            <else />
+                <include file="Agreement:rechargeAgreement_vi" />
+            </if>            
+        </div>
+    </div>
+
+</div>
+
+
+
+
+<!--共用底部-->
+<include file="Public:bottom" />
+
+<!-- 共用登录-->
+<include file="Public:login" />
+
+<!--共用弹框-->
+<include file="Public:alert" />
+
+<!--共用js-->
+<include file="Public:javascript" />
+
+</body>
+</html>

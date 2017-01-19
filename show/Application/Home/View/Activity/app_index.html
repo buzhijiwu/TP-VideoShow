@@ -1,0 +1,517 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, mininum-scale=1, maximum-scale=1, user-scaleable=no,  target-densitydpi = high-dpi">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="shortcut icon" href="/Public/Public/Images/favicon.ico"/>
+    <link href="__PUBLIC__/Home/Css/{:getLanguage()}/app/reset.css?time=201600509.css" rel="stylesheet" type="text/css" />
+    <link  href="__PUBLIC__/Home/Css/{:getLanguage()}/app/common.css?time=201600509.css" rel="stylesheet" type="text/css">
+    <link  href="__PUBLIC__/Home/Css/{:getLanguage()}/app/active.css?time=201600509.css" rel="stylesheet" type="text/css">
+    <!--<link  href="__PUBLIC__/Home/Css/{:getLanguage()}/app/active.less?time=201600509.less" rel="stylesheet" type="text/less">-->
+    <!--<script src="__PUBLIC__/Home/Css/{:getLanguage()}/less-1.6.3.min.js"></script>-->
+
+    <title>{:lan('MAY_ACTIVE_2016', 'Home')}</title>
+
+</head>
+<body class="may-active">
+
+<!--main-->
+<div class="common-wrap">
+    <div class="width">
+        <div class="mayActive-main-app">
+
+            <!--标题-->
+            <img class="active-title" src="/Public/Public/Images/mayActive/app-title-{:getLanguage()}.jpg"/>
+
+            <!--切换按钮-->
+            <div class="tab-btn clear">
+                <p class="active">{:lan("MAY_ACTIVITY_RULE", "Home")}</p>
+                <p>{:lan("MAY_ACTIVITY_REWARD", "Home")}</p>
+                <p>{:lan("MAY_ACTIVITY_TOP_LIST", "Home")}</p>
+            </div>
+
+            <!--规则-->
+            <div class="active-top-list">
+                <div class="list-title">
+                    <i class="active-icon icon-gui"></i>
+                    <span>{:lan("MAY_ACTIVITY_RULE", "Home")}</span>
+                </div>
+
+                <ul class="txt-list">
+                    <li class="clear">
+                        <div class="left">
+                            <span>1</span>
+                        </div>
+                        <p class="right">{:lan("MAY_RULE_TXT1", "Home")}</p>
+                    </li>
+                    <li class="clear">
+                        <div class="left">
+                            <span>2</span>
+                        </div>
+                        <p class="right">{:lan("MAY_RULE_TXT2", "Home")}<img src="/Public/Public/Images/mayActive/bee.png" width="30" height="30"></p>
+                    </li>
+                    <li class="clear info">
+                        <p>
+                            <i class="active-icon icon-star"></i>
+                            <span>{:lan("MAY_RULE_TXT3", "Home")}</span>
+                        </p>
+                    </li>
+                    <li class="clear">
+                        <div class="left">
+                            <span>3</span>
+                        </div>
+                        <p class="right">{:lan("MAY_RULE_TXT4", "Home")}</p>
+                    </li>
+                    <li class="clear">
+                        <div class="left">
+                            <span>4</span>
+                        </div>
+                        <p class="right">{:lan("MAY_RULE_TXT5", "Home")}</p>
+                    </li>
+                    <li class="clear info">
+                        <p>
+                            <i class="active-icon icon-star"></i>
+                            <span>
+                                Chú thích:chia sẽ phải chia sẽ công khai, chia sẽ cá nhân không được tính
+                            </span>
+                        </p>
+                    </li>
+                </ul>
+            </div>
+
+            <!--奖励-->
+            <div class="active-top-list dis-none">
+                <div class="list-title">
+                    <i class="active-icon icon-gift"></i>
+                    <span>{:lan("MAY_ACTIVITY_REWARD", "Home")}</span>
+                </div>
+
+                <ul class="txt-list">
+                    <li class="clear info">
+                        <p>
+                            <i class="active-icon icon-star"></i>
+                            <span>{:lan("MAY_EM_REWARD", "Home")}</span>
+                        </p>
+                    </li>
+                    <li class="clear">
+                        <p>
+                            <span>{:lan("MAY_REWARD_TXT1", "Home")}{:lan("MAY_REWARD_TXT2", "Home")}</span>
+                        </p>
+                    </li>
+                    <li class="clear">
+                        <p>
+                            <span>{:lan("MAY_REWARD_TXT3", "Home")}{:lan("MAY_REWARD_TXT4", "Home")}</span>
+                        </p>
+                    </li>
+                    <li class="clear">
+                        <p>
+                            <span>{:lan("MAY_REWARD_TXT5", "Home")}{:lan("MAY_REWARD_TXT6", "Home")}</span>
+                        </p>
+                    </li>
+                    <li class="clear">
+                        <p>
+                            <span>{:lan("MAY_REWARD_TXT7", "Home")}{:lan("MAY_REWARD_TXT8", "Home")}</span>
+                        </p>
+                    </li>
+
+
+
+                    <li class="clear info marginTop">
+                        <p>
+                            <i class="active-icon icon-star"></i>
+                            <span>{:lan("MAY_US_REWARD", "Home")}</span>
+                        </p>
+                    </li>
+                    <li class="clear">
+                        <p>
+                            <span>{:lan("MAY_REWARD_TXT9", "Home")}</span>
+                        </p>
+                    </li>
+                </ul>
+
+            </div>
+
+
+            <!--榜单-->
+            <div class="active-top-list dis-none">
+
+                <!--主播榜-->
+                <div class="em-active-list">
+
+                    <div class="list-title">
+                        <i class="active-icon icon-em"></i>
+                        <span>{:lan("MAY_EM_TOP_LIST", "Home")}</span>
+                    </div>
+
+                    <!--主播榜切换按钮-->
+                    <div class="em-tab-btn clear">
+                        <p class="active">{:lan("MAY_COUNT_TOP_LIST", "Home")}</p>
+                        <p>{:lan("MAY_IN_WA_TOP_LIST", "Home")}</p>
+                        <p>{:lan("MAY_SHARE_TOP_LIST", "Home")}</p>
+                        <p>{:lan("MAY_GIFT_TOP_LIST", "Home")}</p>
+                    </div>
+
+                    <!--总分榜-->
+                    <div class="em-tab-list">
+                        <table class="list-main">
+                            <thead>
+                            <tr>
+                                <th class="td1">{:lan("MAY_TOP_LIST", "Home")}</th>
+                                <th class="td2">{:lan("MAY_NICKNAME", "Home")}</th>
+                                <th class="td3">{:lan("MAY_POINTS", "Home")}</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <volist name="topEmcTotal" id="vo" key="k">
+                                <tr>
+                                    <td class="td1">
+                                        <div class="header-img-wrap">
+                                            <img src="{$vo.smallheadpic}" class="header-img">
+                                            <span class="rank <in name="k" value="1,2,3">high-top</in>">{$k}</span>
+                                        </div>
+                                    </td>
+                                    <td class="td2">
+                                        <span class="name">
+                                            {$vo.nickname}
+                                        </span>
+                                    </td>
+                                    <td class="td3">
+                                        <p class="point">{$vo.total}</p>
+                                    </td>
+                                </tr>
+                            </volist>
+                            </tbody>
+                        </table>
+                        <div class="click-load-more">
+                            <i class="active-icon icon-click"></i>
+                            <span>{:lan("MAY_LOOK_MORE", "Home")}</span>
+                        </div>
+                    </div>
+
+                    <!--收入榜-->
+                    <div class="em-tab-list dis-none">
+                        <table class="list-main">
+                            <thead>
+                            <tr>
+                                <th class="td1">{:lan("MAY_TOP_LIST", "Home")}</th>
+                                <th class="td2">{:lan("MAY_NICKNAME", "Home")}</th>
+                                <th class="td3">{:lan("MAY_RECEIVE_MONEY", "Home")}</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                        <div class="click-load-more">
+                            <i class="active-icon icon-click"></i>
+                            <span>{:lan("MAY_LOOK_MORE", "Home")}</span>
+                        </div>
+                    </div>
+
+                    <!--分享榜-->
+                    <div class="em-tab-list dis-none">
+                        <table class="list-main">
+                            <thead>
+                            <tr>
+                                <th class="td1">{:lan("MAY_TOP_LIST", "Home")}</th>
+                                <th class="td2">{:lan("MAY_NICKNAME", "Home")}</th>
+                                <th class="td3">{:lan("MAY_SHARE_NUM", "Home")}</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                        <div class="click-load-more">
+                            <i class="active-icon icon-click"></i>
+                            <span>{:lan("MAY_LOOK_MORE", "Home")}</span>
+                        </div>
+                    </div>
+
+                    <!--礼物榜-->
+                    <div class="em-tab-list dis-none">
+                        <table class="list-main">
+                            <thead>
+                            <tr>
+                                <th class="td1">{:lan("MAY_TOP_LIST", "Home")}</th>
+                                <th class="td2">{:lan("MAY_NICKNAME", "Home")}</th>
+                                <th class="td3">{:lan("MAY_RECEIVE_GIFT_NUM", "Home")}</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                        <div class="click-load-more">
+                            <i class="active-icon icon-click"></i>
+                            <span>{:lan("MAY_LOOK_MORE", "Home")}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!--用户榜-->
+                <div class="em-active-list marginTop">
+                    <div class="list-title">
+                        <i class="active-icon icon-us"></i>
+                        <span>{:lan("MAY_US_TOP_LIST", "Home")}</span>
+                    </div>
+
+                    <div class="em-tab-list">
+                        <table class="list-main">
+                            <thead>
+                            <tr>
+                                <th class="td1">{:lan("MAY_TOP_LIST", "Home")}</th>
+                                <th class="td2">{:lan("MAY_NICKNAME", "Home")}</th>
+                                <th class="td3">{:lan("MAY_SENT_GIFT_NUM", "Home")}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <volist name="topUserSentGift" id="vo" key="k">
+                                <tr>
+                                    <td class="td1">
+                                        <div class="header-img-wrap">
+                                            <img src="{$vo.smallheadpic}" class="header-img">
+                                            <span class="rank <in name="k" value="1,2,3">high-top</in>">{$k}</span>
+                                        </div>
+                                    </td>
+
+                                    <td class="td2">
+                                        <span class="name">
+                                            {$vo.nickname}
+                                        </span>
+                                    </td>
+                                    <td class="td3">
+                                        <p class="point">{$vo.giftcount}</p>
+                                    </td>
+                                </tr>
+                            </volist>
+                            </tbody>
+                        </table>
+                        <div class="click-load-more">
+                            <i class="active-icon icon-click"></i>
+                            <span>{:lan("MAY_LOOK_MORE", "Home")}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--共用js-->
+<include file="Public:javascript" />
+<script type="text/javascript">
+    $(function () {
+
+
+
+
+
+        var url = [
+            "{:U('Home/Activity/getTopEmcTotalList')}",//主播总榜
+            "{:U('Home/Activity/LoadTopEmcEarnList')}",//主播收入哇秀榜
+            "{:U('Home/Activity/LoadTopEmcShareList')}",//主播分享次数榜
+            "{:U('Home/Activity/LoadTopActivityGiftList')}"//主播劳动礼物榜
+        ];
+
+        var type = [
+            "total",
+            "earnamount",
+            "sharecount",
+            "giftcount"
+        ];
+        var data ={};
+
+
+        $(".tab-btn").on("click","p", function () {
+            $(this).addClass("active").siblings("p").removeClass("active");
+            $(".active-top-list").eq($(this).index()).removeClass("dis-none")
+                    .siblings(".active-top-list").addClass("dis-none")
+        });
+
+
+        $(".em-tab-btn").on("click","p", function () {
+            $(this).addClass("active").siblings("p").removeClass("active");
+            var n = $(this).index();
+            $(".click-load-more").eq(n).removeClass("dis-none");
+            $(".em-tab-list").eq(n).removeClass("dis-none")
+                    .siblings(".em-tab-list").addClass("dis-none");
+            loadTopHtml(n);
+        });
+
+        $(".click-load-more").each(function(index){
+            if($(".list-main").eq(index).find("tr").length<10){
+                $(".click-load-more").eq(index).addClass("dis-none");
+            }
+            $(".click-load-more").eq(index).on("click",function () {
+                $(this).addClass("dis-none");
+                if(index<4){
+                    loadEmMoreHtml(index);
+                }else{
+                    loadUsMoreHtml();
+                }
+
+            })
+        });
+
+        //加载总榜前十列表
+        function loadTopHtml(n){
+            data ={
+                'limit_start' : 0,
+                'limit' : 10
+            };
+            $(".list-main").eq(n).find("table").html("<img src=\"/Public/Public/Images/Face/Joway/running.gif\" class='loading'>");
+
+            $.ajax({
+                url: url[n],
+                data: data,
+                dataType: 'json',
+                type: "post",
+                async:true,
+                success: function(res) {
+                    $(".list-main").eq(n).find("tbody").html(buildEmTopList(res,n));
+                    if(res.length<10){
+                        $(".click-load-more").eq(n).addClass("dis-none")
+                    }
+                },
+                error: function(res) {
+                    console.log(res);
+                }
+            });
+        }
+        function buildEmTopList (data,n){
+
+            var html = "",topClass,topColor,dataType;
+
+            for(var i = 0; i < data.length ; i++) {
+                if (i < 3) {
+                    topColor = "rank high-top"
+                } else {
+                    topColor = "rank"
+                }
+                html +=
+                        "<tr>"+
+                        "<td class=\"td1\">"+
+                        "<div class=\"header-img-wrap\">"+
+                        "<img src="+data[i].smallheadpic+" class=\"header-img\">"+
+                        "<span class=\""+topColor+"\">"+(i+1)+"</span>"+
+                        "</div>"+
+                        "</td>"+
+                        "<td class=\"td2\">"+
+                        "<span class='name'>" +
+                        data[i].nickname+
+                        "</span>"+
+                        "</td>"+
+                        "<td class=\"td3\">"+
+                        "<p class=\"point\">" + data[i][type[n]] + "</p>"+
+                        "</td>"+
+                        "</tr>"
+            }
+
+            return html;
+        }
+
+        //加载主播前三十列表
+        function loadEmMoreHtml(n){
+            data ={
+                'limit_start' : 10,
+                'limit' : 20
+            };
+
+            $.ajax({
+                url: url[n],
+                data: data,
+                dataType: 'json',
+                type: "post",
+                async:true,
+                success: function(res) {
+                    $(".list-main").eq(n).find("tbody").append(buildEmMoreList(res,n));
+                },
+                error: function(res) {
+                    console.log(res);
+                }
+            });
+        }
+        function buildEmMoreList (data,n){
+            var html = "",topColor = "rank";
+            for(var i = 0; i < data.length ; i++) {
+                html +=
+                        "<tr>"+
+                        "<td class=\"td1\">"+
+                        "<div class=\"header-img-wrap\">"+
+                        "<img src="+data[i].smallheadpic+" class=\"header-img\">"+
+                        "<span class=\""+topColor+"\">"+(i+11)+"</span>"+
+                        "</div>"+
+                        "</td>"+
+                        "<td class=\"td2\">"+
+                        "<span class='name'>" +
+                        data[i].nickname+
+                        "</span>"+
+                        "</td>"+
+                        "<td class=\"td3\">"+
+                        "<p class=\"point\">" + data[i][type[n]] + "</p>"+
+                        "</td>"+
+                        "</tr>"
+            }
+            return html;
+        }
+
+
+
+
+        //加载用户前三十列表
+        function loadUsMoreHtml(){
+            data ={
+                'limit_start' : 10,
+                'limit' : 20
+            };
+
+            $.ajax({
+                url: "{:U('Home/Activity/getTopUserSentGiftList')}",
+                data: data,
+                dataType: 'json',
+                type: "post",
+                async:true,
+                success: function(res) {
+                    $(".list-main").eq(4).find("tbody").append(buildUsMoreList(res));
+                },
+                error: function(res) {
+                    console.log(res);
+                }
+            });
+        }
+        function buildUsMoreList (data){
+            var html = "",topColor = "rank";
+            for(var i = 0; i < data.length ; i++) {
+                html +=
+                    "<tr>"+
+                    "<td class=\"td1\">"+
+                    "<div class=\"header-img-wrap\">"+
+                    "<img src="+data[i].smallheadpic+" class=\"header-img\">"+
+                    "<span class=\""+topColor+"\">"+(i+11)+"</span>"+
+                    "</div>"+
+                    "</td>"+
+                    "<td class=\"td2\">"+
+                    "<span class=\"name\">"+
+                    data[i].nickname+
+                    "</span>"+
+                    "</td>"+
+                    "<td class=\"td3\">"+
+                    "<p class=\"point\">" + data[i].giftcount + "</p>"+
+                    "</td>"+
+                    "</tr>"
+            }
+            return html;
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+    <showlist>
+		<websiteissue>Web site connect failed.please refresh and retry</websiteissue>
+		<authenfailed>Chat domain can not pass the authorization！Please contact www.waashow.com to apply for authorizing</authenfailed>
+		<regsuccess>Function register successfully</regsuccess>
+		<regfailed>Function register failed，please check if function is exist</regfailed>
+		<alreadlogin>The user has logined</alreadlogin>
+		<evictroom>You are evicted the room</evictroom>
+		<wish>My Wishing</wish>
+		<wantget>Today,i hope i can get</wantget>
+		<geunit> </geunit>
+		<peohotrec>people hot recommend</peohotrec>
+		<spend>spend</spend>
+		<grabsofa>grab sofa successful</grabsofa>
+		<userdesc>user</userdesc>
+		<leftroom>left room</leftroom>
+		<sendto>send to</sendto>
+		<sendflyscreen>send a fly screen</sendflyscreen>
+		<tempvisitor>visitor</tempvisitor>
+    </showlist>

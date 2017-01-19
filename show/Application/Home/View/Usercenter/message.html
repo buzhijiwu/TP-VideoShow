@@ -1,0 +1,47 @@
+<extend name="base" />
+
+<block name="main">
+<!-- 消息中心 -->
+	<div class="right-msg-main">
+
+		<ul class="right-msg-list">
+		    <eq name="messages[0]" value="">
+		    <div class="common-no-data">
+		    	<img src="/Public/Public/Images/newImage/common/al-cry.png">
+		    	<h1>{:lan('NO_INFO', 'Home')}</h1>
+		    </div>
+		    <else />
+			<volist name="messages" id="vo">
+				<li class="list"
+					data-messageid="{$vo[messageid]}"
+					data-title="{$vo[title]}"
+					data-text="{$vo[content]}"
+					data-time="{$vo[createtime]}">
+					<eq name="vo[read]" value="0">
+						<i class="iconfont read">&#xe617;</i>
+						<else/>
+						<i class="iconfont unread">&#xe616;</i>
+					</eq>
+					{$vo[title]}
+					<div class="right1">
+						<span>{$vo[createtime]}</span>
+						<button class="delete-msg iconfont">&#xe618;</button>
+					</div>
+				</li>
+			</volist>
+			</eq>
+		</ul>
+		{$page}
+
+		<!--消息弹出框-->
+		<div class="msg-alert dis-none">
+			<div class="msg-alert-main">
+				<h3 class="msg-title"></h3>
+				<p class="msg-content"></p>
+				<p class="msg-time"></p>
+				<i class="iconfont close-alert">&#xe605;</i>
+				<input id="messageid" type="hidden" value="">
+			</div>
+		</div>
+	</div>
+</block>

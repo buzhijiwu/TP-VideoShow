@@ -1,0 +1,153 @@
+<!doctype html>
+<html>
+<head>
+    <!--公用meta-->
+    <include file="Public:meta" />
+    <title>{:lan("MALL","Home")}</title>
+</head>
+<body>
+<!--公用头部-->
+<include file="Public:header" />
+<!--主要内容-->
+<div class="common-wrap">
+    <div class="recharge-main">
+        <div class="width">
+
+            <div class="down">
+                <!--左边列表-->
+                <include file="Public:rechargeLeft" />
+
+                <!--右边内容-->
+                <div class="right">
+                    <form method="post" name="upForm" target="_blank" action="{:U('Home/Rechargecenter/paydollar')}" onsubmit="return checkForm(this);">
+                        <input type="hidden" id="userid" value="{$Think.session.userid}" />
+                        <input type="hidden" id="payment_status" value="{$payment_status}" />
+                        <table>
+                            <tr>
+                                <td class="td1">
+                                    {:lan('RECHARGE_ACCOUNT', 'Home')}:
+                                </td>
+                                <td class="td2 nickname">
+                                    <span> {$userinfo[nickname]}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td1">
+                                    {:lan('RECHARGE_CHANNEL', 'Home')}:
+                                </td>
+                                <td class="td2">
+                                    <ul class="clear channel-list">
+                                        <volist name="paydollarChannels" id="vo">
+                                            <li data-channelid="{$vo[channelid]}" data-rechargetype="{$vo[rechargetype]}" style="width: 135px;">
+                                                {$vo[rechargename]}<i></i>
+                                                <ul class="seller-list dis-none">
+                                                    <li data-seller="{$seller[sellerid]}">
+                                                        {$vo[rechargename]}<i></i>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </volist>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td1">
+                                    {:lan('SELLER', 'Home')}:
+                                </td>
+                                <td class="td2">
+                                    <ul class="clear seller-list">
+                                        <volist name="paydollarChannels[0][sellers]" id="seller">
+                                            <li data-seller="{$seller[sellerid]}" style="width: 230px;"><img style="width: 227px;" src="{$seller[pclogopath]}" alt=""><i></i></li>
+                                        </volist>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td1">
+                                    {:lan('RECHARGE_AMOUNT', 'Home')}:
+                                </td>
+                                <td class="td2">
+                                    <ul class="clear money-list">
+                                        <volist name="paydollarChannels[0][rechargedefs]" id="vo" key="k">
+                                            <li>
+                                                <span class="rechargedefid dis-none">{$vo[rechargedefid]}</span>
+                                                <p><span class="showamount"> {$vo[rechargeamount]}</span> {$vo[rechargeunit]} </p>
+                                                <p> {:lan('PRICE', 'Home')}: <span class="amount">{$vo[localmoney]}</span> {$vo[localunit]} </p>
+                                                <i></i>
+                                            </li>
+                                        </volist>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td1">
+
+                                </td>
+                                <td class="td2">
+                                    <p class="charge-agreement">
+                                        <input name="deal" type="checkbox" value="" checked id="deal" />
+                                        <label for="deal">{:lan('AGREE', 'Home')}</label>
+                                        <a href="{:U('Home/Rechargecenter/rechargeAgreement')}">{:lan('WAASHOW_RECHARGE_PROTOCOL', 'Home')}</a>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td1"></td>
+                                <td class="td2">
+                                    <input type="submit" class="recharge" id="paydollar-charge" value="{:lan('RECHARGE', 'Home')}" />
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--共用底部-->
+<include file="Public:bottom" />
+
+<!-- 共用登录-->
+<include file="Public:login" />
+
+<!--共用弹框-->
+<include file="Public:alert" />
+
+<!--共用js-->
+<include file="Public:javascript" />
+<script>
+    $(function () {
+        var payment_status = $("#payment_status").val();
+        if (payment_status == 'success') {
+            common.alertAuto(false,"{:lan('RECHARGE_SUCCESS', 'Home')}", function () {
+                window.location.href = "{:U('Rechargecenter/paydollar')}";
+            },2000)
+        }else if($("#payment_status").val() == 'failed'){
+            common.alertAuto(false,"{:lan('RECHARGE_FAIL', 'Home')}", function () {
+                window.location.href = "{:U('Rechargecenter/paydollar')}";
+            },2000)
+        }else if($("#payment_status").val() == '-1'){
+            common.alertAuto(false,"{:lan('-1', 'Home')}", function () {
+                window.location.href = "{:U('Rechargecenter/paydollar')}";
+            },1000)
+        }
+    });
+
+    function checkForm() {
+        var userid = $("#userid").val();
+        if (!userid || userid <= 0) {
+            common.showLog();
+            return false;
+        }
+
+        var rechargedefid = $.trim($(".money-list li.active .rechargedefid").text());
+        var html = '<input type="hidden" name="rechargedefid" value="'+rechargedefid+'" />';
+        var amount = $.trim($(".money-list li.active .amount").text());
+        html = html+'<input type="hidden" name="amount" value="'+amount+'" />';
+        $("#paydollar-charge").before(html);
+    }
+</script>
+</body>
+</html>

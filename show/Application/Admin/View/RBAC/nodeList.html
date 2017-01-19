@@ -1,0 +1,201 @@
+<js file="__PUBLIC__/Public/Js/jquery-1.7.2.min.js" />
+<h3 style="margin-left:480px;letter-spacing:10px;color:#D24F1C;">
+	权限列表 &nbsp; 
+	<div style="background:purple;display:inline-block;border:0px solid red;width:24px;height:5px;"></div><span style="letter-spacing:0;font-size:14px;color:purple;">[ 在左侧菜单列表 ]</span>
+	<div style="background:red;display:inline-block;border:0px solid red;width:24px;height:5px;"></div><span style="letter-spacing:0;font-size:14px;color:red;">[ 不在左侧菜单列表 ]</span>
+</h3>
+
+
+<form id="form1" action="__SELF__" method="POST">
+<div class="div_1">
+	<foreach name="nodeList" item="v">
+	<input type="hidden" name="nodeid[]" value="{$v['id']}" />
+	<div class="node0">
+		<div class="div_1_a"><font><span style="border:0px solid red;display:inline-block;width:8px;height:10px;background:url(__PUBLIC__/Public/Images/ico03.gif) no-repeat;"></span> {$v['menuname']} </font> &nbsp; <input class="sort" size="1" type="text" name="nodesort[]" value="{$v['sort']}" placeholder="顺序" /> &nbsp;<label style="font-size:14px;"><input class="node0_ck" type="checkbox" value="1" />选择</label>
+<if condition="!$v['surpernode']" >
+<a style="margin-left:15px;text-decoration:none;font-weight:bold;font-size:12px;color:#0864C8;" class="edit_node" href="javascript:;" nid="{$v['id']}">编辑</a>
+<a style="margin-left:15px;text-decoration:none;font-weight:bold;font-size:12px;color:#5864C8;" class="del_node1" href="javascript:;" nid="{$v['id']}">删除</a>
+</if>
+		</div>
+		<foreach name="v.son" item="v0">
+		<input type="hidden" name="nodeid[]" value="{$v0['id']}" />
+		<div class="node1">
+			<div class="div_1_b" style="margin-left:20px;margin-top:5px;"><font color="green">&nbsp;<span style="border:0px solid red;display:inline-block;width:8px;height:10px;background:url(__PUBLIC__/Public/Images/ico03.gif) no-repeat;"></span> {$v0['menuname']} </font> &nbsp; <input class="sort" style="border:1px solid pink;" size="1" type="text" name="nodesort[]" value="{$v0['sort']}"  placeholder="顺序" />&nbsp;<label style="font-size:14px;color:green;"><input class="node1_ck" type="checkbox" value="1" />选择</label>
+<if condition="!$v0['surpernode']" >
+<a style="margin-left:15px;text-decoration:none;font-weight:bold;font-size:12px;color:#0864C8;" class="edit_node" href="javascript:;" nid="{$v0['id']}">编辑</a>
+<a style="margin-left:15px;text-decoration:none;font-weight:bold;font-size:12px;color:#5864C8;" class="del_node1" href="javascript:;" nid="{$v0['id']}">删除</a>
+</if>
+</div>
+			<foreach name="v0.son" item="v1">
+			<input type="hidden" name="nodeid[]" value="{$v1['id']}" />
+			<div class="node2">
+				<div class="div_1_c" style="margin-left:40px;margin-top:5px;"><font color="<if condition="$v1['ismenu'] eq 0">red<else />purple</if>"> &nbsp;&nbsp; {$v1['menuname']}</font> &nbsp; <input class="sort" size="1" type="text" name="nodesort[]" value="{$v1['sort']}"  placeholder="顺序" />&nbsp;<label style="font-size:14px;color:pink;"><input class="node2_ck" type="checkbox" value="1" />选择</label>
+<if condition="!$v1['surpernode']" >
+<a style="margin-left:15px;text-decoration:none;font-weight:bold;font-size:12px;color:#0864C8;" class="edit_node" href="javascript:;" nid="{$v1['id']}">编辑</a>
+<a style="margin-left:15px;text-decoration:none;font-weight:bold;font-size:12px;color:#5864C8;" class="del_node2 del_node1" href="javascript:;" nid="{$v1['id']}">删除</a>
+</if>
+</div>
+			</div>
+			</foreach>
+		</div>
+		</foreach>
+	</div>
+	</foreach>
+</div>
+
+<div style="margin-top:30px;margin-left:130px;">
+	<input style="background:#53B3B6;font-size:20px;width:100px;height:30px;cursor:pointer;" class="subit" type="button" value="提 &nbsp;&nbsp;&nbsp; 交" />
+</div>
+</form>
+<style>
+div {border:0px solid red;}
+</style>
+
+<script>
+{/*编辑*/}
+$('a.edit_node').hide();
+$('a.edit_node').click(function() {
+	//var $nodeid = parseInt($(this).attr('nid'));
+	//window.location.href = "{:U('RBAC/editNode')}"+'?nodeid='+$nodeid;
+});
+
+{/*删除*/}
+$('a.del_node1').click(function() {
+	if(!confirm('确定要删除吗？')) return false;
+	var $nodeid = parseInt($(this).attr('nid'));
+	var $url = "{:U('RBAC/nodeList')}";
+	var $data = {
+		'action' : 'delNode',
+		'nodeid' : $nodeid
+	};
+	$.ajaxSetup({
+       async : false
+    });
+	$.post($url,$data,function(a) {
+		if(a=='error' || !a) {
+			alert('删除失败，请重试');
+			return;
+		}
+		alert('删除成功');
+		window.location.reload();
+	});
+});
+
+$('input.subit').click(function(){
+	$('#form1').submit();
+});
+</script>
+
+<script>
+$('div.div_1').css({'margin-left':'100px',border:'0px dashed #CCC','min-width':'300px'});
+$('div.div_1_a').css({'margin-top':'20px'});
+$('div.div_1_a font , div.div_1_b font , div.div_1_c font').css({cursor:'pointer'});
+$('input.sort').keydown(function(e) {   {/*不能输入空格   不能输入非数字*/}
+	var shuziOnly150930 = ((e.keyCode<48 || e.keyCode>56) && (e.keyCode<96 || e.keyCode>105)) && e.keyCode!=8 && e.keyCode!=46 && e.keyCode!=37 && e.keyCode!=38 && e.keyCode!=39 && e.keyCode!=40;
+	{/*数字  主键盘   小键盘   回格键   删除键   方向键*/}
+	
+	if(e.keyCode==32) return false;
+	if( shuziOnly150930 ) return false;
+});
+//
+$(document).on('click','.div_1_a font',function() {
+	if(!$(this).parents('div.node0').find('div.node1').is(':hidden')) {
+		$(this).parents('div.node0').find('span').eq(0).css({'background':'url(__PUBLIC__/Public/Images/ico04.gif) no-repeat'});
+		$(this).parents('div.node0').find('div.node1').slideUp(100);
+	}
+	else {
+		$(this).parents('div.node0').find('span').eq(0).css({'background':'url(__PUBLIC__/Public/Images/ico03.gif) no-repeat'});
+		$(this).parents('div.node0').find('div.node1').slideDown(100);
+	}
+});
+$(document).on('click','.div_1_b font',function() {
+	if(!$(this).parents('div.node1').find('div.node2').is(':hidden')) {
+		$(this).parents('div.node1').find('span').eq(0).css({'background':'url(__PUBLIC__/Public/Images/ico04.gif) no-repeat'});
+		$(this).parents('div.node1').find('div.node2').slideUp(100);
+	}
+	else {
+		$(this).parents('div.node1').find('span').eq(0).css({'background':'url(__PUBLIC__/Public/Images/ico03.gif) no-repeat'});
+		$(this).parents('div.node1').find('div.node2').slideDown(100);
+	}
+});
+
+
+{/*选择右边的选框*/}
+$(document).on('click','input.node2_ck',function() {  {/*第三层*/}
+	if( $(this).get(0).checked==true ) {   {/*如果第三层的某个元素是选中状态*/}
+		$(this).parents('div.node1').eq(0).find('input.node1_ck').eq(0).get(0).checked = true;
+		$(this).parents('div.node0').eq(0).find('input.node0_ck').eq(0).get(0).checked = true;
+	} else {  {/*如果第三层的某个元素不是选中状态*/}
+		var flag = false;
+		$('input.node2_ck').each(function() {
+			if($(this).get(0).checked==true) {
+				flag = true;
+				return false;
+			}
+		});
+		if(!flag) {
+			$(this).parents('div.node1').eq(0).find('input.node1_ck').eq(0).get(0).checked = false;
+			
+			$('input.node1_ck').each(function() {
+				if($(this).get(0).checked==true) {
+					flag = true;
+					return false;
+				}
+			});
+			if(!flag) {
+	       $(this).parents('div.node0').eq(0).find('input.node0_ck').eq(0).get(0).checked = false;
+			}
+		} else {
+			$(this).parents('div.node1').eq(0).find('input.node1_ck').eq(0).get(0).checked = true;
+		$(this).parents('div.node0').eq(0).find('input.node0_ck').eq(0).get(0).checked = true;
+		}
+	}
+});
+
+
+$(document).on('click','input.node1_ck',function() {  {/*第二层*/}
+	if( $(this).get(0).checked==true ) {  {/*第二层某个元素被选中时*/}
+		$(this).parents('div.node0').eq(0).find('input.node0_ck').eq(0).get(0).checked = true;
+		$(this).parents('div.node1').find('input.node2_ck').each(function() {
+			$(this).get(0).checked=true;
+		});
+	} else {
+		$(this).parents('div.node1').find('input.node2_ck').each(function() {
+			$(this).get(0).checked=false;
+		});
+		var flag = false;
+		$('input.node1_ck').each(function() {
+			if($(this).get(0).checked==true) {
+				flag = true;
+				return false;
+			}
+		});
+		if(!flag) {
+			$(this).parents('div.node0').eq(0).find('input.node0_ck').eq(0).get(0).checked = false;
+		} else {
+			$(this).parents('div.node0').eq(0).find('input.node0_ck').eq(0).get(0).checked = true;
+		}
+	}
+});
+
+$(document).on('click','input.node0_ck',function() {  {/*第一层*/}
+	if( $(this).get(0).checked==true ) { {/*第一层元素被选中时*/}
+		$(this).parents('div.node0').eq(0).find('input.node1_ck').each(function() {
+			$(this).get(0).checked=true;
+			$(this).parents('div.node1').eq(0).find('input.node2_ck').each(function() {
+				$(this).get(0).checked=true;
+			});
+		});
+	} else {
+		$(this).parents('div.node0').eq(0).find('input.node1_ck').each(function() {
+			$(this).get(0).checked=false;
+			$(this).parents('div.node1').eq(0).find('input.node2_ck').each(function() {
+				$(this).get(0).checked=false;
+			});
+		});
+	}
+});
+
+
+$('div.node0 label').hide();  {/*隐藏所有的选择按钮*/}
+</script>

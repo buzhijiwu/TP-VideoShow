@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+<head>
+    <!--公用meta-->
+    <include file="Public:meta" />
+
+    <title>{:lan("MALL","Home")}</title>
+</head>
+
+<body>
+<!--公用头部-->
+<include file="Public:header" />
+
+<!--主要内容-->
+<div class="common-wrap">
+    <div class="guard-main">
+        <div class="width">
+
+            <!-- 商城导航 -->
+            <include file="Public:mallhead" />
+
+            <!-- 特权展示-图片 -->
+            <div class="guard-img-list clear">
+                <div class="list">
+                    <p class="icon i1"></p>
+                    <p>{$guardlist[0]['privilege'][0]['privilegename']}</p>
+                </div>
+                <div class="list">
+                    <p class="icon i2"></p>
+                    <p>{$guardlist[0]['privilege'][1]['privilegename']}</p>
+                </div>
+                <div class="list">
+                    <p class="icon i3"></p>
+                    <p>{$guardlist[0]['privilege'][2]['privilegename']}</p>
+                </div>
+                <div class="list">
+                    <p class="icon i4"></p>
+                    <p>{$guardlist[0]['privilege'][3]['privilegename']}</p>
+                </div>
+                <div class="list">
+                    <p class="icon i5"></p>
+                    <p>{$guardlist[0]['privilege'][4]['privilegename']}</p>
+                </div>
+                <div class="list">
+                    <p class="icon i6"></p>
+                    <p>{$guardlist[0]['privilege'][5]['privilegename']}</p>
+                </div>
+                <div class="list">
+                    <p class="icon i7"></p>
+                    <p>{$guardlist[0]['privilege'][6]['privilegename']}</p>
+                </div>
+            </div>
+
+            <!-- 特权展示-文字 -->
+            <table class="vip-txt">
+                <thead>
+                <tr>
+                    <th>{:lan('GUARD_PRIVILEGE', 'Home')}</th>
+                    <th>{$guardlist[0]['gdname']}</th>
+                    <th>{$guardlist[1]['gdname']}</th>
+                </tr>
+                </thead>
+                <tr>
+                    <td>
+                        <h3>{$guardlist[0]['privilege'][0]['privilegename']}</h3>
+                        {$guardlist[0]['privilege'][0]['description']}
+                    </td>
+                    <td><img src="{$guardlist[0]['privilege'][0]['valuedesc']}"/></td>
+                    <td><img src="{$guardlist[1]['privilege'][0]['valuedesc']}"/></td>
+                </tr>
+                <tr>
+                    <td><h3>{$guardlist[0]['privilege'][1]['privilegename']}</h3>
+                        {$guardlist[0]['privilege'][1]['description']} </td>
+                    <td><img src="{$guardlist[0]['privilege'][1]['valuedesc']}"/></td>
+                    <td><img src="{$guardlist[1]['privilege'][1]['valuedesc']}"/></td>
+                </tr>
+                <tr>
+                    <td><h3>{$guardlist[0]['privilege'][2]['privilegename']}</h3>
+                        {$guardlist[0]['privilege'][2]['description']} </td>
+                    <td><img src="{$guardlist[0]['privilege'][2]['valuedesc']}"/></td>
+                    <td><img src="{$guardlist[1]['privilege'][2]['valuedesc']}"/></td>
+                </tr>
+                <tr>
+                    <td><h3>{$guardlist[0]['privilege'][3]['privilegename']}</h3>
+                        {$guardlist[0]['privilege'][3]['description']} </td>
+                    <td><img src="{$guardlist[0]['privilege'][3]['valuedesc']}"/></td>
+                    <td><img src="{$guardlist[1]['privilege'][3]['valuedesc']}"/></td>
+                </tr>
+                <tr>
+                    <td><h3>{$guardlist[0]['privilege'][4]['privilegename']}</h3>
+                        {$guardlist[0]['privilege'][4]['description']} </td>
+                    <td><img src="{$guardlist[0]['privilege'][4]['valuedesc']}"/></td>
+                    <td><img src="{$guardlist[1]['privilege'][4]['valuedesc']}"/></td>
+                </tr>
+                <tr>
+                    <td><h3>{$guardlist[0]['privilege'][5]['privilegename']}</h3>
+                        {$guardlist[0]['privilege'][5]['description']} </td>
+                    <td><img src="{$guardlist[0]['privilege'][5]['valuedesc']}"/></td>
+                    <td><img src="{$guardlist[1]['privilege'][5]['valuedesc']}"/></td>
+                </tr>
+                <tr>
+                    <td><h3>{$guardlist[0]['privilege'][6]['privilegename']}</h3>
+                    <td><img src="{$guardlist[0]['privilege'][6]['valuedesc']}"/></td>
+                    <td><img src="{$guardlist[1]['privilege'][6]['valuedesc']}"/></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!--共用底部-->
+<include file="Public:bottom" />
+
+<!-- 共用登录-->
+<include file="Public:login" />
+
+<!--共用弹框-->
+<include file="Public:alert" />
+
+<!--共用去充值弹框-->
+<include file="Public:gochargeAlert" />
+
+<!--共用js-->
+<include file="Public:javascript" />
+</body>
+</html>

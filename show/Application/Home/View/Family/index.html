@@ -1,0 +1,153 @@
+<!doctype html>
+<html>
+<head>
+  <!--公用meta-->
+  <include file="Public:meta" />
+
+  <title>Family</title>
+
+</head>
+<body >
+<!--公用头部-->
+<include file="Public:header" />
+
+<!--主要内容-->
+<div class="common-wrap">
+  <div class="family-main">
+    <div class="width clear">
+      <!--左侧列表-->
+      <div class="left">
+        <h2 class="title">
+          {:lan('FAMILY_HOME', 'Home')}
+        </h2>
+        <div class="family-list clear">
+          <volist name="data.family_list" id="v">
+            <div class="list">
+              <a href="{$v.href}" class="top">
+                <img src="{$v.familylogosrc}" class="family-img">
+                <p class="family-name" title="{$v.familyname}">{$v.familyname}</p>
+              </a>
+              <div class="family-detail">
+                <div class="common-family">
+                  <p>{:lan("FAMILY_NAME", "Home")}</p>
+                                    <span class="family-style" href="{$v.href}">
+                                        {$v.badgehtml}
+                                    </span>
+                </div>
+                <p class="line">
+                  <span class="td1">{:lan('FAMILY_EMCEES', 'Home')}:</span>
+                  <span class="td2">{$v.emceesNum}</span>
+                </p>
+                <p class="line">
+                  <span class="td1" >{:lan('FAMILY_MEMBER', 'Home')}:</span>
+                  <span class="td2" >{$v.memberNum}</span>
+                </p>
+              </div>
+            </div>
+          </volist>
+        </div>
+        <p class="common-loadMore" id="loadmorediv">{$rolldownloadmore}</p>
+      </div>
+      <div class="right">
+        <!--创建家族按钮-->
+        <div class="create-family">
+          <gt name="Think.session.familyid" value="0">
+            <a href="/Home/Family/getFamilyDetail/familyid/{$_SESSION[familyid]}.html"
+               class="create-button">
+              {:lan('FAMILY_MINE', 'Home')}
+            </a>
+            <else />
+            <gt name="Think.session.userid" value="0">
+              <button onclick="family.createFamily(<neq name="Think.session.userlevel">{$Think.session.userlevel}<else/>0</neq>,<neq name="Think.session.emceelevel" value="">{$Think.session.emceelevel}<else/>0</neq>,'{:lan(\'CAN_NOT_CREATE_FAMILY\', \'Home\')}');"class="create-button">{:lan('FAMILY_CREATE', 'Home')}</button>
+              <else />
+              <button onclick="common.showLog({logShow:'._logShow'});"
+                      class="create-button">
+                {:lan('FAMILY_CREATE', 'Home')}
+              </button>
+            </gt>
+          </gt>
+        </div>
+        <!--右侧列表-->
+
+        <!--家族人气榜-->
+        <div class="common-billboard">
+          <h2 class="title">{:lan('FAMILY_EARN', 'Home')}</h2>
+          <ul class="list">
+            <volist name="data.familyEarn" id="v" key="k">
+              <li>
+                <a href="{$v.href}">
+                  <p class="num">
+                    <img src="/Public/Public/Images/Ranklist/{$k}.png" />
+                  </p>
+                  <p class="head-img">
+                    <img class="smallheadimg" src="{$v.familyheadpic}" />
+                  </p>
+                  <p class="name" title="{$v.familyname}">
+                    <span>{$v.familyname}</span>
+                  </p>
+                  <p class="family-top-list">
+                    <i class="iconfont">&#xe60b;</i>
+                    <span>{$v.totalmembercount}</span>
+                  </p>
+                </a>
+                <img src="/Public/Public/Images/Background/Room/down_line_shadow.png" class="down-line">
+              </li>
+            </volist>
+          </ul>
+        </div>
+
+        <!--家族人气榜-->
+        <div class="common-billboard">
+          <h2 class="title">{:lan('FAMILY_MEMBER_RICH', 'Home')}</h2>
+          <ul class="list">
+            <volist name="data.familyRich" id="v" key="k">
+              <li>
+                <a href="{$v.href}">
+                  <p class="num">
+                    <img src="/Public/Public/Images/Ranklist/{$k}.png" />
+                  </p>
+                  <p class="head-img">
+                    <img class="smallheadimg" src="{$v.familyheadpic}" />
+                  </p>
+                  <p class="name" title="{$v.familyname}">
+                    <span>{$v.familyname}</span>
+                  </p>
+                  <p class="family-top-list">
+                    <span class="family-style" href="{$v.href}">
+                        {$v.badgehtml}
+                    </span>
+                  </p>
+                </a>
+                <img src="/Public/Public/Images/Background/Room/down_line_shadow.png" class="down-line">
+              </li>
+            </volist>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--共用底部-->
+<include file="Public:bottom" />
+
+<!-- 共用登录-->
+<include file="Public:login" />
+
+<!--共用弹框-->
+<include file="Public:alert" />
+
+<!--共用js-->
+<include file="Public:javascript" />
+<script>
+
+
+  var pageno =1,
+          isLast = false;
+  $(window).scroll(function () {
+    family.scrollLoad("{:lan('FAMILY_BADGE', 'Home')}","{:lan('FAMILY_EMCEES', 'Home')}","{:lan('FAMILY_MEMBER', 'Home')}");
+  });
+
+</script>
+</body>
+</html>

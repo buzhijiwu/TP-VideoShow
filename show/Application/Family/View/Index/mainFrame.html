@@ -1,0 +1,46 @@
+<tagLib name="html" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=7" />
+<title></title>
+<link href="__PUBLIC__/Public/statics/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Public/statics/css/system.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Public/statics/css/table_form.css" rel="stylesheet" type="text/css" />
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Tools/Js/jquery/jquery-1.8.3.min.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/admin_common.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/styleswitch.js"></script>
+<script type="text/javascript">
+	window.focus();
+</script>
+</head>
+<body>
+<style type="text/css">
+	html{_overflow-y:scroll}
+</style><div id="main_frameid" class="pad-10 display" style="_margin-right:-12px;_width:98.9%;">
+<script type="text/javascript">
+$(function(){if ($.browser.msie && parseInt($.browser.version) < 7) $('#browserVersionAlert').show();}); 
+</script>
+<div class="explain-col mb10" style="display:none" id="browserVersionAlert">{$userieeight}</div>
+<div class="col-2 lf mr10" style="width:48%">
+	<h6>{$myinformation}</h6>
+	<div class="content" style="float:right;">
+		{$accountbalance}<font color="#FF6600"><b>{$userinfo['balance']}</b></font> {$moneyunit}
+	</div>
+	<div class="content">
+	{$hello} {$_SESSION['familyusername']}<br />
+	{$rolefamilymanager} <br />
+	<div class="bk20 hr"><hr /></div>
+	{$lastlogintime} {$userinfo['lastlogtime']|fDate}<br />
+	{$lastloginip} {$userinfo['lastlogip']} <br />
+	</div>
+</div>
+<div class="bk10"></div>
+<div class="col-2 lf mr10" style="width:48%">
+	<h6>{$prompting}</h6>
+	<div class="content">{$promptingcontent}</div>
+</div>
+</div>
+</body></html>
+<script type="text/javascript">$("#main_frameid").removeClass("display");</script>

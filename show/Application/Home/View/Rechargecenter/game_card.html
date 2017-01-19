@@ -1,0 +1,150 @@
+<!doctype html>
+<html>
+<head>
+
+    <!--公用meta-->
+    <include file="Public:meta" />
+
+    <title>{:lan("MALL","Home")}</title>
+
+</head>
+<body>
+
+
+<!--公用头部-->
+<include file="Public:header" />
+
+<!--主要内容-->
+<div class="common-wrap">
+    <div class="recharge-main">
+        <div class="width">
+
+            <div class="down">
+                <!--左边列表-->
+                <include file="Public:rechargeLeft" />
+
+                <!--右边内容-->
+                <div class="right">
+                    <table>
+                        <tr>
+                            <td class="td1">
+                                {:lan('RECHARGE_ACCOUNT', 'Home')}:
+                            </td>
+                            <td class="td2 nickname">
+                                <span> {$userinfo[nickname]}</span>
+                                <input type="hidden" id="userid" name="userid" value="{$userinfo[userid]}" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td1">
+                                {:lan('RECHARGE_CHANNEL', 'Home')}:
+                            </td>
+                            <td class="td2">
+                                <ul class="clear channel-list">
+                                    <volist name="gamecardchannels" id="vo">
+                                        <li data-channelid="{$vo[channelid]}" data-rechargetype="{$vo[rechargetype]}">
+                                            {$vo[rechargename]}
+                                            <i></i>
+                                            <ul class="seller-list dis-none">
+                                                <volist name="vo.sellers" id="seller">
+                                                    <li data-seller="{$seller[sellerid]}">
+                                                        <img src="{$seller[pclogopath]}" alt=""><i></i>
+                                                    </li>
+                                                </volist>
+                                            </ul>
+                                        </li>
+                                    </volist>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td1">
+                                {:lan('SELLER', 'Home')}:
+                            </td>
+                            <td class="td2">
+                                <ul class="clear seller-list">
+                                    <volist name="gamecardchannels[0][sellers]" id="seller">
+                                        <li data-seller="{$seller[sellerid]}"
+                                            data-sellername="{$seller[sellername]}">
+                                            <img src="{$seller[pclogopath]}" alt=""><i></i></li>
+                                    </volist>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td1">
+                                {:lan('GAME_CARD_ACCOUNT', 'Home')}:
+                            </td>
+                            <td class="td2">
+                                <input type="text"
+                                       placeholder="{:lan('PLEASE_INPUT_GAME_CARD_ACCOUNT', 'Home')}"
+                                       class="txt"
+                                       onafterpaste="this.value=this.value.replace(/\D/g,'')"
+                                       id="call-pin"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td1">
+                                {:lan('GAME_CARD_PASSWORD', 'Home')}:
+                            </td>
+                            <td class="td2">
+                                <input type="text"
+                                       placeholder="{:lan('PLEASE_INPUT_GAME_CARD_PASSWORD', 'Home')}"
+                                       class="txt"
+                                       onafterpaste="this.value=this.value.replace(/\D/g,'')"
+                                       id="call-serial"/>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td1">
+
+                            </td>
+                            <td class="td2">
+                                <p class="scale">*{$gamecardchannels[0][rechratio][rechratiodesc]}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td1">
+
+                            </td>
+                            <td class="td2">
+                                <p class="charge-agreement">
+                                    <input name="deal" type="checkbox" value="" checked id="deal" />
+                                    <label for="deal">{:lan('AGREE', 'Home')}</label>
+                                    <a href="{:U('Home/Rechargecenter/rechargeAgreement')}">{:lan('WAASHOW_RECHARGE_PROTOCOL', 'Home')}</a>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td1"></td>
+                            <td class="td2">
+                                <button class="recharge" id="game-charge">{:lan('RECHARGE', 'Home')}</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--共用底部-->
+<include file="Public:bottom" />
+
+<!-- 共用登录-->
+<include file="Public:login" />
+
+<!--共用弹框-->
+<include file="Public:alert" />
+
+<!--共用js-->
+<include file="Public:javascript" />
+<script>
+    $(function () {
+        common.isLog();
+    });
+</script>
+</body>
+</html>

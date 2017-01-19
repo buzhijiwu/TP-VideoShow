@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style"  />
+    <meta content="telephone=no" name="format-detection" />
+    <link rel="stylesheet" type="text/css" href="../../Public/Game/Css/base.css">
+    <link rel="stylesheet" type="text/css" href="../../Public/Game/Css/style.css?v=20160819.css">
+    <title>Sports Game</title>
+
+</head>
+<body>
+
+<div class="game-wrap">
+
+    <div id="loading">
+        <img src="../../Public/Public/Images/Face/Joway/running.gif" class="loadimg">
+        <p>Loading...</p>
+    </div>
+
+
+    <div class="main dis-none">
+        <!--倒计时和关闭按钮-->
+        <div class="section1">
+            <a class="iconfont game-question" href="/Home/Index/rollpic/rollpicid/390" target="_blank">&#xe644;</a>
+            <i class="iconfont">&#xe63d;</i>
+            <span class="time" id="time"></span>
+            <div id="closeButton" style="display:none">
+                <i class="iconfont close-game">&#xe61b;</i>
+            </div>
+        </div>
+
+        <!--抢庄与转动-->
+        <div class="section2">
+            <div class="left">
+                <div class="rob" id="rob">
+                    <button class="iconfont">&#xe64b;</button>
+                </div>
+
+                <div class="bankerInfo dis-none">
+                    <img src="" class="header-img">
+                    <p></p>
+                    <p id="bankerBalance"></p>
+                </div>
+            </div>
+            <div class="right">
+                <table class="ball-wrap">
+                    <tr class="tr1">
+                        <td class="ball14"></td>
+                        <td class="ball15"></td>
+                        <td class="ball16"></td>
+                        <td class="ball1 active"></td>
+                        <td class="ball2"></td>
+                        <td class="ball3"></td>
+                        <td class="ball4"></td>
+                    </tr>
+                    <tr class="tr2">
+                        <td class="ball13"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="ball5"></td>
+                    </tr>
+                    <tr class="tr3">
+                        <td class="ball12"></td>
+                        <td class="ball11"></td>
+                        <td class="ball10"></td>
+                        <td class="ball9"></td>
+                        <td class="ball8"></td>
+                        <td class="ball7"></td>
+                        <td class="ball6"></td>
+                    </tr>
+                </table>
+                <div class="result">
+                    <span>NEW</span>
+                    <div class="new-result"></div>
+                </div>
+            </div>
+        </div>
+
+        <!--押注-->
+        <div class="section3">
+            <div class="list-wrap clear">
+                <div class="list active">
+                    <img src="../../Public/Game/Image/sports_game/football.png">
+                    <p class="multiple">×2</p>
+                    <p class="count">0</p>
+                </div>
+                <div class="list">
+                    <img src="../../Public/Game/Image/sports_game/baseball.png">
+                    <p class="multiple">×4</p>
+                    <p class="count">0</p>
+                </div>
+                <div class="list">
+                    <img src="../../Public/Game/Image/sports_game/tennis.png">
+                    <p class="multiple">×5</p>
+                    <p class="count">0</p>
+                </div>
+                <div class="list">
+                    <img src="../../Public/Game/Image/sports_game/basketball.png">
+                    <p class="multiple">×6</p>
+                    <p class="count">0</p>
+                </div>
+                <div class="list">
+                    <img src="../../Public/Game/Image/sports_game/volleyball.png">
+                    <p class="multiple">×10</p>
+                    <p class="count">0</p>
+                </div>
+            </div>
+            <div class="num-wrap clear">
+                <button class="num" data-num="10">10</button>
+                <button class="num" data-num="20">20</button>
+                <button class="num" data-num="50">50</button>
+                <button class="num" data-num="100">100</button>
+            </div>
+        </div>
+
+        <!--兑换-->
+        <div class="section4 clear">
+            <div class="left">
+                <span>兑换：</span>
+                <div class="exchange">
+                    <span id="balance">0</span>
+                    <img src="../../Public/Game/Image/sports_game/chip.png">
+                    <i class="iconfont">&#xe638;</i>
+                </div>
+            </div>
+            <div class="right" id="stakeSubmit">GO</div>
+        </div>
+    </div>
+
+</div>
+<p class="dis-none" id="language">{$language}</p>
+<input type="hidden" id="userid" name="userid" value="{$userid}">
+<input type="hidden" id="showroomno" name="showroomno" value="{$roomno}">
+<script src="../../Public/Game/Js/jquery-1.11.1.min.js"></script>
+<script src="../../Public/Home/Js/live/socket.io.js"></script>
+<script src="../../Public/Game/Js/JavaScript.js?v=20160922"></script>
+</body>
+</html>

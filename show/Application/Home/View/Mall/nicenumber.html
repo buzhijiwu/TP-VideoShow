@@ -1,0 +1,275 @@
+<!doctype html>
+<html>
+<head>
+    <!--公用meta-->
+    <include file="Public:meta" />
+
+    <title>{:lan("MALL","Home")}</title>
+</head>
+<body>
+<!--公用头部-->
+<include file="Public:header" />
+
+<!--主要内容-->
+<div class="common-wrap">
+    <div class="niceNum-main">
+        <div class="width">
+
+            <!-- 商城导航 -->
+            <include file="Public:mallhead" />
+
+            <div class="down clear">
+                <div class="left">
+                    <!--五位靓号-->
+                    <div class="section clear">
+                        <div class="left1">
+                            <h1>[5]</h1>
+                            <p>{:lan("FIVE_BIT_NICE_NO","Home")}</p>
+                            <button class="change">{:lan("SWITCH_GROUP","Home")}</button>
+                        </div>
+                        <div class="right1 clear">
+                            <volist name="fiveBit" id="vo">
+                                <div class="list each-nice-no"
+                                     data-niceno="{$vo[niceno]}"
+                                     data-price="{$vo[price]}">
+                                    <span class="number">{$vo[niceno]}</span>
+                                </div>
+                            </volist>
+                        </div>
+                    </div>
+
+                    <!--六位靓号-->
+                    <div class="section clear">
+                        <div class="left1">
+                            <h1>[6]</h1>
+                            <p>{:lan("SIX_BIT_NICE_NO","Home")}</p>
+                            <button class="change">{:lan("SWITCH_GROUP","Home")}</button>
+                        </div>
+                        <div class="right1 clear">
+                            <volist name="sixBit" id="vo">
+                                <div class="list each-nice-no"
+                                     data-niceno="{$vo[niceno]}"
+                                     data-price="{$vo[price]}">
+                                    <span class="number">{$vo[niceno]}</span>
+                                </div>
+                            </volist>
+                        </div>
+                    </div>
+
+                    <!--七位靓号-->
+                    <div class="section clear">
+                        <div class="left1">
+                            <h1>[7]</h1>
+                            <p>{:lan("SEVEN_BIT_NICE_NO","Home")}</p>
+                            <button class="change">{:lan("SWITCH_GROUP","Home")}</button>
+                        </div>
+                        <div class="right1 clear">
+                            <volist name="sevenBit" id="vo">
+                                <div class="list each-nice-no"
+                                     data-niceno="{$vo[niceno]}"
+                                     data-price="{$vo[price]}">
+                                    <span class="number">{$vo[niceno]}</span>
+                                </div>
+                            </volist>
+                        </div>
+                    </div>
+
+                    <!--八位靓号-->
+                    <div class="section clear">
+                        <div class="left1">
+                            <h1>[8]</h1>
+                            <p>{:lan("EIGHT_BIT_NICE_NO","Home")}</p>
+                            <button class="change">{:lan("SWITCH_GROUP","Home")}</button>
+                        </div>
+                        <div class="right1 clear">
+                            <volist name="eightBit" id="vo">
+                                <div class="list each-nice-no"
+                                     data-niceno="{$vo[niceno]}"
+                                     data-price="{$vo[price]}">
+                                    <span class="number">{$vo[niceno]}</span>
+                                </div>
+                            </volist>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="right">
+                    <div class="search-input clear">
+                        <input type="text"
+                               placeholder="{:lan('PLEASE_INPUT_NEED_NO','Home')}"
+                               id="searchno"
+                               maxlength="8"
+                               onkeyup="this.value=this.value.replace(/\D/g,'')"/>
+                        <input class="iconfont search-num" value="&#xe603;" type="button" onclick="mall.searchNiceNum({fn:'mall.buyNiceNum()'});">
+                    </div>
+                    <div class="hot-num clear">
+                        <volist name="hot" id="vo">
+                            <div class="list each-nice-no"
+                                 data-niceno="{$vo[niceno]}"
+                                 data-price="{$vo[price]}">{$vo[niceno]}
+                            </div>
+                        </volist>
+                    </div>
+                    <div class="num-top-list">
+                        <h1>{:lan("NICE_NO_LIST","Home")}</h1>
+                        <!--五位靓号-->
+                        <div class="list">
+                            <div class="left1">
+                                <p>{:lan("FIVE_BIT","Home")}</p>
+                                <p>{:lan("NICE_NUMBER","Home")}</p>
+                            </div>
+                            <ul class="right1">
+                                <li data-niceno="{$fiveBitHot[0][niceno]}"
+                                    data-price="{$fiveBitHot[0][price]}"
+                                    class="each-nice-no">
+                                    <span class="rank r1">1</span>
+                                    <span>{$fiveBitHot[0][niceno]}</span>
+                                </li>
+                                <li data-niceno="{$fiveBitHot[1][niceno]}"
+                                    data-price="{$fiveBitHot[1][price]}"
+                                    class="each-nice-no">
+                                    <span class="rank r2">2</span>
+                                    <span>{$fiveBitHot[1][niceno]}</span>
+                                </li>
+                                <li data-niceno="{$fiveBitHot[2][niceno]}"
+                                    data-price="{$fiveBitHot[2][price]}"
+                                    class="each-nice-no">
+                                    <span class="rank r3">3</span>
+                                    <span>{$fiveBitHot[2][niceno]}</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--六位靓号-->
+                        <div class="list">
+                            <div class="left1">
+                                <p>{:lan("SIX_BIT","Home")}</p>
+                                <p>{:lan("NICE_NUMBER","Home")}</p>
+                            </div>
+                            <ul class="right1">
+                                <li data-niceno="{$sixBitHot[0][niceno]}"
+                                    data-price="{$sixBitHot[0][price]}"
+                                    class="each-nice-no">
+                                    <span class="rank r1">1</span>
+                                    <span>{$sixBitHot[0][niceno]}</span>
+                                </li>
+                                <li data-niceno="{$sixBitHot[1][niceno]}"
+                                    data-price="{$sixBitHot[1][price]}"
+                                    class="each-nice-no">
+                                    <span class="rank r2">2</span>
+                                    <span>{$sixBitHot[1][niceno]}</span>
+                                </li>
+                                <li data-niceno="{$sixBitHot[2][niceno]}"
+                                    data-price="{$sixBitHot[2][price]}"
+                                    class="each-nice-no">
+                                    <span class="rank r3">3</span>
+                                    <span>{$sixBitHot[2][niceno]}</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--七位靓号-->
+                        <div class="list">
+                            <div class="left1">
+                                <p>{:lan("SEVEN_BIT","Home")}</p>
+                                <p>{:lan("NICE_NUMBER","Home")}</p>
+                            </div>
+                            <ul class="right1">
+                                <li data-niceno="{$sevenBitHot[0][niceno]}"
+                                    data-price="{$sevenBitHot[0][price]}"
+                                    class="each-nice-no">
+                                    <span class="rank r1">1</span>
+                                    <span>{$sevenBitHot[0][niceno]}</span>
+                                </li>
+                                <li data-niceno="{$sevenBitHot[1][niceno]}"
+                                    data-price="{$sevenBitHot[1][price]}"
+                                    class="each-nice-no">
+                                    <span class="rank r2">2</span>
+                                    <span>{$sevenBitHot[1][niceno]}</span>
+                                </li>
+                                <li data-niceno="{$sevenBitHot[2][niceno]}"
+                                    data-price="{$sevenBitHot[2][price]}"
+                                    class="each-nice-no">
+                                    <span class="rank r3">3</span>
+                                    <span>{$sevenBitHot[2][niceno]}</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--八位靓号-->
+                        <div class="list">
+                            <div class="left1">
+                                <p>{:lan("EIGHT_BIT","Home")}</p>
+                                <p>{:lan("NICE_NUMBER","Home")}</p>
+                            </div>
+                            <ul class="right1">
+                                <li data-niceno="{$eightBitHot[0][niceno]}"
+                                    data-price="{$eightBitHot[0][price]}"
+                                    class="each-nice-no">
+                                    <span class="rank r1">1</span>
+                                    <span>{$eightBitHot[0][niceno]}</span>
+                                </li>
+                                <li data-niceno="{$eightBitHot[1][niceno]}"
+                                    data-price="{$eightBitHot[1][price]}"
+                                    class="each-nice-no">
+                                    <span class="rank r2">2</span>
+                                    <span>{$eightBitHot[1][niceno]}</span>
+                                </li>
+                                <li data-niceno="{$eightBitHot[2][niceno]}"
+                                    data-price="{$eightBitHot[2][price]}"
+                                    class="each-nice-no">
+                                    <span class="rank r3">3</span>
+                                    <span>{$eightBitHot[2][niceno]}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--共用底部-->
+<include file="Public:bottom" />
+
+<!-- 共用登录-->
+<include file="Public:login" />
+
+<!--共用弹框-->
+<include file="Public:alert" />
+
+<!--共用去充值弹框-->
+<include file="Public:gochargeAlert" />
+
+<!--商城-靓号购买弹框-->
+<div class="nice-alert dis-none">
+    <div class="alert-animate">
+        <div class="alert-main">
+            <div class="top clear">
+                <div class="left">
+                    <p class="txt">532156</p>
+                </div>
+                <div class="right">
+                    <div class="input-group">
+                        <input type="button" value="-" class="decrease disabled" disabled>
+                        <span class="time">1</span>
+                        <span>{:lan("MONTHS","Home")}</span>
+                        <input type="button" value="+" class="increase">
+                    </div>
+                    <img src="/Public/Public/Images/Buyshow/ticket_line.png" class="hr">
+                    <p>
+                        <span class="price"></span>
+                        <span>{:lan("MONEY_UNIT","Home")}</span>
+                    </p>
+                </div>
+            </div>
+            <div class="down">
+                <button class="no button" onclick="common.closeNiceNumAlert()">{:lan("CANCEL","Home")}</button>
+                <button class="yes button">{:lan("BUY","Home")}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--共用js-->
+<include file="Public:javascript" />
+</body>
+</html>

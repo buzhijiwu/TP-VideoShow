@@ -1,0 +1,176 @@
+<!--公用登录和注册-->
+<p class="dis-none" id="language">{:getLanguage()}</p>
+<input type="hidden" value="{$Think.config.IMAGE_BASE_URL}" id="baseUrl">
+<div class="common-login dis-none">
+    <div class="bg">
+        <div class="main">
+            <!--顶部背景-->
+            <div class="top">
+                <i class="iconfont _close">&#xe605;</i>
+            </div>
+            <!--主要内容-->
+            <div class="down clear">
+
+                <div class="left">
+                    <!--提示语-->
+                    <p class="log-info">
+                        <span class="login-message"></span>
+                    </p>
+                    <!--左侧登录-->
+                    <div class="login-left _login">
+                        <div class="country">
+                            <div class="choiced _target _choiced">
+                                <i class="iconfont">&#xe608;</i>
+                                <p data-value="{$countryinfo.countryno}">
+                                    {$countryinfo.countryname} (+{$countryinfo.countryno})
+                                </p>
+                            </div>
+                            <div class="options dis-none _options">
+                                <volist name="country" id="cou">
+                                    <p data-value="{$cou.countryno}">
+                                        {$cou.countryname} (+{$cou.countryno})
+                                    </p>
+                                </volist>
+                            </div>
+                            <i class="iconfont select-down _target">&#xe604;</i>
+                        </div>
+                        <div class="input-group">
+                            <i class="iconfont">&#xe609;</i>
+                            <input type="number"
+                                   class="username log-input"
+                                   id="username"
+                                   name="username"
+                                   autocomplete="off"
+                                   placeholder="{:lan('INPUT_YOUR_USERNAME', 'Home')}"/>
+                        </div>
+                        <div class="input-group" id="text-hide1">
+                            <i class="iconfont">&#xe606;</i>
+                            <input type="text"
+                                   class="password log-input"
+                                   placeholder="{:lan('PLEASE_INPUT_PASSWORD', 'Home')}"/>
+                        </div>
+                        <div class="input-group dis-none">
+                            <i class="iconfont">&#xe606;</i>
+                            <input type="password"
+                                   class="password log-input"
+                                   id="password"
+                                   name="password"
+                                   placeholder="{:lan('PLEASE_INPUT_PASSWORD', 'Home')}"/>
+                        </div>
+                        <div class="remember-pwd" id="logshow">
+                            <label for="rememberpwd">
+                                <input id="rememberpwd"
+                                       name="rememberpwd"
+                                       type="checkbox"
+                                       value=""
+                                       checked="checked" />
+                                {:lan('REMEMBER_ME', 'Home')}
+                            </label>
+                            <a class="forget-pwd" href="/Forgetpwd">{:lan('FORGET_PASSWORD', 'Home')}</a>
+                        </div>
+                        <input id="loginsubmit"
+                               type="button"
+                               class="login-submit"
+                               value="{:lan('HOME_LOGIN', 'Home')}"
+                               onclick="common.login()">
+                    </div>
+                    <!--左边注册-->
+                    <div class="register-left dis-none _register">
+                        <div class="country">
+                            <div class="choiced _target _choiced">
+                                <i class="iconfont">&#xe608;</i>
+                                <p data-value="{$countryinfo.countryno}">
+                                    {$countryinfo.countryname} (+{$countryinfo.countryno})
+                                </p>
+                            </div>
+                            <div class="options dis-none _options">
+                                <volist name="country" id="cou">
+                                    <p data-value="{$cou.countryno}">
+                                        {$cou.countryname} (+{$cou.countryno})
+                                    </p>
+                                </volist>
+                            </div>
+                            <i class="iconfont _target">&#xe604;</i>
+                        </div>
+                        <div class="input-group">
+                            <i class="iconfont">&#xe609;</i>
+                            <input type="number"
+                                   class="username log-input"
+                                   id="rusername"
+                                   name="rusername"
+                                   placeholder="{:lan('INPUT_YOUR_USERNAME', 'Home')}" />
+                        </div>
+                        <div class="input-group" id="text-hide2">
+                            <i class="iconfont">&#xe606;</i>
+                            <input type="text"
+                                   class="password log-input"
+                                   placeholder="{:lan('PLEASE_SET_PASSWORD', 'Home')}"/>
+                        </div>
+                        <div class="input-group dis-none">
+                            <i class="iconfont">&#xe606;</i>
+                            <input type="password"
+                                   class="password log-input"
+                                   id="rpassword"
+                                   name="rpassword"
+                                   placeholder="{:lan('PLEASE_SET_PASSWORD', 'Home')}"/>
+                        </div>
+                        <div class="re-code" id="regshow1">
+                            <i class="iconfont">&#xe607;</i>
+                            <input type="text"
+                                   class="rcode"
+                                   id="verifycode"
+                                   placeholder="{:lan('PLEASE_INPUT_VERIFYCODE', 'Home')}"/>
+                        </div>
+                        <button id="verifycodebtn" class="set-code"
+                              onclick="common.getCode('{:lan(\'SEND_VERIFYCODE\', \'Home\')}','{$sendagain}');">
+                            {:lan('SEND_VERIFYCODE', 'Home')}
+                        </button>
+                        <hr class="clearIn">
+                        <div id="regshow2" class="agreement">
+                            <input id="agreecbox"
+                                   name="deal"
+                                   type="checkbox"
+                                   checked
+                                   class="deal"/>
+                            <a href="{:U('Home/Index/registerAgreement')}">
+                                {:lan('USER_AGREEMENT', 'Home')}
+                            </a>
+                        </div>
+                        <input id="regsubmit"
+                               type="button"
+                               class="register-submit"
+                               value="{:lan('HOME_REGISTER', 'Home')}"/>
+                    </div>
+                </div>
+                <!--右边按钮-->
+                <div class="right">
+                    <!--右侧登录-->
+                    <div class="login-right login-common-right _login">
+                        <h3>{:lan('HAVE_NO_ACCOUNT', 'Home')}?</h3>
+                        <button class="to" onclick="common.toRegister()">{:lan('HOME_REGISTER', 'Home')}</button>
+                    </div>
+                    <!--右侧注册-->
+                    <div class="register-right dis-none login-common-right _register">
+                        <h3 >{:lan('ALREADY_HAVE_ACCOUNT', 'Home')}!</h3>
+                        <button class="to" onclick="common.tologin()">{:lan('HOME_LOGIN', 'Home')}</button>
+                    </div>
+                    <!--第三方登录-->
+                    <div class="login-unchange">
+                        <h3>{:lan('THIRDPARTY_LOGIN', 'Home')}:</h3>
+                        <div class="threeLogin clear">
+                            <a href="{:U('Login/facebookLogin')}">
+                                <img src="/Public/Public/Images/Thirdparty/f.png"/>
+                            </a>
+                            <a href="{:U('Login/twitterLogin')}">
+                                <img src="/Public/Public/Images/Thirdparty/t.png"/>
+                            </a>
+                            <a href="{:U('Login/googleLogin')}">
+                                <img src="/Public/Public/Images/Thirdparty/google.png"/>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

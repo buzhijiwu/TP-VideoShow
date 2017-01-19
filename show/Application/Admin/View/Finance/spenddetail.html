@@ -1,0 +1,143 @@
+﻿<tagLib name="html" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<meta http-equiv="X-UA-Compatible" content="IE=7" /> 
+<title>{:lan('ADMIN_MAN_TITLE', 'Admin')}</title>
+<link href="__PUBLIC__/Public/statics/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Public/statics/css/system.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Public/statics/css/table_form.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Public/statics/css/dialog.css" rel="stylesheet" type="text/css" />
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/dialog.js"></script>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles1.css" title="styles1" media="screen" />
+<link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles2.css" title="styles2" media="screen" />
+<link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles3.css" title="styles3" media="screen" />
+<link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles4.css" title="styles4" media="screen" />
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/jquery.min.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/admin_common.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/styleswitch.js"></script>
+
+</head> 
+<body> 
+<style type="text/css"> 
+	html{_overflow-y:scroll}
+</style><div id="closeParentTime" style="display:none"></div> 
+<div class="pad-10">
+    <form name="searchform" id="searchform" action="/Admin/Finance/spenddetail" method="get" >
+        <input type="hidden" name="searchform" value="1">
+        <table width="100%" cellspacing="0" class="search-form">
+            <tbody>
+            <tr>
+                <td>
+                    <div class="explain-col">
+                        {:lan('TRANSACTION_TIME', 'Admin')}：
+                        <link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/js/calendar/jscal2.css"/>
+                        <link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/js/calendar/border-radius.css"/>
+                        <link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/js/calendar/win2k.css"/>
+                        <script type="text/javascript" src="__PUBLIC__/Public/statics/js/calendar/calendar.js"></script>
+                        <script type="text/javascript" src="__PUBLIC__/Public/statics/js/calendar/lang/en.js"></script>
+                        <input type="text" name="start_time" id="start_time" value="{$search['start_time']}" size="10" class="date" readonly>&nbsp;<script type="text/javascript">
+                        Calendar.setup({
+                            weekNumbers: false,
+                            inputField : "start_time",
+                            trigger    : "start_time",
+                            dateFormat: "%Y-%m-%d",
+                            showTime: false,
+                            minuteStep: 1,
+                            onSelect   : function() {this.hide();}
+                        });
+                    </script>- &nbsp;<input type="text" name="end_time" id="end_time" value="{$search['end_time']}" size="10" class="date" readonly>&nbsp;<script type="text/javascript">
+                        Calendar.setup({
+                            weekNumbers: false,
+                            inputField : "end_time",
+                            trigger    : "end_time",
+                            dateFormat: "%Y-%m-%d",
+                            showTime: false,
+                            minuteStep: 1,
+                            onSelect   : function() {this.hide();}
+                        });
+                    </script>
+                        {:lan('ROOMNO', 'Admin')}/{:lan('SYS_USERNAME', 'Admin')}/{:lan('NICKNAME', 'Admin')}：
+                        <input name="username" type="text" class="input-text" value="{$search['username']}" />
+                        {:lan('TARGET_OBJECT', 'Admin')}：
+                        <input name="targetname" type="text" class="input-text" value="{$search['targetname']}" />
+                        <input type="button" class="button" onclick="form_search();" value="{:lan('BTN_SEARCH', 'Admin')}" />
+                        <div style="float:right;">
+                            {:lan('EXPORT_DATA','Admin')}{:lan("PAGE_TOTAL", "Common")}{$export_page}{:lan("PAGE", "Common")}
+                            <input type="text" style="width:50px;" name="export_page" value="">
+                            <input type="button" class="button" onclick="export_record();" style="background-color:#00CC99;" value="{:lan('EXPORT_DATA','Admin')}">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+    <div class="subnav">
+        <span>{:lan('USER_TOTAL_SPEND', 'Admin')}：</span>
+        <b style="color:red;font-size:18px;">{$total_spend_money} XU</b>
+        <span>({:lan('USER_TOTAL_SPEND_TIPS', 'Admin')})</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <span>{:lan('SYS_LOCAL_CURRENCY', 'Admin')}：</span>
+        <b style="color:red;font-size:18px;">{$total_spend_vnd} VND</b>
+        <span>(1{:lan('MONEY_UNIT','Admin')}={$vnd_ratio}{:lan('VND','Admin')})</span>
+    </div><br/>
+<form name="myform" id="myform" action="" method="post" >
+    <div class="table-list">
+        <table width="100%">
+            <thead>
+            <tr>
+                <th>{:lan('SYS_NUMBER', 'Admin')}</th>
+                <th>{:lan('ROOMNO', 'Admin')}</th>
+                <th>{:lan('SYS_USERNAME', 'Admin')}</th>
+                <th>{:lan('NICKNAME', 'Admin')}</th>
+                <th>{:lan('TARGET_OBJECT', 'Admin')}</th>
+                <th>{:lan('TRADE_TYPE', 'Admin')}</th>
+                <th>{:lan('GIFT_NAME', 'Admin')}</th>
+                <th>{:lan('GIFT_COUNT', 'Admin')}</th>
+                <th>{:lan('VIRTUAL_MONEY', 'Admin')}</th>
+                <th>{:lan('TRANSACTION_TIME', 'Admin')}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <volist name="spenddetails" id="vo" key="k">
+                <tr>
+                    <td align='center'>{$k}</td>
+                    <td align='center'>
+                        <neq name="vo.niceno" value="">{$vo['niceno']}<else/>{$vo['roomno']}</neq>
+                    </td>
+                    <td align='center'>{$vo['username']}</td>
+                    <td align='center'>{$vo['nickname']}</td>
+                    <td align='center'>{$vo['targetname']}</td>
+                    <td align="center">{$vo['tradetype']}</td>
+                    <td align='center'>{$vo['giftname']}</td>
+                    <td align='center'>{$vo['giftcount']}</td>
+                    <td align='center'>{$vo['spendamount']}</td>
+                    <td align='center'>{$vo['tradetime']}</td>
+                </tr>
+            </volist>
+
+            </tbody>
+        </table>
+        <div id="pages">{$page}</div>
+    </div>
+    <input type="hidden" id="return" name="return" value="{$_SERVER["REQUEST_URI"]|base64_encode}" >
+</form>
+</div>
+<script type="text/javascript">
+    //条件搜索
+    function form_search(){
+        document.getElementById('searchform').action = '/Admin/Finance/spenddetail/';
+        $('#searchform').submit();
+    }
+    //导出数据
+    function export_record(){
+        if(confirm("{:lan('CONFIRM_EXPORT_DATA','Admin')}")){
+            document.getElementById('searchform').action = '/Admin/Finance/export_spenddetail/';
+            $('#searchform').submit();
+        }
+    }
+</script>
+</body> 
+</html>

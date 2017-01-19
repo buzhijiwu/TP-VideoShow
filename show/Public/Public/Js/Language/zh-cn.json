@@ -1,0 +1,28 @@
+{
+	"CANCELFAVORITE" : "取消收藏",
+	"GUARDYOURSELF" : "自己不能守护自己!",
+	"ADDFAVORFAIL" : "添加收藏失败，请稍后再试~",
+	"REPEATFAVOR" : "您已经收藏过了",
+	"SYSTEMERROR" : "系统出错了",
+	"FAVORYOURSELF" : "自己不能收藏自己!",
+	"CLICKFAVORITE" : "点我收藏哦",
+	"ATRANSLATIONTEST" : "添加收藏失败，请稍后再试~",
+	"SPEAKTEXT" : "| 输入文字不超过50个字。每次广播花费500秀币",
+	
+	"YOUARENOTLOGIN" : "你还未登陆请登陆",
+	"BALANCE_NOT_ENOUGH" : "余额不足,请充值",
+	"LOGIN" : "登陆",
+	"RECHARGE" : "充值",
+	
+	"WARMWELCOME":"热烈欢迎",
+	"TUHAO":"土豪",
+	"DRIVE":"驾驶着",
+	"ENTERROOM":"进入房间",
+	"LEAVEROOM":"离开房间",
+	"PRESENTTO":"送给",
+	"GESHU":"个",
+	
+	
+	
+	"ENTERROOMdsaf":"进入房间"
+}

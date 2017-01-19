@@ -1,0 +1,434 @@
+<!doctype html>
+<html>
+<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<link rel="shortcut icon" href="/Public/Public/Images/favicon.ico"/>
+	<link href="__PUBLIC__/Home/Css/{:getLanguage()}/reset.css?time=201600906.css" rel="stylesheet" type="text/css" />
+	<link  href="__PUBLIC__/Home/Css/{:getLanguage()}/common.css?time=201600906.css" rel="stylesheet" type="text/css">
+	<link  href="__PUBLIC__/Home/Css/{:getLanguage()}/layout.css?time=201600906.css" rel="stylesheet" type="text/css">
+	<link  href="__PUBLIC__/Home/Css/{:getLanguage()}/index.css?time=201600906.css" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]>
+	<script src="js/html5shiv.min.js"></script>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+
+    <!-- cnzz统计代码 -->
+    <script>
+    var _czc = _czc || [];
+    _czc.push(["_setAccount", "{$Think.config.CNZZ_SET_ACCOUNT}"]);
+    </script>	
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-75448904-1', 'auto');
+        ga('send', 'pageview');
+
+		var iphone = /iphone/i;
+		var android = /linux/i;
+		if(iphone.test(navigator.platform) || android.test(navigator.platform)){
+			window.location.href = "/Application/Home/View/Public/indexApp.html"
+		}
+    </script>
+	<title>{:lan('WEB_TITLE', 'Home')}</title>
+
+	<script type="text/javascript" src="__PUBLIC__/Tools/Js/jquery/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/Home/Js/live/show.js"></script>
+</head>
+
+<body>
+<!-- Google Tag Manager -->
+	<noscript>
+		<iframe src="//www.googletagmanager.com/ns.html?id=GTM-K7MN7C"
+			height="0" width="0" style="display: none; visibility: hidden"></iframe>
+	</noscript>
+	<script>
+		(function(w, d, s, l, i) {
+			w[l] = w[l] || [];
+			w[l].push({
+				'gtm.start' : new Date().getTime(),
+				event : 'gtm.js'
+			});
+			var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l='
+					+ l
+					: '';
+			j.async = true;
+			j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl;
+			f.parentNode.insertBefore(j, f);
+		})(window, document, 'script', 'dataLayer', 'GTM-K7MN7C');
+	</script>
+	<!-- End Google Tag Manager -->
+<input type="hidden" id="userid" value="{$Think.session.userid}">
+<!--公用头部-->
+<include file="Public:header" />
+
+
+<!--主要内容-->
+<div class="common-wrap">
+	<div class="index-main">
+
+		<!--头部直播-->
+		<div class="top-live">
+			<div class="width clear analysis" data-module-name="首页_视频区域">
+				<div class="left live">
+					<div id="player"></div>
+					<span class="common-em emcee-lv" id="emLv"></span>
+					<p class="em-name _liveName" title=""></p>
+					<div class="attention analysis" data-module-name="首页_关注">
+						<i class="iconfont _isFriend"></i>
+						<span class="_attentionNum"></span>
+					</div>
+					<p class="look-num">
+						<i class="iconfont">&#xe600;</i>
+						<span class="_viewNum"></span>
+					</p>
+					<a href="" class="into _enterRoom">{:lan("ENTER_ROOM", "Home")}</a>
+				</div>
+
+				<div class="left nolive dis-none"></div>
+
+				<div class="right clear">
+				    <volist name="videoArea" id="emcee" key="k">
+					<div class="live-list"
+						 data-roomno="{$emcee['roomno']}"
+						 data-livetype="{$emcee['livetype']}"
+						 data-fans="{$emcee['fanscount']}"
+						 data-view="{$emcee['totalaudicount']}"
+						 data-friend="{$emcee['isfriend']}"
+						 data-emceeid="{$emcee['userid']}"
+						 data-isliving="{$emcee['isliving']}"
+						 data-lv="{$emcee['emceelevel']}">
+						<div class="table-cell">
+							<img src="{$Think.config.IMAGE_BASE_URL}{$emcee['bigheadpic']}" class="emcee-header">
+						</div>
+						<p class="line">
+							<eq name="emcee[isliving]" value="1">
+								<eq name="emcee['livetype']" value="2">
+									<i class="iconfont pc-icon on-live">&#xe61a;</i>
+									<else/>
+									<i class="iconfont app-icon on-live">&#xe619;</i>
+								</eq>
+								<else/>
+								<eq name="emcee['livetype']" value="2">
+									<i class="iconfont pc-icon">&#xe61a;</i>
+									<else/>
+									<i class="iconfont app-icon">&#xe619;</i>
+								</eq>
+							</eq>
+							<span title="{$emcee['nickname']}" class="video-nickname">{$emcee['nickname']}</span>
+						</p>
+						<eq name="emcee[isliving]" value="1">
+							<div class="icon-play">LIVE</div>
+						</eq>
+					</div>
+					</volist>
+				</div>
+			</div>
+		</div>
+
+		<!--推荐主播-->
+		<div class="hot-live">
+			<div class="width clear">
+				<div class="left clear analysis" data-module-name="首页_推荐">
+				    <volist  name="commendEmcees" id="emcee" key="k" offset="0" length='1'>
+					<a class="left1" href="{:U('/'.$emcee['roomno'])}">
+						<div class="table-cell">
+							<img src="{$Think.config.IMAGE_BASE_URL}{$emcee['bigheadpic']}" class="emcee-header">
+						</div>
+						<div class="line1 clear">
+						<eq name="emcee[isliving]" value="1">
+							<eq name="emcee['livetype']" value="2">
+								<i class="iconfont pc-icon on-live">&#xe61a;</i>
+								<else/>
+								<i class="iconfont app-icon on-live">&#xe619;</i>
+							</eq>
+							<else/>
+							<eq name="emcee['livetype']" value="2">
+								<i class="iconfont pc-icon">&#xe61a;</i>
+								<else/>
+								<i class="iconfont app-icon">&#xe619;</i>
+							</eq>
+						</eq>
+						<p class="em-name" title="{$emcee['nickname']}">{$emcee['nickname']}</p>
+						<p class="look-num">
+							<i class="iconfont">&#xe600;</i>
+							<span class="count" title="{$emcee['totalaudicount']}">{$emcee['totalaudicount']}</span>
+						</p>
+						</div>
+						<div class="dark iconfont">
+							&#xe63f;
+						</div>
+					</a>
+					</volist>
+					<ul class="show-common-list clear right1">
+					    <volist  name="commendEmcees" id="emcee" key="k" offset="1" length='4'>
+						<li class="list">
+							<a href="{:U('/'.$emcee['roomno'])}">
+								<eq name="emcee[isliving]" value="1">
+									<div class="icon-play">LIVE</div>
+								</eq>
+								<div class="table-cell">
+									<img class="header-img" src="{$Think.config.IMAGE_BASE_URL}{$emcee['bigheadpic']}" />
+								</div>
+								<div class="line1 clear">
+									<eq name="emcee[isliving]" value="1">
+										<eq name="emcee['livetype']" value="2">
+											<i class="iconfont pc-icon on-live">&#xe61a;</i>
+											<else/>
+											<i class="iconfont app-icon on-live">&#xe619;</i>
+										</eq>
+										<else/>
+										<eq name="emcee['livetype']" value="2">
+											<i class="iconfont pc-icon">&#xe61a;</i>
+											<else/>
+											<i class="iconfont app-icon">&#xe619;</i>
+										</eq>
+									</eq>
+									<p class="em-name" title="{$emcee['nickname']}">{$emcee['nickname']}</p>
+									<p class="look-num">
+										<i class="iconfont">&#xe600;</i>
+										<span class="count" title="{$emcee['totalaudicount']}">{$emcee['totalaudicount']}</span>
+									</p>
+								</div>
+								<div class="dark iconfont">
+									&#xe63f;
+								</div>
+							</a>
+						</li>
+						</volist>
+					</ul>
+				</div>
+				<div class="right">
+					<div class="slide-left ckone">
+						<ul class="slide-left-wrapper clear">
+							<foreach name="rollpic" item="rp" key="k">
+								<li class="analysis" data-module-name="首页_轮播图-{$rp['title']}">
+									<a href="{$rp['linkurl']}">
+										<img src="{$Think.config.IMAGE_BASE_URL}{$rp['picpath']}" alt=""/></a></li>
+								</if> </foreach>
+						</ul>
+						<div class="slide-left-box">
+							<div class="slide-left-boxWrap">
+								<ul class="dot-wrap">
+									<foreach name="rollpic" item="rp" key="k"> <if
+											condition="$k eq 0">
+										<li class="currentLp"><em>{$k}</em></li>
+										<else />
+										<li><em>{$k}</em></li>
+									</if> </foreach>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="download"></div>
+				</div>
+			</div>
+		</div>
+
+		<!--main-->
+		<div class="main">
+			<div class="width clear">
+
+				<!--左边列表-->
+				<div class="left">
+					<div class="floor">
+						<h2 class="title">
+							<i class="iconfont">&#xe641;</i>
+							{:lan("HOT_EMCEE", "Home")}
+						</h2>
+						<ul class="show-common-list clear analysis" data-module-name="首页_热门">
+							<volist name="hotEmcees.data" id="emcee" key="k">
+								<li class="list">
+									<a href="{:U('/'.$emcee['roomno'])}">
+										<eq name="emcee[isliving]" value="1">
+											<div class="icon-play">LIVE</div>
+										</eq>
+										<div class="table-cell">
+											<img class="header-img" src="/Public/Public/Images/Common/img-loading.gif" data-src="{$Think.config.IMAGE_BASE_URL}{$emcee['bigheadpic']}" />
+										</div>
+										<div class="line1 clear">
+											<eq name="emcee[isliving]" value="1">
+												<eq name="emcee['livetype']" value="2">
+													<i class="iconfont pc-icon on-live">&#xe61a;</i>
+												<else/>
+													<i class="iconfont app-icon on-live">&#xe619;</i>
+												</eq>
+											<else/>
+												<eq name="emcee['livetype']" value="2">
+													<i class="iconfont pc-icon">&#xe61a;</i>
+												<else/>
+													<i class="iconfont app-icon">&#xe619;</i>
+												</eq>
+											</eq>
+											<p class="em-name" title="{$emcee['nickname']}">{$emcee['nickname']}</p>
+											<p class="look-num">
+												<i class="iconfont">&#xe600;</i>
+												<span class="count" title="{$emcee['totalaudicount']}">{$emcee['totalaudicount']}</span>
+											</p>
+										</div>
+										<div class="dark iconfont">
+											&#xe63f;
+										</div>
+									</a>
+								</li>
+							</volist>
+						</ul>
+					</div>
+					<div id="loading" class="dis-none">
+						<img src="/Public/Public/Images/Common/loading.gif">
+					</div>
+				</div>
+
+
+				<div class="right">
+
+					<!--公告-->
+					<div class="analysis" data-module-name="首页_公告">
+					<include file="Public:announce" />
+					</div>
+
+					<!--主播收入榜-->
+					<div class="section">
+						<h2 class="title">
+							<i class="iconfont">&#xe63c;</i>
+							<span>{:lan('EMCEE_EARN_TOP', 'Home')}</span>
+						</h2>
+						<div class="rank-list analysis" data-module-name="首页_主播收入榜">
+							<div class="tab-buttons clear">
+								<p class="active">{:lan("DAY", "Home")}</p>
+								<p>{:lan("WEEK", "Home")}</p>
+								<p>{:lan("MONTH", "Home")}</p>
+								<p>{:lan("TOTAL", "Home")}</p>
+							</div>
+							<div class="list-main">
+								<!--日-->
+								<table class="list">
+									<tbody></tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+
+					<!--用户消费榜-->
+					<div class="section">
+						<h2 class="title">
+							<i class="iconfont">&#xe63c;</i>
+							<span>{:lan("TOP_CONSUME_LIST", "Home")}</span>
+						</h2>
+						<div class="rank-list analysis" data-module-name="首页_用户消费榜">
+							<div class="tab-buttons clear">
+								<p class="active">{:lan("DAY", "Home")}</p>
+								<p>{:lan("WEEK", "Home")}</p>
+								<p>{:lan("MONTH", "Home")}</p>
+								<p>{:lan("TOTAL", "Home")}</p>
+							</div>
+							<div class="list-main">
+								<!--日-->
+								<table class="list">
+									<tbody></tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+<!--共用底部-->
+<include file="Public:bottom" />
+
+<!-- 共用登录-->
+<include file="Public:login" />
+
+<!--共用弹框-->
+<include file="Public:alert" />
+
+<!--共用去充值弹框-->
+<include file="Public:gochargeAlert" />
+
+<!--共用js-->
+<include file="Public:javascript" />
+
+
+<script>
+
+	(function () {
+		var range = ["d","w","m","all"],
+				url = ['/Home/Toplist/LoadTopEmceeList','/Home/Toplist/LoadRichList'];
+		for(var i =0; i < 2; i++){
+			(function (i) {
+				$.ajax({
+					url: url[i],
+					data: {range:"d"},
+					dataType: 'json',
+					type: "post",
+					cache : false,
+					success: function(data) {
+						index.topLIstSection.find("tbody").eq(i)
+								.html(index.buildLoadList(data,i));
+					},error: function(data) {
+						console.log(data);
+					}
+				});
+			})(i);
+		}
+
+		common.slideLeft(370);
+		index.scrollLoad({
+			pagesize : 40
+		});
+		var firstList = $(".index-main .top-live .right .live-list").eq(0);
+		firstList.addClass("active");
+		if(firstList.attr("data-isliving") == 1){
+
+			var liveType = firstList.attr("data-livetype") == 2 ? "pc" : "app";
+			var attentionIcon = firstList.attr("data-friend") == 1 ? "&#xe61f;" : "&#xe620;";
+
+			swfobject.embedSWF(
+					"/Public/Public/Swf/WaaShowLivePlayerPCcommon.swf?roomId="+firstList.attr("data-roomno")+"&liveUserID="+firstList.attr("data-emceeid")+"&language="+ $.trim($("#language").text())+"&headerImg="+firstList.find(".emcee-header").attr("src")+"&blackImg=/Public/Public/Images/Background/black-bg.png&liveType="+liveType+"&baseurl="+$("#baseUrl").val(),
+					"player",740,450,"10.0", "",{},
+					{quality:"high",wmode:"opaque",allowscriptaccess:"always",allowFullScreen:"true"}
+			);
+
+			if(liveType == "pc"){
+				$(".index-main .top-live").removeClass("app");
+			}else if(liveType == "app"){
+				$(".index-main .top-live").addClass("app");
+			}
+
+			$("#emLv").addClass("em"+firstList.attr("data-lv"));
+			$("._liveName").html(firstList.find(".video-nickname").html());
+			$("._attentionNum").html(firstList.attr("data-fans"));
+			$("._viewNum").html(firstList.attr("data-view"));
+			$("._enterRoom").attr("href","/"+firstList.attr("data-roomno"));
+			$("._isFriend").html(attentionIcon);
+			index.emceeuserid = firstList.attr("data-emceeid");
+		}else{
+			if($(".left.nolive video").length == 0){
+				var htmlStr = "<video width=\"100%\" controls=\"controls\" height=\"450\" loop=\"loop\" autoplay=\"autoplay\">"+
+						"<source src=\"{$Think.config.IMAGE_BASE_URL}/Uploads/Market/pc/default.mp4\" type=\"video/mp4\">"+
+						"</video>";
+
+				$(".left.nolive").removeClass("dis-none").html(htmlStr);
+				$(".left.live").addClass("dis-none");
+			}
+		}
+
+	})();
+
+
+</script>
+</body>
+</html>

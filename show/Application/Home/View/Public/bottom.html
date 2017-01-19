@@ -1,0 +1,25 @@
+<!--公用页面底部-->
+<div class="common-footer">
+    <div class="width clear">
+        <p class="line2"><a href="/19000" target="_blank">{:lan('ONLINE_SERVICE', 'Home')}</a> | <a href="/Home/Index/aboutUs.html" target="_blank">{:lan('ABOUT_US', 'Home')}</a> | <a href="/Home/Index/contactUs.html" target="_blank">{:lan('CONTACT_US', 'Home')}</a> | <a href="/Home/Index/registerAgreement.html" target="_blank">{:lan('WAASHOW_AGREEMENT', 'Home')}</a></p>
+        <if condition="getLanguage() eq 'vi'">
+        <p class="line3">
+            Liên kết：
+            <volist name="linkList" id="vo" key="k">
+            <if condition="$k eq 1">
+            <a href="{$vo.linkurl}" target="_blank">{$vo.linkname}</a>
+            <else />
+             | <a href="{$vo.linkurl}" target="_blank">{$vo.linkname}</a>
+             </if>
+            </volist>
+        </p>
+        </if>
+        <if condition="getLanguage() eq 'vi'">
+        <p class="line3">Copyright by waashow.vn</p>
+        <elseif condition="getLanguage() eq 'zh'" />
+        <p class="line3">备案号：苏ICP备16031743号-1</p>
+        <else />
+        <p class="line3">Copyright by JOWAY INFOTECH</p>
+        </if>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" class="off">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<title>{:lan('APP_STORE_CHANNEL', 'Appchannel')}</title>
+<link href="__PUBLIC__/Public/statics/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Public/statics/css/system.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Public/statics/css/dialog.css" rel="stylesheet" type="text/css" />
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Tools/Js/jquery/jquery-1.8.3.min.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/styleswitch.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/dialog.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/hotkeys.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/jquery.sGallery.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/Js/Language/language.js"></script>
+
+<script type="text/javascript">
+function ResumeError() { 
+	return true; 
+} 
+window.onerror = ResumeError;
+</script>
+</head>
+<body scroll="no">
+<div class="header">
+	<div class="logo_ea lf" style="width:210px;"><a href="#" target="_blank"><span class="invisible">{$waashowplatform}</span></a></div>
+
+    <div class="col-auto" style="overflow: visible">
+		<h2 class="title-name">{:lan('APP_STORE_CHANNEL', 'Appchannel')}</h2>
+    	<div class="log cut_line">{$hello} {$_SESSION['disusername']} <span>|</span><a href="{:U('logout')}">[{$quitsystem}]</a><span>|</span>
+    		<a href="/" target="_blank" id="site_homepage" style="margin-right: 50px;">{$sitehomepage}</a>
+            {:lan('LAST_LOGIN_TIME', 'Appchannel')}{$lastlogintime}
+    	</div>
+        <ul class="nav" id="top_menu">
+        
+        </ul>
+    </div>
+</div>
+<div id="content">
+	<div class="col-left left_menu">
+    	<div id="leftMain"></div>
+        <a href="javascript:;" id="openClose" style="outline-style: none; outline-color: invert; outline-width: medium;" hideFocus="hidefocus" class="open" title="{$spreadandshrink}"><span class="hidden">{$spread}</span></a>
+    </div>
+	<div class="col-1 lf cat-menu" id="display_center_id" style="display:none" height="100%">
+	    <div class="content">
+        	<iframe name="center_frame" id="center_frame" src="" frameborder="false" scrolling="auto" style="border:none" width="100%" height="auto" allowtransparency="true"></iframe>
+        </div>
+    </div>
+    <div class="col-auto mr8">
+    	<div class="col-1">
+        	<div class="content" style="position:relative; overflow:hidden">
+                <iframe name="right" id="rightMain" src="{:U('/Appchannel/Channel/channel_query/')}" frameborder="false" scrolling="auto" style="border:none; margin-bottom:20px" width="100%" height="auto" allowtransparency="true"></iframe>
+                
+        	</div>
+        </div>
+    </div>
+</div>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Appchannel/Js/admin_index_ea.js"></script>
+</body>
+</html>

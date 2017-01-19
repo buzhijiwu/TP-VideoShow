@@ -1,0 +1,81 @@
+<extend name="base" />
+
+<block name="menu">
+<div class="nav-list clear">
+	<a href="__URL__/recivegift">{:lan('RECIVE_LIST', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+	<a href="__URL__/sendgift">{:lan('SEND_GIFT', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+	<a href="__URL__/rechargelist" class="active">{:lan('RECHARGE_RECORD', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+	<a href="__URL__/consumelist">{:lan('CONSUME_RECORD', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+	<a href="__URL__/showbeanexchange">{:lan('EXCHANGE_SHOW_BEAN_RECORD', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+	<a href="__URL__/showmoneyexchange">{:lan('EXCHANGE_SHOW_MONEY_RECORD', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+</div>
+</block>
+
+<block name="main">
+<div class="right-mybill-main">
+	<eq name="rechargeList[0]" value="">
+	<!--无充值记录-->
+	<div class="common-no-data">
+		<img src="/Public/Public/Images/newImage/common/al-cry.png">
+		<h1>{:lan('NO_RECHARGE', 'Home')}</h1>
+		<!--laydate的bug，需要加id，否则报错-->
+		<a id="start" class="dis-none"></a>
+		<a id="end" class="dis-none"></a>
+	</div>
+    <else />
+	<!--有充值记录-->
+	<form name="query" action="" method="get" id="query" class="query">
+		<p class="table-title">
+			{:lan('QUERY_TIME', 'Home')}：
+			<input name="start" id="start" class="laydate-icon" placeholder="{$starttime}"/> {:lan('TO', 'Home')}
+			<input name="end" id="end" class="laydate-icon" placeholder="{$endtime}"/>
+			<button class="query-btn">{:lan('QUERY', 'Home')}</button>
+			<neq name="Think.get.time" placeholder=""><button class="btn-no">{:lan('CANCEL', 'Home')}</button></neq>
+		</p>
+		<table class="table-list">
+			<thead>
+			  <tr>
+				<th>{:lan('ORDER_NO', 'Home')}</th>
+				<th>{:lan('RECHARGE_SHOW_MONEY', 'Home')}</th>
+				<th>{:lan('RECHARGE_AMOUNT', 'Home')}</th>
+				<th>{:lan('RECHARGE_CHANNEL', 'Home')}</th>
+				<th>{:lan('STATUS', 'Home')}</th>
+				<th>{:lan('RECHARGE_TIME', 'Home')}</th>
+			</tr>
+			</thead>
+			<tbody>
+			   <volist name="rechargeList" id="vo">
+				   <tr>
+						<td>{$vo[orderno]}</td>
+						<td>
+						    {$vo[showamount]}
+						    <if condition="$vo[ispresent]=='1'">
+						    （{:lan('PRESENT', 'Home')}）
+						    </if>
+						</td>
+						<td>{$vo[amount]} <neq name="vo.localunit" value="">({$vo[localunit]})</neq></td>
+						<td>{$vo[channelname]}</td>
+						<td>
+							<if condition="$vo[status]=='2'">
+							{:lan('PENDING', 'Home')}
+							<elseif condition="$vo[status]=='1'"/>
+							{:lan('SUCCESSFUL', 'Home')}
+							<else />
+							{:lan('FAILED', 'Home')}
+							</if>
+						</td>
+						<td>{$vo[rechargetime]}</td>
+					</tr>
+				</volist>
+			</tbody>
+		</table>
+	</form>
+	{$page}
+	</eq>
+</div>
+	<script>
+		$(function () {
+			userCenter.timeChoice();
+		})
+	</script>
+</block>

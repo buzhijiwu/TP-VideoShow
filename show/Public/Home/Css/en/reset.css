@@ -1,0 +1,108 @@
+/*盒子模型*/
+*,*:after,*:before{
+    box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+}
+html,body{
+    height: 100%;
+    font-family:"PingFang SC","Helvetica Neue", Helvetica, "Microsoft Yahei", "WenQuanYi Micro Hei", Arial,Verdana,sans-serif ;
+    font-size: 12px;
+}
+body{
+    background-color: #f1f4f8;
+}
+body,ol,ul,h1,h2,h3,h4,h5,h6,p,th,td,dl,dd,label,
+form,fieldset,legend,input,textarea,select,button{
+    margin:0;
+    padding:0;
+    border:0;
+    background-color: transparent;
+    font-family:"PingFang SC","Helvetica Neue", Helvetica, "Microsoft Yahei", "WenQuanYi Micro Hei", Arial,Verdana,sans-serif ;
+}
+input:focus,button:focus,select:focus{
+    outline: none;
+}
+input[type=checkbox],input[type=radio]{
+    vertical-align: baseline;
+    position: relative;
+    top: 2px;
+}
+/*自动填充密码的背景色*/
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    background-color: rgba(255,255,255,1);
+    background-image: none;
+    color:#666;
+}
+/*input的type=number时候清除右边箭头*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button{
+    -webkit-appearance: none !important;
+    margin: 0;
+}
+input[type="number"]{-moz-appearance:textfield;}
+ul,li{
+    list-style: none;
+}
+h1,h2,h3,h4,h5,h6,i,b,strong,p,div{
+    font-weight: normal;
+    word-wrap: break-word;
+}
+/*清除ios系统input效果*/
+input[type=button],input[type=submit],input[type=file],button {
+    cursor: pointer;
+    -webkit-appearance: none;
+}
+body{
+    background:#f5f5f5;
+    -webkit-text-size-adjust:100%;
+    font-size: 14px;
+    position: relative;
+    color: #666;
+}
+a{
+    text-decoration:none;
+    color:#666;
+    font-style: normal;
+}
+a:hover{
+    cursor: pointer
+}
+img{
+    border:none;
+    vertical-align:middle;
+    line-height: 1
+}
+span,i,b,strong,a,input,button{
+    vertical-align: middle;
+}
+table{
+    table-layout: fixed;
+    width: 100%;
+    border-collapse:collapse;
+    border-spacing:0;
+}
+/*清除样式*/
+.clearIn,.clear:after{
+    display:block;
+    font-size:0;
+    content:" ";
+    clear:both;
+    height:0;
+    border: none;
+    padding: 0;
+    margin: 0;
+    overflow:auto;
+    float: none;
+    zoom:1;
+}
+/*隐藏*/
+.dis-none{
+    display: none;
+}
+
+
+
+
+

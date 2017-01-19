@@ -1,0 +1,102 @@
+<extend name="Public:list" />
+<block name="title"></block>
+<block name="css"></block>
+
+<block name="main">
+  <script>
+    $(function(){
+
+      $.formValidator.initConfig({formid:"myform",autotip:true,onerror:function(msg,obj){window.top.art.dialog({content:msg,lock:true,width:'200',height:'50'}, function(){this.close();$(obj).focus();})}});
+      $("#menuid").formValidator({
+                onshow:"{:lan('MENU_NO', 'Admin')}",
+                onfocus:"{:lan('MENU_NO', 'Admin')}",
+                oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"})
+              .inputValidator({min:1,onerror:"{:lan('MENU_NO', 'Admin')}"})
+              .regexValidator({regexp:"num",datatype:"enum",onerror:"{:lan('PLZ_INPUT_NUMBER', 'Admin')}"});
+      $("#menuname").formValidator({
+                onshow:"{:lan('MENU_NAME', 'Admin')}",
+                onfocus:"{:lan('MENU_NAME', 'Admin')}",
+                oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"})
+              .inputValidator({min:1,onerror:"{:lan('MENU_NAME', 'Admin')}"});
+      $("#menukey").formValidator({
+                onshow:"{:lan('MENU_KEY', 'Admin')}",
+                onfocus:"{:lan('MENU_KEY', 'Admin')}",
+                oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"})
+              .inputValidator({min:1,onerror:"{:lan('MENU_KEY', 'Admin')}"});
+      $("#position").formValidator({
+                onshow:"{:lan('MENU_DESCRIPTION', 'Admin')}",
+                onfocus:"{:lan('MENU_DESCRIPTION', 'Admin')}",
+                oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"})
+              .inputValidator({min:1,onerror:"{:lan('MENU_DESCRIPTION', 'Admin')}"});
+      $("#sort").formValidator({
+                onshow:"{:lan('SORT', 'Admin')}",
+                onfocus:"{:lan('SORT', 'Admin')}",
+                oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"})
+              .inputValidator({min:1,onerror:"{:lan('SORT', 'Admin')}"})
+              .regexValidator({regexp:"num",datatype:"enum",onerror:"{:lan('PLZ_INPUT_NUMBER', 'Admin')}"});
+    })
+  </script>
+<div class="subnav">
+  <div class="content-menu ib-a blue line-x"><a href="__URL__/menu/"><em>{:lan('MENU_LIST', 'Admin')}</em></a><span>|</span><a href="javascript:;" class="on"><em>{:lan('ADD_MENU', 'Admin')}</em></a></div>
+</div>
+<style type="text/css">
+	html{_overflow-y:scroll}
+</style>
+<div class="pad_10">
+  <div class="common-form">
+    <form name="myform" action="" method="post" id="myform">
+		<input name="nicenoid" value="{$data['mid']}" type="hidden">
+		<input name="parentid" type="hidden" value="{$Think.get.pid|default=0}" style=" width: 150px;">
+			
+      <table class="table_form contentWrap" width="100%">
+        <tbody>
+        	<eq name="data.menutype" value="">
+          <tr>
+            <td width="80">{:lan('MENU_TYPE', 'Admin')}</td>
+            <td>
+            	<select name="menutype" class="selectStyle">
+                	<option value="1">{:lan('ADMIN_MENU', 'Admin')}</option>
+                	<option value="-1" >{:lan('HOME_MENU', 'Admin')}</option>
+				</select>
+			</td>
+	      </tr>   
+	      </eq>
+	      
+          <tr>
+            <td width="80">{:lan('MENU_NO', 'Admin')}</td>
+            <td><input name="menuid" class="input-text" type="text" value="{$data['menuid']}" style=" width: 150px;" id="menuid"></td>
+          </tr>
+          <tr>
+            <td>{:lan('MENU_NAME', 'Admin')}</td>
+            <td><input name="menuname" class="input-text" type="text" value="{$data['menuname']}" style=" width: 150px;" id="menuname"></td>
+          </tr>
+          <tr>
+            <td>{:lan('MENU_KEY', 'Admin')}</td>
+            <td><input name="menukey" class="input-text" type="text" value="{$data['menukey']}" style=" width: 150px;" id="menukey"></td>
+          </tr>
+          <tr>
+            <td>{:lan('MENU_DESCRIPTION', 'Admin')}</td>
+            <td><input name="position" class="input-text" type="text" value="{$data['position']}" style=" width: 150px;" id="position"></td>
+          </tr>
+          <tr>
+            <td>{:lan('MENU_URL', 'Admin')}</td>
+            <td><input name="url" class="input-text" type="text" value="{$data['url']}" style=" width: 150px;" id="url"></td>
+          </tr>
+          <tr>
+            <td>{:lan('SORT', 'Admin')}</td>
+            <td><input name="sort" class="input-text" type="text" value="{$data['msort']|default=0}" style=" width: 50px;" id="sort"></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="bk15"></div>
+      <input name="dosubmit" value="{:lan('SUBMIT_BUTTION', 'Admin')}" class="button" type="submit">
+    </form>
+  </div>
+</div>
+</block>
+
+<block name="js">
+<script type="text/javascript">
+
+</script>
+</block>

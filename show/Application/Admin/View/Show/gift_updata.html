@@ -1,0 +1,97 @@
+<extend name="Public:list" />
+<block name="title"></block>
+<block name="css"></block>
+
+<block name="main">
+<style type="text/css"> 
+	html{_overflow-y:scroll}
+</style>
+<div id="closeParentTime" style="display:none"></div>
+<div class="pad-10">
+  <div class="subnav">
+    <div class="content-menu ib-a blue line-x"><a href="/Admin/index.php/Index/admin_goodnum/"><em>{:lan('ALL_NICENO_LIST', 'Admin')}</em></a><span>|</span><a href="javascript:;" class="on"><em>{:lan('ADD_NICENO', 'Admin')}</em></a></div>
+  </div>
+  <style type="text/css">
+	html{_overflow-y:scroll}
+</style>
+
+  <div class="pad_10">
+    <div class="common-form">
+      <form name="myform" action="" method="post" id="myform">
+        <table class="table_form contentWrap" width="100%">
+          <tbody>
+            <tr>
+              <td width="80">{:lan('NICE_NUMBER', 'Admin')}</td>
+              <td><input name="num" id="num" class="input-text" type="text"></td>
+            </tr>
+            <tr>
+              <td>{:lan('PRICE', 'Admin')}</td>
+              <td><input name="price" id="price" class="input-text" type="text"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="bk15"></div>
+        <input name="dosubmit" value="{:lan('SUBMIT_BUTTION', 'Admin')}" class="button" type="submit">
+      </form>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+function confirm_delete(){
+	if(confirm('{:lan('CONFIRM_DELETE', 'Admin')}')) $('#myform').submit();
+}
+</script>
+<div class="ui_dialog_wrap " id="" style="z-index: 1000000; visibility: hidden;">
+  <div class="ui_overlay" style="z-index: 1000000;">
+    <div></div>
+  </div>
+  <div class="ui_dialog" style="">
+    <table class="">
+      <tbody>
+        <tr>
+          <td class="ui_border ui_td_00"></td>
+          <td class="ui_border ui_td_01"></td>
+          <td class="ui_border ui_td_02"></td>
+        </tr>
+        <tr>
+          <td class="ui_border ui_td_10"></td>
+          <td class="ui_td_11"><table class="ui_dialog_main">
+              <tbody>
+                <tr>
+                  <td class="ui_title_wrap"><div class="ui_title">
+                      <div class="ui_title_text"></div>
+                      <a class="ui_close" href="#" accesskey="c">×</a></div></td>
+                </tr>
+                <tr>
+                  <td class="ui_content_wrap" style=""><div class="ui_content"></div>
+                    <div class="ui_loading_tip">Loading..</div></td>
+                </tr>
+                <tr>
+                  <td class="ui_bottom_wrap"><div class="ui_bottom">
+                      <div class="ui_btns"></div>
+                      <div class="ui_resize"></div>
+                    </div></td>
+                </tr>
+              </tbody>
+            </table></td>
+          <td class="ui_border ui_td_12"></td>
+        </tr>
+        <tr>
+          <td class="ui_border ui_td_20"></td>
+          <td class="ui_border ui_td_21"></td>
+          <td class="ui_border ui_td_22"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="ui_move_temp" style="z-index: 1000001;">
+    <div></div>
+  </div>
+</div>
+</block>
+
+<block name="js">
+<script language="JavaScript">
+	window.top.$('#display_center_id').css('display','none');
+</script>
+</block>

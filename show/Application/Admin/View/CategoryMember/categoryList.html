@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=7" />
+<title>{:C('TITLE_CONTENT')}</title>
+<link href="__PUBLIC__/Public/statics/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Public/statics/css/system.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Public/statics/css/table_form.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles1.css" title="styles1" media="screen" />
+<link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles2.css" title="styles2" media="screen" />
+<link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles3.css" title="styles3" media="screen" />
+<link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles4.css" title="styles4" media="screen" />
+<js file="__PUBLIC__/Public/Js/jquery-1.7.2.min.js" />
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/admin_common.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/styleswitch.js"></script>
+<script type="text/javascript">
+	window.focus();
+</script>
+</head>
+<body>
+<div id="ajaxloading" style="display:none;">
+		<img id="ajaxloadingimg" style="border:0px solid black;" src="__PUBLIC__/Public/Images/ajaxloading.gif" />
+</div>
+<script>
+$('#ajaxloading').css({'width':'100%','height':'100%','background':'#CCC','position':'absolute','opacity':'0.8'});
+</script>
+<style>
+#ajaxloadingimg { position:absolute;left:50%;top:50%;}
+#ajaxloading {line-height:50%;text-align='center'}
+</style>
+<div class="subnav">
+    <div class="content-menu ib-a blue line-x">
+    <a href="javascript:;" class="on"><em>分类列表</em></a><span>    </div>
+</div>
+<style type="text/css">
+	html{_overflow-y:scroll}
+</style><div class="pad-lr-10">
+<div class="table-list">
+<style>
+#table {width:800px;}
+</style>
+<form action="__SELF__" method="post">
+	<input type="hidden" name="postkey" value="{$Think.config.PC_KEY}" />
+	<input type="hidden" name="action" value="editsort" />
+    <table id="table" width="100%" cellspacing="0">
+        <thead>
+		<tr>
+			<th width="20">排序</th>
+			<th width="100">分类名称</th>
+			<th width="100">相关操作</th>
+		</tr>
+        </thead>
+<tbody>
+<volist name="list" id="v">
+<tr>
+<td width="100" align="center">
+	<input size="3 type="text" name="sort[]" value="{$v['sort']}" />
+	<input type="hidden" name="id[]" value="{$v['id']}" />
+</td>
+
+<td align="center" width="80" title="英文 : {$v['lan_en']}   越南文 : {$v['lan_vi']}">{$v['lan_cn']}</td>
+ 
+<td align="center" width="100">
+<a href="javascript:edit({$v['id']}, '{$v['lan_cn']}')">修改</a> | <a class="del" delid="{$v['id']}" href="javascript:;">删除</a>
+</td>
+</tr>
+</volist>
+</tbody>
+</table>
+<input style="margin-left:112px;margin-top:30px;" class="button" type="submit" value="修改排序" />
+</form>
+</div>
+</div>
+<div id="pages"></div>
+</body>
+</html>
+<script type="text/javascript">
+<!--
+	function edit(id, name) {
+		window.top.art.dialog({title:'修改--'+name, id:'edit', iframe:'__URL__/categoryList/cateid/'+id+'/action/edit_cate' ,width:'500px',height:'200px'}, 	function(){var d = window.top.art.dialog({id:'edit'}).data.iframe;
+		var form = d.document.getElementById('dosubmit');form.click();return false;}, function(){window.top.art.dialog({id:'edit'}).close()});
+	}
+//-->
+</script>
+
+<script>
+$(document).on('click','a.del',function () {
+	if(!confirm('确定要删除吗？')) return false;
+	var thi = $(this);
+	var delid = $(this).attr('delid');
+	var url = "{:U('CategoryMember/categoryList')}";
+	var data = {
+		'action' : 'del',
+		'id' : delid
+	};
+	$('#ajaxloading').show();
+	$.post(url,data,function (a) {
+		$('#ajaxloading').hide();
+		if(a=='ok') {
+			thi.parents('tr').eq(0).slideUp(200,function(){
+				$(this).remove();
+				alert('删除成功');
+			});
+		} else {
+			alert('删除失败。失败原因：异步参数错误');
+		}
+	});
+});
+</script>

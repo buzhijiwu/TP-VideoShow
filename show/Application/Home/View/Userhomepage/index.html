@@ -1,0 +1,287 @@
+<!doctype html>
+<html>
+<head>
+	<!--公用meta-->
+	<include file="Public:meta" />
+
+	<title>{:lan('PERSONAL_HOMEPAGE', 'Home')}</title>
+
+</head>
+<body>
+<!--公用头部-->
+<include file="Public:header" />
+
+<!--主要内容-->
+<div class="common-wrap">
+	<div class="homepage-main">
+		<div class="width">
+			<!--顶部信息-->
+			<div class="top clear">
+				<div class="left">
+					<img src="{$Think.config.IMAGE_BASE_URL}{$userinfo[smallheadpic]}">
+				</div>
+				<div class="right">
+					<input type="hidden" id="currentuserid" name="currentuserid" value="{$userid}">
+					<h2 class="name" title="{$userinfo[nickname]}">
+						<span class="nick-name">{$userinfo[nickname]}</span>
+						<gt name="userinfo['guardid']" value="0">
+							<span class="common-guard{$userinfo['guardid']} common-vipIcon"></span>
+						</gt>
+						<if condition="$userinfo[niceno]!=''">
+							<span class="common-vipIcon common-niceno"></span>
+						</if>
+						<gt name="userinfo['vip']" value="0">
+							<span class="common-vip{$userinfo['vip']} common-vipIcon"></span></h3>
+							<else />
+							<span class="emusvipwh down_power"></span></h3>
+						</gt>
+					</h2>
+                    <eq name="userinfo['isemcee']" value="1">
+                        <table class="line1">
+                            <tr>
+                                <td class="td1">
+                                    {:lan('EM_GRADE', 'Home')}:
+                                </td>
+                                <td class="td2 clear">
+                                    <div class="level common-em em{$userinfo[emceelevel]} homepage-level"></div>
+                                    <div class="common-progress">
+                                        <p style="width:{$userinfo[EmceeGrade]}px"></p>
+                                    </div>
+                                </td>
+                                <td class="td1">
+                                    {:lan('US_GRADE', 'Home')}:
+                                </td>
+                                <td class="td2 clear">
+                                    <div class="level common-us us{$userinfo[userlevel]} homepage-level"></div>
+                                    <div class="common-progress">
+                                        <p style="width:{$userinfo[UserGrade]}px"></p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="line2">
+                            <tr>
+                                <td class="td1">
+                                    {:lan('SEX', 'Home')}:
+                                </td>
+                                <td class="td2">
+                                    <eq name="userinfo[sex]" value="0">{:lan('MALE', 'Home')}<else/>{:lan('FEMALE', 'Home')}</eq>
+                                </td>
+                                <td class="td1">
+                                    {:lan('FAMILY', 'Home')}:
+                                </td>
+                                <td class="td2">
+                                    <gt name="userinfo.familyid" value="0">
+                                        {$userinfo[familyname]}
+                                        <else />
+                                        {:lan('FAMILY_NOT_JOINED', 'Home')}
+                                    </gt>
+                                </td>
+                            </tr>
+                        </table>
+                        <else/>
+                        <table class="line1">
+                            <tr>
+                                <td class="td1">
+                                    {:lan('US_GRADE', 'Home')}:
+                                </td>
+                                <td class="td2">
+                                    <div class="common-progress">
+                                        <p style="width:{$userinfo[UserGrade]}px"></p>
+                                    </div>
+                                    <div class="level common-us us{$userinfo[nextUserLevel]} homepage-level"></div>
+                                </td>
+                                <td class="td1">
+                                    {:lan('SEX', 'Home')}:
+                                </td>
+                                <td class="td2">
+                                    <eq name="userinfo[sex]" value="0">{:lan('MALE', 'Home')}<else/>{:lan('FEMALE', 'Home')}</eq>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="line2">
+                            <tr>
+                                <td class="td1">
+                                    {:lan('FAMILY', 'Home')}:
+                                </td>
+                                <td class="td2">
+                                    <gt name="userinfo.familyid" value="0">
+                                        {$userinfo[familyname]}
+                                        <else />
+                                        {:lan('FAMILY_NOT_JOINED', 'Home')}
+                                    </gt>
+                                </td>
+                                <td  class="td1"></td>
+                                <td  class="td2"></td>
+                            </tr>
+                        </table>
+                    </eq>
+				</div>
+			</div>
+
+			<!--列表-->
+			<div class="down clear">
+				<div class="left">
+					<!--tab标签-->
+					<div class="nav">
+						<p class="active">
+							{:lan('TA_FRIEND', 'Home')}
+							<i class="iconfont">&#xe60c;</i>
+						</p>
+						<p>
+							{:lan('HAVE_CAR', 'Home')}
+							<i class="iconfont">&#xe60c;</i>
+						</p>
+						<p>
+							{:lan('HAVE_PRIVILEGE', 'Home')}
+							<i class="iconfont">&#xe60c;</i>
+						</p>
+						<p>
+							{:lan('GUARD_GODDESS', 'Home')}
+							<i class="iconfont">&#xe60c;</i>
+						</p>
+					</div>
+
+					<!--列表-->
+					<div class="main-list">
+						<!--关注-->
+						<div class="show-common-list clear homepage-list"></div>
+
+						<!--座驾-->
+						<div class="car-list homepage-list clear dis-none"></div>
+
+						<!--特权-->
+						<div class="vip-img-list clear homepage-list dis-none">
+							<eq name="userinfo[privileges][0]"  value="">
+								<div class="common-no-data">
+									<img src="/Public/Public/Images/newImage/common/al-cry.png">
+									<h1>{:lan('NO_PRIVILEGES', 'Home')}</h1>
+								</div>
+
+								<else/>
+								<div class="list">
+									<p class="icon i1"></p>
+									<p>{$userinfo[privileges][0][privilegename]}</p>
+								</div>
+								<div class="list">
+									<p class="icon i2"></p>
+									<p>{$userinfo[privileges][1][privilegename]}</p>
+								</div>
+								<div class="list">
+									<p class="icon i3"></p>
+									<p>{$userinfo[privileges][2][privilegename]}</p>
+								</div>
+								<div class="list">
+									<p class="icon i4"></p>
+									<p>{$userinfo[privileges][3][privilegename]}</p>
+								</div>
+								<div class="list">
+									<p class="icon i5"></p>
+									<p>{$userinfo[privileges][4][privilegename]}</p>
+								</div>
+								<div class="list">
+									<p class="icon i6"></p>
+									<p>{$userinfo[privileges][5][privilegename]}</p>
+								</div>
+								<div class="list">
+									<p class="icon i7"></p>
+									<p>{$userinfo[privileges][6][privilegename]}</p>
+								</div>
+							</eq>
+						</div>
+
+						<!--守护-->
+						<div class="show-common-list clear homepage-list dis-none"></div>
+
+						<!--页码-->
+						<div class="common-page"></div>
+
+					</div>
+				</div>
+
+
+
+				<div class="right">
+
+					<!--猜你喜欢的主播-->
+					<div class="top-list">
+						<h2 class="title">
+							<i class="icon i-like"></i>
+							{:lan('MAYBE_YOU_LIKE_EMCEE', 'Home')}
+						</h2>
+						<ul class="list">
+							<volist name="userinfo[mayLikeEmcees]" id="vo">
+								<li>
+									<a href="/{$vo[roomno]}.html" class="clear">
+										<img src="{$Think.config.IMAGE_BASE_URL}{$vo[smallheadpic]}" class="header-img">
+										<div class="right1">
+											<div class="line1 clear">
+												<p class="name" title="{$vo[nickname]}">
+													<span>{$vo[nickname]}</span>
+												</p>
+												<span class="common-em em{$vo[emceelevel]}"></span>
+											</div>
+											<div class="line2">
+												{:lan('FANS_COUNT', 'Home')}:{$vo[fanscount]}
+											</div>
+										</div>
+									</a>
+								</li>
+							</volist>
+						</ul>
+					</div>
+
+
+					<!--浏览历史-->
+					<div class="top-list">
+						<h2 class="title">
+							<i class="icon i-view"></i>
+							{:lan('VISIT_HISTORY', 'Home')}
+						</h2>
+						<ul class="list">
+							<volist name="userinfo[visits]" id="vo">
+								<li>
+									<a href="{:U('Userhomepage/index/userid/'.$vo[userid])}" class="clear">
+										<img src="{$Think.config.IMAGE_BASE_URL}{$vo[smallheadpic]}" class="header-img">
+										<div class="right1">
+											<div class="line1 clear">
+												<p class="name" title="{$vo[nickname]}">
+													<span>{$vo[nickname]}</span>
+												</p>
+												<span class="common-us us{$vo[userlevel]}"></span>
+											</div>
+											<div class="line2">
+												{$vo[operatetime]}
+											</div>
+										</div>
+									</a>
+								</li>
+							</volist>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--共用底部-->
+<include file="Public:bottom" />
+
+<!-- 共用登录-->
+<include file="Public:login" />
+
+<!--共用弹框-->
+<include file="Public:alert" />
+
+<!--共用js-->
+<include file="Public:javascript" />
+<script>
+	$(function () {
+		homepage.tabShow("{:lan('NO_FRIEND', 'Home')}","{:lan('NO_CARS', 'Home')}","{:lan('NO_GUARD', 'Home')}");
+		homepage.loadFriends(0,"{:lan('NO_FRIEND', 'Home')}");
+		homepage.toPageNo("{:lan('NO_FRIEND', 'Home')}","{:lan('NO_CARS', 'Home')}","{:lan('NO_GUARD', 'Home')}");
+	})
+</script>
+</body>
+</html>

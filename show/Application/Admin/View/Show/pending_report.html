@@ -1,0 +1,88 @@
+<extend name="Public:list" />
+<block name="title"></block>
+<block name="css"></block>
+
+<block name="main">
+  <div id="searchid">
+    <form name="searchform" action="/Admin/Show/pending_report" method="get" >
+      <table width="100%" cellspacing="0" class="search-form">
+        <tbody>
+          <tr>
+            <td><div class="explain-col"> {:lan('REPORT_TIME', 'Admin')}：
+               <input type="text" name="start_time" id="start_time" value="<eq name='Think.get.start_time' value=''>{$now}<else />{$Think.get.start_time}</eq>" size="10" class="date" readonly>
+                &nbsp;<script type="text/javascript">     Calendar.setup({
+      weekNumbers: false,
+        inputField : "start_time",
+        trigger    : "start_time",
+        dateFormat: "%Y-%m-%d",
+        showTime: false,
+        minuteStep: 1,
+        onSelect   : function() {this.hide();}
+      });
+        </script>- &nbsp;
+                <input type="text" name="end_time" id="end_time" value="<eq name='Think.get.end_time' value=''>{$now}<else />{$Think.get.end_time}</eq>" size="10" class="date" readonly>
+                &nbsp;<script type="text/javascript">     Calendar.setup({
+      weekNumbers: false,
+        inputField : "end_time",
+        trigger    : "end_time",
+        dateFormat: "%Y-%m-%d",
+        showTime: false,
+        minuteStep: 1,
+        onSelect   : function() {this.hide();}
+      });
+        </script>
+                {:lan('REPORTED_USER', 'Admin')}
+                <input name="keyword" type="text" class="input-text" onfocus="if(this.value='{:lan('USERNAME', 'Admin')}/{:lan('NICKNAME', 'Admin')}/{:lan('ROOMNO', 'Admin')}')this.value=''" onblur="onb();" <neq name="{keyword}" value="">value="{$keyword}"<else />value="{:lan('USERNAME', 'Admin')}/{:lan('NICKNAME', 'Admin')}/{:lan('ROOMNO', 'Admin')}"</neq> />
+                <input type="submit" name="search" class="button" value="{:lan('SEARCH', 'Admin')}" />
+              </div></td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+  <style>
+  #myform th, #myform td { text-align: center;}
+  </style>
+  <form name="myform" id="myform" action="" method="post" >
+    <div class="table-list">
+      <table width="100%">
+        <thead>
+          <tr>
+            <th width="40">{:lan('SYS_NUMBER', 'Admin')}</th>
+            <th>{:lan('REPORT_TIME', 'Admin')}</th>            
+            <th>{:lan('REPORTED_USERNAME', 'Admin')}</th>
+            <th>{:lan('REPORTED_NICKNAME', 'Admin')}</th>  
+            <th>{:lan('ROOMNO', 'Admin')}</th>                      
+            <th>{:lan('REPORTED_COUNT', 'Admin')}</th>
+            <th>{:lan('OPERATION', 'Admin')}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <volist name="data" id="v" key="k">
+          <tr>
+            <td>{$k}</td>
+            <td>{$v.createtime}</td>            
+            <td>{$v.username}</td>
+            <td>{$v.nickname}</span></td>
+            <td>{$v.showroomno}</span></td>            
+            <td>{$v.reportedcount}</td>
+            <td><a href="{:U('Admin/Show/pending_report_detail/reporteduid/'.$v['reporteduid'])}">{:lan('REDIS_KEY_DETAIL', 'Admin')}</a></td>            
+          </tr>
+          </volist>
+        </tbody>
+      </table>
+      <div id="pages">{$page}</div>
+    </div>
+  </form>
+</block>
+
+<block name="js">
+<script type="text/javascript">
+function onb(){
+  if ($("input[name='keyword']").val() == '') {
+    var a = "{:lan('USERNAME', 'Admin')}/{:lan('NICKNAME', 'Admin')}/{:lan('ROOMNO', 'Admin')}";
+    $("input[name='keyword']").val(a);
+  }
+}
+</script>
+</block>

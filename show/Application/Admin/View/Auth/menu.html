@@ -1,0 +1,83 @@
+<extend name="Public:list" />
+<block name="title">{:lan('MENU_LIST', 'Admin')}</block>
+<block name="css"></block>
+
+<block name="main">
+<div class="subnav">
+  <div class="content-menu ib-a blue line-x">
+  	<a href="__URL__/menu" <eq name="Think.get.type" value="">class="on"</eq> ><em>{:lan('ADMIN_MENU', 'Admin')}</em></a><span>|</span>
+  	<a href="__URL__/menu/type/1" <eq name="Think.get.type" value="1">class="on"</eq>><em>{:lan('HOME_MENU', 'Admin')}</em></a><span>|</span>
+
+  </div>
+</div>
+<form name="myform" id="myform" action="__URL__/delAll" method="post" >
+    <div class="table-list">
+      <table width="100%">
+        <thead>
+          <tr>
+      		<th width="40">{:lan('NUMBER', 'Admin')}</th>
+      		<th align="left">{:lan('MENU_NAME', 'Admin')}</th>
+      		<th align="left">{:lan('MENU_KEY', 'Admin')}</th> 		
+      		<th align="left">{:lan('MENU_DESCRIPTION', 'Admin')}</th>
+      		<th align="left">{:lan('MENU_URL', 'Admin')}</th>
+      		<th align="left">{:lan('SORT', 'Admin')}</th>
+      		<th align="left">{:lan('UPDATE_TIME', 'Admin')}</th>
+      		<th>{:lan('OPERATION', 'Admin')}<th>
+          </tr>
+        </thead>
+        <tbody>
+          <volist name="data" id="v">
+            <tr>
+              <td>{$v.menuid}</td>
+              <td>{$v.menuname}</td>
+              <td>{$v.menukey}</td>            
+              <td>{$v.position}</td>
+              <td>{$v.url}</td>
+              <td>{$v.sort}</td>
+              <td>{$v.createtime}</td>
+              <td align="center">
+              	<eq name="v.menutype" value="0"><a href="__URL__/menu_up/pid/{$v.menuid}">{:lan('ADD', 'Admin')}</a> | </eq><a href="__URL__/menu_up/id/{$v.mid}">{:lan('EDIT', 'Admin')}</a>
+			  </td>
+            </tr>
+            <volist name="v._child" id="o">
+	            <tr>
+	              <td>{$o.menuid}</td>
+	              <td> &nbsp; &nbsp; ├─ {$o.menuname}</td>
+	              <td>{$o.menukey}</td>            
+	              <td>{$o.position}</td>
+	              <td>{$o.url}</td>
+	              <td>{$o.sort}</td>
+	              <td>{$o.createtime}</td>
+	              <td align="center">
+	              	<a href="__URL__/menu_up/pid/{$o.menuid}">{:lan('ADD', 'Admin')}</a> | <a href="__URL__/menu_up/id/{$o.mid}/pid/{$o.parentid}">{:lan('EDIT', 'Admin')}</a> | <a href="javascript:confirmurl('__URL__/delOne/db/4005/id/{$o.mid}', '{:lan('WEATHER_DEL_RECORD', 'Admin')}')">{:lan('BTN_DELETE', 'Admin')}</a>
+				  </td>
+	            </tr>
+	            <volist name="o._child" id="m">
+	            <tr>
+	              <td>{$m.menuid}</td>
+	              <td> &nbsp; &nbsp;  &nbsp; &nbsp; ├─ {$m.menuname}</td>
+	              <td>{$m.menukey}</td>            
+	              <td>{$m.position}</td>
+	              <td>{$m.url}</td>
+	              <td>{$m.sort}</td>
+	              <td>{$m.createtime}</td>
+	              <td align="center">
+	              	<a href="__URL__/menu_up/id/{$m.mid}/pid/{$m.parentid}">{:lan('EDIT', 'Admin')}</a> | <a href="javascript:confirmurl('__URL__/delOne/db/4005/id/{$m.mid}', '{:lan('WEATHER_DEL_RECORD', 'Admin')}')">{:lan('BTN_DELETE', 'Admin')}</a>
+				  </td>
+	            </tr>
+	         	</volist>
+	         </volist>
+          </volist>
+        </tbody>
+      </table>
+    </div>
+</form>
+</block>
+
+<block name="js">
+<script type="text/javascript">
+function confirm_delete(){
+	if(confirm('{:lan('CONFIRM_DELETE', 'Admin')}')) $('#myform').submit();
+}
+</script>
+</block>

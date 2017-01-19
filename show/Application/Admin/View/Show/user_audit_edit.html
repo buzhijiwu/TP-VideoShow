@@ -1,0 +1,340 @@
+<extend name="Public:list" />
+<block name="title"></block>
+<block name="css"></block>
+<block name="main">
+  <div class="content-menu ib-a blue line-x"></div>
+  <form class="pad-10" name="upForm" id="upForm" action="" method="post" enctype="multipart/form-data" onSubmit="return checkForm(this)">
+    <input type="hidden" name="id" value="1115">
+    <div class="pad_10">
+      <div class="col-tab">
+        <ul class="tabBut cu-li">
+            <li id="tab_setting_1" <neq name="Think.get.modify_operator" value="1">class="on"</neq> onClick="SwapTab('setting','on','',6,1);">{:lan('APPROVE_INFO', 'Admin')}</li>
+            <li id="tab_setting_2" onClick="SwapTab('setting','on','',6,2);" class="<eq name='Think.get.modify_operator' value='1'>on</eq>">{:lan('SIGN_INFO', 'Admin')}</li>
+        </ul>
+        <div id="div_setting_1" style="overflow-y: auto; overflow-x: hidden; <eq name='Think.get.modify_operator' value='1'>display: none<else />display: block</eq>;" class="contentList pad-10">
+            <input type="hidden" name="accountid" value="{$data.account.accountid}">
+            <table width="100%" cellspacing="0" class="table_form contentWrap">
+            <tbody>
+              <tr>
+                <th width="80"> {:lan('REAL_NAME', 'Admin')} </th>
+                <td><input class="input-text" type="text" name="account[realname]" value="{$data.account.realname}"></td>
+              </tr>
+              <tr>
+                  <th width="80"> {:lan('EMCEE_CATEGORY', 'Admin')} </th>
+                  <td>
+                      <select name="categoryid">
+                          <volist name="emceecategory" id="vo">
+                              <option value = "{$vo.categoryid}" <eq name="categoryid" value="$vo.categoryid">selected="selected"</eq> >{$vo.categoryname}</option>
+                          </volist>
+                      </select>
+
+                  </td>
+              </tr>
+              <tr>
+                  <th width="80"> {:lan('SETTLEMENT_TYPE', 'Admin')} </th>
+                  <td>
+                      <select name="settlement_type">
+                          <option value = "1" >{:lan('NO_SALARY', 'Admin')}</option>
+                          <option value = "2" <eq name="data.emcee.settlement_type" value="2"> selected</eq>>{:lan('BASIC_SALARY', 'Admin')}</option>
+                      </select>
+                  </td>
+              </tr>
+              <tr>
+                  <th width="80"> {:lan('EMCEE_WORK_TYPE', 'Admin')} </th>
+                  <td>
+                      <select name="emceetype">
+                          <option value = "0">{:lan('EMCEE_WORK_PARTY_TIME', 'Admin')}</option>
+                          <option value = "1">{:lan('EMCEE_WORK_FULL_TIME', 'Admin')}</option>
+                      </select>
+                  </td>
+              </tr>
+              <tr>
+                <th width="80"> {:lan('SEX', 'Admin')} </th>
+                <td>
+                  <input name="user[sex]" value="0" type="radio" <eq name="data.user.sex|default=0" value="0">checked="checked"</eq>> {:lan('MALE', 'Admin')} &nbsp; 
+                    <input name="user[sex]" value="1" type="radio" <eq name="data.user.sex" value="1">checked="checked"</eq>> {:lan('FEMALE', 'Admin')} 
+                </td>
+              </tr>
+              <tr>
+                <th width="80"> {:lan('MOBILE', 'Admin')} </th>
+                <td><input class="input-text" type="text" name="account[mobileno]" value="{$data.account.mobileno}"></td>
+              </tr>
+              <tr>
+                <th width="80"> Zalo </th>
+                <td><input class="input-text" type="text" name="account[zalo]" value="{$data.account.zalo}"></td>
+              </tr>
+              <tr>
+                  <th width="80"> Facebook </th>
+                  <td><input class="input-text" type="text" name="account[facebook]" value="{$data.account.facebook}"></td>
+              </tr>
+              <tr>
+                <th width="80"> Email </th>
+                <td><input class="input-text" type="text" name="account[email]" value="{$data.account.email}"></td>
+              </tr>  
+              <tr>
+                <th width="80"> {:lan('ADDRESS', 'Admin')} </th>
+                <td><input class="input-text" type="text" name="account[address]" value="{$data.account.address}"></td>
+              </tr>
+              <tr>
+                <th width="80"> {:lan('CARD_ID', 'Admin')} </th>
+                <td><input class="input-text" type="text" name="account[cardid]" value="{$data.account.cardid}"></td>
+              </tr>  
+              <tr>
+                <th width="80"> {:lan('HANDHELD_ID_PIC', 'Admin')} </th>
+                <td>
+                  <neq name="data.account.credentialspicurl" value="">
+                  <img width="155" src="{$Think.config.IMAGE_BASE_URL}{$data.account.credentialspicurl}" class="example">
+                  <else />
+                  <img src="../../../../Public/Public/Images/apply/a-ex.png" class="example">
+                  </neq>
+                  <!--<span>{:lan('EXAMPLE', 'Admin')}：</span>-->
+                  <!--<img src="../../../../Public/Public/Images/apply/a-em-active.png" class="example">-->
+                  <!--<input type="file" name="idImage" accept="image/*">-->
+                </td>
+              </tr>
+
+              <tr>
+                <th width="80"> {:lan('LIVE_POSTER', 'Admin')} </th>
+                <td>
+                  <neq name="data.account.emceepic" value="">
+                  <img width="155px" src="{$Think.config.IMAGE_BASE_URL}{$data.account.emceepic}">
+                  <input class="hidden" type="text" name="account[emceepic]" value="{$data.account.emceepic}">
+                  </neq>
+                </td>
+              </tr>
+
+              <tr>
+                <th width="80"> {:lan('LIVE_TIME', 'Admin')} </th>
+                <td><input class="input-text" type="text" name="account[livetime]" value="{$data.account.livetime}"></td>
+              </tr>
+              <tr>
+                <th width="80"> {:lan('BANK_NAME', 'Admin')} </th>
+                <td><input class="input-text" type="text" name="account[bankname]" value="{$data.account.bankname}"></td>
+              </tr>
+              <tr>
+                <th width="80"> {:lan('BANK_ADDRESS', 'Admin')} </th>
+                <td><input class="input-text" type="text" name="account[bankaddress]" value="{$data.account.bankaddress}"></td>
+              </tr>
+              <tr>
+                <th width="80"> {:lan('SUB_BANK_NAME', 'Admin')} </th>
+                <td><input class="input-text" type="text" name="account[subbankname]" value="{$data.account.subbankname}"></td>
+              </tr>
+              <tr>
+                <th width="80"> {:lan('BANK_NO', 'Admin')} </th>
+                <td><input class="input-text" type="text" name="account[bankno]" value="{$data.account.bankno}"></td>
+              </tr>
+              <tr>
+                <th width="80"> {:lan('ACCOUNT_NAME', 'Admin')} </th>
+                <td><input class="input-text" type="text" name="account[accountname]" value="{$data.account.accountname}"></td>
+              </tr>
+              <tr>
+                  <th width="80"> {:lan('SKILL', 'Admin')} </th>
+                  <td>
+                      <label>
+                          <input type="checkbox" name="skill[]" value="MC" <volist name="skill_list[0]" id="vo0"><in name="vo0" value="$data.account.skill">checked</in></volist> />MC
+                      </label>
+                      <label>
+                          <input type="checkbox" name="skill[]" value="DJ" <volist name="skill_list[1]" id="vo1"><in name="vo1" value="$data.account.skill">checked</in></volist> />DJ
+                      </label>
+                      <label>
+                          <input type="checkbox" name="skill[]" value="{:lan('FUNNY', 'Admin')}" <volist name="skill_list[2]" id="vo2"><in name="vo2" value="$data.account.skill">checked</in></volist> />{:lan('FUNNY', 'Admin')}
+                      </label>
+                      <label>
+                          <input type="checkbox" name="skill[]" value="{:lan('SING', 'Admin')}" <volist name="skill_list[3]" id="vo3"><in name="vo3" value="$data.account.skill">checked</in></volist> />{:lan('SING', 'Admin')}
+                      </label>
+                      <label>
+                          <input type="checkbox" name="skill[]" value="{:lan('DANCE', 'Admin')}" <volist name="skill_list[4]" id="vo4"><in name="vo4" value="$data.account.skill">checked</in></volist> />{:lan('DANCE', 'Admin')}
+                      </label>
+                      <label>
+                          <input type="checkbox" name="skill[]" value="{:lan('GAME', 'Admin')}" <volist name="skill_list[5]" id="vo5"><in name="vo5" value="$data.account.skill">checked</in></volist> />{:lan('GAME', 'Admin')}
+                      </label>
+                  </td>
+              </tr>
+              <tr>
+                  <th width="80"> {:lan('REMARKS', 'Admin')} </th>
+                  <td>
+                      <textarea name="account[remark]" style="height: 60px;width:310px;; visibility:inherit" id="remark">{$data.account.remark}</textarea>
+                  </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+          <div id="div_setting_2" style="overflow-y: auto; overflow-x: hidden; <eq name='Think.get.modify_operator' value='1'>display: block<else />display: none</eq>;" class="contentList pad-10">
+              <input type="hidden" name="contractid" value="{$data.contract.contractid}">
+              <table width="100%" cellspacing="0" class="table_form contentWrap">
+                  <tbody>
+                  <tr>
+                      <th width="80">{:lan('CONTRACT_NO', 'Admin')} </th>
+                      <td><input type="text" name="contract[contractno]" value="{$data.contract.contractno}" size="50"  class="input-text" style="width:150px;"></td>
+                  </tr>
+                  <tr>
+                      <th width="80">{:lan('CONTRACT_NAME', 'Admin')}</th>
+                      <td><input type="text" name="contract[contractname]" value="{$data.contract.contractname}" size="50"  class="input-text" style="width:150px;"></td>
+                  </tr>
+                  <tr>
+                      <th width="80">{:lan('CONTRACT_CONTENT', 'Admin')} </th>
+                      <td><input type="text" name="contract[contractcontent]" value="{$data.contract.contractcontent}" size="50"  class="input-text" style="width:150px;"></td>
+                  </tr>
+                  <tr>
+                      <th width="80">{:lan('EFFECTIVE_TIME', 'Admin')} </th>
+                      <td><input type="text" id="t1" name="contract[effectivetime]" value="{$data.contract.effectivetime|default=date('Y-m-d')}" size="50"  class="input-text" style="width:150px;"></td>
+                  </tr>
+                  <tr>
+                      <th width="80">{:lan('DUE_TIME', 'Admin')} </th>
+                      <td><input type="text" id="t2" name="contract[expiretime]" value="{$data.contract.expiretime|default=date('Y-m-d')}" size="50"  class="input-text" style="width:150px;"></td>
+                  </tr>
+                  <tr>
+                      <th width="80">{:lan('SIGN_TIME', 'Admin')} </th>
+                      <td><input type="text" id="t3" name="contract[signtime]" value="{$data.contract.signtime|default=date('Y-m-d')}" size="50"  class="input-text" style="width:150px;"></td>
+                  </tr>
+                  <tr>
+                      <th width="80">{:lan('EMCEE_FAMILY', 'Admin')} </th>
+                      <td id="family_v" <eq name='data.user.familyid' value='11'>style="width: 200px;"</eq>>
+                        <select name="emcee_family" onchange="family_select(this.value);">
+                          <option value="">{:lan('PLEASE_CHOOSE', 'Admin')}</option>
+                          <volist name="familylist" id="v">
+                          <option value="{$v.familyid}" <eq name="v.familyid" value="$data.user.familyid">selected="selected"</eq>>{$v.familyname}</option>
+                          </volist>
+                        </select>
+                      </td>
+                      
+                      <th width="80" id="operator_t" style="<neq name='data.user.familyid' value='11'>display: none;</neq>">{:lan('OPERATOR_BELONG', 'Admin')} </th>
+                      <td id="operator_v" style="<neq name='data.user.familyid' value='11'>display: none;</neq>">
+                        <select name="operatorid" onchange="operator_select();">
+                          <option value="">{:lan('PLEASE_CHOOSE', 'Admin')}</option>
+                          <volist name="operatorlist" id="v">
+                          <option value="{$v.userid}" <eq name="v.userid" value="$data.user.operatorid">selected="selected"</eq>>{$v.realname}</option>
+                          </volist>
+                        </select>
+                      </td> 
+                      <td id="sitelogoTip" style="color: red;"></td>                     
+                  </tr>                  
+                  <script type="text/javascript">
+                      Calendar.setup({
+                          weekNumbers: false,
+                          inputField : "t1",
+                          trigger    : "t1",
+                          dateFormat: "%Y-%m-%d",
+                          showTime: false,
+                          minuteStep: 1,
+                          onSelect : function() {this.hide();}
+                      });
+                      Calendar.setup({
+                          weekNumbers: false,
+                          inputField : "t2",
+                          trigger    : "t2",
+                          dateFormat: "%Y-%m-%d",
+                          showTime: false,
+                          minuteStep: 1,
+                          onSelect : function() {this.hide();}
+                      });
+                      Calendar.setup({
+                          weekNumbers: false,
+                          inputField : "t3",
+                          trigger    : "t3",
+                          dateFormat: "%Y-%m-%d",
+                          showTime: false,
+                          minuteStep: 1,
+                          onSelect : function() {this.hide();}
+                      });
+                  </script>
+                  </tbody>
+              </table>
+          </div>
+        </div>
+        <div class="bk10"></div>
+        <div class="btn">
+            <input type="hidden" name="is_familychange" id="is_familychange" value="">
+            <input type="hidden" name="is_operatorchange" id="is_operatorchange" value="">            
+            <input type="hidden" name="is_through" id="is_through" value="">
+            <eq name="signflag" value="2">
+                <input type="button" class="button" name="dosubmit" value="{:lan('SAVE', 'Admin')}" style="width:100px;height:40px;" onclick="doSubmitForm(2);">
+                <else/>
+                <input type="button" class="button" name="dosubmit" value="{:lan('AUDIT_SIGN', 'Admin')}" style="width:100px;height:40px;" onclick="doSubmitForm(1);">
+            </eq>
+            <input type="button" class="button" value="{:lan('CANCEL_SIGN', 'Admin')}" style="width:100px;height:40px;background-color: #999;margin-left: 20px;" onclick="doSubmitForm(0);">
+          </if>
+        </div>
+      </div>
+    </div>
+  </form>
+</block>
+<block name="js"> 
+  <script type="text/javascript">
+      function SwapTab(name,cls_show,cls_hide,cnt,cur){
+          for(i=1;i<=cnt;i++){
+              if(i==cur){
+                  $('#div_'+name+'_'+i).show();
+                  $('#tab_'+name+'_'+i).attr('class',cls_show);
+              }else{
+                  $('#div_'+name+'_'+i).hide();
+                  $('#tab_'+name+'_'+i).attr('class',cls_hide);
+              }
+          }
+      }
+
+function showsmtp(obj,hiddenid){
+	hiddenid = hiddenid ? hiddenid : 'smtpcfg';
+	var status = $(obj).val();
+	if(status == 1) $("#"+hiddenid).show();
+	else  $("#"+hiddenid).hide();
+}
+function test_mail() {
+	var mail_type = $('input[checkbox=mail_type][checked]').val();
+    $.post('?m=admin&c=setting&a=public_test_mail&mail_to='+$('#mail_to').val(),{mail_type:mail_type,mail_server:$('#mail_server').val(),mail_port:$('#mail_port').val(),mail_user:$('#mail_user').val(),mail_password:$('#mail_password').val(),mail_auth:$('#mail_auth').val(),mail_auth:$('#mail_auth').val(),mail_from:$('#mail_from').val()}, function(data){
+	alert(data);
+	});
+}
+  //提交
+  function doSubmitForm(is_through){
+      if(upForm.emcee_family.value == '' && is_through != 0) {
+        $("#tab_setting_2").click();
+        $("#family_v").width(200); 
+        $("#sitelogoTip").html("{:lan('EMCEE_FAMILY_NOT_EMPTY', 'Admin')}");
+        upForm.emcee_family.focus();
+        return false;
+      }
+      if(upForm.emcee_family.value == 11 && upForm.operatorid.value == '' && is_through != 0) {
+        $("#tab_setting_2").click();
+        $("#operator_v").width(200); 
+        $("#sitelogoTip").html("{:lan('OPERATOR_BELONG_NOT_EMPTY', 'Admin')}");
+        upForm.operatorid.focus();
+        return false;
+      }     
+      $('#is_through').val(is_through);
+      if ($("#is_operatorchange").val() == '1' && upForm.emcee_family.value == 11 && is_through != 0 && {$data.user.operatorid} != 0) {
+        if (confirm("{:lan('CHANGE_OPERATOR_CONFIRM', 'Admin')}"+"("+"{:lan('NEXTMONTH_EFFECTIVE', 'Admin')}"+")")) {
+          document.getElementById('upForm').submit();          
+        }
+      }else if ($("#is_familychange").val() == '1' && is_through != 0) {
+        if ({$data.user.operatorid} == 0 && {$data.user.familyid} == 11) {
+          document.getElementById('upForm').submit();
+        }else{
+          if (confirm("{:lan('CHANGE_FAMILY_CONFIRM', 'Admin')}"+"("+"{:lan('NEXTMONTH_EFFECTIVE', 'Admin')}"+")")) {
+             document.getElementById('upForm').submit();          
+          }          
+        }
+      }else{
+        document.getElementById('upForm').submit();        
+      }
+
+  }
+  function family_select(familyid){
+      $("#sitelogoTip").html("");
+      $("#is_familychange").val("1");      
+      if (familyid == 11) {
+          $("#operator_t").show();
+          $("#operator_v").show();
+          $("#family_v").width(200);                   
+      }else{
+          $("#operator_t").hide();
+          $("#operator_v").hide();
+          $("#family_v").width('');    
+      }
+  }
+  function operator_select(){
+      $("#sitelogoTip").html("");
+      $("#is_operatorchange").val("1");
+  }  
+</script> 
+</block>

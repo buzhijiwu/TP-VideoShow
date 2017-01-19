@@ -1,0 +1,84 @@
+<extend name="Public:list" />
+<block name="title"></block>
+<block name="css"></block>
+
+<block name="main">
+    <script type="text/javascript" src="__PUBLIC__/Tools/Js/jquery/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/Js/live/show.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/Js/live/swfobject.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/Js/live/player.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/Js/live/chatRoom.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/Js/live/common.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/Js/live/socket.io.js"></script>
+    <script type="text/javascript">
+        var _show='';
+    </script>
+
+    <input type="hidden" id="waachnodepath" value="{$chatNodePath}"/>
+</block>
+
+<block name="js">
+    <script type="text/javascript" src="__PUBLIC__/Home/Js/live/chatClient.js"></script>
+    <script src="__PUBLIC__/Home/Js/live/liveChat.js"></script>
+    <script type="text/javascript">
+        window.onload = function(){
+            //获取本周收入榜前三名（每30分钟执行一次）
+            setTimeout(function(){
+                cyclicLoading(1,20);
+            },0);
+            //获取本周消费榜前三名（每30分钟执行一次）
+            setTimeout(function(){
+                cyclicLoading(2,20);
+            },1000*60*5);
+            //获取iPhone6plus主播收到礼物榜前三名（每15分钟执行一次）
+            setTimeout(function(){
+                cyclicLoading(3,20);
+            },1000*60*10);
+            //获取iPhone6plus用户赠送礼物榜前三名（每15分钟执行一次）
+            setTimeout(function(){
+                cyclicLoading(4,20);
+            },1000*60*15);
+        }
+
+        //定义循环
+        function cyclicLoading(msgtype,time){
+            nodejsMessage(msgtype,time);
+            setInterval(function(){
+                nodejsMessage(msgtype,time)
+            },1000*60*time);//这里的1000表示1秒有1000毫秒,1分钟有60秒,time表示总共time分钟
+        }
+
+        //发送通知消息
+        function nodejsMessage(msgtype){
+            console.log(msgtype);
+            var data = {
+                "msgtype": msgtype
+            };
+            $.ajax({
+                type: "post",
+                url: "/Admin/SystemMessage/getSystemMessage",
+                dataType: "json",
+                data: data,
+                success: function (msg) {
+                    if (msg) {
+                        var nodeJsData =  {msg:
+                                [
+                                    {
+                                        _method_:"SendMsg",
+                                        action:"4",
+                                        ct:{message:msg},
+                                        msgtype:"2"
+                                    }
+                                ],
+                            retcode:"1",
+                            retmsg:"OK"};
+                        socket.emit('sendPublicMsg', nodeJsData);
+                    }
+                },
+                error: function (e) {
+
+                }
+            });
+        }
+    </script>
+</block>

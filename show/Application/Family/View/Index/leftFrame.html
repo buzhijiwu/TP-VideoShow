@@ -1,0 +1,29 @@
+<h3 class="f14"><a href="{:U('mainFrame')}" target="right">{$managehomepage}</a></h3>
+<h3 class="f14"><span class="switchs cu on" title="{$spreadandshrink}"></span>{$personalinformaion}</h3>
+<ul>
+	<li id="_MP1" class="sub_menu"><a href="javascript:_MP(1,'/Family/Index/edit_pwd/');" hidefocus="true" style="outline:none;">{$changepassword}</a></li>
+</ul>
+
+<h3 class="f14"><span class="switchs cu on" title="{$spreadandshrink}"></span>{$familymangement}</h3>
+<ul>
+	<li id="_MP2" class="sub_menu"><a href="javascript:_MP(2,'/Family/Index/add_emcee/');" hidefocus="true" style="outline:none;">{:lan('ADD_EMCEE', 'Family')}</a></li>
+	<li id="_MP3" class="sub_menu"><a href="javascript:_MP(3,'/Family/Index/view_myemcee/');" hidefocus="true" style="outline:none;">{$emceelist}</a></li>
+	<li id="_MP4" class="sub_menu"><a href="javascript:_MP(4,'/Family/Index/view_showmoney/');" hidefocus="true" style="outline:none;">{$incomeexpensesummary}</a></li>
+    <li id="_MP5" class="sub_menu"><a href="javascript:_MP(5,'/Family/Index/view_familyDetail/');" hidefocus="true" style="outline:none;">{$incomeexpensedetail}</a></li>
+</ul>
+
+<script type="text/javascript">
+$(".switchs").each(function(i){
+	var ul = $(this).parent().next();
+	$(this).click(
+	function(){
+		if(ul.is(':visible')){
+			ul.hide();
+			$(this).removeClass('on');
+				}else{
+			ul.show();
+			$(this).addClass('on');
+		}
+	})
+});
+</script>

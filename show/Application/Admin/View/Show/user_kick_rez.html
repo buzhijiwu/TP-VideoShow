@@ -1,0 +1,120 @@
+<extend name="Public:list" />
+<block name="title"></block>
+<block name="css"></block>
+
+<block name="main">
+  <div class="subnav">
+    <div class="content-menu ib-a blue line-x">
+      <a href='/admin.php/show/user_kick_rez' class="on"><em>{:lan('USER_KICK_REZ', 'Admin')}</em></a>
+      <span>|</span>
+      <a href='/admin.php/show/user_shutup_rez'><em>{:lan('USER_SHUTUP_REZ', 'Admin')}</em></a>
+    </div>
+  </div>  
+  <div id="searchid">
+    <form name="searchform" action="/Admin/Show/user_kick_rez" method="get" >
+      <input type="hidden" name="searchform" value="1">
+      <table width="100%" cellspacing="0" class="search-form">
+        <tbody>
+          <tr>
+            <td><div class="explain-col"> {:lan('TIME', 'Admin')}：
+               <input type="text" name="start_time" id="start_time" value="{$search.starttime}" size="10" class="date" readonly>
+                &nbsp;<script type="text/javascript">     Calendar.setup({
+      weekNumbers: false,
+        inputField : "start_time",
+        trigger    : "start_time",
+        dateFormat: "%Y-%m-%d",
+        showTime: false,
+        minuteStep: 1,
+        onSelect   : function() {this.hide();}
+      });
+        </script>- &nbsp;
+                <input type="text" name="end_time" id="end_time" value="{$search.endtime}" size="10" class="date" readonly>
+                &nbsp;<script type="text/javascript">     Calendar.setup({
+      weekNumbers: false,
+        inputField : "end_time",
+        trigger    : "end_time",
+        dateFormat: "%Y-%m-%d",
+        showTime: false,
+        minuteStep: 1,
+        onSelect   : function() {this.hide();}
+      });
+        </script>
+                {:lan('BE_KICKED_USER', 'Admin')}
+                <input name="keyword" type="text" class="input-text" onfocus="if(this.value='{:lan('USERNAME', 'Admin')}/{:lan('NICKNAME', 'Admin')}')this.value=''" onblur="onb();" <neq name="{keyword}" value="">value="{$keyword}"<else />value="{:lan('USERNAME', 'Admin')}/{:lan('NICKNAME', 'Admin')}"</neq> />
+                <input type="submit" name="search" class="button" value="{:lan('SEARCH', 'Admin')}" />
+              </div></td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+  <style>
+  #myform th, #myform td { text-align: center;}
+  </style>
+  <form name="myform" id="myform" action="" method="post" >
+    <div class="table-list">
+      <table width="100%">
+        <thead>
+          <tr>
+            <th width="40">{:lan('SYS_NUMBER', 'Admin')}</th>
+            <th>{:lan('BE_KICKED_USER', 'Admin')}</th>
+            <th>{:lan('BE_KICKED_USER_NICKNAME', 'Admin')}</th>            
+            <th>{:lan('KICKING_USER', 'Admin')}</th>
+            <th>{:lan('EMCEE', 'Admin')}{:lan('ROOMNO', 'Admin')}</th>
+            <th>{:lan('TIME', 'Admin')}</th>
+            <th>{:lan('OPERATION', 'Admin')}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <volist name="data.list" id="v" key="k">
+          <tr>
+            <td>{$k}</td>
+            <td>{$v.kickedusername}</td>
+            <td>{$v.kickedusernickname}</span></td>
+            <td>{$v.kickingusername}</td>
+            <td>{$v.roomno}</td>
+            <td>{$v.createtime}</td>
+            <td>
+              <eq name="v.status" value="1">
+              <a href="javascript:;" onclick="confirm_relieve({$v.kickid});">{:lan('RELIEVE', 'Admin')}</a>
+              <else />
+              <a href="javascript:;">{:lan('ALREADY_ENABLE', 'Admin')}</a>
+              </eq>
+            </td>            
+          </tr>
+          </volist>
+        </tbody>
+      </table>
+      <div id="pages">{$data.page}</div>
+    </div>
+  </form>
+</block>
+
+<block name="js">
+<script type="text/javascript">
+function confirm_relieve(id){
+  if(confirm('{:lan('CONFIRM_RELIEVE', 'Admin')}')){
+    $.ajax({
+      'url' : "{:U('Admin/Show/do_user_kick_rez')}",
+      'type' : 'POST',
+      dataType : 'json',
+      'data' : {id:id},
+      success : function (res) {
+         if (res.status == 1) {
+           alert(res.msg);
+           window.location.reload();
+         }else{
+            alert(res.msg);
+         }
+      }
+    });
+  } 
+}
+function onb(){
+  if ($("input[name='keyword']").val() == '') {
+    var a = "{:lan('USERNAME', 'Admin')}/{:lan('NICKNAME', 'Admin')}";
+    $("input[name='keyword']").val(a);
+  }
+}
+</script>
+</block>

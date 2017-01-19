@@ -1,0 +1,54 @@
+<extend name="Public:list" />
+<block name="title">{:lan('AGENT_LIST', 'Admin')}</block>
+<block name="css"></block>
+
+<block name="main">
+    <div class="subnav">
+        <div class="content-menu ib-a blue line-x">
+            <a href="__URL__/agent" class="on"><em>{:lan('AGENT_LIST', 'Admin')}</em></a><span>|</span>
+            <a href="__URL__/agent_update"><em>{:lan('ADD_AGENT', 'Admin')}</em></a>
+        </div>
+    </div>
+    <form name="myform" id="myform" action="" method="post" >
+        <div class="table-list">
+            <table width="100%" style="text-align: center;">
+                <thead>
+                <tr>
+                    <th>{:lan('NO', 'Admin')}</th>
+                    <th>{:lan('AGENT_NAME', 'Admin')}</th>
+                    <th>{:lan('AGENT_TYPE', 'Admin')}</th>
+                    <th>{:lan('SYS_REALNAME', 'Admin')}</th>
+                    <th>{:lan('SYS_TELNUM', 'Admin')}</th>
+                    <th>{:lan('AGENT_LIMIT_AMOUNT', 'Admin')}</th>
+                    <th>{:lan('AGENT_USE_AMOUNT', 'Admin')}</th>
+                    <th>{:lan('SYS_LASTLOGINTIME', 'Admin')}</th>
+                    <th>{:lan('SYS_LASTLOGINIP', 'Admin')}</th>
+                    <th>{:lan('SYS_ACCOUNTCREATETIME', 'Admin')}</th>
+                    <th>{:lan('OPERATION', 'Admin')}<th>
+                </tr>
+                </thead>
+                <tbody>
+                <volist name="data" id="v">
+                    <tr>
+                        <td>{$v.agentid}</td>
+                        <td>{$v.agentname}</td>
+                        <td>{$v.agenttype}</td>
+                        <td>{$v.realname}</td>
+                        <td>{$v.mobileno}</td>
+                        <td>{$v.limitamount}</td>
+                        <td>{$v.useamount}</td>
+                        <td>{$v.lastlogintime}</td>
+                        <td>{$v.lastloginip}</td>
+                        <td>{$v.createtime}</td>
+                        <td>
+                            <a href="__URL__/agent_detail/id/{$v.agentid}">{:lan('AGENT_DETAIL', 'Admin')}</a> |
+                            <a href="__URL__/agent_update/id/{$v.agentid}">{:lan('MODIFY', 'Admin')}</a> |
+                            <a href="javascript:confirmurl('__URL__/delOne/db/4006/id/{$v.agentid}', '{:lan('WEATHER_DEL_RECORD', 'Admin')}')">{:lan('BTN_DELETE', 'Admin')}</a>
+                        </td>
+                    </tr>
+                </volist>
+                </tbody>
+            </table>
+        </div>
+    </form>
+</block>

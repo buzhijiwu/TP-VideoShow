@@ -1,0 +1,674 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "<h2>返回值说明</h2>接口调用成功：{'code':200,'data':返回的数据};<br/>接口调用失败：{'code':状态码,'msg':错误信息};"
+    },
+    "tags": [
+        {"name": "Currency","description": "货币管理"},
+        {"name": "SportGame","description": "运动会游戏"}
+    ],
+    "paths": {
+        "/Home/Currency/getUserInfo": {
+            "post": {
+                "tags": ["Currency"],
+                "operationId": "getUserShowBean",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "获取用户信息",
+                "description": "根据用户ID获取用户的基本信息，token值是用户登录成功生成的，用于安全验证",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "userid",
+                        "description": "用户ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "token",
+                        "description": "用户登录token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "请求成功",
+                        "schema": {
+                            "properties": {
+                                "userid": {
+                                    "description": "用户ID",
+                                    "type": "integer"
+                                },
+                                "show_money": {
+                                    "description": "秀币余额 ",
+                                    "type": "integer"
+                                },
+                                "show_bean": {
+                                    "description": "秀豆余额 ",
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    },
+                    "-1": {
+                        "description": "系统繁忙"
+                    },
+                    "400": {
+                        "description": "参数有误（token未传、userid和token不匹配）"
+                    },
+                    "100": {
+                        "description": "用户未登录（userid未传、userid小于0）"
+                    }
+                }
+            }
+        },
+        "/Home/Currency/getCurrencyExchangeRule?type={type}": {
+            "get": {
+                "tags": ["Currency"],
+                "operationId": "getCurrencyExchangeRule",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "获取货币兑换规则",
+                "description": "获取货币兑换规则，必须传输兑换类型",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "type",
+                        "description": "兑换类型：1.秀币换秀豆、2.秀豆换秀币",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "请求成功",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "properties": {
+                                    "type": {
+                                        "description": "兑换类型：1.秀币换秀豆、2.秀豆换秀币",
+                                        "type": "integer"
+                                    },
+                                    "show_money": {
+                                        "description": "兑换秀币",
+                                        "type": "integer"
+                                    },
+                                    "show_bean": {
+                                        "description": "兑换秀豆",
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "-1": {
+                        "description": "系统繁忙"
+                    },
+                    "400": {
+                        "description": "参数有误（type未传）"
+                    }
+                }
+            }
+        },
+        "/Home/Currency/currencyExchange": {
+            "post": {
+                "tags": ["Currency"],
+                "operationId": "currencyExchange",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "秀豆秀币兑换",
+                "description": "前端可以先做验证，也可以不验证，后台会根据规则做进一步验证",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "userid",
+                        "description": "URL：用户ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "token",
+                        "description": "URL：用户登录token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "type",
+                        "description": "兑换类型：1.秀币换秀豆、2.秀豆换秀币",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "value",
+                        "description": "使用多少（秀豆/秀币）进行兑换",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "devicetype",
+                        "description": "设备类型：0.安卓，1.iOS，2.PC",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "兑换成功",
+                        "schema": {
+                            "properties": {
+                                "userid": {
+                                    "description": "用户ID",
+                                    "type": "integer"
+                                },
+                                "type": {
+                                    "description": "兑换类型：1.秀币换秀豆、2.秀豆换秀币",
+                                    "type": "integer"
+                                },
+                                "show_money": {
+                                    "description": "兑换秀币",
+                                    "type": "integer"
+                                },
+                                "show_bean": {
+                                    "description": "兑换秀豆",
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    },
+                    "-1": {
+                        "description": "系统繁忙"
+                    },
+                    "400": {
+                        "description": "参数有误（参数不完整、没找到相应规则）"
+                    },
+                    "100": {
+                        "description": "用户未登录（userid未传、userid小于0）"
+                    }
+                }
+            }
+        },
+        "/Home/SportGame/openGame": {
+            "post": {
+                "tags": ["SportGame"],
+                "operationId": "openGame",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "打开游戏界面",
+                "description": "打开游戏界面首先请求一次，验证用户是否可以抢庄，通过前端做第一步控制，可以减轻抢庄的请求数。",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "userid",
+                        "description": "用户ID",
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "token",
+                        "description": "用户登录token",
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "lantype",
+                        "description": "用户当前使用的语言类型：zh/en/vi",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "请求成功",
+                        "schema": {
+                            "properties": {
+                                "game_info": {
+                                    "description": "游戏信息",
+                                    "schema": {
+                                        "properties": {
+                                            "userid": {
+                                                "description": "用户ID",
+                                                "type": "integer"
+                                            },
+                                            "show_bean": {
+                                                "description": "秀豆余额 ",
+                                                "type": "integer"
+                                            },
+                                            "min_show_bean": {
+                                                "description": "上庄的最低秀豆",
+                                                "type": "integer"
+                                            },
+                                            "game_status": {
+                                                "description": "当前游戏状态：0.游戏未开始，抢庄阶段，1.游戏开始，押注阶段,2.游戏进行中，开奖阶段",
+                                                "type": "integer"
+                                            },
+                                            "is_stake": {
+                                                "description": "本局游戏是否押注：0.未押注，1.已押注",
+                                                "type": "integer"
+                                            },
+                                            "countdown": {
+                                                "description": "押注倒计时",
+                                                "type": "integer"
+                                            },
+                                            "game_over_countdown": {
+                                                "description": "游戏结束倒计时",
+                                                "type": "integer"
+                                            }
+                                        }
+                                    }
+                                },
+                                "game_banker_info": {
+                                    "description": "游戏庄家信息",
+                                    "schema": {
+                                        "properties": {
+                                            "bankerid": {
+                                                "description": "庄家用户ID",
+                                                "type": "integer"
+                                            },
+                                            "bankerName": {
+                                                "description": "庄家用户名 ",
+                                                "type": "string"
+                                            },
+                                            "bankerHeadpic": {
+                                                "description": "庄家头像",
+                                                "type": "string"
+                                            },
+                                            "show_bean": {
+                                                "description": "庄家上庄的总秀豆",
+                                                "type": "integer"
+                                            },
+                                            "start_time": {
+                                                "description": "游戏开始时间",
+                                                "type": "string"
+                                            },
+                                            "roomno": {
+                                                "description": "庄家坐庄的直播间",
+                                                "type": "string"
+                                            },
+                                            "optionid": {
+                                                "description": "开奖选项ID",
+                                                "type": "string"
+                                            },
+                                            "number": {
+                                                "description": "开奖选项停留位置",
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                },
+                                "game_option": {
+                                    "description": "游戏选项",
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "optionid": {
+                                                    "description": "选项ID",
+                                                    "type": "integer"
+                                                },
+                                                "optionName": {
+                                                    "description": "选项名称",
+                                                    "type": "string"
+                                                },
+                                                "optionImage": {
+                                                    "description": "选项图标",
+                                                    "type": "string"
+                                                },
+                                                "odds": {
+                                                    "description": "选项赔率",
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "game_option_list": {
+                                    "description": "游戏选项列表排列",
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "optionid": {
+                                                    "description": "选项ID",
+                                                    "type": "integer"
+                                                },
+                                                "optionName": {
+                                                    "description": "选项名称",
+                                                    "type": "string"
+                                                },
+                                                "optionImage": {
+                                                    "description": "选项图标",
+                                                    "type": "string"
+                                                },
+                                                "odds": {
+                                                    "description": "选项赔率",
+                                                    "type": "string"
+                                                },
+                                                "number": {
+                                                    "description": "序号",
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "参数有误"
+                    },
+                    "500": {
+                        "description": "游戏已关闭，隐藏游戏按钮"
+                    }
+                }
+            }
+        },
+        "/Home/SportGame/grabBanker": {
+            "post": {
+                "tags": ["SportGame"],
+                "operationId": "grabBanker",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "用户抢庄",
+                "description": "活动开始，所有满足条件的用户都可以抢庄,有人抢庄成功，广播通知所有客户端",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "userid",
+                        "description": "用户ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "token",
+                        "description": "用户登录token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "roomno",
+                        "description": "抢庄时所在的房间号",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "抢庄成功",
+                        "schema": {
+                            "properties": {
+                                "bankerid": {
+                                    "description": "庄家ID",
+                                    "type": "integer"
+                                },
+                                "bankerName": {
+                                    "description": "庄家昵称",
+                                    "type": "string"
+                                },
+                                "bankerHeadpic": {
+                                    "description": "庄家头像连接",
+                                    "type": "string"
+                                },
+                                "show_bean": {
+                                    "description": "上庄总秀豆 ",
+                                    "type": "integer"
+                                },
+                                "start_time": {
+                                    "description": "游戏开始时间 ",
+                                    "type": "integer"
+                                },
+                                "countdown": {
+                                    "description": "倒计时",
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    },
+                    "-1": {
+                        "description": "系统繁忙"
+                    },
+                    "400": {
+                        "description": "参数有误"
+                    },
+                    "100": {
+                        "description": "用户未登录"
+                    },
+                    "101": {
+                        "description": "秀豆不足"
+                    },
+                    "102": {
+                        "description": "慢了一步，抢庄失败"
+                    }
+                }
+            }
+        },
+        "/Home/SportGame/userStake": {
+            "post": {
+                "tags": ["SportGame"],
+                "operationId": "userStake",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "用户押注",
+                "description": "当用户点击GO按钮的时候，统一提交该用户所有的押注信息",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "userid",
+                        "description": "押注用户ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "token",
+                        "description": "用户登录token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "用户不同选项的押注金额",
+                        "required": true,
+                        "type": "array",
+                        "schema": {
+                            "properties": {
+                                "optionid": {
+                                    "description": "选项ID",
+                                    "type": "integer"
+                                },
+                                "show_bean": {
+                                    "description": "押注金额 ",
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "押注成功"
+                    },
+                    "-1": {
+                        "description": "系统繁忙"
+                    },
+                    "400": {
+                        "description": "参数有误"
+                    },
+                    "100": {
+                        "description": "用户未登录"
+                    },
+                    "111": {
+                        "description": "已经开始开奖，押注失败"
+                    },
+                    "112": {
+                        "description": "押注数据异常，押注失败"
+                    },
+                    "113": {
+                        "description": "本局游戏参与人数已满，押注失败"
+                    },
+                    "114": {
+                        "description": "庄家自己不能押注"
+                    }
+                }
+            }
+        },
+        "/Home/SportGame/waitingSettlement": {
+            "post": {
+                "tags": ["SportGame"],
+                "operationId": "waitingReward",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "开奖倒计时,等待结算",
+                "description": "触发开奖倒计时，后台生成中奖奖项，计算所有参与者的盈利，保存数据",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "userid",
+                        "description": "用户ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "token",
+                        "description": "用户登录token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "请求成功",
+                        "schema": {
+                            "properties": {
+                                "optionid": {
+                                    "description": "中奖选项ID",
+                                    "type": "integer"
+                                },
+                                "number": {
+                                    "description": "中奖选项停留位置",
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    },
+                    "-1": {
+                        "description": "系统繁忙"
+                    },
+                    "400": {
+                        "description": "参数有误"
+                    },
+                    "100": {
+                        "description": "用户未登录"
+                    }
+                }
+            }
+        },
+        "/Home/SportGame/gameOverExchangeStatus": {
+            "post": {
+                "tags": ["SportGame"],
+                "operationId": "gameOverExchangeStatus",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "游戏结束，改变游戏状态",
+                "description": "后台生成中奖选项之后，等待前端转到中奖选项，更改游戏状态",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "userid",
+                        "description": "用户ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "token",
+                        "description": "用户登录token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "请求成功"
+                    },
+                    "-1": {
+                        "description": "系统繁忙"
+                    },
+                    "400": {
+                        "description": "参数有误"
+                    },
+                    "100": {
+                        "description": "用户未登录"
+                    }
+                }
+            }
+        },
+        "/Home/SportGame/gameSettlement": {
+            "post": {
+                "tags": ["SportGame"],
+                "operationId": "gameSettlement",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "游戏结算",
+                "description": "倒计时结束，用户获取自己的中奖信息。后台读取结算好的数据，直接返回",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "userid",
+                        "description": "押注用户ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "token",
+                        "description": "用户登录token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "结算成功",
+                        "schema": {
+                            "properties": {
+                                "userid": {
+                                    "description": "用户ID",
+                                    "type": "integer"
+                                },
+                                "settlement_bean": {
+                                    "description": "结算秀豆，赢了为正，输了为负",
+                                    "type": "integer"
+                                },
+                                "CloseSportGame": {
+                                    "description": "关闭运动会游戏：0.不关闭、1.关闭",
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    },
+                    "-1": {
+                        "description": "系统繁忙"
+                    },
+                    "400": {
+                        "description": "参数有误"
+                    },
+                    "100": {
+                        "description": "用户未登录"
+                    }
+                }
+            }
+        }
+    }
+}

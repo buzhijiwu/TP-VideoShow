@@ -1,0 +1,16 @@
+<!-- 公告 -->
+<div class="common-notice">
+	<h2 class="title">{:lan("SYSTEM_NOTICE", "Home")}</h2>
+	<div class="notice-wrap">
+		<ul class="list">
+			<foreach name="noticeList" item="v">
+				<li class="analysis" data-module-name="首页_公告-{$v[title]}">
+					<a href="{:U($v['url'])}">{$v['title']}</a>
+				</li>
+			</foreach>
+		</ul>
+		<div class="common-scrollBar">
+			<div class="scrollBar"></div>
+		</div>
+	</div>
+</div>

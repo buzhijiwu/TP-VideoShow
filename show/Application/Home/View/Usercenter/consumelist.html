@@ -1,0 +1,70 @@
+<extend name="base" />
+
+<block name="menu">
+<div class="nav-list clear">
+	<a href="__URL__/recivegift">{:lan('RECIVE_LIST', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+	<a href="__URL__/sendgift">{:lan('SEND_GIFT', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+	<a href="__URL__/rechargelist">{:lan('RECHARGE_RECORD', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+	<a href="__URL__/consumelist" class="active">{:lan('CONSUME_RECORD', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+	<a href="__URL__/showbeanexchange">{:lan('EXCHANGE_SHOW_BEAN_RECORD', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+	<a href="__URL__/showmoneyexchange">{:lan('EXCHANGE_SHOW_MONEY_RECORD', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+</div>
+</block>
+
+<block name="main">
+	<div class="right-mybill-main">
+	    <eq name="consumeList[0]" value="">	
+		<!--无消费记录-->
+		<div class="common-no-data">
+			<img src="/Public/Public/Images/newImage/common/al-cry.png">
+			<h1>{:lan('NO_BILL', 'Home')}</h1>
+			<!--laydate的bug，需要加id，否则报错-->
+			<a id="start" class="dis-none"></a>
+			<a id="end" class="dis-none"></a>
+		</div>
+        <else />
+		<!--有消费记录-->
+		<form name="query" action="" method="get" id="query" class="query">
+			<p class="table-title">
+				{:lan('QUERY_TIME', 'Home')}：
+				<input name="start" id="start" class="laydate-icon" value="{$starttime}"/> {:lan('TO', 'Home')}
+				<input name="end" id="end" class="laydate-icon" value="{$endtime}"/>
+				<button class="query-btn">{:lan('QUERY', 'Home')}</button>
+				<neq name="Think.get.time" value=""><button class="btn-no">{:lan('CANCEL', 'Home')}</button></neq>
+			</p>
+			<table class="table-list">
+				<thead>
+				<tr>
+					<th>{:lan('TRADE_TYPE', 'Home')}</th>
+					<th>{:lan('CONSUME_SHOW_MONEY', 'Home')}</th>
+					<th>{:lan('STATUS', 'Home')}</th>
+					<th>{:lan('TRADE_TIME', 'Home')}</th>
+				</tr>
+				</thead>
+				<tbody>
+				<volist name="consumeList" id="vo">
+					<tr>
+						<td>{:lan('BUY', 'Home')} {$vo[giftname]}</td>
+						<td>{$vo[spendamount]}</td>
+						<td>
+							<if condition="$vo[status]=='0'">
+								{:lan('PENDING', 'Home')}
+								<elseif condition="$vo[status]=='1'"/>
+								{:lan('SUCCESSFUL', 'Home')}
+							</if>
+						</td>
+						<td>{$vo[tradetime]}</td>
+					</tr>
+				</volist>
+				</tbody>
+			</table>
+		</form>
+		{$page}
+		</eq>
+	</div>
+	<script>
+		$(function () {
+			userCenter.timeChoice();
+		})
+	</script>
+</block>

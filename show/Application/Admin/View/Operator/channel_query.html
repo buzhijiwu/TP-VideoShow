@@ -1,0 +1,160 @@
+<tagLib name="html" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>{:lan('ADMIN_MAN_TITLE', 'Admin')}</title>
+    <link href="__PUBLIC__/Public/statics/css/reset.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/Public/statics/css/system.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/Public/statics/css/table_form.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/Public/statics/css/dialog.css" rel="stylesheet" type="text/css" />
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/dialog.js"></script>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles1.css" title="styles1" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles2.css" title="styles2" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles3.css" title="styles3" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles4.css" title="styles4" media="screen" />
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/admin_common.js"></script>
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/styleswitch.js"></script>
+
+</head>
+<body>
+<style type="text/css">
+    html{_overflow-y:scroll}
+</style><div id="closeParentTime" style="display:none"></div>
+<div class="pad-10">
+    <form name="searchform" id="searchform" action="/Admin/Operator/channel_query" method="get" >
+        <input type="hidden" name="searchform" value="1">
+        <table width="100%" cellspacing="0" class="search-form">
+            <tbody>
+            <tr>
+                <td>
+                    <div class="explain-col">
+                        {:lan('CHANNEL_BUSINESS', 'Admin')}：
+                        <select name="distributeid" style="margin-right: 5px;">
+                            <option value="">{:lan('ALL', 'Admin')}</option>
+                            <volist name="distributeList" id="vo" key="k">
+                            <option value="{$vo.distributeid}" <eq name="search.distributeid" value="$vo.distributeid"> selected</eq>>
+                            {$vo.distributename}
+                            </option>
+                            </volist>                          
+                        </select>                        
+                        {:lan('TIME', 'Admin')}：
+                        <link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/js/calendar/jscal2.css"/>
+                        <link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/js/calendar/border-radius.css"/>
+                        <link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/js/calendar/win2k.css"/>
+                        <script type="text/javascript" src="__PUBLIC__/Public/statics/js/calendar/calendar.js"></script>
+                        <script type="text/javascript" src="__PUBLIC__/Public/statics/js/calendar/lang/en.js"></script>
+                        <input type="text" name="start_time" id="start_time" value="{$search['start_time']}" size="10" class="date" readonly>&nbsp;<script type="text/javascript">
+                        Calendar.setup({
+                            weekNumbers: false,
+                            inputField : "start_time",
+                            trigger    : "start_time",
+                            dateFormat: "%Y-%m-%d",
+                            showTime: false,
+                            minuteStep: 1,
+                            onSelect   : function() {this.hide();}
+                        });
+                    </script>- &nbsp;<input type="text" name="end_time" id="end_time" value="{$search['end_time']}" size="10" class="date" readonly>&nbsp;<script type="text/javascript">
+                        Calendar.setup({
+                            weekNumbers: false,
+                            inputField : "end_time",
+                            trigger    : "end_time",
+                            dateFormat: "%Y-%m-%d",
+                            showTime: false,
+                            minuteStep: 1,
+                            onSelect   : function() {this.hide();}
+                        });
+                    </script>
+                        {:lan('STAT_PERIOD', 'Admin')}：
+                        <select name="circle">
+                            <option value="0" <eq name="search.circle" value="0"> selected</eq>>{:lan('DAY_DATE', 'Admin')}</option>
+                            <option value="1" <eq name="search.circle" value="1"> selected</eq>>{:lan('WEEK_DATE', 'Admin')}</option>
+                            <option value="2" <eq name="search.circle" value="2"> selected</eq>>{:lan('MONTH_DATE', 'Admin')}</option>
+                        </select>
+                        <input type="button" class="button" style="margin-left: 10px;" onclick="form_search();" value="{:lan('BTN_SEARCH', 'Admin')}" />
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+    <form name="myform" id="myform" action="" method="post" >
+        <div class="table-list">
+            <table width="100%">
+                <thead>
+                <tr>
+                    <th>{:lan('SYS_NUMBER', 'Admin')}</th>
+                    <th>{:lan('APP_STORE_CHANNEL_BUSINESS', 'Admin')}</th>
+                    <th>{:lan('DATE', 'Admin')}</th>
+                    <th>{:lan('RECHARGE_NUMBER', 'Admin')}</th>
+                    <th>{:lan('RECHARGE_COUNT', 'Admin')}</th>
+                    <th>{:lan('RECHARGE_AMOUNT', 'Admin')}</th>                    
+                    <th>{:lan('REGISTER_NUMBER', 'Admin')}</th>
+                    <th>{:lan('RECHARGE_DETAIL', 'Admin')}</th>
+                    <th>{:lan('REGISTER_DETAIL', 'Admin')}</th>                    
+                </tr>
+                </thead>
+                <tbody>
+                <volist name="result" id="vo" key="k">
+                    <tr>
+                        <td align='center'>{$k}</td>
+                        <td align="center">{$vo['distributename']}</td>
+                        <td align="center">
+                            <neq name="vo.circle" value="1">
+                            {$vo['createtime']}
+                            <else />
+                                <if condition="($vo.start_time neq '') AND ($vo.end_time neq '')"> 
+                                {$vo['start_time']}~{$vo['end_time']}
+                                <else />
+                                {$vo['start_time']}{$vo['end_time']}
+                                </if>
+                            </neq>
+                        </td>
+                        <td align="center">{$vo['rechargenum']}</td>
+                        <td align="center">{$vo['rechargecount']}</td>
+                        <td align="center">{$vo['rechargeamount']}</td>                        
+                        <td align='center'>{$vo['registercount']}</td>
+                        <td align='center'>
+                            <eq name="vo.rechargecount" value="0">
+                            <a target="_blank" href="javascript:;" style="color: #bbb;">
+                            {:lan('VIEW', 'Admin')}
+                            </a>
+                            <else />
+                            <a target="_blank" href="{:U('Admin/Operator/appchannel_rechargedetail/distributeid/'.$vo['distributeid'].
+                            '/start_time/'.$vo['start_time'].'/end_time/'.$vo['end_time'])}">
+                            {:lan('VIEW', 'Admin')}
+                            </a>
+                            </eq>
+                        </td>
+                        <td align='center'>
+                            <eq name="vo.registercount" value="0">
+                            <a target="_blank" href="javascript:;" style="color: #bbb;">
+                            {:lan('VIEW', 'Admin')}
+                            </a>
+                            <else />
+                            <a target="_blank" href="{:U('Admin/Operator/appchannel_registerdetail/distributeid/'.$vo['distributeid'].
+                            '/start_time/'.$vo['start_time'].'/end_time/'.$vo['end_time'])}">
+                            {:lan('VIEW', 'Admin')}
+                            </a>                            
+                            </eq>
+                        </td>   
+                    </tr>
+                </volist>
+
+                </tbody>
+            </table>
+            <div id="pages">{$page}</div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    //条件搜索
+    function form_search(){
+        document.getElementById('searchform').action = '/Admin/Operator/channel_query/';
+        $('#searchform').submit();
+    }
+</script>
+</body>
+</html>

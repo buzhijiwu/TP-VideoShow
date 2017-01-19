@@ -1,0 +1,50 @@
+<extend name="Public:list" />
+<block name="title">{:lan('ADMIN_MAN_TITLE', 'Admin')}</block>
+<block name="css"></block>
+
+<block name="main">
+    <div class="subnav">
+        <div>
+            <input type="button" onclick="refresh_key('{$key}');" name="search" class="button" value="{:lan('REDIS_KEY_REFRESH', 'Admin')}" />
+        </div>
+    </div>
+    <form name="myform" id="myform" action="" method="post" >
+        <div class="table-list">
+            <table width="100%">
+                <thead>
+                <tr>
+                    <th align='left' style="width:12%;">{:lan('SYS_NUMBER', 'Admin')}</th>
+                    <th align='left' style="width:12%;">{:lan('REDIS_KEY_NAME','Admin')}</th>
+                    <th align='left' style="width:15%;">{:lan('REDIS_HASHKEY_NAME','Admin')}</th>
+                    <th align='left'>{:lan('DUE_TIME','Admin')}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <volist name="data" id="v" key="k">
+                    <tr>
+                        <td>{$k}</td>
+                        <td>BanLive</td>
+                        <td>{$v.hkey}</td>
+                        <eq name="v.failuretime" value="-1">
+                        <td>{:lan('NO_UPPER_LIMIT','Admin')}</td>
+                        <else />
+                        <td>{$v.failuretime}</td>                        
+                        </eq>
+                    </tr>
+                </volist>
+                </tbody>
+            </table>
+        </div>
+    </form>    
+</block>
+
+<block name="js">
+    <script type="text/javascript">
+        //刷新key
+        function refresh_key(key){
+            if(confirm("{:lan('CONFIRM_REFRESH','Admin')}")){
+                window.location.href = "{:U('Admin/Show/banlive_update/key/"+key+"/')}";
+            }
+        }
+    </script>
+</block>

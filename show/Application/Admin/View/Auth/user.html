@@ -1,0 +1,58 @@
+<extend name="Public:list" />
+<block name="title">{:lan('ADMIN_LIST', 'Admin')}</block>
+<block name="css"></block>
+
+<block name="main">
+<div class="subnav">
+  <div class="content-menu ib-a blue line-x">
+  	<a href="__URL__/user" <eq name="Think.get.type" value="">class="on"</eq> ><em>{:lan('ADMIN_LIST', 'Admin')}</em></a><span>|</span>
+  	<a href="__URL__/user_up"><em>{:lan('ADD_ADMIN', 'Admin')}</em></a>
+  </div>
+</div>
+<form name="myform" id="myform" action="__URL__/delAll" method="post" >
+    <div class="table-list">
+      <table width="100%">
+        <thead>
+          <tr>
+      		<th width="40">{:lan('NUMBER', 'Admin')}</th>
+      		<th align="">{:lan('USERNAME', 'Admin')}</th>
+      		<th align="center">{:lan('USER_GROUP', 'Admin')}</th>
+      		<th align="center">{:lan('SYS_REALNAME', 'Admin')}</th>
+      		<th align="center">{:lan('SYS_TELNUM', 'Admin')}</th>
+      		<th align="center">{:lan('SYS_POSITION', 'Admin')}</th>
+      		<th align="center">{:lan('SYS_LASTLOGINTIME', 'Admin')}</th>
+      		<th align="center">{:lan('SYS_LASTLOGINIP', 'Admin')}</th>
+      		<th align="center">{:lan('UPDATE_TIME', 'Admin')}</th>
+      		<th align="center">{:lan('OPERATION', 'Admin')}<th>
+          </tr>
+        </thead>
+        <tbody>
+          <volist name="data" id="v">
+            <tr>
+              <td align='center'>{$v.adminid}</td>
+              <td align='center'>{$v.adminname}</td>
+              <td align='center'>{$v.rolename}</td>
+              <td align="center">{$v.realname}</td>
+              <td align='center'>{$v.contactno}</td>
+              <td align="center">{$v.position}</td>
+              <td align="center">{$v.lastlogintime}</td>
+              <td align='center'>{$v.lastloginip}</td>
+              <td align="center">{$v.createtime}</td>
+              <td align="center">
+              	<a href="__URL__/user_up/id/{$v.adminid}">{:lan('MODIFY', 'Admin')}</a> | <a href="javascript:confirmurl('__URL__/delOne/db/4003/id/{$v.adminid}', '{:lan('WEATHER_DEL_RECORD', 'Admin')}')">{:lan('BTN_DELETE', 'Admin')}</a>
+			  </td>
+            </tr>
+          </volist>
+        </tbody>
+      </table>
+    </div>
+</form>
+</block>
+
+<block name="js">
+<script type="text/javascript">
+function confirm_delete(){
+	if(confirm('{:lan('CONFIRM_DELETE', 'Admin')}')) $('#myform').submit();
+}
+</script>
+</block>

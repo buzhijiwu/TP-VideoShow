@@ -1,0 +1,186 @@
+<extend name="Public:list" />
+<block name="title"></block>
+<block name="css"></block>
+
+<block name="main">
+    <script>
+        $(function(){
+
+            $.formValidator.initConfig({formid:"myform",autotip:true,onerror:function(msg,obj){window.top.art.dialog({content:msg,lock:true,width:'200',height:'50'}, function(){this.close();$(obj).focus();})}});
+            $("#agentname").formValidator({
+                        onshow:"{:lan('AGENT_NAME', 'Admin')}",
+                        onfocus:"{:lan('AGENT_NAME', 'Admin')}",
+                        oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"})
+                    .inputValidator({min:1,onerror:"{:lan('AGENT_NAME', 'Admin')}"});
+            $("#password").formValidator({
+                        onshow:"{:lan('AGENT_NAME', 'Admin')}",
+                        onfocus:"{:lan('AGENT_NAME', 'Admin')}",
+                        oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"})
+                    .inputValidator({min:1,onerror:"{:lan('AGENT_NAME', 'Admin')}"});
+            $("#realname").formValidator({
+                        onshow:"{:lan('INPUT_REAL_NAME', 'Admin')}",
+                        onfocus:"{:lan('INPUT_REAL_NAME', 'Admin')}",
+                        oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"})
+                    .inputValidator({min:1,onerror:"{:lan('INPUT_REAL_NAME', 'Admin')}"});
+            $("#mobileno").formValidator({
+                        onshow:"{:lan('INPUT_YOUR_USERNAME', 'Admin')}",
+                        onfocus:"{:lan('INPUT_YOUR_USERNAME', 'Admin')}",
+                        oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"})
+                    .inputValidator({min:1,max:20,onerror:"{:lan('INPUT_YOUR_USERNAME', 'Admin')}"})
+                    .regexValidator({regexp:"num",datatype:"enum",onerror:"{:lan('INPUT_YOUR_USERNAME', 'Admin')}"});
+            $("#cardid").formValidator({
+                        onshow:"{:lan('INPUT_CARD_ID', 'Admin')}",
+                        onfocus:"{:lan('INPUT_CARD_ID', 'Admin')}",
+                        oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"})
+                    .inputValidator({min:1,max:30,onerror:"{:lan('INPUT_CARD_ID', 'Admin')}"})
+                    .regexValidator({regexp:"num",datatype:"enum",onerror:"{:lan('PLZ_INPUT_NUMBER', 'Admin')}"});
+            $("#address").formValidator({
+                        onshow:"{:lan('INPUT_ADDRESS', 'Admin')}",
+                        onfocus:"{:lan('INPUT_ADDRESS', 'Admin')}",
+                        oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"})
+                    .inputValidator({min:1,max:100,onerror:"{:lan('INPUT_ADDRESS', 'Admin')}"});
+            $("#contactno").formValidator({
+                        onshow:"{:lan('AGENT_CONTACT_NO', 'Admin')}",
+                        onfocus:"{:lan('AGENT_CONTACT_NO', 'Admin')}",
+                        oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"})
+                    .inputValidator({min:1,max:20,onerror:"{:lan('AGENT_CONTACT_NO', 'Admin')}"})
+                    .regexValidator({regexp:"num",datatype:"enum",onerror:"{:lan('PLZ_INPUT_NUMBER', 'Admin')}"});
+            $("#bankid").formValidator({
+                        onshow:"{:lan('INPUT_BANK_NO', 'Admin')}",
+                        onfocus:"{:lan('INPUT_BANK_NO', 'Admin')}",
+                        oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"})
+                    .inputValidator({min:1,max:30,onerror:"{:lan('INPUT_BANK_NO', 'Admin')}"})
+                    .regexValidator({regexp:"num",datatype:"enum",onerror:"{:lan('PLZ_INPUT_NUMBER', 'Admin')}"});
+            $("#bankname").formValidator({
+                        onshow:"{:lan('INPUT_BANK_NAME', 'Admin')}",
+                        onfocus:"{:lan('INPUT_BANK_NAME', 'Admin')}",
+                        oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"})
+                    .inputValidator({min:1,onerror:"{:lan('INPUT_BANK_NAME', 'Admin')}"});
+            $("#baccoutname").formValidator({
+                        onshow:"{:lan('INPUT_ACCOUNT_NAME', 'Admin')}",
+                        onfocus:"{:lan('INPUT_ACCOUNT_NAME', 'Admin')}",
+                        oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"})
+                    .inputValidator({min:1,onerror:"{:lan('INPUT_ACCOUNT_NAME', 'Admin')}"});
+            $("#subbank").formValidator({
+                        onshow:"{:lan('INPUT_SUB_BANK_NAME', 'Admin')}",
+                        onfocus:"{:lan('INPUT_SUB_BANK_NAME', 'Admin')}",
+                        oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"})
+                    .inputValidator({min:1,onerror:"{:lan('INPUT_SUB_BANK_NAME', 'Admin')}"});
+            $("#companyname").formValidator({
+                        onshow:"{:lan('AGENT_COMPANY_NAME', 'Admin')}",
+                        onfocus:"{:lan('AGENT_COMPANY_NAME', 'Admin')}",
+                        oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"})
+                    .inputValidator({min:1,onerror:"{:lan('AGENT_COMPANY_NAME', 'Admin')}"});
+            $("#limitamount").formValidator({
+                        onshow:"{:lan('AGENT_LIMIT_AMOUNT', 'Admin')}",
+                        onfocus:"{:lan('AGENT_LIMIT_AMOUNT', 'Admin')}",
+                        oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"})
+                    .inputValidator({min:1,max:20,onerror:"{:lan('AGENT_LIMIT_AMOUNT', 'Admin')}"})
+                    .regexValidator({regexp:"num",datatype:"enum",onerror:"{:lan('PLZ_INPUT_NUMBER', 'Admin')}"});
+
+        })
+    </script>
+
+
+    <div class="subnav">
+        <div class="content-menu ib-a blue line-x">
+            <a href="__URL__/agent/"><em>{:lan('AGENT_LIST', 'Admin')}</em></a><span>|</span>
+            <a href="javascript:;" class="on"><em>{:lan('ADD_AGENT', 'Admin')}</em></a>
+        </div>
+    </div>
+    <style type="text/css">
+        html{_overflow-y:scroll}
+    </style>
+    <div class="pad_10">
+        <div class="common-form">
+            <form name="myform" action="" method="post" id="myform">
+                <input name="agentid" value="{$data['agentid']}" type="hidden">
+                <table class="table_form contentWrap" width="100%">
+                    <tbody>
+
+                    <tr>
+                        <td width="120">{:lan('AGENT_NAME', 'Admin')}</td>
+                        <td>
+                            <input name="agentname" class="input-text" type="text" id="agentname" value="{$data['agentname']}" style=" width: 200px;">
+                            <span style="color:red;">*</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{:lan('ADMIN_PASSWORD', 'Admin')}</td>
+                        <td>
+                            <input name="password" class="input-text" type="password" id="password" value="" style=" width: 200px;">
+                            <span style="color:red;">
+                                <if condition="$data['agentid'] neq ''">{:lan('DONOT_CHANGEPWD', 'Admin')}<else/>*</if>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{:lan('AGENT_TYPE', 'Admin')}</td>
+                        <td>
+                            <select name="agenttype" class="selectStyle">
+                                <option value="">{:lan('PLEASE_CHOOSE', 'Admin')}</option>
+                                <volist name="agenttype" id="v">
+                                    <option <eq name="data.agenttype" value="$v.id">selected="selected"</eq> value="{$v.id}">{$v.name}</option>
+                                </volist>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{:lan('SYS_REALNAME', 'Admin')}</td>
+                        <td><input name="realname" class="input-text" type="text" id="realname" value="{$data['realname']}" style=" width: 200px;"></td>
+                    </tr>
+                    <tr>
+                        <td>{:lan('SYS_TELNUM', 'Admin')}</td>
+                        <td><input name="mobileno" class="input-text" type="text" id="mobileno" value="{$data['mobileno']}" style=" width: 200px;"></td>
+                    </tr>
+                    <tr>
+                        <td>{:lan('AGENT_CARD_ID', 'Admin')}</td>
+                        <td><input name="cardid" class="input-text" type="text" id="cardid" value="{$data['cardid']}" style=" width: 200px;"></td>
+                    </tr>
+                    <tr>
+                        <td>{:lan('SYS_ADDRESS', 'Admin')}</td>
+                        <td><input name="address" class="input-text" type="text" id="address" value="{$data['address']}" style=" width: 200px;"></td>
+                    </tr>
+                    <tr>
+                        <td>{:lan('AGENT_CONTACT_NO', 'Admin')}</td>
+                        <td><input name="contactno" class="input-text" type="text" id="contactno" value="{$data['contactno']}" style=" width: 200px;"></td>
+                    </tr>
+
+                    <tr>
+                        <td>{:lan('AGENT_BANK_ID', 'Admin')}</td>
+                        <td><input name="bankid" class="input-text" type="text" id="bankid" value="{$data['bankid']}" style=" width: 200px;"></td>
+                    </tr>
+                    <tr>
+                        <td>{:lan('AGENT_BANK_NAME', 'Admin')}</td>
+                        <td><input name="bankname" class="input-text" type="text" id="bankname" value="{$data['bankname']}" style=" width: 200px;"></td>
+                    </tr>
+                    <tr>
+                        <td>{:lan('AGENT_BACCOUT_NAME', 'Admin')}</td>
+                        <td><input name="baccoutname" class="input-text" type="text" id="baccoutname" value="{$data['baccoutname']}" style=" width: 200px;"></td>
+                    </tr>
+                    <tr>
+                        <td>{:lan('AGENT_SUBBANK', 'Admin')}</td>
+                        <td><input name="subbank" class="input-text" type="text" id="subbank" value="{$data['subbank']}" style=" width: 200px;"></td>
+                    </tr>
+                    <tr>
+                        <td>{:lan('AGENT_COMPANY_NAME', 'Admin')}</td>
+                        <td><input name="companyname" class="input-text" type="text" id="companyname" value="{$data['companyname']}" style=" width: 200px;"></td>
+                    </tr>
+                    <tr>
+                        <td>{:lan('AGENT_LIMIT_AMOUNT', 'Admin')}</td>
+                        <td><input name="limitamount" class="input-text" type="text" id="limitamount" value="{$data['limitamount']}" style=" width: 200px;"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="bk15"></div>
+                <input name="dosubmit" value="{:lan('SUBMIT_BUTTION', 'Admin')}" class="button" type="submit">
+            </form>
+        </div>
+    </div>
+</block>
+
+<block name="js">
+    <script type="text/javascript">
+
+    </script>
+</block>

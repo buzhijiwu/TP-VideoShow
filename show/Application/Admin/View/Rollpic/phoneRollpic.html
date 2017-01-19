@@ -1,0 +1,284 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=7" />
+<title>{:C('TITLE_CONTENT')}</title>
+<link href="__PUBLIC__/Public/statics/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Public/statics/css/system.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Public/statics/css/table_form.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles1.css" title="styles1" media="screen" />
+<link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles2.css" title="styles2" media="screen" />
+<link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles3.css" title="styles3" media="screen" />
+<link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles4.css" title="styles4" media="screen" />
+
+<js href="__PUBLIC__/Public/Js/jquery-1.7.2.min.js" />
+
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/admin_common.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/styleswitch.js"></script>
+<script type="text/javascript">
+	window.focus();
+	</script>
+	
+	
+<link rel="stylesheet" href="/Tools/Js/Kindeditor/themes/default/default.css" />
+<script charset="utf-8" src="/Tools/Js/Kindeditor/kindeditor.js"></script>
+<script charset="utf-8" src="/Tools/Js/Kindeditor/lang/zh_CN.js"></script>
+</head>
+<body>
+<div class="subnav">
+    <div class="content-menu ib-a blue line-x">
+        <a href='javascript:;' class="on"><em>手机端轮播图</em></a>
+	</div>
+</div>
+
+<div class="subnav">
+    <div class="content-menu ib-a blue line-x">
+        <a lantype="en" href='javascript:;' class="lantype <if condition="$lantype eq 'en'">on</if>"><em>英文版</em></a>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a lantype="cn" href='javascript:;' class="lantype <if condition="$lantype eq 'cn'">on</if>"><em>中文版</em></a>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a lantype="vi" href='javascript:;' class="lantype <if condition="$lantype eq 'vi'">on</if>"><em>越南文版</em></a>
+	</div>
+</div>
+<style type="text/css">
+	html {_overflow-y:scroll}
+</style>
+<script>
+$('a.lantype').click(function() {
+	var lantype = $(this).attr('lantype');
+	if($.trim(lantype)=="{$lantype}") return false;
+	window.location.href = "{:U('Rollpic/phoneRollpic')}?lantype=" + lantype;
+});
+</script>
+<form name="myform" action="__SELF__" method="post">
+<input type="hidden" name="lantype" value="{$lantype}" />
+<div class="pad_10">
+
+<div class="bk10"></div>
+<div class="table-list">
+    
+	<div style="width:800px;min-height:200px;border:0px solid red">
+		<input disabled type="text" id="url3" value="" />
+		<input type="button" id="image3" value="选择图片" />
+		&nbsp;&nbsp;
+		<a id="add_a" style="color:#4B67B0;font-weight:bold;" href="javascript:;">添加</a>
+		&nbsp;&nbsp;
+		<a id="edit_a" style="color:#4B67B0;font-weight:bold;" href="javascript:;">修改</a>
+		<div id="imgarea" style="margin-top:10px;width:700px;min-height:100px;border:0px solid pink">
+
+<div id="ajaxloading" style="display:none;">
+		<img id="ajaxloadingimg" style="border:0px solid black;" src="__PUBLIC__/Public/Images/ajaxloading.gif" />
+</div>
+<style>
+#ajaxloadingimg { position:absolute;left:50%;top:50%;}
+#ajaxloading {line-height:50%;text-align='center'}
+</style>
+<foreach name="rollpics" item="v" >
+		<table>
+			<tr>
+				<td style="width:100px;" rowspan="4">
+					<a href="{$v['picpath']}" target="_blank">
+						<img class="lazy" src="{$Think.config.IMAGE_BASE_URL}{$v['picpath']}" width="100" />
+					</a>
+				</td>
+				<td>
+					<font color="green">标题：</font><input class="text_input" type="text" name="title[]" placeholder="请输入标题" value="{$v['title']}" />
+				</td>
+			</tr>
+			<tr>
+			<td style="min-width:600px;">
+				<font color="green">链接地址：</font><input class="text_input" size="60" type="text" name="linkurl[]" placeholder="请输入链接地址" value="{$v['linkurl']}" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<font color="green">顺序：</font><input type="text" class="text_input" size="5" name="orderno[]" placeholder="输入顺序" value="{$v['orderno']}" />&nbsp;&nbsp;&nbsp;<a href="javascript:;" class="del_a"><font color="green">删除</font></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label><font color="green">选中修改</font>&nbsp;&nbsp;<input type="checkbox" class="checkimg" value="1" /></label>
+			</td>
+		</tr>
+		<input class="hidden_imgurl" type="hidden" name="picpath[]" value="{$v['picpath']}" />
+		<input class="action" type="hidden" name="action[]" value="save" />
+		<input class="picid" type="hidden" name="picid[]" value="{$v['id']}" />
+		</table>
+</foreach>
+
+		</div>
+	</div>
+
+    <div class="btn">
+	<input id="submitbtn" style="<if condition="$rollpics || 1">display:none;</if>" type="submit" class="button" name="dosubmit" value="保存" /></div>  </div>
+</div>
+</div>
+</form>
+<script language="JavaScript">
+<!--
+	window.top.$('#display_center_id').css('display','none');
+//-->
+</script>
+
+<script>
+KindEditor.ready(function(K) {
+		var editor = K.editor({
+			allowFileManager : true,
+			uploadJson : "{:U('Common/upimg')}"   {/*图片上传后的处理地址*/}
+		});
+		K('#image3').click(function() {
+			editor.loadPlugin('image', function() {
+				editor.plugin.imageDialog({
+					showRemote : false,
+					imageUrl : K('#url3').val(),
+					clickFn : function(url, title, width, height, border, align) {
+						K('#url3').val(url);
+						editor.hideDialog();
+					}
+				});
+			});
+		});
+	});
+</script>
+</body>
+</html>
+
+<script>
+$('#ajaxloading').css({'width':'100%','height':'100%','background':'#CCC','position':'absolute','opacity':'0.8'});
+
+var documentFlag = false;
+$(document).on('mouseover','table tr , table td',function() {
+	$(this).css({'background-color':'white'});
+});
+
+$('#add_a').click(function() {
+	var imgurl = $.trim($('#url3').val());
+	if(imgurl=='') {
+		//alert('请先上传图片');
+		return false;
+	}
+	documentFlag = true;
+	$('#submitbtn').show();
+	var $html = '<table><tr><td style="width:100px;" rowspan="4"><a href="'+imgurl+'" target="_blank"><img class="lazy" src="'+imgurl+'" width="100" /></a></td><td>标题：<input class="text_input" type="text" name="title[]" placeholder="请输入标题" value="" /></td></tr><tr><td style="min-width:600px;">链接地址：<input class="text_input" size="60" type="text" name="linkurl[]" placeholder="请输入链接地址" value="" /></td></tr><tr><td>顺序：<input type="text" class="text_input" size="5" name="orderno[]" placeholder="输入顺序" value="" />&nbsp;&nbsp;&nbsp;<a class="del_a" href="javascript:;">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>选中修改&nbsp;&nbsp;<input type="checkbox" class="checkimg" value="1" /></label></td></tr><input class="hidden_imgurl" type="hidden" name="picpath[]" value="'+imgurl+'" /><input type="hidden" class="action" name="action[]" value="add" /><input class="picid" type="hidden" name="picid[]" value="" /></table>';
+	$('#imgarea').append($html);
+	$('#url3').val('');
+});
+
+$(document).on('click','#edit_a',function() {
+	var imgurl = $.trim($('#url3').val());
+	if(imgurl=='') {
+		//alert('请先上传图片');
+		return false;
+	}
+	var flag = false;
+	var obj = {};
+	var action = '';
+	var id = 0;
+	$('.checkimg').each(function() {
+		if($(this).get(0).checked) {
+			obj = $(this).parents('table').eq(0).find('.lazy').eq(0);
+			action = $(this).parents('table').eq(0).find('.action').eq(0).val();
+			id = $(this).parents('table').eq(0).find('.picid').eq(0).val();
+			flag = true;
+			return false;
+		}
+	});
+	if(!flag) {
+		alert('请选择要修改的图片');
+		return false;
+	}
+	if(action=='save') {
+		var flag = true;
+		var $url = "{:U('Rollpic/admin_rollpic')}";
+		var $data = {
+			'action' : 'edit' ,
+			'picpath' : imgurl,
+			'id' : id
+		};
+		$('#ajaxloading').show();
+		$.post($url,$data,function(a) {
+			if(a!='ok') flag = false;
+			$('#ajaxloading').hide();
+			if(!flag) {
+				alert('操作失败，错误原因：异步参数错误');
+				return false;
+			} else {
+				obj.attr('src',imgurl);
+				$('#url3').val('');
+				alert('修改图片成功');
+			}
+		});
+	} else {
+		obj.attr('src',imgurl);
+		$('#url3').val('');
+		alert('修改图片成功');
+	}
+	obj.parents('td').eq(0).find('a').eq(0).attr('href',imgurl);
+	$('.checkimg').each(function() {
+		$(this).get(0).checked = false;
+	});
+});
+
+
+$('form').submit(function() {
+	if(!documentFlag) return false;
+	var flag = true;
+	$('.text_input').each(function() {
+		if($.trim($(this).val())=='') {
+			flag = false;
+			return false;
+		}
+	});
+	if(!flag) {
+		alert('请填写完整相关表单');
+		return false;
+	}
+});
+
+$('.text_input').focus(function() {
+	documentFlag = true;
+	$('#submitbtn').show();
+});
+
+$(document).on('click','a.del_a',function() {
+	if(!confirm('确认要删除吗？此操作不可恢复')) return false;
+	var $thi = $(this);
+	var flag = true;
+	if($(this).parents('table').eq(0).find('input.action').eq(0).val()=='save') {
+		var $url = "{:U('Rollpic/admin_rollpic')}";
+		var $data = {
+			'action' : 'del' ,
+			'id' : $(this).parents('table').eq(0).find('input.picid').eq(0).val()
+		};
+		$('#ajaxloading').show();
+		$.post($url,$data,function(a) {
+			if(a!='ok') flag = false;
+			$('#ajaxloading').hide();
+			if(!flag) {
+				alert('操作失败，错误原因：异步参数错误');
+				return false;
+			} else {
+				$thi.parents('table').eq(0).slideUp(200,function() {
+					$(this).remove();
+					alert('删除成功');
+				});
+			}
+		});
+	} else {
+		$thi.parents('table').eq(0).slideUp(200,function() {
+			$(this).remove();
+			alert('删除成功');
+		});
+	}
+});
+
+
+$(document).on('click','.checkimg',function() {
+	if($(this).get(0).checked) {
+		$('.checkimg').each(function() {
+			$(this).get(0).checked = false;
+		});
+		$(this).get(0).checked = true;
+	}
+});
+</script>
+
+<style>
+table {margin-bottom:50px;margin-top:30px;}
+</style>

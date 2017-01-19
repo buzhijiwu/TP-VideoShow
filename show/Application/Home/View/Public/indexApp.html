@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <title>DownLoad</title>
+
+    <style>
+        /*盒子模型*/
+        *,*:after,*:before{
+            box-sizing:border-box;
+            -webkit-box-sizing:border-box;
+        }
+        html,body{
+            height: 100%;
+        }
+        body,ol,ul,h1,h2,h3,h4,h5,h6,p,th,td,dl,dd,label,
+        form,fieldset,legend,input,textarea,select,button{
+            margin:0;
+            padding:0;
+            border:0;
+            background-color: transparent;
+            font-family:"PingFang SC","Helvetica Neue", Helvetica, "Microsoft Yahei", "WenQuanYi Micro Hei", Arial,Verdana,sans-serif ;
+
+        }
+        input:focus,button:focus,select:focus{
+            outline: none;
+        }
+        input[type=checkbox],input[type=radio]{
+            vertical-align: baseline;
+            position: relative;
+            top: 2px;
+        }
+        /*自动填充密码的背景色*/
+        input:-webkit-autofill,
+        textarea:-webkit-autofill,
+        select:-webkit-autofill {
+            background-color: rgba(255,255,255,1);
+            background-image: none;
+            color:#666;
+        }
+        /*input的type=number时候清除右边箭头*/
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button{
+            -webkit-appearance: none !important;
+            margin: 0;
+        }
+        ul,li{
+            list-style: none;
+        }
+        h1,h2,h3,h4,h5,h6,i,b,strong,p,div{
+            font-weight: normal;
+            word-wrap: break-word;
+        }
+        /*清除ios系统input效果*/
+        input[type=button],input[type=submit],input[type=file],button {
+            cursor: pointer;
+            -webkit-appearance: none;
+        }
+        body{
+            background:#f5f5f5;
+            -webkit-text-size-adjust:100%;
+            font-size: 14px;
+            position: relative;
+            color: #666;
+        }
+        a{
+            text-decoration:none;
+            color:#666;
+            font-style: normal;
+        }
+        a:hover{
+            cursor: pointer
+        }
+        img{
+            border:none;
+            vertical-align:middle;
+            line-height: 1
+        }
+        span,i,b,strong,a{
+            vertical-align: middle;
+        }
+        table{
+            table-layout: fixed;
+            width: 100%;
+            border-collapse:collapse;
+            border-spacing:0;
+        }
+        /*清除样式*/
+        .clearIn,.clear:after{
+            display:block;
+            font-size:0;
+            content:" ";
+            clear:both;
+            height:0;
+            border: none;
+            padding: 0;
+            margin: 0;
+            overflow:auto;
+            float: none;
+            zoom:1;
+        }
+
+        .wrap{
+            background-image: url("../../../../Public/Public/Images/AppIndex/app-index-bg.jpg");
+            background-size:cover;
+            padding-top: 50px;
+            background-repeat: no-repeat;
+            background-position: center top;
+            padding-bottom: 18px;
+            min-height: 100%;
+        }
+        .wrap .logo{
+            width: 50%;
+            display: block;
+            margin: 0 auto 30px auto;
+        }
+        .wrap .phone{
+            width: 46%;
+            display: block;
+            margin: 0 auto 24px auto;
+        }
+        .wrap .download{
+            display: block;
+            width: 61%;
+            margin:0 auto 9px auto;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            border: 1px solid #e4a158;
+            border-radius: 5px;
+            color: #e4a158;
+            font-size: 16px;
+        }
+        .wrap .download .icon{
+            height: 25px;
+            position: relative;
+            top: -3px;
+            margin-right: 3px;
+        }
+        .wrap .follow{
+            margin-top: 36px;
+            display: block;
+            width: 100%;
+            bottom: 18px;
+            text-align: center;
+            font-size: 16px;
+            color: #fff;
+        }
+        .wrap .follow img{
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+
+
+<div class="wrap">
+    <img src="../../../../Public/Public/Images/AppIndex/app-index-logo.png" class="logo">
+    <img src="../../../../Public/Public/Images/AppIndex/app-index-phone.png" class="phone">
+
+    <a href="https://itunes.apple.com/cn/app/waashow-kenh-video-truc-tuyen/id1067265475?mt=8&ign-mpt=uo%3D4" class="download">
+        <img class="icon" src="../../../../Public/Public/Images/AppIndex/app-index-ios.png">
+        <span>iPhone Download</span>
+    </a>
+
+    <a href="http://waashow.vn/ApkDownload/Android/WaaShow_Idol.apk" class="download">
+        <img class="icon" src="../../../../Public/Public/Images/AppIndex/app-index-android.png">
+        <span>Android Download</span>
+    </a>
+
+    <a href="http://www.facebook.com/waashow.vn" class="follow">
+        <img src="../../../../Public/Public/Images/AppIndex/facebook.png">
+        <span>FOLLOW US</span>
+    </a>
+</div>
+<script src="/Public/Tools/Js/jquery/jquery-1.11.1.min.js"></script>
+
+</body>
+</html>

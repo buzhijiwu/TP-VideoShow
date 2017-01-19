@@ -1,0 +1,99 @@
+<extend name="Public:list" />
+<block name="title"></block>
+<block name="css"></block>
+
+<block name="main">
+  <div id="searchid">
+    <form name="searchform" action="/Admin/Operator/game_history_record" method="get" >
+      <table width="100%" cellspacing="0" class="search-form">
+        <tbody>
+          <tr>
+            <td><div class="explain-col">
+                {:lan('GAME_TIME', 'Admin')}：
+                <input type="text" name="start_time" id="start_time" value="{$Think.get.start_time}" size="10" class="date" readonly>
+                &nbsp;<script type="text/javascript">     Calendar.setup({
+                weekNumbers: false,
+                  inputField : "start_time",
+                  trigger    : "start_time",
+                  dateFormat: "%Y-%m-%d",
+                  showTime: false,
+                  minuteStep: 1,
+                  onSelect   : function() {this.hide();}
+                });
+                </script>- &nbsp;
+                <input type="text" name="end_time" id="end_time" value="{$Think.get.end_time}" size="10" class="date" readonly>
+                &nbsp;<script type="text/javascript">     Calendar.setup({
+                weekNumbers: false,
+                  inputField : "end_time",
+                  trigger    : "end_time",
+                  dateFormat: "%Y-%m-%d",
+                  showTime: false,
+                  minuteStep: 1,
+                  onSelect   : function() {this.hide();}
+                });
+                </script>      
+                {:lan('BANKER', 'Admin')} {:lan('NICKNAME', 'Admin')}/{:lan('ROOMNO', 'Admin')}：
+                <input type="text" name="keyword" class="input-text" value="{$Think.get.keyword}" />
+                <input type="submit" name="search" class="button" value="{:lan('SEARCH', 'Admin')}" />
+              </div></td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+
+  <div class="subnav">
+      <span>{:lan('CUMULATIVE_TOTAL_BET', 'Admin')}：</span>
+      <b style="color:red;font-size:18px;">{$cumulativetotalbet}</b>
+  </div><br/>
+
+  <style>
+  #myform th, #myform td { text-align: center;}
+  </style>
+  <form name="myform" id="myform" action="" method="post" >
+    <div class="table-list">
+      <table width="100%">
+        <thead>
+          <tr>
+            <th width="40">{:lan('SYS_NUMBER', 'Admin')}</th>
+            <th>{:lan('BANKER', 'Admin')}{:lan('NICKNAME', 'Admin')}</th>            
+            <th>{:lan('BANKER', 'Admin')}{:lan('ROOMNO', 'Admin')}</th>
+            <th>{:lan('BANKER', 'Admin')}{:lan('SHOW_COIN_BALANCE', 'Admin')}</th>
+            <th>{:lan('BET_NUMBER', 'Admin')}</th>
+            <th>{:lan('TOTAL_BET', 'Admin')}</th>
+            <th>{:lan('WINNERS_DESERVE', 'Admin')}</th>
+            <th>{:lan('WINNERS_ACTUALLY_GET', 'Admin')}</th>  
+            <th>{:lan('BANKER_WINS', 'Admin')}</th>
+            <th>{:lan('GAME_START_TIME', 'Admin')}</th>    
+            <th>{:lan('WINNING_RESULTS', 'Admin')}</th>                                  
+          </tr>
+        </thead>
+        <tbody>
+          <volist name="data" id="v" key="k">
+          <tr>
+            <td>{$k}</td>
+            <td>{$v.nickname}</td>            
+            <neq name="v.niceno" value="">          
+            <td>{$v.niceno}</td>
+            <else />
+            <td>{$v.roomno}</td>
+            </neq> 
+            <td>{$v.showbean}</td>            
+            <td>{$v.betnumber}</td>
+            <td>{$v.totalbet}</td>   
+            <td>{$v.winnerdeserve}</td>  
+            <td>{$v.winneractuallyget}</td>  
+            <td>{$v.bankerwins}</td>            
+            <td>{$v.addtime}</td>   
+            <td>{$v.name}</td>                      
+          </tr>
+          </volist>
+        </tbody>
+      </table>
+      <div id="pages">{$page}</div>
+    </div>
+  </form>
+</block>
+
+<block name="js">
+</block>

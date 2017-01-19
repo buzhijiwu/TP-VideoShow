@@ -1,0 +1,83 @@
+<extend name="Public:list" />
+<block name="title"></block>
+<block name="css"></block>
+
+<block name="main">
+	
+<div class="subnav">
+  <div class="content-menu ib-a blue line-x">
+    <a href="javascript:;" class="on"><em>{:lan('GIFT_LIST', 'Admin')}</em></a></div>
+</div>
+<style type="text/css">
+	html{_overflow-y:scroll}
+</style>
+<form name="myform" action="" method="post" enctype="multipart/form-data">
+  <div class="pad_10">
+    <div class="bk10"></div>
+    <div class="table-list">
+      <table cellspacing="0" width="100%">
+        <thead>
+          <tr>
+            <th width="16"><input value="" id="check_box" onclick="selectall('ids[]');" type="checkbox"></th>
+            <th>{:lan('GIFT_TYPE', 'Admin')}</th>
+            <th>{:lan('GIFT_NO', 'Admin')}</th>
+            <th>{:lan('GIFT_NAME', 'Admin')}</th>
+            <th>{:lan('PRICE', 'Admin')}</th>
+            <th>{:lan('SMALL_PIC', 'Admin')}(25*25)</th>
+            <th>{:lan('BIG_PIC', 'Admin')}(50*50)</th>
+            <th>flash</th>
+            <th>{:lan('CREATE_TIME', 'Admin')}</th>
+          </tr>
+        </thead>
+        <tbody>
+    	  <volist name="data.list" id="v">
+    	  <tr align="center">
+			  <td><input class="inputcheckbox " name="ids[]" value="{$v.giftid}" type="checkbox"></td>
+			  <td>
+			    <select name="categoryid[]">
+			      <volist  name="cate" id="o">
+			      <option value="{$o.categoryid}" <eq name="v.categoryid" value="$o.categoryid">selected="selected"</eq>>{$o.categoryname}</option>
+			      </volist>
+			    </select></td>
+	    	  <td><input name="giftid[]" readonly="readonly" type="text" value="{$v.giftid}" class="input-text-c input-text" style="width:50px;"></td>
+			  <td><input name="giftname[]" type="text" value="{$v.giftname}" class="input-text-c input-text" style="width:150px;"></td>
+			  <td><input name="price[]" type="text" value="{$v.price}" class="input-text-c input-text" style="width:50px;"></td>
+			  <td><input name="smallimgsrc[]" type="text" value="{$v.smallimgsrc}" class="input-text-c input-text" style="width:150px;"></td>
+			  <td><input name="bigimgsrc[]" type="text" value="{$v.bigimgsrc}" class="input-text-c input-text" style="width:150px;"></td>
+			  <td><input name="giftflash[]" type="text" value="{$v.giftflash}" class="input-text-c input-text" style="width:150px;"></td>
+			  <td><center>{$v.createtime}</center></td>
+			</tr>
+          </volist>
+          	<tr align="center">
+			  <td align="center">{:lan('ADD', 'Admin')}</td>
+			  <td>
+			    <select name="add_categoryid">
+			      <volist  name="cate" id="o">
+			      <option value="{$o.categoryid}">{$o.categoryname}</option>
+			      </volist>
+			    </select></td>
+			  <td><input name="add_giftid" type="text" value="0" class="input-text-c input-text" style="width:50px;"></td>
+			  <td><input name="add_giftname" type="text" value="" class="input-text-c input-text" style="width:150px;"></td>
+			  <td><input name="add_price" type="text" value="" class="input-text-c input-text" style="width:50px;"></td>
+			  <td><input name="add_smallimgsrc" type="text" value="" class="input-text-c input-text" style="width:150px;"></td>
+			  <td><input name="add_bigimgsrc" type="text" value="" class="input-text-c input-text" style="width:150px;"></td>
+			  <td><input name="add_giftflash" type="text" value="" class="input-text-c input-text" style="width:150px;"></td>
+			  <td><center></center></td>
+			</tr>
+        </tbody>
+      </table>
+      <div class="btn">
+        <label for="check_box">{:lan('ALL_OR_CANCEL', 'Admin')}</label>
+        <input class="button" name="dosubmit" value="{:lan('SAVE', 'Admin')}" type="submit">
+      </div>
+    </div>
+  </div>
+</form>
+
+</block>
+
+<block name="js">
+<script type="text/javascript">
+	window.top.$('#display_center_id').css('display','none');
+</script>
+</block>

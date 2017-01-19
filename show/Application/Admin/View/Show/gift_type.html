@@ -1,0 +1,66 @@
+<extend name="Public:list" />
+<block name="title"></block>
+<block name="css"></block>
+
+<block name="main">
+<div class="subnav">
+  <div class="content-menu ib-a blue line-x"><a href="javascript:;" class="on"><em>{:lan('GIFT_TYPE_SET', 'Admin')}</em></a></div>
+</div>
+<style type="text/css">
+	html{_overflow-y:scroll}
+</style>
+<form name="myform" action="" method="post">
+  <div class="pad_10">
+    <div class="bk10"></div>
+    <div class="table-list">
+      <table cellspacing="0" width="100%">
+        <thead>
+          <tr>
+            <th width="16"><input value="" id="check_box" onclick="selectall('ids[]');" type="checkbox"></th>
+            <th width="38">{:lan('NUMBER', 'Admin')}</th>
+            <th width="150">{:lan('NAME', 'Admin')}</th>
+            <th width="150">{:lan('SORT', 'Admin')}</th>            
+            <th width="150"></th>
+            <th width="150"></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+        	<volist name="data.list" id="v">
+          <tr>
+            <td align="center"><input class="inputcheckbox " name="ids[]" value="{$v.cateid}" type="checkbox"></td>
+            <td><input name="id[]" size="3" value="{$v.categoryid}" readonly="readonly" class="input-text-c input-text" type="text"></td>
+            <td><input name="name[]" value="{$v.categoryname}" class="input-text-c input-text" style="width:150px;" type="text"></td>
+            <td><input name="sort[]" value="{$v.sort}" class="input-text-c input-text" style="width:150px;" type="text"></td>     
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          </volist>
+          <tr>
+            <td align="center">{:lan('ADD', 'Admin')}</td>
+            <td><input name="add_id" value="0" size="3" class="input-text-c input-text" type="text"></td>
+            <td><input name="add_name" class="input-text-c input-text" style="width:150px;" type="text"></td>
+            <td><input name="add_sort" class="input-text-c input-text" style="width:150px;" type="text"></td>            
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="btn">
+        <label for="check_box">{:lan('ALL_OR_CANCEL', 'Admin')}</label>
+        <input class="button" name="dosubmit" value="{:lan('SAVE', 'Admin')}" type="submit">
+      </div>
+    </div>
+  </div>
+</form>
+
+
+</block>
+
+<block name="js">
+<script language="JavaScript">
+	window.top.$('#display_center_id').css('display','none');
+</script>
+</block>

@@ -1,0 +1,158 @@
+<extend name="Public:list" />
+<block name="title"></block>
+<block name="css"></block>
+
+<block name="main">
+<style type="text/css">	
+html{_overflow-y:scroll}
+</style>
+<div id="closeParentTime" style="display:none"></div>
+<div class="pad-10">
+  <div id="searchid">
+    <form name="searchform" action="/Admin/Show/code_manager" method="get">
+      <!-- <input type="hidden" name="s" value="Admin/Show/code_manager" /> -->
+      <table class="search-form" cellspacing="0" width="100%">
+        <tbody>
+          <tr>
+            <td><div class="explain-col"> {:lan('CREATE_TIME', 'Admin')}：
+                <input name="start_time" id="start_time" value="{$Think.get.start_time}" size="10" class="date input-text" readonly type="text">
+                &nbsp;<script type="text/javascript">			Calendar.setup({
+			weekNumbers: false,
+		    inputField : "start_time",
+		    trigger    : "start_time",
+		    dateFormat: "%Y-%m-%d",
+		    showTime: false,
+		    minuteStep: 1,
+		    onSelect   : function() {this.hide();}
+			});
+        </script>- &nbsp;
+                <input name="end_time" id="end_time" value="{$Think.get.end_time}" size="10" class="date input-text" readonly type="text">
+                &nbsp;<script type="text/javascript">			Calendar.setup({
+			weekNumbers: false,
+		    inputField : "end_time",
+		    trigger    : "end_time",
+		    dateFormat: "%Y-%m-%d",
+		    showTime: false,
+		    minuteStep: 1,
+		    onSelect   : function() {this.hide();}
+			});
+        </script>
+               {:lan('NICE_NUMBER', 'Admin')}：
+                <input name="keyword" class="input-text" value="{$Think.get.keyword}" type="text">
+                {:lan('BIT', 'Admin')}：
+                <select name="length">
+                  <option value="">{:lan('UNLIMITED', 'Admin')}</option>
+                  <option value="1" <eq name="Think.get.length" value="1">selected="selected"</eq>>{:lan('ONE_BIT', 'Admin')}</option>
+                  <option value="2" <eq name="Think.get.length" value="2">selected="selected"</eq>>{:lan('TWO_BIT', 'Admin')}</option>
+                  <option value="3" <eq name="Think.get.length" value="3">selected="selected"</eq>>{:lan('THREE_BIT', 'Admin')}</option>
+                  <option value="4" <eq name="Think.get.length" value="4">selected="selected"</eq>>{:lan('FOUR_BIT', 'Admin')}</option>
+                  <option value="5" <eq name="Think.get.length" value="5">selected="selected"</eq>>{:lan('FIVE_BIT', 'Admin')}</option>
+                  <option value="6" <eq name="Think.get.length" value="6">selected="selected"</eq>>{:lan('SIX_BIT', 'Admin')}</option>
+                  <option value="7" <eq name="Think.get.length" value="7">selected="selected"</eq>>{:lan('SEVEN_BIT', 'Admin')}</option>
+                  <option value="8" <eq name="Think.get.length" value="8">selected="selected"</eq>>{:lan('EIGHT_BIT', 'Admin')}</option>
+                </select>
+                {:lan('SALES_STATUS', 'Admin')}：
+                <select name="isused">
+                  <option value="">{:lan('UNLIMITED', 'Admin')}</option>
+                  <option value="1" <eq name="Think.get.isused" value="1">selected="selected"</eq>>{:lan('SELL_OUT', 'Admin')}</option>
+                  <option value="0" <eq name="Think.get.isused" value="0">selected="selected"</eq>>{:lan('UNSOLD', 'Admin')}</option>
+                </select>
+                {:lan('USERID', 'Admin')}：
+                <input name="userid" class="input-text" value="{$Think.get.userid}" type="text">
+                <input name="search" class="button" value="{:lan('SEARCH', 'Admin')}" type="submit">
+              </div></td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+  <form name="myform" id="myform" action="" method="post">
+    <div class="table-list">
+      <table width="100%">
+        <thead>
+          <tr>
+            <th width="16"><input value="" id="check_box" onclick="selectall('ids[]');" type="checkbox"></th>
+            <th width="150">{:lan('NICE_NUMBER', 'Admin')}</th>
+            <th width="50">{:lan('BIT', 'Admin')}</th>
+            <th width="100">{:lan('PRICE', 'Admin')}</th>
+            <th width="200">{:lan('SALES_STATUS', 'Admin')}</th>
+            <th width="118">{:lan('CREATE_TIME', 'Admin')}</th>
+            <th width="118">{:lan('OPERATION_TIME', 'Admin')}</th>            
+            <th width="150">{:lan('REMARKS', 'Admin')}</th>
+            <th>{:lan('OPERATION', 'Admin')}</th>
+          </tr>
+        </thead>
+        <tbody>
+        	<volist name="data.list" id="v">
+          <tr>
+          	<input type="hidden" name="db" value="6031">
+            <td align="center">
+            	<neq name="v.isused" value="1"><input class="inputcheckbox " name="ids[]" value="{$v.nicenoid}" type="checkbox"></neq></td>
+            <td align="center" width="150"><font color="#FF6600"><b>{$v.niceno}</b></font></td>
+            <td align="center"><span style="">{$v.length}{:lan('BIT', 'Admin')}</span></td>
+            <td align="center">{$v.price}</td>
+            <td align="center">
+            	<eq name="v.isused" value="1">
+            		<span style="color:#FF6600;">{:lan('SELL_OUT', 'Admin')}</span><br/>{$v.username}(UID:{$v.userid})<else/>{:lan('UNSOLD', 'Admin')}</eq></td>
+            <td align="center">{$v.createtime}</td>
+            <td align="center">{$v.operatetime}</td>            
+            <td align="center">{$v.remark}</td>
+            <td align="center">
+            	<eq name="v.isused" value="1">
+            		<a href="javascript:edit({$v.nicenoid}, {$v.userid})">{:lan('WITHDRAW', 'Admin')}</a>
+        			<else/>
+            		<a href="__URL__/code_addone/id/{$v.nicenoid}">{:lan('MODIFY', 'Admin')}</a> | <a href="javascript:give({$v.nicenoid})">{:lan('PRESENT', 'Admin')}</a> | <a href="javascript:confirmurl('__URL__/delOne/db/6031/id/{$v.nicenoid}', '{:lan('WEATHER_DEL_NICENO', 'Admin')}')">{:lan('BTN_DELETE', 'Admin')}</a>
+            	</eq>
+            </td>
+          </tr>
+         	</volist>
+        </tbody>
+      </table>
+      <div class="btn">
+        <label for="check_box">{:lan('BTN_ALL', 'Admin')}/{:lan('BTN_CANCEL', 'Admin')}</label>
+        <input type="button" class="button" value="{:lan('BTN_DELETE', 'Admin')}" onClick="myform.action='__URL__/delAll/';return confirm_delete()"/>
+      </div>
+      <div id="pages">{$data.page}</div>
+    </div>
+  </form>
+</div>
+</block>
+
+<block name="js">
+<script type="text/javascript">
+function confirm_delete(){
+	if(confirm('{:lan('CONFIRM_DELETE', 'Admin')}')) $('#myform').submit();
+}
+function give(id) { 
+	var name=prompt("{:lan('PLEASE_INPUT_USERNO', 'Admin')}","");
+	if(name){ 
+		$.post('__URL__/code_give',{
+			id : id,
+			userid : name,
+			on : 1
+		},function(r){
+			if(r.status==1){
+				location.reload();
+			}else{
+				alert(r.info);
+			}
+		})
+	} 
+} 
+
+function edit(id,userid) { 
+		$.post('__URL__/code_give',{
+			id : id,
+			userid : userid,
+			on : 0
+		},function(r){
+			if(r.status==1){
+				location.reload();
+			}else{
+				alert(r.info);
+			}
+		})
+}
+
+</script>
+</block>

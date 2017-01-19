@@ -1,0 +1,131 @@
+<!doctype html>
+<html>
+<head>
+
+    <!--公用meta-->
+    <include file="Public:meta" />
+
+    <title>{:lan("MALL","Home")}</title>
+
+</head>
+<body>
+
+
+<!--公用头部-->
+<include file="Public:header"/>
+
+<!--主要内容-->
+<div class="common-wrap">
+    <div class="recharge-main">
+        <div class="width">
+
+            <div class="down">
+                <!--左边列表-->
+                <include file="Public:rechargeLeft" />
+
+                <!--右边内容-->
+                <div class="right">
+                    <table>
+                        <tr>
+                            <td class="td1">
+                                {:lan('RECHARGE_ACCOUNT', 'Home')}:
+                            </td>
+                            <td class="td2 nickname">
+                                <span> {$userinfo[nickname]}</span>
+                                <input type="hidden" id="userid" name="userid" value="{$userinfo[userid]}" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td1">
+                                {:lan('SELLER', 'Home')}:
+                            </td>
+                            <td class="td2">
+                                <ul class="clear channel-list">
+                                    <volist name="smschannels" id="vo">
+                                        <li data-channelid="{$vo[channelid]}" data-rechargetype="{$vo[rechargetype]}">
+                                            {$vo[rechargename]}<i></i>
+                                            <ul class="seller-list dis-none">
+                                                <volist name="vo.sellers" id="seller">
+                                                    <li data-seller="{$seller[sellerid]}">
+                                                        <img src="{$seller[pclogopath]}" alt=""><i></i>
+                                                    </li>
+                                                </volist>
+                                            </ul>
+                                        </li>
+                                    </volist>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td1">
+                                {:lan('CHOICE_GSM', 'Home')}:
+                            </td>
+                            <td class="td2">
+                                <ul class="clear seller-list">
+                                    <volist name="smschannels[0][sellers]" id="seller">
+                                        <li data-seller="{$seller[sellerid]}"><img src="{$seller[pclogopath]}" alt=""><i></i></li>
+                                    </volist>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td1">
+                                {:lan('RECHARGE_AMOUNT', 'Home')}:
+                            </td>
+                            <td class="td2">
+                                <ul class="clear money-list">
+                                    <volist name="smschannels[0][rechargedefs]" id="vo">
+                                        <li>
+                                            <input type="hidden" name="rechargedefid" value="{$vo[rechargedefid]}" />
+                                            <p><span class="showamount"> {$vo[rechargeamount]}</span> {$vo[rechargeunit]} </p>
+                                            <p> {:lan('PRICE', 'Home')}: <span class="amount">{$vo[localmoney]}</span> {$vo[localunit]} </p>
+                                            <i></i>
+                                        </li>
+                                    </volist>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td1">
+
+                            </td>
+                            <td class="td2">
+                                <p class="charge-agreement">
+                                    <input name="deal" type="checkbox" value="" checked id="deal" />
+                                    <label for="deal">{:lan('AGREE', 'Home')}</label>
+                                    <a href="{:U('Home/Rechargecenter/rechargeAgreement')}">{:lan('WAASHOW_RECHARGE_PROTOCOL', 'Home')}</a>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td1"></td>
+                            <td class="td2">
+                                <button class="recharge" id="sms-charge">{:lan('RECHARGE', 'Home')}</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--共用底部-->
+<include file="Public:bottom" />
+
+<!-- 共用登录-->
+<include file="Public:login" />
+
+<!--共用弹框-->
+<include file="Public:alert" />
+
+<!--共用js-->
+<include file="Public:javascript" />
+<script>
+    $(function () {
+        common.isLog();
+    });
+</script>
+</body>
+</html>

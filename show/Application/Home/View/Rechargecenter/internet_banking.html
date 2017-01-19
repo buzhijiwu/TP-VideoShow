@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+
+    <!--公用meta-->
+    <include file="Public:meta" />
+
+    <title>{:lan("MALL","Home")}</title>
+
+</head>
+<body>
+
+<!--公用头部-->
+<include file="Public:header" />
+
+<!--主要内容-->
+<div class="common-wrap">
+    <div class="recharge-main">
+        <div class="width">
+
+            <div class="down">
+                <!--左边列表-->
+                <include file="Public:rechargeLeft" />
+
+                <!--右边内容-->
+
+                <!--右边内容-->
+                <div class="right internet-banking">
+                    <p>Nạp tiền bằng hình thức chuyển khoản ngân hàng là kênh nạp xu chính thức của Waashow, có mức
+                         chuyển đổi tỷ giá tốt dành cho người dùng, chỉ áp dụng cho mức nạp có giá trị từ 100.000 VND
+                        trở lên.</p>
+                    <p>=> Tỉ lệ quy đổi: +10%</p>
+                    <p>Ví dụ: nạp 100.000 VND thì tài khoản của bạn sẽ có 1100 Xu</p>
+                    <p>1. Khách hàng chuyển khoản tới tài khoản ngân hàng của Waashow:</p>
+                    <p>Tên tài khoản: <strong>VÒNG THÔNG BÌNH</strong></p>
+                    <p>Số tài khoản: <strong>215762329</strong></p>
+                    <p>Tên ngân hàng:<strong> Ngân hàng TMCP Á Châu - Chi nhánh Hồ Chí Minh (PGD Lý Thường Kiệt)</strong></p>
+                    <p>*** Trong nội dung giao dịch ghi rõ thông tin bao gồm: [ Nạp xu Waashow _Số điện thoại cần nạp_ID nick Waashow ] để Waashow có thể chuyển xu tới cho bạn trong thời gian nhanh nhất.</p>
+                    <p>2. Sau khi xác nhận giao dịch thành công, Waashow căn cứ theo nội dung giao dịch của khách hàng
+                    để chuyển xu theo tỉ lệ tương ứng.</p>
+                    <p>Thời gian chuyển xu vào tài khoản của KH trong khoảng 30 phút sau khi giao dịch ngân hàng của
+                        KH hoàn tất (áp dụng trong các ngày làm việc từ thứ 2 đến thứ 7)</p>
+                    <p>3. Thông tin liên hệ:</p>
+                    <p>Xin quý khách vui lòng liên hệ theo thông tin dưới đây để nhận được trợ giúp nhanh nhất.</p>
+                    <p>- Tổng đài hỗ trợ (trong giờ làm việc): (08) 38635287</p>
+                    <p>- Tài khoản CSKH tại room: <a href="http://waashow.vn/19000.html">http://waashow.vn/19000.html</a></p>
+                    <p>4. Lưu ý:</p>
+                    <p>- Waashow căn cứ theo thời gian nhận thông báo giao dịch thành công từ ngân hàng để thực hiện
+                    chuyển xu tới khách hàng.</p>
+                    <p>- Quy trình chuyển xu tới tài khoản của khách hàng trong các ngày nghỉ, ngày lễ tết là trong
+                    vòng 24h, dịch vụ sẽ cố gắng chuyển xu tới các bạn trong thời gian sớm nhất.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--共用底部-->
+<include file="Public:bottom" />
+
+<!-- 共用登录-->
+<include file="Public:login" />
+
+<!--共用弹框-->
+<include file="Public:alert" />
+
+<!--共用js-->
+<include file="Public:javascript" />
+<script>
+    $(function () {
+        common.isLog();
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+﻿<tagLib name="html" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=7" />
+<title>{:lan('ADMIN_MAN_TITLE', 'Agent')}</title>
+<link href="__PUBLIC__/Public/statics/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Public/statics/css/system.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Public/statics/css/table_form.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles1.css" title="styles1" media="screen" />
+<link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles2.css" title="styles2" media="screen" />
+<link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles3.css" title="styles3" media="screen" />
+<link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles4.css" title="styles4" media="screen" />
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/jquery.min.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/admin_common.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/styleswitch.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/formvalidator.js" charset="UTF-8"></script>
+<script type="text/javascript">
+	window.focus();
+</script>
+</head>
+<body>
+<div class="subnav">
+    <div class="content-menu ib-a blue line-x">
+        <a href='javascript:;' ><em>{:lan('RECHARGE', 'Agent')}</em></a></div>
+</div>
+<style type="text/css">
+	html{_overflow-y:scroll}
+</style><script type="text/javascript">
+<!--
+$(function(){
+	$.formValidator.initConfig({autotip:true,formid:"myform",onerror:function(msg){}});
+	$("#username").formValidator({onshow:"{:lan('PLZ_INPUT_USER_NAME', 'Agent')}",onfocus:"{:lan('PLZ_INPUT_USER_NAME', 'Agent')}",oncorrect:"{:lan('INPUT_SUCCESS', 'Agent')}"}).inputValidator({min:1,max:20,onerror:"{:lan('PLZ_INPUT_USER_NAME', 'Agent')}"});
+	$("#rechargeamount").formValidator({onshow:"{:lan('PLZ_INPUT_RECHARGE_MONEY', 'Agent')}",onfocus:"{:lan('PLZ_INPUT_RECHARGE_MONEY', 'Agent')}",oncorrect:"{:lan('INPUT_SUCCESS', 'Agent')}"}).inputValidator({min:1,max:20,onerror:"{:lan('PLZ_INPUT_RECHARGE_MONEY', 'Agent')}"});
+})
+//-->
+</script>
+<div class="pad_10">
+<div class="common-form">
+<form name="myform" action="__URL__/do_recharge/" method="post" id="myform">
+<table width="100%" class="table_form contentWrap">
+	<tr>
+		<td width="120">{:lan('CAN_USE_AMOUNT', 'Agent')}</td>
+		<td><input type="text" value="{$agentInfo['limitamount']}"  class="input-text" readonly="readonly"/>{:lan('VIRTUAL_UNIT_COIN', 'Agent')}</td>
+	</tr>
+	<tr>
+		<td width="120">{:lan('HAVE_USE_AMOUNT', 'Agent')}</td>
+		<td><input type="text" value="{$agentInfo['useamount']}"  class="input-text" readonly="readonly"/>{:lan('VIRTUAL_UNIT_COIN', 'Agent')}</td>
+	</tr>
+<tr>
+<td width="120">{:lan('USERNAME', 'Agent')}</td>
+<td><input type="text" name="username"  class="input-text" id="username"/></td>
+</tr>
+<tr>
+<td width="120">{:lan('AMOUNT', 'Agent')}</td>
+<td><input type="text" name="rechargeamount"  class="input-text" id="rechargeamount" onkeyup="this.value=this.value.replace(/[^\d]/g,'')" onpaste="return false"></input>{:lan('VIRTUAL_UNIT_COIN', 'Agent')}</td>
+</tr>
+</table>
+    <div class="bk15"></div>
+    <input name="dosubmit" type="submit" value="{:lan('SUBMIT_BUTTION', 'Agent')}" class="button">
+</form>
+</div>
+</div>
+</body>
+</html>
+

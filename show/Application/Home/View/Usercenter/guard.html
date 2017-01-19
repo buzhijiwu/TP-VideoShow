@@ -1,0 +1,163 @@
+<extend name="base" />
+
+<block name="menu">
+	<div class="nav-list clear">
+		<a href="__URL__/seehistory">{:lan('MY_FOOTMARK', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+		<a href="__URL__/attention">{:lan('MY_ATTENTION', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+		<a href="__URL__/guard" class="active">{:lan('MY_GUARD', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+	</div>
+</block>
+<block name="main">
+
+	<!--内容展示-->
+	<div class="right-guard-main">
+
+		<div class="guard-list clear">
+		    <eq name="guardEmcees[0]" value="">
+		    <!--无守护-->
+		    <div class="common-no-data">
+		    	<img src="/Public/Public/Images/newImage/common/al-cry.png">
+		    	<h1>{:lan('NO_GUARDS', 'Home')}</h1>
+		    </div>		    
+		    <else />
+		    <!--有守护-->		
+			<volist name="guardEmcees" id="vo">
+				<a href="/{$vo[roomno]}.html" class="list clear">
+					<img src="{$Think.config.IMAGE_BASE_URL}{$vo[bigheadpic]}" class="header-img">
+
+					<table class="right1">
+						<tr>
+							<td class="td1">
+								{$vo[nickname]}
+							</td>
+							<td class="td2">
+								<span class="common-em em{$vo[emceelevel]}"></span>
+							</td>
+						</tr>
+						<tr>
+							<td class="td1">
+								<i class="iconfont">&#xe615;</i>
+								<span>
+									{:lan('AREADY_GUARD', 'Home')}
+									<b>{$vo[alreadydays]}</b>
+									{:lan('DAYS', 'Home')}
+								</span>
+							</td>
+							<td class="td2">
+								<span class="common-vipIcon common-guard{$vo[guardid]}"></span>
+							</td>
+						</tr>
+						<tr>
+							<td class="td1">
+								<i class="iconfont">&#xe614;</i>
+								<span>
+									{:lan('REMAIN', 'Home')}
+									<b>{$vo[remaindays]}</b>
+									{:lan('DAYS', 'Home')}
+								</span>
+							</td>
+							<td class="td2">
+								<button class="guard-long"
+										data-guardid="{$vo[guardid]}"
+										data-emceeuserid="{$vo[emceeuserid]}"
+										data-nickname="{$vo[nickname]}"
+										data-emceelevel="{$vo[emceelevel]}"
+										data-expiretime="{$vo[expiretime]}">
+									{:lan('CONTINUE_GUARD', 'Home')}
+								</button>
+							</td>
+						</tr>
+					</table>
+				</a>
+			</volist>
+			</eq>
+		</div>
+		{$page}
+
+		<!--续守弹框-->
+		<div class="guard-long-alert dis-none">
+			<div class="alert-main">
+				<i class="iconfont close-guard">&#xe605;</i>
+				<table class="list">
+					<tr>
+						<td class="td1">
+							{:lan('GUARD_EMCEE', 'Home')}：
+						</td>
+						<td class="td2">
+							<span id="nick-name" class="nick-name"></span>
+							<span class="common-em"></span>
+						</td>
+					</tr>
+					<tr>
+						<td class="td1">
+							{:lan('GUARD_CATEGORY', 'Home')}：
+						</td>
+						<td class="td2">
+							<input type="hidden" id="gdid" name="gdid" value="" />
+							<volist name="guarddefs" id="gdd" key="gf">
+								<eq name="gf" value="1">
+									<p id="c_guard"
+									   class="active guard-choice"
+									   data-category="0"
+									   data-gdid="{$gdd.gdid}"
+									   data-gdprice="{$gdd.gdprice}">
+										{$gdd.gdname}
+									</p>
+								<else />
+									<p id="g_guard"
+									   data-category="0"
+									   class="guard-choice"
+									   data-gdid="{$gdd.gdid}"
+									   data-gdprice="{$gdd.gdprice}">
+										{$gdd.gdname}
+									</p>
+								</eq>
+							</volist>
+						</td>
+					</tr>
+					<tr>
+						<td class="td1">
+							{:lan('GUARD_TIME', 'Home')}：
+						</td>
+						<td class="td2">
+							<input type="hidden" id="gdduration" name="gdduration" value="2" />
+							<p class="guard-time" data-category="1" data-month="1">{:lan('ONE_MONTH', 'Home')}</p>
+							<p class="guard-time active" data-category="1" data-month="2">{:lan('TWO_MONTH', 'Home')}</p>
+							<p class="guard-time" data-category="1" data-month="3">{:lan('THREE_MONTH', 'Home')}</p>
+							<p class="guard-time" data-category="1" data-month="6">{:lan('SIX_MONTH', 'Home')}</p>
+						</td>
+					</tr>
+					<tr>
+						<td class="td1">
+							{:lan('SPEND_MONEY', 'Home')}：
+						</td>
+						<td class="td2">
+							<span id="guardcost" class="guardcost"></span>
+							{:lan('MONEY_UNIT', 'Home')}
+						</td>
+					</tr>
+					<tr>
+						<td class="td1">
+							<input type="hidden" id="neweffectivetime" name="curexpiretime" value="" />
+							<input type="hidden" id="emceeuserid" name="emceeuserid" value="" />
+							<input type="hidden" id="userid" name="userid" value="{$Think.session.userid}" />
+						</td>
+						<td class="td2">
+							<button onclick="userCenter.guardLongSub();" class="buy-btn">{:lan("CONFIRM", "Home")}</button>
+						</td>
+					</tr>
+				</table>
+			</div>
+
+		</div>
+
+		<!--共用去充值弹框-->
+		<include file="Public:gochargeAlert" />
+	</div>
+</block>
+
+
+
+
+
+

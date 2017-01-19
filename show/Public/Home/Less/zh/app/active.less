@@ -1,0 +1,986 @@
+/*定义公用样式*/
+@main-color:#FF5e5c;
+@main-hover-color:#FF3330;
+.txt-over{
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.border-radius(@radius){
+  border-radius: @radius;
+  -moz-border-radius: @radius;
+  -webkit-border-radius: @radius;
+}
+
+
+
+//定义公用弹框
+.app-common-alert{
+  position: fixed;
+  width:100%;
+  background-color: rgba(0,0,0,0.4);
+  height: 100%;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  .alert-animate{
+    position: absolute;
+    width: 80%;
+    left: 10%;
+    min-height: 100px;
+    padding: 35px 10px;
+    background-color: #fff;
+    .border-radius(5px);
+    top: 200px;
+    .alert-main{
+      line-height: 25px;
+      font-size: 14px;
+      color: #666;
+      text-align: center;
+    }
+  }
+}
+#app-common-footer{
+  width:100%;
+  height: 40px;
+  line-height: 40px;
+  font-size: 18px;
+  color: #fff;
+  background-color: @main-color;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+  &:hover{
+    background-color: @main-hover-color;
+  }
+}
+
+
+
+//五月劳动节主播大赛PC 2016/05/04\
+.may-active{
+  background-image: url("/Public/Public/Images/mayActive/app-bg.jpg");
+  background-size: 100% auto;
+}
+.mayActive-main-app{
+  padding-bottom: 20px;
+  .marginTop{
+    margin-top: 40px;
+  }
+  .active-title{
+    width: 100%;
+  }
+  .tab-btn{
+    margin: 36px 5% 32px 5%;
+    width: 90%;
+    background-color: #721191;
+    height: 40px;
+    line-height: 40px;
+    .border-radius(5px);
+    p{
+      float: left;
+      width: 33.33%;
+      font-size: 16px;
+      text-align: center;
+      color: #bc7fcf;
+      &.active{
+        color: #fbcc30;
+      }
+    }
+  }
+  .active-top-list{
+    border: 1px dashed #721191;
+    width: 90%;
+    margin: 0 5%;
+    padding:20px 2%;
+    .active-icon{
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      background-size: 20px auto;
+      background-position: center center;
+      background-repeat: no-repeat;
+      &.icon-em{
+        background-image: url("/Public/Public/Images/mayActive/icon-em.jpg");
+      }
+      &.icon-us{
+        background-image: url("/Public/Public/Images/mayActive/icon-us.jpg");
+      }
+      &.icon-click{
+        background-image: url("/Public/Public/Images/mayActive/icon-click-app.jpg");
+        background-size: 20px 20px;
+      }
+      &.icon-gui{
+        background-image: url("/Public/Public/Images/mayActive/icon-gui-app.png");
+      }
+      &.icon-star{
+        background-image: url("/Public/Public/Images/mayActive/icon-star.png");
+        background-size: 16px 16px;
+      }
+      &.icon-gift{
+        background-image: url("/Public/Public/Images/mayActive/active-gift.png");
+        background-size: 25px 25px;
+      }
+    }
+    .list-title{
+      text-align: center;
+      font-size: 20px;
+      color: #8427a2;
+      font-weight: bold;
+    }
+    .em-active-list{
+      .em-tab-btn{
+        margin-top: 20px;
+        p{
+          float: left;
+          width: 25%;
+          text-align: center;
+          height: 30px;
+          line-height: 30px;
+          color: #8427a2;
+          font-size: 16px;
+          .border-radius(4px);
+          &.active{
+            color: #fff;
+            background-color: #721191;
+          }
+        }
+      }
+      .em-tab-list{
+        margin-top: 20px;
+        .list-main{
+          tr{
+            .td1{
+              width: 60px;
+            }
+            .td2{
+              width: 50%;
+            }
+            .td3{
+              width: 50%;
+            }
+            th{
+              text-align: center;
+              padding: 5px 0;
+              font-size: 14px;
+              font-weight: normal;
+              background-color: #f79910;
+              color: #fff;
+            }
+            td{
+              vertical-align: middle;
+              padding: 10px 0;
+              &.td1{
+                text-align: center;
+                .header-img-wrap{
+                  position: relative;
+                  width: 60px;
+                  height: 40px;
+                  .header-img{
+                    width: 40px;
+                    height: 40px;
+                    .border-radius(50%);
+                  }
+                  .rank{
+                    position: absolute;
+                    display: block;
+                    width: 18px;
+                    height: 18px;
+                    text-align: center;
+                    line-height: 18px;
+                    background-color: #9c42b9;
+                    color: #fff;
+                    .border-radius(50%);
+                    left: 35px;
+                    top: 25px;
+                    &.high-top{
+                      background-color: #f79910;
+                    }
+                  }
+                }
+              }
+              &.td2{
+                text-align: center;
+                .name{
+                  display: block;
+                  .txt-over;
+                  width: 80%;
+                  margin-left: 10%;
+                  &:hover{
+                    color:#9c42b9 ;
+                  }
+                }
+              }
+              &.td3{
+                text-align: center;
+                .point{
+                  width: 100%;
+                  .txt-over;
+                  font-size: 14px;
+                }
+              }
+            }
+          }
+        }
+        .click-load-more{
+          margin: 5px 0;
+          text-align: center;
+          .icon-click{
+            .border-radius(50%);
+          }
+          span{
+            font-size: 14px;
+            margin-left: 10px;
+            color: #721191;
+          }
+        }
+      }
+    }
+    .txt-list{
+      margin-top: 15px;
+      li{
+        line-height: 30px;
+        padding: 0 4%;
+        display: table;
+        font-size: 14px;
+        color: #8427a2;
+        &.info{
+          color: #f79910;
+        }
+
+        .left{
+          display: table-cell;
+          span{
+            width: 18px;
+            height: 18px;
+            line-height: 18px;
+            text-align: center;
+            background-color: #9c42b9;
+            color: #fff;
+            display: block;
+            .border-radius(50%);
+            font-size: 14px;
+          }
+        }
+        .right{
+          display: table-cell;
+          padding-left: 10px;
+        }
+      }
+    }
+  }
+}
+
+
+//五月歌唱比赛PC 2016/05/13
+.may-sing-main{
+  background-color:#0d1136 ;
+  padding-bottom: 5px;
+  .title{
+    width: 100%;
+  }
+  .tab-btn{
+    margin: 10px auto;
+    padding: 0 15%;
+    width: 100%;
+    button{
+      height: 35px;
+      width: 49%;
+      .border-radius(3px);
+      background-color: #313a93;
+      color: #fff;
+      box-shadow: 2px 2px 10px 2px rgba(0,0,0,0.5);
+      font-size: 12px;
+      font-weight: bold;
+      margin-right: 2%;
+      float: left;
+      &:last-child{
+        margin-right: 0;
+      }
+      &.active{
+        background-color: #fff;
+        color: #313a93;
+      }
+    }
+  }
+  .sing-list-wrap{
+    padding: 0 20px;
+    background-color: rgba(255,255,255,0.2);
+    padding-bottom: 10px;
+    .list{
+      float: left;
+      width: 48%;
+      margin:0 1%;
+      .top-list{
+        line-height: 30px;
+        height: 30px;
+        font-size: 14px;
+        color: #fff;
+        text-align: center;
+        span{
+          color: #FF5e5c;
+          font-size: 16px;
+        }
+      }
+      .list-main{
+        .border-radius(4px);
+        overflow: hidden;
+        border: 2px solid #aaa;
+        &:nth-child(2n){
+          margin-right: 0;
+        }
+        .line1{
+          width: 100%;
+          overflow: hidden;
+          position: relative;
+          display: block;
+          &:hover{
+            cursor: pointer;
+            .name{
+              color: @main-color;
+            }
+          }
+          img{
+            width: 100%;
+          }
+          .iconfont{
+            position: absolute;
+            display: block;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+            font-size: 30px;
+            color: rgba(0,0,0,0.6);
+            top:50%;
+            left: 50%;
+            margin-top: -20px;
+            margin-left: -20px;
+          }
+          .name{
+            line-height: 20px;
+            height: 20px;
+            font-size: 12px;
+            color: #fff;
+            background-color: rgba(0,0,0,0.6);
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding-left: 2%;
+          }
+        }
+        .line2{
+          padding: 5px 0;
+          line-height: 20px;
+          height: 50px;
+          font-size: 14px;
+          background-color: #fff;
+          padding-left: 2%;
+          text-align: center;
+          p{
+            color:#FF5e5c;
+          }
+        }
+        .line3{
+          background-color: #fff;
+          padding:15px 2% 5px 2%;
+          .left{
+            float: left;
+            width: 50%;
+            text-align: center;
+            button{
+              height: 25px;
+              line-height: 25px;
+              font-size: 12px;
+              color: #fff;
+              background-color:#FF5e5c;
+              width: 96%;
+              .border-radius(2px);
+              margin: 0 2%;
+              &:hover{
+                background-color: @main-hover-color;
+              }
+            }
+            .num{
+              margin-top: 5px;
+              font-size: 12px;
+              line-height: 20px;
+              height: 40px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .sing-rule{
+    .line{
+      width: 90%;
+      margin: 20px auto;
+      padding:10px 2%;
+      background-color: rgba(255,255,255,0.2);
+      color: #fdf5bd;
+      font-size: 12px;
+      line-height: 20px;
+      .border-radius(5px);
+      overflow: hidden;
+      li{
+        margin-bottom: 15px;
+        p{
+          padding-left: 3%;
+          margin-bottom: 5px;
+        }
+      }
+    }
+    table{
+      width: 90%;
+      margin: 20px auto;
+      padding:25px 2% 0 2%;
+      background-color: rgba(255,255,255,0.2);
+      color: #fdf5bd;
+      font-size: 12px;
+      line-height: 20px;
+      .border-radius(5px);
+      overflow: hidden;
+      tr{
+        td{
+          padding: 7px;
+          &:first-child{
+            width: 30px;
+            text-align: center;
+            color: #fff;
+          }
+          &:last-child{
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+  .loading-more{
+    display: block;
+    margin: 10px auto 5px auto;
+    width: 60%;
+    height: 40px;
+    background-color: #313a93;
+    color: #fff;
+    font-weight: bold;
+    font-size: 14px;
+    .border-radius(3px);
+    &:hover{
+      background-color: #fff;
+      color:#313a93 ;
+    }
+  }
+}
+
+
+@media screen and(max-width: 360px) {
+  .may-sing-main{
+    .sing-list-wrap{
+      .list{
+        .list-main{
+          .line3{
+            background-color: #fff;
+            padding:15px 2% 5px 2%;
+            .left{
+              width: 100%;
+              text-align: center;
+              button{
+                height: 25px;
+                line-height: 25px;
+                font-size: 12px;
+                color: #fff;
+                background-color:#FF5e5c;
+                width: 96%;
+                .border-radius(2px);
+                margin: 0 2%;
+                &:hover{
+                  background-color: @main-hover-color;
+                }
+              }
+              .num{
+                margin-bottom: 5px;
+                font-size: 12px;
+                line-height: 20px;
+                height: 40px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+//六月端午节 2016/06/06
+.dragon-active{
+  background-image: url("/Public/Public/Images/Activity/dragonBoat/dragon-bg.jpg");
+  background-size: 100% 100%;
+}
+.dragon-boat-main{
+  .title{
+    width: 100%;
+  }
+  .tab-btn-top{
+    margin: 20px auto;
+    padding: 0 5%;
+    width: 100%;
+    button{
+      height: 35px;
+      width: 48%;
+      .border-radius(3px);
+      background-color: #9fc644;
+      color: #fff;
+      box-shadow: 2px 2px 10px 2px rgba(0,0,0,0.5);
+      font-size: 14px;
+      font-weight: bold;
+      &:first-child{
+        margin-right: 2%;
+      }
+      &.active{
+        background-color: #fff;
+        color: #9fc644;
+      }
+    }
+  }
+  .tab-list{
+    &.dragon-list-wrap{
+      .em-title{
+        text-align: center;
+        img{
+          width: 50%;
+        }
+      }
+
+      .tab-btn{
+        height: 25px;
+        line-height: 25px;
+        margin-top: 10px;
+        p{
+          float: left;
+          .border-radius(3px);
+          color:  #9fc644;
+          font-size: 12px;
+          width: 29%;
+          margin: 0 2%;
+          text-align: center;
+          text-shadow: 0 0 5px rgba(255,255,255,1);
+          &:hover{
+            cursor: pointer;
+          }
+          &.active{
+            background-color: #9fc644;
+            color: #fff;
+            text-shadow: none;
+          }
+        }
+      }
+
+      .em-active-list,.us-active-list{
+        width: 96%;
+        margin: 10px auto;
+        .list-main{
+          tr{
+            th{
+              background-color: #9fc644;
+              padding: 5px 0;
+              color: #fff;
+              font-size: 12px;
+              font-weight: normal;
+            }
+            &:nth-child(even){
+              background-color: #EBF3D9;
+            }
+            &:nth-child(odd){
+              background-color: #fff;
+            }
+            td{
+              text-align: center;
+              padding: 5px 0;
+              &.td1{
+                span{
+                  display: inline-block;
+                  width: 30px;
+                  height: 30px;
+                  .border-radius(50%);
+                  background-color: #b753eb;
+                  color: #fff;
+                  line-height: 30px;
+                  text-align: center;
+                  font-size: 18px;
+                  &.top-color{
+                    background-color: #fbcc30;
+                  }
+                }
+              }
+              &.td2{
+                text-align: left;
+                .txt-over;
+                div{
+                  display: block;
+                  img{
+                    .border-radius(50%);
+                    width: 40px;
+                    height: 40px;
+                    margin-right: 5px;
+                  }
+                  span.name{
+                    font-size: 12px;
+                    color: #ba6ed2;
+                    margin-left: 5px;
+                  }
+                }
+              }
+              &.td3{
+                span{
+                  font-size: 12px;
+                  color: #ba6ed2;
+                }
+                .txt-over;
+              }
+            }
+            .td1{
+              width: 25%;
+            }
+            .td2{
+              width: 50%;
+            }
+            .td3{
+              width: 25%;
+            }
+          }
+          tbody{
+            .loading{
+              display: block;
+              width: 150px;
+              height: auto;
+              margin-top: 20px;
+              margin-left: 90px;
+            }
+          }
+        }
+      }
+    }
+    .rule{
+      margin-top: 30px;
+      .list{
+        width: 90%;
+        margin: 20px 5%;
+        border: 3px solid #fff;
+        .border-radius(5px);
+        padding: 3%;
+        background-color: #9ac440;
+        li{
+          line-height: 30px;
+          padding: 0 3%;
+          color: #fff;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+  .loading-more{
+    display: block;
+    margin: 20px auto;
+    width: 70%;
+    height: 35px;
+    background-color: #9fc644;
+    color: #fff;
+    font-weight: bold;
+    font-size: 18px;
+    .border-radius(3px);
+    &:hover{
+      background-color: #fff;
+      color:#9fc644 ;
+    }
+  }
+}
+
+
+//送iphonePlus活动 2016/08/04
+.iphone-main-app{
+  width: 100%;
+  background-image: url("/Public/Public/Images/Activity/iPhone/iPhone-app-active-bg.jpg");
+  background-size: cover;
+  background-position: center top;
+  padding-bottom: 42px;
+  .header-title{
+    width: 100%;
+    height: auto;
+  }
+  .title1{
+    width: 53%;
+    display: block;
+    margin: 0 auto;
+  }
+  .rule{
+    width: 88.5%;
+    margin: 16px auto 0 auto;
+    background-image: url("/Public/Public/Images/Activity/iPhone/iPhone-app-rule-bg.png");
+    background-size: 100% auto;
+    background-position: center top;
+    border: 1px dashed #43adf9;
+    padding-bottom: 22px;
+    padding-top: 19px;
+    p{
+      padding-left: 5%;
+      padding-right: 5%;
+      color: #fff;
+      font-size: 14px;
+      line-height: 18px;
+      &.ma-t-12{
+        margin-top: 12px;
+      }
+      &.yellow{
+        color: #faf60f;
+        font-size: 14px;
+        font-weight: bold;
+        line-height: 18px;
+        text-align: center;
+      }
+      &.orange{
+        color: #ffae00;
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 20px;
+        margin-top: 15px;
+      }
+      .red{
+        color: #fe48bf;
+      }
+    }
+  }
+  .title2{
+    width: 85%;
+    display: block;
+    margin: 33px auto 0 auto;
+  }
+  table{
+    width: 88%;
+    margin:17px 6% 0 6%;
+    .td1{
+      width: 60px;
+    }
+    .td2{
+      width: 55%;
+    }
+    .td3{
+      width: 45%;
+    }
+    thead{
+      tr{
+        th{
+          height: 20px;
+          vertical-align: middle;
+          font-size: 12px;
+          color: #fff;
+          background-color: #43adf9;
+          font-weight: normal;
+        }
+      }
+    }
+    tbody{
+      tr{
+        &:nth-child(even){
+          background-color: rgba(67,173,249,0.3);
+        }
+        td{
+          height: 42px;
+          vertical-align: middle;
+          &.td1{
+            padding-left: 15px;
+            .header-img{
+              width: 36px;
+              height: 36px;
+              position: relative;
+              display: block;
+              img{
+                width: 36px;
+                height: 36px;
+                .border-radius(50%);
+              }
+              .rank{
+                position: absolute;
+                right: -5px;
+                bottom: -2px;
+                background-color: #43adf9;
+                color: #fff;
+                display: block;
+                width: 18px;
+                height: 18px;
+                font-size: 12px;
+                text-align: center;
+                line-height: 18px;
+                .border-radius(50%);
+                &.top{
+                  background-color: #f79910;
+                }
+              }
+            }
+          }
+          &.td2{
+            padding-left: 5%;
+            .name{
+              color: #fff;
+              font-size: 12px;
+              width: 58%;
+              .txt-over;
+              display: inline-block;
+            }
+          }
+          &.td3{
+            text-align: center;
+            color: #fff;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+//送ipadpro活动 2016/09/08
+.ipad-main-app{
+  width: 100%;
+  background-image: url("/Public/Public/Images/Activity/iPhone/iPhone-app-active-bg.jpg");
+  background-size: cover;
+  background-position: center top;
+  padding-bottom: 42px;
+  .header-title{
+    width: 100%;
+    height: auto;
+  }
+  .title1{
+    width: 53%;
+    display: block;
+    margin: 0 auto;
+  }
+  .rule{
+    width: 88.5%;
+    margin: 16px auto 0 auto;
+    background-image: url("/Public/Public/Images/Activity/iPhone/iPhone-app-rule-bg.png");
+    background-size: 100% auto;
+    background-position: center top;
+    border: 1px dashed #43adf9;
+    padding-bottom: 22px;
+    padding-top: 19px;
+    p{
+      padding-left: 5%;
+      padding-right: 5%;
+      color: #fff;
+      font-size: 14px;
+      line-height: 18px;
+      &.ma-t-12{
+        margin-top: 12px;
+      }
+      &.yellow{
+        color: #faf60f;
+        font-size: 14px;
+        font-weight: bold;
+        line-height: 18px;
+        text-align: center;
+      }
+      &.orange{
+        color: #ffae00;
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 20px;
+        margin-top: 20px;
+      }
+      .red{
+        color: #fe48bf;
+      }
+    }
+  }
+  .title2{
+    width: 85%;
+    display: block;
+    margin: 33px auto 0 auto;
+  }
+  table{
+    width: 88%;
+    margin:17px 6% 0 6%;
+    .td1{
+      width: 60px;
+    }
+    .td2{
+      width: 55%;
+    }
+    .td3{
+      width: 45%;
+    }
+    thead{
+      tr{
+        th{
+          height: 20px;
+          vertical-align: middle;
+          font-size: 12px;
+          color: #fff;
+          background-color: #43adf9;
+          font-weight: normal;
+        }
+      }
+    }
+    tbody{
+      tr{
+        &:nth-child(even){
+          background-color: rgba(67,173,249,0.3);
+        }
+        td{
+          height: 42px;
+          vertical-align: middle;
+          &.td1{
+            padding-left: 15px;
+            .header-img{
+              width: 36px;
+              height: 36px;
+              position: relative;
+              display: block;
+              img{
+                width: 36px;
+                height: 36px;
+                .border-radius(50%);
+              }
+              .rank{
+                position: absolute;
+                right: -5px;
+                bottom: -2px;
+                background-color: #43adf9;
+                color: #fff;
+                display: block;
+                width: 18px;
+                height: 18px;
+                font-size: 12px;
+                text-align: center;
+                line-height: 18px;
+                .border-radius(50%);
+                &.top{
+                  background-color: #f79910;
+                }
+              }
+            }
+          }
+          &.td2{
+            padding-left: 5%;
+            .name{
+              color: #fff;
+              font-size: 12px;
+              width: 58%;
+              .txt-over;
+              display: inline-block;
+            }
+          }
+          &.td3{
+            text-align: center;
+            color: #fff;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+}

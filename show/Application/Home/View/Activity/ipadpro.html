@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="shortcut icon" href="/Public/Public/Images/favicon.ico"/>
+    <link href="__PUBLIC__/Home/Css/{:getLanguage()}/reset.css?time=20160509.css" rel="stylesheet" type="text/css" />
+    <link  href="__PUBLIC__/Home/Css/{:getLanguage()}/common.css?time=20160509.css" rel="stylesheet" type="text/css">
+    <link  href="__PUBLIC__/Home/Css/{:getLanguage()}/layout.css?time=20160509.css" rel="stylesheet" type="text/css">
+    <link  href="__PUBLIC__/Home/Css/{:getLanguage()}/active.css?time=20160509.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+    <title>Ipad Pro</title>
+
+</head>
+<body class="mayActive-body">
+<!--公用头部-->
+<include file="Public:header" />
+
+<!--main-->
+<div class="common-wrap">
+    <div class="width">
+        <div class="ipad-main-pc">
+
+            <!--主播榜-->
+            <table class="emcee">
+                <volist name="topEmceeGetGift" id="vo" key="k">
+                    <tr>
+                        <td class="td1">
+                            <gt name="vo.niceno" value="0">
+                                <a href="{:U('/'.$vo['niceno'])}">
+                                    <img src="{$Think.config.IMAGE_BASE_URL}{$vo.smallheadpic}" class="header-img">
+                                </a>
+                                <else />
+                                <a href="{:U('/'.$vo['roomno'])}">
+                                    <img src="{$Think.config.IMAGE_BASE_URL}{$vo.smallheadpic}" class="header-img">
+                                </a>
+                            </gt>
+                        </td>
+                        <td class="td2">
+                            <span class="common-em em{$vo.emceelevel}"></span>
+                            <gt name="vo.niceno" value="0">
+                                <a class="name" href="{:U('/'.$vo['niceno'])}">{$vo.nickname}</a>
+                                <else />
+                                <a class="name" href="{:U('/'.$vo['roomno'])}">{$vo.nickname}</a>
+                            </gt>
+                        </td>
+                        <td class="td3">
+                            {$vo.total}
+                        </td>
+                    </tr>
+                </volist>
+            </table>
+
+            <!--用户榜-->
+            <table class="user">
+                <volist name="topUserSentGift" id="vo" key="k">
+                    <tr>
+                        <td class="td1">
+                            <a href="{:U('Home/Userhomepage/index/userid/'.$vo['userid'])}">
+                                <img src="{$Think.config.IMAGE_BASE_URL}{$vo.smallheadpic}" class="header-img">
+                            </a>
+                        </td>
+                        <td class="td2">
+                            <span class="common-us us{$vo.userlevel}"></span>
+                            <a class="name" href="{:U('Home/Userhomepage/index/userid/'.$vo['userid'])}">{$vo.nickname}</a>
+                        </td>
+                        <td class="td3">
+                            {$vo.total}
+                        </td>
+                    </tr>
+                </volist>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!--共用底部-->
+<include file="Public:bottom" />
+
+<!-- 共用登录-->
+<include file="Public:login" />
+
+<!--共用弹框-->
+<include file="Public:alert" />
+
+<!--共用js-->
+<include file="Public:javascript" />
+
+</body>
+</html>

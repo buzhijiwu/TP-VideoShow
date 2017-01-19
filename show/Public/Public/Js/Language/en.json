@@ -1,0 +1,28 @@
+{
+	"CANCELFAVORITE" : "Cancel Favorite",
+	"GUARDYOURSELF" : "Can not guard by yourself",
+	"ADDFAVORFAIL" : "Add favorite failed~",
+	"REPEATFAVOR" : "You have added to your favorite",
+	"SYSTEMERROR" : "System error",
+	"FAVORYOURSELF" : "Can not favorite by yourself!",
+	"CLICKFAVORITE" : "Click me to your favorite",
+	"ATRANSLATIONTEST" : "Add favorite failed,please try later~",
+	"SPEAKTEXT" : "| The maximux of your input test is 50 words, every broadcast need pay 3500 show money",
+	
+	
+	"YOUARENOTLOGIN" : "You does not login, pleas login",
+	"BALANCE_NOT_ENOUGH" : "Your balance is not enough please recharge",
+	"LOGIN" : "Login",
+	"RECHARGE" : "Recharge",
+	
+	"WARMWELCOME":"Warmly welcome",
+	"TUHAO":"Rich man",
+	"DRIVE":"Drive",
+	"ENTERROOM":"enter the liveroom",
+	"LEAVEROOM":"leave the liveroom",
+	"PRESENTTO":Send",
+	"GESHU":"",
+	
+	
+	"ENTERROOMdasf":"进入房间"
+}

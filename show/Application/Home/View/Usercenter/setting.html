@@ -1,0 +1,152 @@
+<extend name="base" />
+
+<block name="menu">
+<div class="nav-list clear">
+	<a href="__URL__/setting" class="active">{:lan('BASE_INFO', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+	<a href="__URL__/smallheadpic">{:lan('EDIT_HEAD_PIC', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+    <a href="__URL__/bigheadpic">{:lan('EMCEE_HEADPIC', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+	<a href="__URL__/modifypwd">{:lan('EDIT_PASSWORD', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+</div>
+</block>
+
+<block name="main">
+<!-- 基本资料 -->
+<div class="right-setting-main">
+	<div class="left1">
+		<p class="header-img">
+			<img src="{$Think.config.IMAGE_BASE_URL}{$userinfo['smallheadpic']}">
+		</p>
+		<a href="smallheadpic">
+			<i class="iconfont">&#xe613;</i>
+			<span>{:lan('EDIT_HEAD_PIC', 'Home')}</span>
+		</a>
+	</div>
+	<div class="right1">
+	<table>
+		<tr>
+			<td class="td1">
+				{:lan('NICKNAME', 'Home')}：
+			</td>
+			<td class="td2">
+				<input id="settingname"
+					   type="text"
+					   class="input"
+					   name="nickname"
+					   value="{$userinfo[nickname]}"
+					   placeholder="{:lan('PLEASE_INPUT_NICKNAME', 'Home')}"
+					   maxlength="20"/>
+			</td>
+		</tr>
+		<tr>
+			<td class="td1">
+				{:lan('SEX', 'Home')}：
+			</td>
+			<td class="td2">
+				<label for="sex">
+					<input type="radio" name="sex" value="0" id="sex"
+					<eq name="userinfo[sex]" value="0">
+						checked="checked" </eq>> {:lan('SEX_MALE', 'Home')} &nbsp;
+				</label>
+				<label for="sex1">
+					<input type="radio" name="sex" value="1" id="sex1"
+					<eq name="userinfo[sex]" value="1">
+						checked="checked" </eq>> {:lan('SEX_FEMALE', 'Home')}
+				</label>
+			</td>
+		</tr>
+		<tr>
+			<td class="td1">
+				{:lan('BIRTHDAY', 'Home')}：
+			</td>
+			<td class="td2">
+				<input class="input laydate-icon"
+					   type="text"
+					   id="birthday"
+					   name="birthday"
+					   value="{$userinfo[birthday]}"
+					   placeholder="{:lan('PLEASE_INPUT_BIRTHDAY', 'Home')}"/>
+
+			</td>
+		</tr>
+		<tr>
+			<td class="td1">
+				{:lan('EMAIL', 'Home')}：
+			</td>
+			<td class="td2">
+				<input id='email'
+					   type="text"
+					   class="input"
+					   name="email"
+					   value="{$userinfo[email]}"
+					   placeholder="{:lan('PLEASE_INPUT_EMAIL', 'Home')}"/>
+			</td>
+		</tr>
+		<tr>
+			<td class="td1">
+				{:lan('MOBILE', 'Home')}：
+			</td>
+			<td class="td2">
+			    <neq name="Think.session.userno" value="">
+				{$userinfo[userno]}
+				<button class="change-phone-num">{:lan('EDIT', 'Home')}</button>
+                <else />
+				{:lan('NO_BIND_PHONE', 'Home')}
+				<button class="change-phone-num">{:lan('NOW_BIND', 'Home')}</button>
+				</neq>
+			</td>
+		</tr>
+	</table>
+
+	<p class="setting-info"></p>
+
+	<button class="setting-sub">{:lan('SAVE', 'Home')}</button>
+
+</div>
+
+	<div class="change-phone-wrap dis-none">
+		<div class="change-phone-alert">
+			<p class="info-msg"></p>
+
+			<div class="country">
+				<div class="choiced _target _choiced">
+					<p data-value="{$countryinfo.countryno}">
+						{$countryinfo.countryname} (+{$countryinfo.countryno})
+					</p>
+				</div>
+				<div class="options dis-none _options">
+					<volist name="country" id="cou">
+						<p data-value="{$cou.countryno}">
+							{$cou.countryname} (+{$cou.countryno})
+						</p>
+					</volist>
+				</div>
+				<i class="iconfont select-down _target">&#xe604;</i>
+			</div>
+
+			<p class="input1">
+				<input type="number" name="phoneNum" id="phoneNum" placeholder="{:lan('INPUT_YOUR_USERNAME', 'Home')}" class="phone-num">
+			</p>
+
+			<p class="input2">
+				<input type="number" name="validCode" id="validCode" placeholder="{:lan('PLEASE_INPUT_VERIFYCODE', 'Home')}" class="valid-num">
+				<button class="send-code" onclick="userCenter.getValidCode(1)">{:lan('SEND_VERIFYCODE', 'Home')}</button>
+			</p>
+
+			<p class="input3">
+				<button class="confirm" onclick="userCenter.getValidCode(0)">{:lan('SURE', 'Home')}</button>
+				<button class="cancel" onclick="userCenter.bindPhoneNumClose()">{:lan('CANCEL', 'Home')}</button>
+			</p>
+
+		</div>
+	</div>
+
+</div>
+
+
+<script>
+	laydate({
+		elem: '#birthday',
+		max: laydate.now()
+	});
+</script>
+</block>

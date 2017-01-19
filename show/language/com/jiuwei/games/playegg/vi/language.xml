@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+	<showlist>
+        <nologin>Bạn chưa đăng nhập</nologin>
+		<noenoughvm>Bạn không đủ xu，thả trứng một lần phải mất xu</noenoughvm>
+		<virtualmoney>xu</virtualmoney>
+		<notwinning>Rất đáng tiếc, thả không đạt</notwinning>
+		<congratulation>Chức mừng, bạn đã nhận được xu</congratulation>
+		<award>Thưởng</award>
+		<errretry>Hệ thống xảy ra lỗi, vui lòng thử lại sau</errretry>
+		<commuerretry>Truyền thông tin thất bại, vui lòng thử lại sau</commuerretry>
+		<repeattext>Thêm lần nữa</repeattext>
+		<wantaward>Tôi muốn lĩnh thưởng</wantaward>
+		<exittext>Thoát khỏi game</exittext>
+		<winningfirst>Haha, trúng thưởng rồi!Cảm ơn bạn đã tham gia, mời lĩnh thưởng! Giải nhất là 1000 xu</winningfirst>
+		<winningsec>Haha, trúng thưởng rồi!Cảm ơn bạn đã tham gia, mời lĩnh thưởng! Giải nhì là 500 xu</winningsec>
+		<winningthird>Haha, trúng thưởng rồi!Cảm ơn bạn đã tham gia, mời lĩnh thưởng! Giải ba là 200 xu</winningthird>
+        <winningforth>Haha, trúng thưởng rồi!Cảm ơn bạn đã tham gia, mời lĩnh thưởng! Giải tư là 100 xu</winningforth>
+		<tomorrowretry>Hôm nay bạn đã thả trứng quá 3 lần, vui lòng ngày mai tiếp tục!</tomorrowretry>
+		<seetomorrow>Ngày mai tiếp tục</seetomorrow>
+	</showlist>

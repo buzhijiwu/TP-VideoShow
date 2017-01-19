@@ -1,0 +1,68 @@
+<extend name="Public:list" />
+<block name="title"></block>
+<block name="css"></block>
+
+<block name="main">
+<div class="subnav">
+  <div class="content-menu ib-a blue line-x">
+  	<a><em>{:lan('EDIT', 'Admin')}{:lan('AUTHORITY', 'Admin')} - {$Think.get.name}</em></a><span>
+  </div>
+</div>
+<script>
+function mys(name,id) {
+	if ($("#"+id).attr("checked")==false) {
+		$(name).each(function() {
+			this.checked=false;
+		});
+	} else {
+		$(name).each(function() {
+			this.checked=true;
+		});
+	}
+}
+</script>
+<form name="myform" id="myform" action="" method="post">
+    <div class="table-list">
+	  <volist name="data.menu" id="v">
+      <table width="100%">
+        <thead>
+          <tr>
+      		<th  colspan="2" align="left"><input id="b{$v.menuid}" onclick="mys('.b{$v.menuid}','b{$v.menuid}');" class="checkbox ok" name="menuid[]" type="checkbox" 
+      			<volist name="data.auth" id="n" >
+      				<eq name="n.menuid" value="$v.menuid">checked="checked" </eq>		
+      			</volist>
+      			value="{$v.menuid}"> {$v.menuname}</th>
+          </th></tr>
+        </thead>
+        <tbody>
+        	<volist name="v._child" id="o">
+          <tr>
+              <td width="120"><input id="b{$o.menuid}" onclick="mys('.b{$o.menuid}','b{$o.menuid}');" class="checkbox b{$v.menuid} ok" type="checkbox" name="menuid[]"
+              	<volist name="data.auth" id="n" >
+      				<eq name="n.menuid" value="$o.menuid">checked="checked" </eq>		
+      			</volist>       	
+              	  	value="{$o.menuid}"> {$o.menuname}：</td>
+              <td align="left">
+              	<volist name="o._child" id="m">
+              	<input class="checkbox b{$o.menuid} b{$v.menuid} ok" type="checkbox" name="menuid[]" value="{$m.menuid}" 
+              		<foreach name="data.auth" item="vo">
+              			<eq name="vo.menuid" value="$m.menuid">checked="checked" </eq>
+              		</foreach>> {$m.menuname} &nbsp;  &nbsp; 
+          		</volist>
+              </td>
+            </tr>     
+           </volist>
+        </tbody>
+      </table>
+      </volist>
+    </div>
+    <div class="bk15"></div>
+    <input name="dosubmit" value="{:lan('SUBMIT_BUTTION', 'Admin')}" class="button" type="submit">
+</form>
+</block>
+
+<block name="js">
+<script type="text/javascript">
+
+</script>
+</block>

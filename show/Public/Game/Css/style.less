@@ -1,0 +1,310 @@
+/*定义公用样式*/
+@main-color:#f4378c;
+@main-hover-color:#d83476;
+@main-bgColor:#f1f4f8;
+.txt-over{
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.border-radius(@radius){
+  border-radius: @radius;
+  -moz-border-radius: @radius;
+  -webkit-border-radius: @radius;
+}
+
+//运动会游戏
+.game-wrap{
+  background-color: rgba(21,20,27,0.9);
+  height: 340px;
+  //倒计时和关闭按钮
+  .section1{
+    width: 100%;
+    padding:0 3.5%;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    font-size: 14px;
+    position: relative;
+    color: @main-color;
+    .close-game{
+      position: absolute;
+      display: block;
+      width: 20px;
+      height: 35px;
+      top: 0;
+      right: 3.5%;
+      text-align: center;
+      line-height: 35px;
+      font-size: 16px;
+      color: @main-color;
+      &:hover{
+        cursor: pointer;
+      }
+    }
+    .game-question{
+      position: absolute;
+      display: block;
+      width: 20px;
+      height: 35px;
+      top: 0;
+      left: 3.5%;
+      text-align: center;
+      line-height: 35px;
+      font-size: 22px;
+      color: #fff;
+      &:hover{
+        cursor: pointer;
+        color: @main-color;
+      }
+    }
+  }
+
+  //抢庄与转动
+  .section2{
+    position: relative;
+    padding:0 3.5%;
+    .left{
+      display: table-cell;
+      vertical-align: middle;
+      padding-right: 10px;
+      height: 120px;
+      button{
+        width: 50px;
+        height: 50px;
+        .border-radius(50%);
+        background-color: @main-color;
+        color: #fff;
+        font-size: 26px;
+        &:hover{
+          background-color: @main-hover-color;
+        }
+      }
+      .bankerInfo{
+        text-align: center;
+        .header-img{
+          width: 50px;
+          height: 50px;
+          .border-radius(50%);
+        }
+        p{
+          color: #edb80f;
+          .txt-over;
+          width: 50px;
+        }
+      }
+    }
+    .right{
+      display: table-cell;
+      width: 100%;
+      vertical-align: middle;
+      height: 120px;
+      position: relative;
+      .ball-wrap{
+        border: 1px solid @main-color;
+        tr{
+          td{
+            vertical-align: middle;
+            height: 40px;
+            text-align: center;
+            border-right: 1px solid @main-color;
+            background-color: rgba(0,0,0,0.3);
+            &.ball4,
+            &.ball5,
+            &.ball6{
+              border-right: none;
+            }
+            &.ball5{
+              border-left:1px solid @main-color;
+            }
+            &.active{
+              background-color: @main-color;
+            }
+            img{
+              width: 26px;
+              height: 26px;
+            }
+          }
+          &.tr1{
+            td{
+              border-bottom: 1px solid @main-color;
+            }
+          }
+          &.tr3{
+            td{
+              border-top: 1px solid @main-color;
+            }
+          }
+          &.tr2{
+            td{
+              border-right:none;
+              &.ball13{
+                border-right:1px solid @main-color;
+              }
+            }
+          }
+        }
+      }
+      .result{
+        position: absolute;
+        top:50px;
+        left: 17%;
+        width: 68%;
+        span{
+          display: block;
+          float: left;
+          margin-top: 2px;
+          margin-right: 2px;
+          line-height: 16px;
+          color: #fff;
+          background-color: @main-color;
+          padding: 1px 5px;
+          font-size: 12px;
+          .border-radius(2px);
+        }
+        .new-result{
+          width:75%;
+          float: left;
+          height: 20px;
+          overflow: hidden;
+          img{
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+            margin: 0 1px;
+          }
+        }
+      }
+    }
+  }
+
+  //押注
+  .section3{
+    border-bottom: 1px solid #aaa;
+    padding:15px 3.5%;
+    .list-wrap{
+      border: 2px solid @main-color;
+      .list{
+        float: left;
+        width: 20%;
+        border-right:1px solid @main-color ;
+        text-align: center;
+        background-color: rgba(0,0,0,0.3);
+        &.active{
+          background-color:rgba(244,54,140,0.2);
+        }
+        &:hover{
+          cursor: pointer;
+        }
+        img{
+          margin-top: 5px;
+          width: 20px;
+          height: 20px;
+        }
+        .multiple{
+          font-size: 12px;
+          line-height: 16px;
+          color: #edb80f;
+        }
+        .count{
+          font-size: 14px;
+          line-height: 20px;
+          border-top: 1px solid @main-color;
+          color: #fff;
+        }
+        &:last-child{
+          border-right: none;
+        }
+      }
+    }
+    .num-wrap{
+      margin-top: 10px;
+      .num{
+        background-color: rgba(0,0,0,0.3);
+        float: left;
+        width: 15%;
+        text-align: center;
+        margin:0 5%;
+        .border-radius(3px);
+        height: 24px;
+        line-height: 24px;
+        font-size: 16px;
+        color: #edb80f;
+        border: 2px solid @main-color;
+        &:hover{
+          cursor: pointer;
+          background-color:rgba(244,54,140,0.2);
+        }
+      }
+    }
+  }
+
+  //兑换
+  .section4{
+    height: 50px;
+    line-height: 50px;
+    padding:0 3.5%;
+    .left{
+      float: left;
+      span{
+        font-size: 16px;
+        color: @main-color;
+      }
+      .exchange{
+        display: inline-block;
+        font-size: 16px;
+        color: #fff;
+        img{
+          width: 20px;
+          height: 20px;
+          vertical-align: middle;
+          position: relative;
+          top: -2px;
+          margin-left: 5px;
+        }
+        .iconfont{
+          color: @main-color;
+        }
+        &:hover{
+          cursor: pointer;
+        }
+      }
+    }
+    .right{
+      float: right;
+      width: 70px;
+      height: 30px;
+      text-align: center;
+      line-height: 30px;
+      margin-top: 10px;
+      .border-radius(3px);
+      background-color: @main-color;
+      color: #fff;
+      font-size: 16px;
+      &:hover{
+        background-color: @main-hover-color;
+        cursor: pointer;
+      }
+      &.disabled{
+        background-color: #ccc;
+        &:hover{
+          cursor: no-drop;
+        }
+      }
+    }
+  }
+
+  //加载中
+  #loading{
+    text-align: center;
+    .loadimg{
+      width: 150px;
+      margin-top: 100px;
+    }
+    p{
+      font-size: 16px;
+      color : #fff;
+    }
+  }
+
+}

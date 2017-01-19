@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DownLoad</title>
+    <!-- cnzz统计代码 -->
+    <script>
+    var _czc = _czc || [];
+    _czc.push(["_setAccount", "1260140389"]);
+    </script>       
+</head>
+<body>
+
+<script>
+    window.onload = function () {
+        var phonePlatform = navigator.platform;
+        var iphone = /iphone/i;
+        var android = /linux/i;
+        if(iphone.test(phonePlatform)){
+            _czc.push(["_trackEvent", "APP下载", "跳转", "IOS"]);
+            window.location.href = "https://itunes.apple.com/cn/app/waashow-kenh-video-truc-tuyen/id1067265475?mt=8&ign-mpt=uo%3D4?";
+        }else if(android.test(phonePlatform)){
+            _czc.push(["_trackEvent", "APP下载", "跳转", "Android"]);
+            window.location.href = "http://www.waashow.com/ApkDownload/Android/WaaShow_Idol.apk?";
+        }
+    };
+</script>
+<div style="display:none">
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260140389'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1260140389%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+</div>
+</body>
+</html>

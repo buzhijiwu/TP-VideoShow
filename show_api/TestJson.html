@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script language="javascript" src="jquery.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+function query(){
+	var vpageno = document.getElementById("pageno").value;
+	//alert(vpageno);
+	//xu.xlingmao.com ws.xlingmao.com  getIndexRoom  getOneCateRoom  checkSmsCode
+	$.ajax({ 
+		url: 'http://xu.xlingmao.com/api.php/Api/doregister', 
+		//data: {phoneno:'15861815162',apptype:0,countryno:'86'},
+		data: {phoneno:'12345678901' , password:'123456' , countryno:'86', verifycode:'1213', appkey:'e168f8869807', lantype:'zh'},
+		//data: {limit:6,lantype:'zh'},
+		dataType: 'json',
+		type: "post", 
+		cache : false, 
+		success: function(data) {
+			alert(JSON.stringify(data));
+		},error: function(XMLHttpRequest, textStatus, errorThrown) {
+			alert(XMLHttpRequest.status);
+			alert(XMLHttpRequest.readyState);
+			alert(textStatus);
+			alert(errorThrown);
+		}  
+	});
+}
+
+
+</script>
+
+	<input name="keyword" type="text" name="pageno" id="pageno" />
+	<input type="button" name="search" value="查询" onclick="query()" />
+</body>
+</html>

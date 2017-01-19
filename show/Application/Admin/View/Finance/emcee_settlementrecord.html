@@ -1,0 +1,178 @@
+﻿<tagLib name="html" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>{:lan('ADMIN_MAN_TITLE', 'Admin')}</title>
+    <link href="__PUBLIC__/Public/statics/css/reset.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/Public/statics/css/system.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/Public/statics/css/table_form.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/Public/statics/css/dialog.css" rel="stylesheet" type="text/css" />
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/dialog.js"></script>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles1.css" title="styles1" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles2.css" title="styles2" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles3.css" title="styles3" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles4.css" title="styles4" media="screen" />
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/admin_common.js"></script>
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/styleswitch.js"></script>
+
+</head>
+<body>
+<style type="text/css">
+    html{_overflow-y:scroll}
+</style><div id="closeParentTime" style="display:none"></div>
+<div class="pad-10">
+    <div id="searchid" style="display:none">
+        <form id="searchform" name="searchform" action="" method="get" >
+            <input type="hidden" name="searchform" value="1">
+            <table width="100%" cellspacing="0" class="search-form">
+                <tbody>
+                <tr>
+                    <td>
+                        <div class="explain-col">
+                            <link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/js/calendar/jscal2.css"/>
+                            <link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/js/calendar/border-radius.css"/>
+                            <link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/js/calendar/win2k.css"/>
+                            <script type="text/javascript" src="__PUBLIC__/Public/statics/js/calendar/calendar.js"></script>
+                            <script type="text/javascript" src="__PUBLIC__/Public/statics/js/calendar/lang/en.js"></script>
+                            {:lan('TRANSACTION_TIME', 'Admin')}：
+                            <input type="text" name="settlement_month" id="settlement_month" value="{$search['settlement_month']}" size="10" class="date" readonly>
+                            <script type="text/javascript">
+                                Calendar.setup({
+                                    weekNumbers: false,
+                                    inputField : "settlement_month",
+                                    trigger    : "settlement_month",
+                                    dateFormat: "%Y-%m",
+                                    showTime: false,
+                                    minuteStep: 1,
+                                    onSelect   : function() {this.hide();}
+                                });
+                            </script>
+                            {:lan('ROOMNO', 'Admin')}/{:lan('SYS_USERNAME', 'Admin')}/{:lan('NICKNAME', 'Admin')}：
+                            <input name="username" type="text" class="input-text" value="{$search['username']}" />
+                            <select name="familyid">
+                                <option value ="">{:lan('FAMILY_NAME','Admin')}</option>
+                                <foreach  name="familys" item="v">
+                                    <option value ="{$v['familyid']}" <if condition="$v['familyid'] eq $search['familyid']"> selected</if>>{$v['familyname']}</option>
+                                </foreach >
+                            </select>
+                            <select name="signflag">
+                                <option value="">{:lan('SIGN_STATUS', 'Admin')}</option>
+                                <option value="2" <eq name="search.signflag" value="2"> selected</eq> >{:lan('SIGNED', 'Admin')}</option>
+                                <option value="1" <eq name="search.signflag" value="1"> selected</eq> >{:lan('NOT_SIGN', 'Admin')}</option>
+                            </select>
+                            <input type="button" class="button" onclick="form_search();" value="{:lan('BTN_SEARCH', 'Admin')}" />
+                            <div style="float:right;">
+                                {:lan('EXPORT_DATA','Admin')}{:lan("PAGE_TOTAL", "Common")}{$export_page}{:lan("PAGE", "Common")}
+                                <input type="text" style="width:50px;" name="export_page" value="">
+                                <input type="button" class="button" onclick="export_record();" style="background-color:#00CC99;" value="{:lan('EXPORT_DATA','Admin')}">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+        <script>
+            $('#searchid').css('display','');
+        </script>
+    </div>
+    <div class="subnav">
+        <span>{:lan('ALREADY_SETTLEMENT_MONEY', 'Admin')}</span>
+        <b style="color:red;font-size:18px;">{$totalSettlementMoney} VND</b>
+    </div><br/>
+    <form name="myform" id="myform" action="{:U('Admin/Finance/do_settlement/status/0/')}" method="post" >
+        <div class="table-list">
+            <table width="100%">
+                <thead>
+                <tr>
+                    <th width="16"><input type="checkbox" value="" id="check_box" onclick="selectall('ids[]');"></th>
+                    <th>{:lan('ROOMNO', 'Admin')}</th>
+                    <th>{:lan('SYS_USERNAME', 'Admin')}</th>
+                    <th>{:lan('NICKNAME', 'Admin')}</th>
+                    <th>{:lan('LIVE_LENGTH', 'Admin')}</th>
+                    <th>{:lan('NEW_FRIEF_COUNT', 'Admin')}</th>
+                    <th>{:lan('EARN_SHOW_MONEY', 'Admin')}</th>
+                    <th>{:lan('PUNISH_MONEY', 'Admin')}</th>
+                    <th>{:lan('SETTLEMENT_RATIO', 'Admin')}</th>
+                    <th>{:lan('LIVE_REWARD', 'Admin')}(VND)</th>
+                    <th>{:lan('SETTLEMENT', 'Admin')}(VND)</th>
+                    <th>{:lan('EMCEE_FAMILY', 'Admin')}</th>
+                    <th>{:lan('TIME', 'Admin')}</th>
+                    <th>{:lan('SETTLEMENT_TIME', 'Admin')}</th>
+                    <th>{:lan('OPERATION', 'Admin')}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <volist name="list" id="vo" key="k">
+                    <tr>
+                        <td><input class="inputcheckbox" name="ids[]" value="{$vo.settlement_sn}" type="checkbox"></td>
+                        <td align="center">
+                            <neq name="vo.niceno" value="">{$vo['niceno']}<else/>{$vo['roomno']}</neq>
+                        </td>
+                        <td align="center">{$vo['username']}</td>
+                        <td align="center">{$vo['nickname']}</td>
+                        <td align="center">{$vo['living_length']}</td>
+                        <td align="center">{$vo['new_fans_count']}</td>
+                        <td align="center">{$vo['earn_money']}</td>
+                        <td align='center'>{$vo['punish_money']}</td>
+                        <td align='center'>{$vo['ratio']*100}%</td>
+                        <td align='center'>{$vo['reward_money']}</td>
+                        <td align='center'>{$vo['total_settlement_money']}</td>
+                        <td align='center'>{$vo['familyname']}</td>
+                        <td align='center'>{$vo['earntime']}</td>
+                        <td align='center'>{$vo['settlement_time']}</td>
+                        <td align='center'>
+                            <a href="javascript:">
+                                <eq name="vo.signflag" value="2">
+                                    <input
+                                            type="button"
+                                            style="background-color:#169BD5;"
+                                            class="button"
+                                            value="{:lan('CANCEL_SETTLEMENT', 'Admin')}"
+                                            onclick="confirmurl('__URL__/do_settlement/status/0/settlement_sn/{$vo.settlement_sn}','{:lan('CONFIRM_CANCEL_SETTLEMENT','Admin')}')">
+                                    <else/>
+                                    <input type="button"
+                                           style="background-color:red;"
+                                           class="button"
+                                           value="{:lan('CANCEL_SETTLEMENT', 'Admin')}"
+                                           onclick="confirmurl('__URL__/do_settlement/status/0/settlement_sn/{$vo.settlement_sn}','{:lan('CONFIRM_CANCEL_SETTLEMENT','Admin')}')">
+                                </eq>
+                            </a>
+                        </td>
+                    </tr>
+                </volist>
+                </tbody>
+            </table>
+            <div class="btn">
+                <label for="check_box">{:lan('BTN_ALL', 'Admin')}/{:lan('BTN_CANCEL', 'Admin')}</label>
+                <input type="button" class="button" value="{:lan('CANCEL_SETTLEMENT', 'Admin')}" onclick="cancel_emcee_settlement()"/>
+            </div>
+            <div id="pages">{$page}</div>
+        </div>
+        <input type="hidden" id="return" name="return" value="{$_SERVER["REQUEST_URI"]|base64_encode}" >
+    </form>
+</div>
+<script type="text/javascript">
+    function cancel_emcee_settlement(){
+        if(confirm("{:lan('CONFIRM_CANCEL_SETTLEMENT','Admin')}")){
+            $('#myform').submit();
+        }
+    }
+    //条件搜索
+    function form_search(){
+        document.getElementById('searchform').action = '/Admin/Finance/emcee_settlementrecord/';
+        $('#searchform').submit();
+    }
+    //导出数据
+    function export_record(){
+        if(confirm("{:lan('CONFIRM_EXPORT_DATA','Admin')}")){
+            document.getElementById('searchform').action = '/Admin/Finance/export_emcee_settlement_record/status/1/';
+            $('#searchform').submit();
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="shortcut icon" href="/Public/Public/Images/favicon.ico"/>
+    <link href="/Public/Home/Css/zh/reset.css?time=20160627.css" rel="stylesheet" type="text/css" />
+    <link href="/Public/Home/Css/zh/common.css?time=20160627.css" rel="stylesheet" type="text/css">
+    <link href="/Public/Supervise/Css/style.css?time=20160627.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/Public/Public/statics/js/calendar/jscal2.css">
+    <link rel="stylesheet" type="text/css" href="/Public/Public/statics/js/calendar/border-radius.css">
+    <link rel="stylesheet" type="text/css" href="/Public/Public/statics/js/calendar/win2k.css">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+    <script type="text/javascript" src="/Public/Tools/Js/jquery/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="/Public/Home/Js/live/show.js"></script>
+    <script type="text/javascript" src="/Public/Home/Js/live/swfobject.js"></script>
+    <script type="text/javascript" src="/Public/Home/Js/live/chatRoom.js"></script>
+    <script type="text/javascript" src="/Public/Home/Js/live/socket.io.js"></script>
+    <script type="text/javascript" src="/Public/Public/statics/js/calendar/calendar.js"></script>
+    <script type="text/javascript" src="/Public/Public/statics/js/calendar/lang/en.js"></script>
+
+    <title>{:lan('PENDING_REPORT', 'Supervise')}</title>
+</head>
+<body>
+
+<div class="list-main">
+
+    <div id="searchid" class="header">
+        <form name="searchform" action="/Supervise/Treated/pending_report" method="get">
+            <table width="100%" cellspacing="0" class="search-table">
+                <tbody>
+                <tr>
+                    <td><div class="explain-col"> {:lan('REPORT_TIME', 'Supervise')}：
+                        <input type="text" name="start_time" id="start_time" value="<eq name='Think.get.start_time' value=''>{$now}<else />{$Think.get.start_time}</eq>" size="10" class="date input-text" readonly="">
+                        &nbsp;<script type="text/javascript">     Calendar.setup({
+                            weekNumbers: false,
+                            inputField : "start_time",
+                            trigger    : "start_time",
+                            dateFormat: "%Y-%m-%d",
+                            showTime: false,
+                            minuteStep: 1,
+                            onSelect   : function() {this.hide();}
+                        });
+                        </script>- &nbsp;
+                        <input type="text" name="end_time" id="end_time" value="<eq name='Think.get.end_time' value=''>{$now}<else />{$Think.get.end_time}</eq>" size="10" class="date input-text" readonly="">
+                        &nbsp;<script type="text/javascript">     Calendar.setup({
+                            weekNumbers: false,
+                            inputField : "end_time",
+                            trigger    : "end_time",
+                            dateFormat: "%Y-%m-%d",
+                            showTime: false,
+                            minuteStep: 1,
+                            onSelect   : function() {this.hide();}
+                        });
+                        </script>
+
+                    </div></td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="btn" style="margin-top: 20px;">{:lan('REPORTED_USER', 'Supervise')}</div>
+            <div class="search">
+                <input type="text" name="keyword" class="search-input" placeholder="{:lan('USERNAME', 'Supervise')}/{:lan('NICKNAME', 'Supervise')}/{:lan('ROOMNO', 'Supervise')}" value="{$keyword}">
+                <input type="submit" value="&#xe640;" class="search-submit iconfont">
+            </div>
+        </form>
+    </div>
+
+    <form name="myform" id="myform" action="" method="post">
+        <div class="report-table-list">
+            <table width="100%">
+                <thead>
+                <tr>
+                    <th width="70">{:lan('SYS_NUMBER', 'Supervise')}</th>
+                    <th>{:lan('REPORT_TIME', 'Supervise')}</th>
+                    <th>{:lan('REPORTED_USERNAME', 'Supervise')}</th>
+                    <th>{:lan('REPORTED_NICKNAME', 'Supervise')}</th>
+                    <th>{:lan('ROOMNO', 'Supervise')}</th>
+                    <th>{:lan('REPORTED_COUNT', 'Supervise')}</th>
+                    <th>{:lan('OPERATION', 'Supervise')}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <volist name="data" id="v" key="k">
+                    <tr>
+                        <td>{$k}</td>
+                        <td>{$v.createtime}</td>
+                        <td>{$v.username}</td>
+                        <td>{$v.nickname}</td>
+                        <td>{$v.showroomno}</td>
+                        <td>{$v.reportedcount}</td>
+                        <td><a href="{:U('/Supervise/Treated/pending_report_detail/reporteduid/'.$v['reporteduid'])}">{:lan('REDIS_KEY_DETAIL', 'Supervise')}</a></td>
+                    </tr>
+                </volist>
+                </tbody>
+            </table>
+            <div id="pages">{$page}</div>
+        </div>
+    </form>
+</div>
+
+
+
+
+
+</body>
+</html>

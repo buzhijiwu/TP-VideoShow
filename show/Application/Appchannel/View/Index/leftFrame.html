@@ -1,0 +1,20 @@
+<h3 class="f14"><span class="switchs cu on" title="{$spreadandshrink}"></span>{:lan('APP_STORE_CHANNEL', 'Appchannel')}</h3>
+<ul>
+	<li id="_MP2" class="sub_menu on fb blue"><a href="javascript:_MP(2,'/Appchannel/Channel/channel_query/');" hidefocus="true" style="outline:none;">{:lan('CHANNEL_QUERY', 'Appchannel')}</a></li>
+</ul>
+
+<script type="text/javascript">
+$(".switchs").each(function(i){
+	var ul = $(this).parent().next();
+	$(this).click(
+	function(){
+		if(ul.is(':visible')){
+			ul.hide();
+			$(this).removeClass('on');
+				}else{
+			ul.show();
+			$(this).addClass('on');
+		}
+	})
+});
+</script>

@@ -1,0 +1,46 @@
+<?php
+return array(
+    '-1' => 'Hệ thống đang bận',
+    '200' => 'Thành công',
+    '400' => 'Nhập số sai',
+    '500' => 'Yêu cầu không bình thường',
+
+    '400001' => 'Bạn vẫn chưa đăng nhập, vui lòng đăng nhập',
+    '400002' => 'Số này đã được đăng ký',
+    '400003' => 'Mã xác minh sai',
+    '400004' => 'Số này không tồn tại, vui lòng đăng ký ngay',
+    '400005' => 'Tài khoản của bạn đã bị chặn hoặc xóa',
+    '400006' => 'Sai mật khẩu',
+    '400007' => 'Đã quá số lần tin nhấn trong ngày',
+    '400008' => 'Nhập sai mật khẩu cũ',
+    '400009' => 'Hai mật khẩu nhập không đồng nhất',
+    '400010' => 'Không phù hợp nguyên tắc mật khẩu',
+
+    '401001' => 'Nội dung bạn nhập bao hàm kí tự phi pháp',
+    '401002' => 'Tên hiển thị chỉ được từ 1-50',
+    '401003' => 'Avantar tải lên thất bại',
+    '401004' => 'Nickname đã tồn tại',
+    '401005' => 'Nhập nickname của bạn có từ ngữ bị cấm',
+
+    '403001' => 'Vi phạm phòng live, liên hệ CSKH 08.38.635287',
+    '403101' => 'Bạn đã bị đưa vào danh sách đen',
+    '403102' => 'Đưa vào danh sách đen thành công',
+    '403103' => 'Không đủ quyền hạn',
+    '403104' => 'Đã dùng hết số lần',
+    '403105' => 'Không được chặn trò chuyện bản thân',
+    '403106' => 'Đối phương là quản lý phòng , không thể bị cấm nói',
+    '403107' => 'Đối phương là bảo vệ của phòng, , bạn không thể cấm chat',
+    '403108' => 'Không được kích bản thân',
+    '403109' => 'Đối phương là quản lý phòng , không thể bị kick ra',
+    '403110' => 'Đối phương là bảo vệ của phòng bạn không thể kick',
+    '403201' => 'Bạn đã quan tâm idol này',
+    '403202' => 'Mỗi idols một tiếng chỉ được chia sẽ một lần',
+
+    '404001' => 'Nạp xu thất bại, ,xin liên hệ chăm sóc khách hàng',
+    '404002' => 'Nạp xu thất bại',
+    '404003' => 'User 1 tiếng chỉ có 30 cơ hội yêu cầu nạp xu',
+
+    '405001' => 'Không đủ tiền',    
+    '405002' => 'Dãy mã số này đã bị mua',
+    '405003' => 'Chiếc sofa đã có người trả giá cao hơn mua về',    
+);

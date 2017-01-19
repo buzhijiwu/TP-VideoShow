@@ -1,0 +1,108 @@
+<extend name="Public:list" />
+<block name="title"></block>
+<block name="css"></block>
+
+<block name="main">
+  <script>
+    $(function(){
+      $.formValidator.initConfig({formid:"myform",autotip:true,onerror:function(msg,obj){window.top.art.dialog({content:msg,lock:true,width:'200',height:'50'}, function(){this.close();$(obj).focus();})}});
+      $("#adminname").formValidator({
+        onshow:"{:lan('PLZ_INPUT_USER_NAME', 'Admin')}",
+        onfocus:"{:lan('PLZ_INPUT_USER_NAME', 'Admin')}",
+        oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"})
+              .inputValidator({min:1,onerror:"{:lan('PLZ_INPUT_USER_NAME', 'Admin')}"});
+      $("#pass").formValidator({
+        onshow:"{:lan('LAN_PWD_NO_EMPTY', 'Admin')}",
+        onfocus:"{:lan('LAN_PWD_NO_EMPTY', 'Admin')}",
+        oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"})
+              .inputValidator({min:1,onerror:"{:lan('LAN_PWD_NO_EMPTY', 'Admin')}"});
+      $("#realname").formValidator({
+        onshow:"{:lan('INPUT_REAL_NAME', 'Admin')}",
+        onfocus:"{:lan('INPUT_REAL_NAME', 'Admin')}",
+        oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"})
+              .inputValidator({min:1,onerror:"{:lan('INPUT_REAL_NAME', 'Admin')}"});
+      $("#position").formValidator({
+        onshow:"{:lan('USER_POSITION', 'Admin')}",
+        onfocus:"{:lan('USER_POSITION', 'Admin')}",
+        oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"})
+              .inputValidator({min:1,onerror:"{:lan('USER_POSITION', 'Admin')}"});
+      $("#contactno").formValidator({
+        onshow:"{:lan('SYS_TELNUM', 'Admin')}",
+        onfocus:"{:lan('SYS_TELNUM', 'Admin')}",
+        oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"})
+              .inputValidator({min:1,onerror:"{:lan('INPUT_YOUR_USERNAME', 'Admin')}"})
+              .regexValidator({regexp:"num",datatype:"enum",onerror:"{:lan('INPUT_YOUR_USERNAME', 'Admin')}"});
+      $("#address").formValidator({
+        onshow:"{:lan('INPUT_ADDRESS', 'Admin')}",
+        onfocus:"{:lan('INPUT_ADDRESS', 'Admin')}",
+        oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"})
+              .inputValidator({min:1,onerror:"{:lan('INPUT_ADDRESS', 'Admin')}"});
+
+    })
+  </script>
+
+
+<div class="subnav">
+  <div class="content-menu ib-a blue line-x"><a href="__URL__/user/"><em>{:lan('ADMIN_LIST', 'Admin')}</em></a><span>|</span><a href="javascript:;" class="on"><em>{:lan('ADD_ADMIN', 'Admin')}</em></a></div>
+</div>
+<style type="text/css">
+	html{_overflow-y:scroll}
+</style>
+<div class="pad_10">
+  <div class="common-form">
+    <form name="myform" action="" method="post" id="myform">
+		<input name="nicenoid" value="{$data['mid']}" type="hidden">
+		<input name="parentid" type="hidden" value="{$Think.get.pid|default=0}" style=" width: 150px;">
+			
+      <table class="table_form contentWrap" width="100%">
+        <tbody>
+                   
+          <tr>
+            <td width="80">{:lan('USERNAME', 'Admin')}</td>
+            <td><input name="adminname" class="input-text" type="text" value="{$data['adminname']}" style=" width: 150px;" id="adminname"></td>
+          </tr>
+          <tr>
+            <td>{:lan('USER_PWD', 'Admin')}</td>
+            <td><input name="pass" class="input-text" type="text" value="" style=" width: 150px;" id="pass">{:lan('DONOT_CHANGEPWD', 'Admin')}</td>
+          </tr>
+          <tr>
+            <td>{:lan('USER_ROLE', 'Admin')}</td>
+            <td>
+            	<select name="roleid" class="selectStyle">
+            		<option value="">{:lan('PLEASE_CHOOSE', 'Admin')}</option>
+            		<volist name="cate" id="v">
+            			<option <eq name="data.roleid" value="$v.roleid">selected="selected"</eq> value="{$v.roleid}">{$v.rolename}</option>
+            		</volist>
+				</select>
+			</td>
+	      </tr>
+          <tr>
+            <td>{:lan('SYS_REALNAME', 'Admin')}</td>
+            <td><input name="realname" class="input-text" type="text" value="{$data['realname']}" style=" width: 150px;" id="realname"></td>
+          </tr>
+          <tr>
+            <td>{:lan('USER_POSITION', 'Admin')}</td>
+            <td><input name="position" class="input-text" type="text" value="{$data['position']}" style=" width: 150px;" id="position"></td>
+          </tr>
+          <tr>
+            <td>{:lan('SYS_TELNUM', 'Admin')}</td>
+            <td><input name="contactno" class="input-text" type="text" value="{$data['contactno']}" style=" width: 150px;" id="contactno"></td>
+          </tr>
+          <tr>
+            <td>{:lan('SYS_ADDRESS', 'Admin')}</td>
+            <td><input name="address" class="input-text" type="text" value="{$data['address']}" style=" width: 150px;" id="address"></td>
+          </tr>        
+        </tbody>
+      </table>
+      <div class="bk15"></div>
+      <input name="dosubmit" value="{:lan('SUBMIT_BUTTION', 'Admin')}" class="button" type="submit">
+    </form>
+  </div>
+</div>
+</block>
+
+<block name="js">
+<script type="text/javascript">
+
+</script>
+</block>

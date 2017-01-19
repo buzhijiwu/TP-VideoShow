@@ -1,0 +1,101 @@
+<tagLib name="html" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>{:lan('ADMIN_MAN_TITLE', 'Admin')}</title>
+    <link href="__PUBLIC__/Public/statics/css/reset.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/Public/statics/css/system.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/Public/statics/css/table_form.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/Public/statics/css/dialog.css" rel="stylesheet" type="text/css" />
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/dialog.js"></script>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles1.css" title="styles1" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles2.css" title="styles2" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles3.css" title="styles3" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles4.css" title="styles4" media="screen" />
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/admin_common.js"></script>
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/styleswitch.js"></script>
+
+</head>
+<body>
+<style type="text/css">
+    html{_overflow-y:scroll}
+</style><div id="closeParentTime" style="display:none"></div>
+<div class="pad-10">
+    <div id="searchid" style="display:none">
+        <form id="searchform" name="searchform" action="" method="get" >
+            <input type="hidden" name="searchform" value="1">
+            <table width="100%" cellspacing="0" class="search-form">
+                <tbody>
+                <tr>
+                    <td>
+                        <div class="explain-col">
+                            <link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/js/calendar/jscal2.css"/>
+                            <link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/js/calendar/border-radius.css"/>
+                            <link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/js/calendar/win2k.css"/>
+                            <script type="text/javascript" src="__PUBLIC__/Public/statics/js/calendar/calendar.js"></script>
+                            <script type="text/javascript" src="__PUBLIC__/Public/statics/js/calendar/lang/en.js"></script>
+                            {:lan('TIME', 'Admin')}：
+                            <input type="text" name="time" id="time" value="{$search['time']}" size="10" class="date" readonly>
+                            <script type="text/javascript">
+                                Calendar.setup({
+                                    weekNumbers: false,
+                                    inputField : "time",
+                                    trigger    : "time",
+                                    dateFormat: "%Y-%m-%d",
+                                    showTime: false,
+                                    minuteStep: 1,
+                                    onSelect   : function() {this.hide();}
+                                });
+                            </script>
+                            <input type="button" class="button" onclick="form_search();" value="{:lan('BTN_SEARCH', 'Admin')}" />
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+        <script>
+            $('#searchid').css('display','');
+        </script>
+    </div>
+    <div class="table-list">
+        <table width="100%">
+            <thead>
+            <tr>
+                <th>{:lan('SYS_NUMBER', 'Admin')}</th>
+                <th>{:lan('ROOMNO', 'Admin')}</th>
+                <th>{:lan('SYS_USERNAME', 'Admin')}</th>
+                <th>{:lan('NICKNAME', 'Admin')}</th>
+                <th>{:lan('THIS_WEEK_GAME_COUNT', 'Admin')}</th>
+                <th>{:lan('TIME', 'Admin')}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <volist name="result" id="vo" key="k">
+                <tr>
+                    <td align="center">{$k}</td>
+                    <td align="center">{$vo['roomno']}</td>
+                    <td align="center">{$vo['username']}</td>
+                    <td align="center">{$vo['nickname']}</td>
+                    <td align="center">{$vo['totalgamecount']}</td>
+                    <td align="center">{$vo['starttime']} - {$vo['endtime']}</td>
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+        <div id="pages">{$page}</div>
+    </div>
+    <input type="hidden" id="return" name="return" value="{$_SERVER["REQUEST_URI"]|base64_encode}" >
+</div>
+<script type="text/javascript">
+    //条件搜索
+    function form_search(){
+        document.getElementById('searchform').action = '/Admin/Operator/game_times_reward/';
+        $('#searchform').submit();
+    }
+</script>
+</body>
+</html>

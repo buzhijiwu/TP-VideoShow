@@ -1,0 +1,117 @@
+﻿<tagLib name="html" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>{:lan('ADMIN_MAN_TITLE', 'Admin')}</title>
+    <link href="__PUBLIC__/Public/statics/css/reset.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/Public/statics/css/system.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/Public/statics/css/table_form.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles1.css" title="styles1" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles2.css" title="styles2" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles3.css" title="styles3" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles4.css" title="styles4" media="screen" />
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/admin_common.js"></script>
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/styleswitch.js"></script>
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/formvalidator.js" charset="UTF-8"></script>
+    <script type="text/javascript">
+        window.focus();
+    </script>
+</head>
+<body>
+<div class="subnav">
+    <div class="content-menu ib-a blue line-x">
+        <!-- <a href='__URL__/rechargerecord/' ><em>{:lan('USER_RECHARGE_RECORD', 'Admin')}</em></a><span>|</span> -->
+        <a href='javascript:;' class="on"><em>{:lan('MANUAL_RECHARGE', 'Admin')}</em></a>    </div>
+</div>
+<style type="text/css">
+    html{_overflow-y:scroll}
+</style><script type="text/javascript">
+    <!--
+    $(function(){
+        $.formValidator.initConfig({autotip:true,formid:"myform",onerror:function(msg){}});
+        $("#roomno").formValidator({onshow:"{:lan('PLZ_INPUT_ROOMNO', 'Admin')}",onfocus:"{:lan('PLZ_INPUT_ROOMNO', 'Admin')}",oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"}).inputValidator({min:1,max:20,onerror:"{:lan('PLZ_INPUT_ROOMNO', 'Admin')}"});
+        $("#rechargeamount").formValidator({onshow:"{:lan('PLZ_INPUT_RECHARGE_MONEY', 'Admin')}",onfocus:"{:lan('PLZ_INPUT_RECHARGE_MONEY', 'Admin')}",oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"}).inputValidator({min:1,max:20,onerror:"{:lan('PLZ_INPUT_RECHARGE_MONEY', 'Admin')}"});
+        $("#localamount").formValidator({onshow:"{:lan('PLZ_INPUT_LOCAL_AMOUNT', 'Admin')}",onfocus:"{:lan('PLZ_INPUT_LOCAL_AMOUNT', 'Admin')}",oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"}).inputValidator({min:1,max:20,onerror:"{:lan('PLZ_INPUT_LOCAL_AMOUNT', 'Admin')}"});   
+        $("#devicetype").formValidator({onshow:"{:lan('PLZ_SELECT_DEVICE_TYPE', 'Admin')}",onfocus:"{:lan('PLZ_SELECT_DEVICE_TYPE', 'Admin')}",oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"}).inputValidator({min:1,max:20,onerror:"{:lan('PLZ_SELECT_DEVICE_TYPE', 'Admin')}"});             
+    })
+    //-->
+</script>
+<div class="pad_10">
+    <div class="common-form">
+        <form name="myform" action="__URL__/do_manual_recharge/" method="post" id="myform">
+            <table width="100%" class="table_form contentWrap">
+                <tr>
+                    <td width="80">{:lan('ROOMNO', 'Admin')}</td>
+                    <td><input type="text" name="roomno"  class="input-text" id="roomno"></input></td>
+                </tr>
+                <tr>
+                    <td width="80">{:lan('AMOUNT', 'Admin')}</td>
+                    <td><select name="math"><option value="plus">+</option><option value="subtract">-</option></select><input type="text" name="rechargeamount"  class="input-text" id="rechargeamount" onkeyup="this.value=this.value.replace(/[^\d]/g,'')" onpaste="return false"></input>{:lan('VIRTUAL_UNIT_COIN', 'Admin')}</td>
+                </tr>
+                <tr>
+                    <td width="80">{:lan('SYS_LOCAL_CURRENCY', 'Admin')}</td>
+                    <td><input type="text" name="localamount"  class="input-text" id="localamount" onkeyup="this.value=this.value.replace(/[^\d]/g,'')" onpaste="return false"></input></td>
+                </tr>  
+                <tr>
+                    <td width="80">{:lan('DEVICE_TYPE', 'Admin')}</td>
+                    <td>
+                        <select name="devicetype" id="devicetype" class="selectStyle" style="width:200px;">
+                            <option value="">{:lan('PLEASE_CHOOSE', 'Admin')}</option>                        
+                            <option value="0">ANDROID</option>
+                            <option value="1">IOS</option>
+                            <option value="2">PC</option>
+                        </select>
+                    </td>
+                </tr>                              
+                <tr>
+                    <td width="80">{:lan('CHANNEL_NAME', 'Admin')}</td>
+                    <td>
+                        <select name="channelid" class="selectStyle" style="width:200px;">
+                            <volist name="channel" id="v">
+                                <option value="{$v.channelid}" <if condition="$v.channelid eq 3" >selected="selected"</if>>{$v.rechargename}</option>
+                            </volist>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="80">{:lan('SELLER_NAME', 'Admin')}</td>
+                    <td>
+                        <select name="sellerid" class="selectStyle"  style="width:200px;">
+                            <option value="">{:lan('PLEASE_CHOOSE', 'Admin')}</option>
+                            <volist name="seller" id="v">
+                                <option value="{$v.sellerid}">{$v.sellername}</option>
+                            </volist>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="80">{:lan('COMPLIMENTARY_RECHARGE', 'Admin')}</td>
+                    <td>
+                        <label for="presentno">
+                            <input type="radio" name="ispresent" id="presentno" value="0" checked="checked" />
+                            {:lan('NO', 'Admin')}
+                        </label> 
+                        <label for="presentyes">
+                            <input type="radio" name="ispresent" id="presentyes" value="1" style="margin-left: 5px;" />
+                            {:lan('YES', 'Admin')}
+                        </label>            
+                    </td>
+                </tr>                
+                <tr>
+                    <td width="80">{:lan('REMARKS', 'Admin')}</td>
+                    <td>
+                        <textarea name="content" maxlength="180" style="height: 60px;width:310px;; visibility:inherit"></textarea>
+                    </td>
+                </tr>                
+            </table>
+            <div class="bk15"></div>
+            <input name="dosubmit" type="submit" value="{:lan('SUBMIT_BUTTION', 'Admin')}" class="button">
+        </form>
+    </div>
+</div>
+</body>
+</html>
+

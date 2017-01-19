@@ -1,0 +1,102 @@
+<tagLib name="html" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=7" />
+<title></title>
+<link href="__PUBLIC__/Public/statics/css/reset.css" rel="stylesheet"
+	type="text/css" />
+<link href="__PUBLIC__/Public/statics/css/system.css" rel="stylesheet"
+	type="text/css" />
+<link href="__PUBLIC__/Public/statics/css/table_form.css" rel="stylesheet"
+	type="text/css" />
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Tools/Js/jquery/jquery-1.8.3.min.js"></script>
+<script language="javascript" type="text/javascript"
+	src="__PUBLIC__/Public/statics/js/admin_common.js"></script>
+<script language="javascript" type="text/javascript"
+	src="__PUBLIC__/Public/statics/js/styleswitch.js"></script>
+<script language="javascript" type="text/javascript"
+	src="__PUBLIC__/Public/statics/js/formvalidator.js" charset="UTF-8"></script>
+<script language="javascript" type="text/javascript"
+	src="__PUBLIC__/Public/statics/js/formvalidatorregex.js"
+	charset="UTF-8"></script>
+
+<script type="text/javascript">
+	window.focus();
+	
+</script>
+</head>
+<body>
+	<div class="subnav">
+		<div class="content-menu ib-a blue line-x"></div>
+	</div>
+	<style type="text/css">
+        html {
+        	_overflow-y: scroll
+        }
+	</style>
+	
+	<script type="text/javascript">
+  $(document).ready(function() {
+	$.formValidator.initConfig({autotip:true,formid:"myform",onerror:function(msg){}});
+	$("#old_password").formValidator({empty:false,onshow:"{:lan('DONOT_CHANGEPWD', 'Agent')}",onfocus:"{:lan('PWD_ISSIX_TO_TWENTY', 'Agent')}",oncorrect:"{:lan('INPUT_SUCCESS', 'Agent')}"}).inputValidator({min:6,max:20,onerror:"{:lan('PWD_ISSIX_TO_TWENTY', 'Agent')}"}).ajaxValidator({
+	    type : "GET",
+		url : "",
+		data :"action=edit_pwd_ajax",
+		datatype : "html",
+		async:'false',
+		success : function(data){
+            if( data == "1" )
+			{
+                return true;
+			}
+            else
+			{
+            	return false;
+			}
+		},
+		buttons: $("#dosubmit"),
+		onerror : "{:lan('OLD_PWD_ISWRONT', 'Agent')}",
+		onwait : "{:lan('PLEASE_WAIT', 'Agent')}"
+	});
+	$("#new_password").formValidator({empty:false,onshow:"{:lan('DONOT_CHANGEPWD', 'Agent')}",onfocus:"{:lan('PWD_ISSIX_TO_TWENTY', 'Agent')}",oncorrect:"{:lan('TWICE_PWD_ISSAME', 'Agent')}"}).inputValidator({min:6,max:20,onerror:"{:lan('PWD_ISSIX_TO_TWENTY', 'Agent')}"});
+	$("#new_pwdconfirm").formValidator({empty:false,onshow:"{:lan('DONOT_CHANGEPWD', 'Agent')}",onfocus:"{:lan('TWICE_PWD_NOTSAME', 'Agent')}",oncorrect:"{:lan('TWICE_PWD_ISSAME', 'Agent')}"}).compareValidator({desid:"new_password",operateor:"=",onerror:"{:lan('TWICE_PWD_NOTSAME', 'Agent')}"});
+  })
+  
+</script>
+	<div class="pad_10">
+		<div class="common-form">
+			<form name="myform" action="{:U('do_edit_pwd')}" method="post"
+				id="myform">
+				<input type="hidden" name="agentid"
+					value="{$_SESSION['agentid']}">
+				<table width="100%" class="table_form contentWrap">
+					<tr>
+						<td width="80">{:lan('USERNAME', 'Agent')}</td>
+						<td>{$_SESSION['agentname']}</td>
+					</tr>
+					<tr>
+						<td>{:lan('OLD_PASSWORD_LABEL', 'Agent')}</td>
+						<td><input type="password" name="old_password"
+							id="old_password" class="input-text"></td>
+					</tr>
+					<tr>
+						<td>{:lan('NEW_PASSWORD_LABEL', 'Agent')}</td>
+						<td><input type="password" name="new_password"
+							id="new_password" class="input-text"></td>
+					</tr>
+					<tr>
+						<td>{:lan('REPEATE_NEW_PWD_LABEL', 'Agent')}</td>
+						<td><input type="password" name="new_pwdconfirm"
+							id="new_pwdconfirm" class="input-text"></td>
+					</tr>
+				</table>
+				<div class="bk15"></div>
+				<input name="dosubmit" type="submit"
+					value="{:lan('SUBMIT_BUTTION', 'Agent')}" class="button" id="dosubmit">
+			</form>
+		</div>
+	</div>
+</body>
+</html>

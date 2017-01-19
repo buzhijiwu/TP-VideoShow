@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="shortcut icon" href="/Public/Public/Images/favicon.ico"/>
+    <link href="/Public/Home/Css/zh/reset.css?time=20160627.css" rel="stylesheet" type="text/css" />
+    <link href="/Public/Home/Css/zh/common.css?time=20160627.css" rel="stylesheet" type="text/css">
+    <link href="/Public/Supervise/Css/style.css?time=20160627.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/Public/Public/statics/js/calendar/jscal2.css">
+    <link rel="stylesheet" type="text/css" href="/Public/Public/statics/js/calendar/border-radius.css">
+    <link rel="stylesheet" type="text/css" href="/Public/Public/statics/js/calendar/win2k.css">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+    <script type="text/javascript" src="/Public/Tools/Js/jquery/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="/Public/Home/Js/live/show.js"></script>
+    <script type="text/javascript" src="/Public/Home/Js/live/swfobject.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/Js/live/player.js"></script>
+    <script type="text/javascript" src="/Public/Home/Js/live/chatRoom.js"></script>
+    <script type="text/javascript" src="/Public/Home/Js/live/socket.io.js"></script>
+    <script type="text/javascript" src="/Public/Public/statics/js/calendar/calendar.js"></script>
+    <script type="text/javascript" src="/Public/Public/statics/js/calendar/lang/en.js"></script>
+    <script type="text/javascript">
+      var _show='';
+    </script>
+
+    <title>{:lan('PENDING_REPORT', 'Supervise')}</title>
+</head>
+<body>
+<input type="hidden" id="superviseid" name="superviseid" value="{$Think.session.superviseid}" />
+<div class="list-main">
+
+    <div id="searchid" class="header">
+        <div class="subnav">
+            <span>{:lan('UNITARY', 'Supervise')}:</span>
+            <button class="stop-live">{:lan('BAN_LIVE', 'Supervise')}</button>
+            <button onclick="no_problem();">{:lan('NO_PROBLEM', 'Supervise')}</button>
+        </div>
+        <div class="btn" style="margin-top: 20px;margin-left: 10px;">{:lan('REPORT_USER', 'Supervise')}</div>
+        <form name="searchform" action="/Supervise/Treated/pending_report_detail" method="get">
+            <div class="search">
+                <input type="hidden" id="reporteduid" name="reporteduid" value="{$reporteduid}" />
+                <input type="text" name="keyword" class="search-input" placeholder="{:lan('USERNAME', 'Supervise')}/{:lan('NICKNAME', 'Supervise')}/{:lan('ROOMNO', 'Supervise')}" value="{$keyword}">
+                <input type="submit" value="&#xe640;" class="search-submit iconfont">
+            </div>
+        </form>
+    </div>
+
+    <form name="myform" id="myform" action="" method="post">
+        <div class="report-table-list">
+            <table width="100%">
+                <thead>
+                <tr>
+                    <th width="70">{:lan('SYS_NUMBER', 'Supervise')}</th>
+                    <th>{:lan('REPORT_TIME', 'Supervise')}</th>
+                    <th>{:lan('REPORT_USERNAME', 'Supervise')}</th>
+                    <th>{:lan('REPORT_NICKNAME', 'Supervise')}</th>
+                    <th>{:lan('ROOMNO', 'Supervise')}</th>
+                    <th>{:lan('REPORT_REASON', 'Supervise')}</th>
+                    <th>{:lan('OPERATION', 'Supervise')}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <volist name="data" id="v" key="k">
+                    <tr>
+                        <input type="hidden" name="reportid[]" value="{$v.reportid}" />
+                        <td>{$k}</td>
+                        <td>{$v.createtime}</td>
+                        <td>{$v.username}</td>
+                        <td>{$v.nickname}</span></td>
+                        <td>{$v.showroomno}</span></td>
+                        <td>
+                            <switch name="v.type">
+                                <case value="0">{:lan('OBSCENE', 'Supervise')}</case>
+                                <case value="1">{:lan('ADVERTISEMENT', 'Supervise')}</case>
+                                <case value="2">{:lan('POLITICS', 'Supervise')}</case>
+                                <case value="3">{:lan('FRAUD', 'Supervise')}</case>
+                                <case value="4">{:lan('ILLEGAL', 'Supervise')}</case>
+                                <case value="5">{:lan('TORT', 'Supervise')}</case>
+                                <case value="6">{:lan('SELL_FAKES', 'Supervise')}</case>
+                                <default />{$v.content}
+                            </switch>
+                        </td>
+                        <td>
+                            <if condition="($v.video neq '') OR ($v.pic neq '') ">
+                                <a href="{:U('/Supervise/Treated/report_video/reportid/'.$v['reportid'])}" target="_blank">{:lan('VIEW_EVIDENCE', 'Supervise')}</a> | </if>
+                            <a href="{:U('/'.$showroomno)}" target="_blank">{:lan('ENTER_LIVEROOM', 'Supervise')}</a>
+                        </td>
+                    </tr>
+                </volist>
+                </tbody>
+            </table>
+            <div id="pages">{$page}</div>
+        </div>
+        <input type="hidden" id="waachnodepath" value="{$chatNodePath}"/>
+    </form>
+</div>
+
+<!--举报弹框-->
+<div class="liveroom-report-alert-wrap dis-none">
+    <div class="liveroom-report-alert">
+        <!--禁播-->
+        <div class="ban-alert">
+            <div class="line1 line">
+                <span class="left">{:lan('VIOLATION_REASON', 'Home')}：</span>
+                <select class="right" name="type">
+                    <volist name="baninfo.reason" id="v">
+                        <option value="{$v.key}">{$v.value}</option>
+                    </volist>
+                </select>
+            </div>
+            <div class="line2 line">
+                <span class="left">{:lan('VIOLATION_LEVEL', 'Home')}：</span>
+                <select class="right" name="violatelevel">
+                    <volist name="baninfo.level" id="v">
+                        <option value="{$v.key}">{$v.value}</option>
+                    </volist>
+                </select>
+            </div>
+            <div class="line3 line">
+                <span class="left">{:lan('BAN_TIME', 'Home')}：</span>
+                <select class="right" name="bantime">
+                    <volist name="baninfo.time" id="v">
+                        <option value="{$v.key}">{$v.value}</option>
+                    </volist>
+                </select>
+            </div>
+            <div class="line4 line">
+                <span class="left">{:lan('PUNISH_MONEY', 'Home')}：</span>
+                <select class="right" name="banmoney">
+                    <volist name="baninfo.money" id="v">
+                        <option value="{$v.key}">{$v.value}</option>
+                    </volist>
+                </select>
+            </div>
+        </div>
+        <span class="close-report iconfont">&#xe61b;</span>
+        <textarea placeholder="{:lan('PLZ_INPUT_REASON', 'Home')}" class="other-cause dis-none" name="content"></textarea>
+        <div class="bottom">
+            <button class="button no">{:lan('CANCEL', 'Home')}</button>
+            <button class="button yes">{:lan('SURE', 'Home')}</button>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/Public/Home/Js/live/chatClient.js"></script>
+<script src="/Public/Home/Js/live/liveChat.js"></script>
+<script src="/Public/Supervise/Js/children.js"></script>
+<script type="text/javascript">
+    function no_problem() {
+        $('#myform').submit();
+    }
+    
+    //禁播弹出框
+    $(".subnav button.stop-live").on("click", function () {
+        var data =  new Object();
+        var showroomno = {$showroomno};
+        data.roomnum  = showroomno;
+        data.ugoodnum = showroomno;
+        data.equipment = 'pc';
+        data.userid = '19';
+        socket.emit('adminUserCnn', data);  
+
+        playList._report.removeClass("dis-none");
+        playList._report.find(".liveroom-report-alert .ban-alert .line .right").eq(0).val(0);
+        playList._emceeuserid = $("#reporteduid").val();
+    });
+
+    //禁播
+    $('.liveroom-report-alert-wrap .liveroom-report-alert .bottom .yes').on("click", function () {
+        var banType = $("select[name='type']").val();
+        var banContent = $.trim($("textarea[name='content']").val());
+        if(banType == 7 && banContent.length <= 0){
+            $("textarea[name='content']").focus();
+        }else{
+            var data = $("#reporteduid,#superviseid,select[name='type'],textarea[name='content'],select[name='violatelevel'],select[name='bantime'],select[name='banmoney'],input[name='reportid[]']").serialize();
+            playList.stopLiveSubmit(data);   
+            window.location.href = "{:U('/Supervise/Treated/pending_report')}";            
+        }        
+    })    
+</script>
+
+
+
+</body>
+</html>

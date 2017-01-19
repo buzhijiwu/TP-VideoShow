@@ -1,0 +1,88 @@
+<extend name="base" />
+
+<block name="menu">
+	<div class="nav-list clear">
+		<a href="__URL__/index" class="active">{:lan('BASE_INFO', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+		<a href="__URL__/mywealth">{:lan('MY_WEALTH', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+		<a href="__URL__/myprivilege">{:lan('MY_PRIVILEGE', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+		<a href="__URL__/mycar">{:lan('MY_CAR', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+		<a href="__URL__/myfamily">{:lan('MY_FAMILY', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+	</div>
+</block>
+
+<block name="main">
+	<div class="right-index-main clear">
+		<div class="left1">
+			<p class="header-img">
+				<img src="{$Think.config.IMAGE_BASE_URL}{$userinfo['smallheadpic']}">
+			</p>
+			<a href="smallheadpic">
+				<i class="iconfont">&#xe613;</i>
+				<span>{:lan('EDIT_HEAD_PIC', 'Home')}</span>
+			</a>
+		</div>
+		<table class="right1">
+			<tr>
+				<td class="td1">{:lan('NICENAME', 'Home')}：</td>
+				<td class="td2">{$userinfo['nickname']}</td>
+				<td class="td3">
+					<a href="setting">{:lan('EDIT', 'Home')}</a>
+				</td>
+			</tr>
+			<tr>
+				<td class="td1">{:lan('ID', 'Home')}：</td>
+				<td class="td2">{$userinfo['showroomno']}</td>
+				<td class="td3">
+					<a href="{:U('Mall/nicenumber')}">{:lan('BUY', 'Home')}</a>
+				</td>
+			</tr>
+
+			<tr>
+				<td class="td1">{:lan('IDENTITY', 'Home')}：</td>
+				<td class="td2">{$userinfo['vipname']}</td>
+				<td class="td3">
+					<a href="{:U('Mall/index')}">{:lan('UPGRADE', 'Home')}</a>
+				</td>
+			</tr>
+            <eq name="Think.session.isemcee" value="1">
+                <tr>
+                    <td class="td1">{:lan('EM_GRADE', 'Home')}：</td>
+                    <td class="td2">
+                        <div class="level common-em em{$userinfo[emceelevel]}"></div>
+                        <div class="common-progress">
+                            <p style="width:{$userinfo[EmceeGrade]}px">
+                            </p>
+                        </div>
+                    </td>
+                    <td class="td3">
+
+                    </td>
+                </tr>
+            </eq>
+			<tr>
+				<td class="td1">{:lan('US_GRADE', 'Home')}：</td>
+				<td class="td2">
+				    <div class="level common-us us{$userinfo[userlevel]}"></div>
+					<div class="common-progress">
+						<p style="width:{$userinfo[UserGrade]}px">
+						</p>
+					</div>
+				</td>
+				<td class="td3">
+
+				</td>
+			</tr>
+            <!--<tr>
+                <td class="td1">{:lan("RECIVE_NOW", "Home")}：</td>
+                <td class="td2"><span class="money-num">{$userinfo['balanceinfo']['earnmoney']}</span>{:lan("MONEY_UNIT", "Home")}</td>
+                <td class="td3">
+                    <neq name="Think.session.signflag" value="2">
+                        <a href="{:U('Home/Applyemcee/index')}">
+                            <span>{:lan('APPLY_SIGN', 'Home')}</span>
+                        </a>
+                    </neq>
+                </td>
+            </tr>-->
+		</table>
+	</div>
+</block>

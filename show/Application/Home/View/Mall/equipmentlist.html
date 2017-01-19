@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+
+    <!--公用meta-->
+    <include file="Public:meta" />
+
+    <title>{:lan("MALL","Home")}</title>
+    <script type="text/javascript" src="__PUBLIC__/Home/Js/live/swfobject.js"></script>
+</head>
+<body>
+
+<!--公用头部-->
+<include file="Public:header" />
+
+
+<!--主要内容-->
+<div class="common-wrap">
+    <div class="equipment-main">
+        <div class="width">
+
+            <!-- 商城导航 -->
+            <include file="Public:mallhead" />
+
+            <input type="hidden" id="commodityid" value="{$vo[commodityid]}">
+
+            <!--座驾列表-->
+            <div class="equipment-list clear">
+                <volist name="cars" id="vo">
+                    <div class="list">
+                        <h3 class="car-name">{$vo[commodityname]}</h3>
+                        <img src="{$Think.config.IMAGE_BASE_URL}{$vo[pcbigpic]}" class="car-img">
+                        <div class="preview">
+                                <span class="previewflash" flashid="{$vo[commodityflashid]}">
+                                    {:lan('PREVIEW', 'Home')}
+                                </span>
+                            <img src="/Public/Public/Images/Store/line.png" class="hr">
+                        </div>
+                        <div class="input-group">
+                            <input type="button" value="-" class="decrease disabled" disabled>
+                            <span class="time">1</span>
+                            <span>{:lan("MONTHS","Home")}</span>
+                            <input type="button" value="+" class="increase">
+                        </div>
+                        <p class="line-price">
+                            <span>{:lan('PRICE', 'Home')}：</span>
+                            <span class="price">{$vo[commodityprice]}</span>
+                            <span>{:lan('MONEY_UNIT', 'Home')}</span>
+                        </p>
+                        <button class="buy-now">{:lan('BUY_NOW', 'Home')}</button>
+                        <input type="hidden" value="{$vo[commodityid]}" class="commodityid">
+                    </div>
+                </volist>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--flash动画-->
+<div class="flash-wrap">
+    <!--座驾-->
+    <div id="flashCars0"></div>
+
+    <script>
+        //flash-座驾
+        swfobject_h.embedSWF("/Public/Public/Swf/Gifts.swf", "flashCars0",1,1, "10.0", "", {},{wmode:"transparent",allowscriptaccess:"always"});
+
+        function unLoadFlash (dom){
+
+            $(dom).remove();
+        }
+
+    </script>
+</div>
+
+<!--共用底部-->
+<include file="Public:bottom" />
+
+<!-- 共用登录-->
+<include file="Public:login" />
+
+<!--共用商城弹框-->
+<include file="Public:mallAlert" />
+
+<!--共用弹框-->
+<include file="Public:alert" />
+
+<!--共用去充值弹框-->
+<include file="Public:gochargeAlert" />
+
+<!--共用js-->
+<include file="Public:javascript" />
+</body>
+</html>

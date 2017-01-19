@@ -1,0 +1,128 @@
+﻿<tagLib name="html" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<meta http-equiv="X-UA-Compatible" content="IE=7" /> 
+<title>{:lan('ADMIN_MAN_TITLE', 'Admin')}</title>
+<link href="__PUBLIC__/Public/statics/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Public/statics/css/system.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Public/statics/css/table_form.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Public/statics/css/dialog.css" rel="stylesheet" type="text/css" />
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/dialog.js"></script>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles1.css" title="styles1" media="screen" />
+<link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles2.css" title="styles2" media="screen" />
+<link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles3.css" title="styles3" media="screen" />
+<link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles4.css" title="styles4" media="screen" />
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/jquery.min.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/admin_common.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/styleswitch.js"></script>
+
+</head> 
+<body> 
+<style type="text/css"> 
+	html{_overflow-y:scroll}
+</style><div id="closeParentTime" style="display:none"></div> 
+<div class="pad-10"> 
+<div class="content-menu ib-a blue line-x"> 
+<a href="javascript:;"><em>{:lan('MANUAL_RECHARGE_RECORD', 'Admin')}</em></a>
+</div> 
+<div id="searchid"> 
+<form name="searchform" action="/Admin/Finance/manual_rechargerecord" method="get" > 
+<table width="100%" cellspacing="0" class="search-form"> 
+    <tbody> 
+		<tr> 
+		<td> 
+		<div class="explain-col">
+
+			{:lan('OPERATION_TIME', 'Admin')}：
+			<link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/js/calendar/jscal2.css"/>
+			<link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/js/calendar/border-radius.css"/>
+			<link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/js/calendar/win2k.css"/>
+			<script type="text/javascript" src="__PUBLIC__/Public/statics/js/calendar/calendar.js"></script>
+			<script type="text/javascript" src="__PUBLIC__/Public/statics/js/calendar/lang/en.js"></script>
+			<input type="text" name="start_time" id="start_time" value="{$_GET['start_time']}" size="10" class="date" readonly>&nbsp;<script type="text/javascript">
+			Calendar.setup({
+			weekNumbers: false,
+		    inputField : "start_time",
+		    trigger    : "start_time",
+		    dateFormat: "%Y-%m-%d",
+		    showTime: false,
+		    minuteStep: 1,
+		    onSelect   : function() {this.hide();}
+			});
+        </script>- &nbsp;<input type="text" name="end_time" id="end_time" value="{$_GET['end_time']}" size="10" class="date" readonly>&nbsp;<script type="text/javascript">
+			Calendar.setup({
+			weekNumbers: false,
+		    inputField : "end_time",
+		    trigger    : "end_time",
+		    dateFormat: "%Y-%m-%d",
+		    showTime: false,
+		    minuteStep: 1,
+		    onSelect   : function() {this.hide();}
+			});
+        </script>
+
+			{:lan('USERNAME', 'Admin')}：<input name="targetname" type="text" class="input-text" value="{$_GET['targetname']}" />
+			<input type="submit" name="search" class="button" value="{:lan('BTN_SEARCH', 'Admin')}" />
+	</div> 
+		</td> 
+		</tr> 
+    </tbody> 
+</table> 
+</form> 
+</div> 
+
+<div class="table-list"> 
+    <table width="100%"> 
+        <thead> 
+            <tr> 
+			<th>{:lan('SYS_NUMBER', 'Admin')}</th>
+			<th>{:lan('USERNAME', 'Admin')}</th>
+            <th>{:lan('VIRTUAL_MONEY', 'Admin')}</th>
+            <th>{:lan('LOCAL_CURRENCY', 'Admin')}</th>
+            <th>{:lan('LOCAL_UNIT', 'Admin')}</th>
+            <th>{:lan('DEVICE_TYPE', 'Admin')}</th>            
+            <th>{:lan('CHANNEL_NAME', 'Admin')}</th>
+            <th>{:lan('SELLER_NAME', 'Admin')}</th>
+			<th>{:lan('OPERATION_TIME', 'Admin')}</th>
+			<th>{:lan('OPERATOR', 'Admin')}</th>
+			<th>{:lan('REMARKS', 'Admin')}</th>
+			<th></th> 
+            </tr> 
+        </thead> 
+<tbody> 
+	<volist name="data" id="vo" key="k">
+	<tr>
+		<td align='center'>{$k}</td>
+		<td align='center'>{$vo['targetname']}</td>
+        <td align="center">{$vo['showamount']}</td>
+        <td align="center">{$vo['amount']}</td>
+        <td align="center">{$vo['localunit']}</td>
+        <switch name="vo.devicetype" >
+        <case value="0">
+        <td align="center">ANDROID</td>   
+        </case>
+        <case value="1">
+        <td align="center">IOS</td>   
+        </case>    
+        <default /><td align="center">PC</td>   
+        </switch>    
+        <td align="center">{$vo['rechargename']}</td>
+        <td align="center">{$vo['sellername']}</td>
+		<td align="center">{$vo['rechargetime']}</td>
+		<td align="center">{$vo['adminname']}</td>
+		<td align='center'>{$vo['content']}</td>
+	</tr> 
+	</volist>
+             
+     </tbody> 
+     </table> 
+	
+    <div id="pages">{$page}</div> 
+</div> 
+
+</div> 
+
+</body> 
+</html>

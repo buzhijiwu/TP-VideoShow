@@ -1,0 +1,301 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Cache-Control" content="no-siteapp"/>
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>用户中心</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+	<link rel="shortcut icon" href="/Public/Public/Images/favicon.ico"/>
+<link href="__PUBLIC__/Home/Css/{:getLanguage()}/header.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Home/Css/{:getLanguage()}/bottom.css" type="text/css" rel="stylesheet"/>
+<link rel="stylesheet" href="../../../../Public/Home/Css/{:getLanguage()}/mall.css">
+<link rel="stylesheet" href="__PUBLIC__/Home/Css/{:getLanguage()}/common.css">
+<link rel="stylesheet" href="../../../../Public/Home/Css/{:getLanguage()}/rechargecenter.css">
+
+<!--[if lt IE 9]>
+<script src="js/html5shiv.min.js"></script>
+<script src="js/respond.min.js"></script>
+<![endif]-->
+	<script src="__PUBLIC__/Home/Js/jquery-1.11.3.min.js"></script>
+<script src="__PUBLIC__/Home/Js/imghover.js"></script>
+<script src="__PUBLIC__/Home/Js/Mall/vip.js"></script>
+</head>
+<body>
+<!-- 页面头部 start -->
+<include file="Public:nav" />
+<!-- 页面头部 end -->
+
+
+<!-- 页面导航 start -->
+<include file="Public:mallhead" />
+<!-- 页面导航 end -->
+
+<!-- 页面容器 start -->
+<div class="g-bd">	
+	<div class="w">
+		<div class="g-sd">
+	      <ul>
+	      	<li <eq name="menu" value="1">class="on"</eq>><a href="../../../../Application/Home/View/Rechargecenter/calling_card.html">电话卡充值<i class="choice_arrows_red ico"></i></a></li>
+	      	<li <eq name="menu" value="2">class="on"</eq>><a href="../../../../Application/Home/View/Rechargecenter/game_card.html">游戏卡充值<i class="choice_arrows_red ico"></i></a></li>
+	      	<li <eq name="menu" value="3">class="on"</eq>><a href="../../../../Application/Home/View/Rechargecenter/savings_card.html">储蓄卡充值<i class="choice_arrows_red ico"></i></a></li>
+	      	<li <eq name="menu" value="4">class="on"</eq>><a href="../../../../Application/Home/View/Rechargecenter/credit_card.html">信用卡充值<i class="choice_arrows_red ico"></i></a></li>
+	      	<li <eq name="menu" value="5">class="on"</eq>><a href="../../../../Application/Home/View/Rechargecenter/paypal_card.html">Paypal充值<i class="choice_arrows_red ico"></i></a></li>
+	      </ul>
+	    </div>  
+	    <div class="g-mn">  
+	    	<block name="menu"></block>	      	
+	    	<block name="main">
+	    	<!-- 电话卡 start -->
+	    	<div class="p-6" style="display:none">
+	    	<div class="d1">
+	    		<h3>充值账号: </h3>	
+				<a href="../../../Home/View/Userhomepage/index.html"> 写用户名处</a>
+				<i>*1元=1000秀币</i>
+	    	</div>	
+	    	<div class="d2">
+	    		<h3>充值账号: </h3>
+	    		<ul>
+	    			<li>epay</li>
+	    			<li>1pay</li>
+	    			<li>viettel</li>
+	    			<li>sohapay</li>
+	    		</ul>	
+	    	</div>
+	    	<div class="d3">
+	    	<h3>实充渠道: </h3>
+			<ul>
+				<li><img src="../../../../Public/Public/Images/Buyshow/7.png" alt=""></li>
+				<li><img src="../../../../Public/Public/Images/Buyshow/8.png" alt=""></li>
+				<li><img src="../../../../Public/Public/Images/Buyshow/9.png" alt=""></li>
+				<li><img src="../../../../Public/Public/Images/Buyshow/10.png" alt=""></li>
+			</ul>
+	    	</div>
+	    	<div class="d4">
+	    	<h3>电话卡信息: </h3>	
+	    	<input type="text" placeholder="请输入电话卡账号" class="txt"  onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+	    	<input type="text" placeholder="请输入电话卡密码" class="txt"  onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+	    	</div>
+	    	<div class="d5">
+	    	<input name="deal" type="checkbox" value="" checked id="deal" />
+			 <span><label for="deal">同意</label> <a href="">《哇秀虚拟社区币服务协议》</a></span>
+			 <button >立即充值</button>
+	    	</div>
+			<!-- 电话卡 end -->
+			<!-- 游戏卡 start -->
+			<div class="p-7" style="display:none">
+			  	<div class="d1">
+	    		<h3>充值账号: </h3>	
+				<a href="../../../Home/View/Userhomepage/index.html"> 写用户名处</a>
+				<i>*1元=1000秀币</i>
+	    	</div>	
+	    	<div class="d2">
+	    		<h3>充值账号: </h3>
+	    		<ul>
+	    			<li>epay</li>
+	    			<li>1pay</li>
+	    			<li>viettel</li>
+	    			<li>sohapay</li>
+	    		</ul>	
+	    	</div>
+	    	<div class="d3">
+	    	<h3>实充渠道: </h3>
+			<ul>
+				<li><img src="../../../../Public/Public/Images/Buyshow/6.png" alt=""></li>
+				<li><img src="../../../../Public/Public/Images/Buyshow/5.png" alt=""></li>
+				<li><img src="../../../../Public/Public/Images/Buyshow/3.png" alt=""></li>
+				
+			</ul>
+	    	</div>
+	    	<div class="d4">
+	    	<h3>游戏卡信息: </h3>	
+	    	<input type="text" value="  请输入电话卡账号" class="txt">
+	    	<input type="text" value="  请输入电话卡密码" class="txt">
+	    	</div>
+	    	<div class="d5">
+	    	<input name="deal" type="checkbox" value="" checked="false"/> 	
+			 <span> 同意《哇秀虚拟社区币服务协议》</span>
+			 <a href="">立即充值</a>
+	    	</div>	
+
+			</div>
+			<!-- 游戏卡 end -->
+			<!-- 储蓄卡 start -->
+			<div class="p-8" style="display:none" >
+			  	<div class="d1">
+	    		<h3>充值账号: </h3>	
+				<a href="../../../Home/View/Userhomepage/index.html"> 写用户名处</a>
+				<i>*1元=1000秀币</i>
+	    	</div>	
+	    	<div class="d2">
+	    		<h3>充值账号: </h3>
+	    		<ul>
+	    			<li>1pay</li>
+	    			<li>sohapay</li>
+	    		</ul>	
+	    	</div>
+	    	<div class="d3">
+	    	<h3>实充渠道: </h3>
+			<ul>
+				<li><img src="../../../../Public/Public/Images/Buyshow/11.png" alt=""></li>
+				<li><img src="../../../../Public/Public/Images/Buyshow/12.png" alt=""></li>
+				<li><img src="../../../../Public/Public/Images/Buyshow/13.png" alt=""></li>
+				
+			</ul>
+	    	</div>
+	    	<div class="d4">
+	    	<h3>充值金额: </h3>
+	    	<ul>
+	    		<li>
+	    			<span><i> 100.00 </i> 秀币 </span>
+	    			<span> 价格: <i>100</i> 越南盾 </span>
+	    		</li>
+	    		<li>
+	    			<span><i> 500.00 </i> 秀币 </span>
+	    			<span> 价格: <i>500</i> 越南盾 </span>
+	    		</li>
+	    		<li>
+	    			<span><i> 1000.00 </i> 秀币 </span>
+	    			<span> 价格: <i>1000</i> 越南盾 </span>
+	    		</li>
+	    		<li>
+	    			<span><i> 5000.00 </i> 秀币 </span>
+	    			<span> 价格: <i>5000</i> 越南盾 </span>
+	    		</li>
+	    	</ul>
+	    	</div>	
+			<div class="d5">
+	    	<input name="deal" type="checkbox" value="" checked="false"/> 	
+			 <span> 同意《哇秀虚拟社区币服务协议》</span>
+			 <a href="">立即充值</a>
+	    	</div>
+			</div>
+
+			<!-- 储蓄卡 end -->
+			<!-- 信用卡 start -->
+			<div class="p-9" style="display:none" >
+			  	<div class="d1">
+	    		<h3>充值账号: </h3>	
+				<a href="../../../Home/View/Userhomepage/index.html"> 写用户名处</a>
+				<i>*1元=1000秀币</i>
+	    	</div>	
+	    	<div class="d2">
+	    		<h3>充值账号: </h3>
+	    		<ul>
+	    			<li>1pay</li>
+	    			<li>sohapay</li>
+	    		</ul>	
+	    	</div>
+	    	<div class="d3">
+	    	<h3>实充渠道: </h3>
+			<img src="../../../../Public/Public/Images/Buyshow/more.png" height="162" width="727" alt="">
+	    	</div>
+	    	<div class="d4">
+	    	<h3>充值金额: </h3>
+	    	<ul>
+	    		<li>
+	    			<span><i> 100.00 </i> 秀币 </span>
+	    			<span> 价格: <i>100</i> 越南盾 </span>
+	    		</li>
+	    		<li>
+	    			<span><i> 500.00 </i> 秀币 </span>
+	    			<span> 价格: <i>500</i> 越南盾 </span>
+	    		</li>
+	    		<li>
+	    			<span><i> 1000.00 </i> 秀币 </span>
+	    			<span> 价格: <i>1000</i> 越南盾 </span>
+	    		</li>
+	    		<li>
+	    			<span><i> 5000.00 </i> 秀币 </span>
+	    			<span> 价格: <i>5000</i> 越南盾 </span>
+	    		</li>
+	    	</ul>
+	    	</div>	
+				<div class="d5">
+	    	<input name="deal" type="checkbox" value="" checked="false" /> 	
+			 <span> 同意《哇秀虚拟社区币服务协议》</span>
+			 <a href="">立即充值</a>
+	    	</div>	
+			</div>
+
+			<!-- 信用卡 end -->
+			<!-- paypal卡 start -->
+			<div class="p-10" style="display:block">
+			  	<div class="d1">
+	    		<h3>充值账号: </h3>	
+				<a href="../../../Home/View/Userhomepage/index.html"> 写用户名处</a>
+				<i>*1元=1000秀币</i>
+	    	</div>	
+	
+	    	<div class="d4">
+	    	<h3>充值金额: </h3>
+	    	<ul>
+	    		<li class="paypal">
+					<span><i class="money"> 100 </i> 秀币 </span>
+	    			<span> 价格: <i>100</i> 越南盾 </span>
+	    		</li>
+	    		<li class="paypal">
+					<span><i class="money"> 500 </i> 秀币 </span>
+	    			<span> 价格: <i>500</i> 越南盾 </span>
+	    		</li>
+	    		<li class="paypal">
+	    			<span><i class="money"> 1000</i> 秀币 </span>
+	    			<span> 价格: <i>1000</i> 越南盾 </span>
+	    		</li>
+	    		<li class="paypal">
+	    			<span><i class="money"> 5000 </i> 秀币 </span>
+	    			<span> 价格: <i>5000</i> 越南盾 </span>
+	    		</li>
+	    	</ul>
+	    	</div>	
+				<div class="d5">
+	    	<input name="deal" type="checkbox" value="" checked="false"/>
+					<span> 同意《哇秀虚拟社区币服务协议》</span>
+
+
+				</div>
+			</div>
+
+			<!-- paypal卡 end -->
+
+
+
+			</block>	
+	    </div>
+	</div>		
+</div>
+<div style="height:20px;"></div>
+<!-- 页面底部 start -->
+<include file="Public:bottom" />
+<!-- 页面底部 end -->
+<!-- 登录-->
+<include file="Public:login" />
+<!-- TODO:后期JS模块化管理 -->
+<script>
+	$(function () {
+		//判断用户是否登录，未登录显示登录框
+		$.ajax({
+			url:"/Rechargecenter/checkUserLogin/",
+			type:"POST",
+			success: function (data) {
+				var res = JSON.parse(data);
+				if(res.status == 2){
+					$(".mydiv").show();
+					$('.popIframe').show().css({
+						display:'block',
+						opacity:'0.3'
+					})
+				}
+			}
+		});
+	})
+
+</script>
+
+<block name="model"></block>
+<block name="js"></block>
+</body>
+</html>

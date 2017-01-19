@@ -1,0 +1,235 @@
+<!doctype html>
+<html>
+<head>
+	<!--公用meta-->
+	<include file="Public:meta" />
+
+	<title>{:lan("MALL","Home")}</title>
+</head>
+<body>
+<!--公用头部-->
+<include file="Public:header" />
+
+<!--主要内容-->
+<div class="common-wrap">
+	<div class="vip-main">
+		<div class="width">
+
+			<!-- 商城导航 -->
+			<include file="Public:mallhead" />
+
+			<input type="hidden" id="vipid" name="vipid" value="{$vips[0]['vipid']}" />
+			<input type="hidden" id="vipiconpath" name="vipiconpath" value="{$vips[0]['pcbigviplogo']}" />
+
+			<!--购买vip-->
+			<div class="buy-vip">
+				<div class="td1">
+					<p>
+						<img src="{$vips[0]['pcbigviplogo']}">
+					</p>
+					<p>
+						<img src="{$vips[1]['pcbigviplogo']}">
+					</p>
+				</div>
+				<div class="td2">
+					<p class="active">
+						{$vips[0]['vipname']}
+					</p>
+					<p>
+						{$vips[1]['vipname']}
+					</p>
+				</div>
+				<div class="td3">
+					<h3>{:lan('APPLY', 'Home')}<span id="vipname">{$vips[0]['vipname']}</span></h3>
+					<ul class="price">
+						<li class="active">
+							<label for="duration1">
+								<input name="duration" type="radio" value="1" checked="checked" id="duration1"/>
+								<span class="time">{:lan('ONE_MONTH', 'Home')}</span>:
+									<span id="onemonth" class="money">
+										{$vips[0]['vipprice']}
+									</span>
+								{:lan('MONEY_UNIT', 'Home')}
+							</label>
+						</li>
+						<li>
+							<label for="duration2">
+								<input name="duration" type="radio" value="3" id="duration2"/>
+								<span class="time">{:lan('THREE_MONTH', 'Home')}</span>:
+									<span id="threemonth" class="money">
+										{$vips[0]['threemonth']}
+									</span>
+								{:lan('MONEY_UNIT', 'Home')}
+							</label>
+						</li>
+						<li>
+							<label for="duration3">
+								<input name="duration" type="radio" value="12" id="duration3"/>
+								<span class="time">{:lan('TWELVE_MONTH', 'Home')}</span>:
+									<span id="twelvemonth" class="money">
+										{$vips[0]['twelvemonth']}
+									</span>
+								{:lan('MONEY_UNIT', 'Home')}
+							</label>
+						</li>
+					</ul>
+				</div>
+				<div class="td4">
+					<button class="buy-btn">{:lan('BUY', 'Home')}</button>
+				</div>
+			</div>
+
+			<!-- 特权展示-图片 -->
+			<div class="vip-img-list clear">
+				<div class="list">
+					<p class="icon i1"></p>
+					<p>{$vips[0]['privileges'][0]['privilegename']}</p>
+				</div>
+				<div class="list">
+					<p class="icon i2"></p>
+					<p>{$vips[0]['privileges'][1]['privilegename']}</p>
+				</div>
+				<div class="list">
+					<p class="icon i3"></p>
+					<p>{$vips[0]['privileges'][2]['privilegename']}</p>
+				</div>
+				<div class="list">
+					<p class="icon i4"></p>
+					<p>{$vips[0]['privileges'][3]['privilegename']}</p>
+				</div>
+				<div class="list">
+					<p class="icon i5"></p>
+					<p>{$vips[0]['privileges'][4]['privilegename']}</p>
+				</div>
+				<div class="list">
+					<p class="icon i6"></p>
+					<p>{$vips[0]['privileges'][5]['privilegename']}</p>
+				</div>
+				<div class="list">
+					<p class="icon i7"></p>
+					<p>{$vips[0]['privileges'][6]['privilegename']}</p>
+				</div>
+			</div>
+
+			<!-- 特权展示-文字 -->
+			<table class="vip-txt">
+				<thead>
+				<tr>
+					<th>{:lan('VIP_PRIVILEGES', 'Home')}</th>
+					<th>{:lan('SENIOR_VIP', 'Home')}</th>
+					<th>{:lan('SUPREME_VIP', 'Home')}</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td>
+						<h3>{$vips[0]['privileges'][0]['privilegename']}</h3>
+						{$vips[0]['privileges'][0]['description']}
+					</td>
+					<td><img src="{$vips[0]['privileges'][0]['valuedesc']}"></td>
+					<td><img src="{$vips[1]['privileges'][0]['valuedesc']}"></td>
+				</tr>
+				<tr>
+					<td>
+						<h3>{$vips[0]['privileges'][1]['privilegename']}</h3>
+						{$vips[0]['privileges'][1]['description']}
+					</td>
+					<td><img src="{$vips[0]['privileges'][1]['valuedesc']}"></td>
+					<td><img src="{$vips[1]['privileges'][1]['valuedesc']}"></td>
+				</tr>
+				<tr>
+					<td>
+						<h3>{$vips[0]['privileges'][2]['privilegename']}</h3>
+						{$vips[0]['privileges'][2]['description']}
+					</td>
+					<td>{$vips[0]['privileges'][2]['valuedesc']}</td>
+					<td>{$vips[1]['privileges'][2]['valuedesc']}</td>
+				</tr>
+				<tr>
+					<td>
+						<h3>{$vips[0]['privileges'][3]['privilegename']}</h3>
+						{$vips[0]['privileges'][3]['description']}
+					</td>
+					<td>{$vips[0]['privileges'][3]['valuedesc']}</td>
+					<td>{$vips[1]['privileges'][3]['valuedesc']}</td>
+				</tr>
+				<tr>
+					<td>
+						<h3>{$vips[0]['privileges'][4]['privilegename']}</h3>
+						{$vips[0]['privileges'][4]['description']}
+					</td>
+					<td>{$vips[0]['privileges'][4]['valuedesc']}</td>
+					<td>{$vips[1]['privileges'][4]['valuedesc']}</td>
+				</tr>
+				<tr>
+					<td>
+						<h3>{$vips[0]['privileges'][5]['privilegename']}</h3>
+						{$vips[0]['privileges'][5]['description']}
+					</td>
+					<td><img src="{$vips[0]['privileges'][5]['valuedesc']}"></td>
+					<td><img src="{$vips[1]['privileges'][5]['valuedesc']}"></td>
+				</tr>
+				<tr>
+					<td>
+						<h3>{$vips[0]['privileges'][6]['privilegename']}</h3>
+						{$vips[0]['privileges'][6]['description']}
+					</td>
+					<td><img src="{$vips[0]['privileges'][6]['value']}"></td>
+					<td><img src="{$vips[1]['privileges'][6]['value']}"></td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<!--共用底部-->
+<include file="Public:bottom" />
+
+<!-- 共用登录-->
+<include file="Public:login" />
+
+<!--共用弹框-->
+<include file="Public:alert" />
+
+<!--共用商城弹框-->
+<include file="Public:mallAlert" />
+
+<!--共用去充值弹框-->
+<include file="Public:gochargeAlert" />
+
+<!--共用js-->
+<include file="Public:javascript" />
+<script>
+
+	$(function () {
+		//高级、至尊会员切换
+		$(".vip-main .buy-vip .td2").on("click","p", function () {
+			$(this).addClass("active").siblings().removeClass("active");
+			switch($(this).index()){
+				case 0:
+					$("#vipid").val("{$vips[0]['vipid']}");
+					$("#vipiconpath").val("{$vips[0]['pcbigviplogo']}");
+					$('#vipname').html("{$vips[0]['vipname']}");
+					$('#onemonth').html("{$vips[0]['vipprice']}") ;
+					$('#threemonth').html("{$vips[0]['threemonth']}") ;
+					$('#twelvemonth').html("{$vips[0]['twelvemonth']}") ;
+					break;
+				case 1:
+					$("#vipid").val("{$vips[1]['vipid']}");
+					$("#vipiconpath").val("{$vips[1]['pcbigviplogo']}");
+					$('#vipname').html("{$vips[1]['vipname']}");
+					$('#onemonth').html("{$vips[1]['vipprice']}") ;
+					$('#threemonth').html("{$vips[1]['threemonth']}") ;
+					$('#twelvemonth').html("{$vips[1]['twelvemonth']}") ;
+					break;
+			}
+		});
+	})
+
+
+
+
+</script>
+</body>
+</html>

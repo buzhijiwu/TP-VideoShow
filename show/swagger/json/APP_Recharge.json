@@ -1,0 +1,815 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "返回值说明：{'status':状态码,'message':提示信息};"
+    },
+    "tags": [
+        {"name": "Recharge","description": "充值相关"}
+    ],
+    "paths": {
+        "/api.php/Api/getRechargeChannels": {
+            "post": {
+                "tags": ["Recharge"],
+                "operationId": "getRechargeChannels",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "获取充值渠道",
+                "description": "获取充值渠道",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "userid",
+                        "description": "用户ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "token",
+                        "description": "用户登录token值",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "devicetype",
+                        "description": "设备类型 0 安卓 1 iOS 2PC",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "properties": {
+                                "datalist": {
+                                    "description": "充值渠道列表",
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "rechargetype": {
+                                                    "description": "充值类型",
+                                                    "type": "string"
+                                                },
+                                                "channels": {
+                                                    "description": "充值渠道列表",
+                                                    "schema": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "properties": {
+                                                                "chuniqueid": {
+                                                                    "description": "渠道的唯一标识id（不同设备，不同充值类型，不同语言，该标识不同）",
+                                                                    "type": "string"
+                                                                },
+                                                                "channelid": {
+                                                                    "description": "充值渠道ID",
+                                                                    "type": "string"
+                                                                },
+                                                                "rechargetype": {
+                                                                    "description": "充值类型 0 充值卡 1游戏卡 2 ATM DEBIT 3 VISA MATER 4 SMS+ 5 INTERNET BANK 6 AGENT 7 Applestore 8 Paypal 9 Oceanpayment 10 Alipay",
+                                                                    "type": "string"
+                                                                },
+                                                                "rechratioid": {
+                                                                    "description": "充值比例id",
+                                                                    "type": "string"
+                                                                },
+                                                                "rechargename": {
+                                                                    "description": "充值渠道名称",
+                                                                    "type": "string"
+                                                                },
+                                                                "rechargepic": {
+                                                                    "description": "充值渠道图片",
+                                                                    "type": "string"
+                                                                },
+                                                                "rechargedes": {
+                                                                    "description": "充值渠道描述",
+                                                                    "type": "string"
+                                                                },
+                                                                "rechargekey": {
+                                                                    "description": "第三方充值KEY值",
+                                                                    "type": "string"
+                                                                },
+                                                                "sellers": {
+                                                                    "description": "渠道商列表",
+                                                                    "schema": {
+                                                                        "type": "array",
+                                                                        "items": {
+                                                                            "properties": {
+                                                                                "sellerid": {
+                                                                                    "description": "商家id",
+                                                                                    "type": "string"
+                                                                                },
+                                                                                "sellername": {
+                                                                                    "description": "商家名称",
+                                                                                    "type": "string"
+                                                                                },
+                                                                                "pclogopath": {
+                                                                                    "description": "PC端logo路径",
+                                                                                    "type": "string"
+                                                                                },
+                                                                                "applogopath": {
+                                                                                    "description": "APP端logo路径",
+                                                                                    "type": "string"
+                                                                                },
+                                                                                "sellerdesc": {
+                                                                                    "description": "商家描述",
+                                                                                    "type": "string"
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "rechargedefs": {
+                                                                    "description": "充值定义列表",
+                                                                    "schema": {
+                                                                        "type": "array",
+                                                                        "items": {
+                                                                            "properties": {
+                                                                                "rechargedefid": {
+                                                                                    "description": "充值秀币与当地货币记录ID",
+                                                                                    "type": "string"
+                                                                                },
+                                                                                "rechargeamount": {
+                                                                                    "description": "充值秀币金额",
+                                                                                    "type": "string"
+                                                                                },
+                                                                                "rechargeunit": {
+                                                                                    "description": "充值秀币单位",
+                                                                                    "type": "string"
+                                                                                },
+                                                                                "localmoney": {
+                                                                                    "description": "充值所需要当地获取金额",
+                                                                                    "type": "string"
+                                                                                },
+                                                                                "localunit": {
+                                                                                    "description": "充值所需当地货币单位",
+                                                                                    "type": "string"
+                                                                                },
+                                                                                "rechargepic": {
+                                                                                    "description": "充值图标",
+                                                                                    "type": "string"
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "rechratio": {
+                                                                    "properties": {
+                                                                        "ratioid": {
+                                                                            "description": "充值比例序列id",
+                                                                            "type": "string"
+                                                                        },
+                                                                        "rechratioid": {
+                                                                            "description": "充值比例id",
+                                                                            "type": "string"
+                                                                        },
+                                                                        "rechratio": {
+                                                                            "description": "充值比例，当地货币：秀币",
+                                                                            "type": "string"
+                                                                        },
+                                                                        "rechratiodesc": {
+                                                                            "description": "充值比例描述",
+                                                                            "type": "string"
+                                                                        },
+                                                                        "createtime": {
+                                                                            "description": "创建时间",
+                                                                            "type": "string"
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "-1": {
+                        "description": "系统繁忙"
+                    },
+                    "400": {
+                        "description": "参数有误"
+                    },
+                    "500": {
+                        "description": "请求异常"
+                    },
+                    "400001": {
+                        "description": "您还未登陆，请登陆"
+                    }
+                }
+            }
+        },
+        "/api.php/Api/userRecharge": {
+            "post": {
+                "tags": ["Recharge"],
+                "operationId": "userRecharge",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "用户充值（仅ISO用）",
+                "description": "用户充值（仅ISO用）",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "userid",
+                        "description": "用户ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "targetid",
+                        "description": "充值目标用户id（给这个用户充值，如果是给自己充值，那么userid和targetid相同）",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "type",
+                        "description": "商家名称",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "orderno",
+                        "description": "订单号",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "rechargedefid",
+                        "description": "充值秀币与当地货币记录",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "sellerid",
+                        "description": "运营商ID 或者游戏厂家ID 或者 银行卡ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "status",
+                        "description": "充值状态 0：失败 1：成功 2：处理中",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "channelid",
+                        "description": "充值渠道ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "devicetype",
+                        "description": "设备类型 0 安卓 1 iOS 2PC",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "rechargetype",
+                        "description": "充值类型 0 充值卡 1游戏卡 2 ATM DEBIT 3 VISA MATER 4 SMS+ 5 INTERNET BANK 6 AGENT 7 Applestore 8 Paypal 9 Oceanpayment 10 Alipay",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "deviceid",
+                        "description": "设备唯一号",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "requestid",
+                        "description": "请求序列id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "applereceipt",
+                        "description": "用于到AppStore市场校验的秘钥",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功"
+                    },
+                    "-1": {
+                        "description": "系统繁忙"
+                    },
+                    "400": {
+                        "description": "参数有误"
+                    },
+                    "500": {
+                        "description": "请求异常"
+                    },
+                    "404001": {
+                        "description": "充值失败，请联系客服"
+                    },
+                    "404002": {
+                        "description": "充值失败"
+                    }
+                }
+            }
+        },
+        "/api.php/Api/rechargeLog": {
+            "post": {
+                "tags": ["Recharge"],
+                "operationId": "rechargeLog",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "充值日志（仅ISO用）",
+                "description": "充值日志（仅ISO用）",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "userid",
+                        "description": "用户ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "deviceid",
+                        "description": "设备唯一号",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "properties": {
+                                "requestid": {
+                                    "description": "充值日志，序列ID",
+                                    "type":"integer"
+                                }
+                            }
+                        }
+                    },
+                    "-1": {
+                        "description": "系统繁忙"
+                    },
+                    "400": {
+                        "description": "参数有误"
+                    },
+                    "500": {
+                        "description": "请求异常"
+                    },
+                    "404003": {
+                        "description": "一个用户一小时内只有五次充值请求机会"
+                    }
+                }
+            }
+        },
+        "/api.php/Api/rechbycallingcard": {
+            "post": {
+                "tags": ["Recharge"],
+                "operationId": "rechbycallingcard",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "通过充值卡和游戏卡充值（仅安卓用）",
+                "description": "通过充值卡和游戏卡充值（仅安卓用）",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "userid",
+                        "description": "用户ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "type",
+                        "description": "商家名称",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "channelid",
+                        "description": "充值渠道ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "sellerid",
+                        "description": "运营商ID 或者游戏厂家ID 或者 银行卡ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "devicetype",
+                        "description": "设备类型 0 安卓 1 iOS 2PC",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "rechargetype",
+                        "description": "充值类型 0 充值卡 1游戏卡 2 ATM DEBIT 3 VISA MATER 4 SMS+ 5 INTERNET BANK 6 AGENT 7 Applestore 8 Paypal 9 Oceanpayment 10 Alipay",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "pin",
+                        "description": "密码",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "serial",
+                        "description": "账号",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "distributeid",
+                        "description": "应用商店渠道",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "properties": {
+                                "balance": {
+                                    "description": "用户余额",
+                                    "type":"integer"
+                                }
+                            }
+                        }
+                    },
+                    "-1": {
+                        "description": "系统繁忙"
+                    },
+                    "400": {
+                        "description": "参数有误"
+                    },
+                    "500": {
+                        "description": "请求异常"
+                    },
+                    "404002": {
+                        "description": "充值失败"
+                    }
+                }
+            }
+        },
+        "/api.php/Api/rechargeByBank": {
+            "post": {
+                "tags": ["Recharge"],
+                "operationId": "rechargeByBank",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "通过LOCALBANK 充值（仅安卓用）",
+                "description": "通过LOCALBANK 充值（仅安卓用）",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "userid",
+                        "description": "用户ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "amount",
+                        "description": "localmoney，本地货币金额",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "showamount",
+                        "description": "rechargeamount，充值秀币金额",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "channelid",
+                        "description": "充值渠道ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "devicetype",
+                        "description": "设备类型 0 安卓 1 iOS 2PC",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "rechargetype",
+                        "description": "充值类型 0 充值卡 1游戏卡 2 ATM DEBIT 3 VISA MATER 4 SMS+ 5 INTERNET BANK 6 AGENT 7 Applestore 8 Paypal 9 Oceanpayment 10 Alipay",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "distributeid",
+                        "description": "应用商店渠道",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "properties": {
+                                "payurl": {
+                                    "description": "发起支付的URL地址",
+                                    "type":"string"
+                                }
+                            }
+                        }
+                    },
+                    "-1": {
+                        "description": "系统繁忙"
+                    },
+                    "400": {
+                        "description": "参数有误"
+                    },
+                    "500": {
+                        "description": "请求异常"
+                    }
+                }
+            }
+        },
+        "/api.php/Api/rechargeByVisa": {
+            "post": {
+                "tags": ["Recharge"],
+                "operationId": "rechargeByVisa",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "通过 VISA 充值（仅安卓用）",
+                "description": "通过 VISA 充值（仅安卓用）",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "userid",
+                        "description": "用户ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "amount",
+                        "description": "localmoney，本地货币金额",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "showamount",
+                        "description": "rechargeamount，充值秀币金额",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "channelid",
+                        "description": "充值渠道ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "sellerid",
+                        "description": "运营商ID 或者游戏厂家ID 或者 银行卡ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "devicetype",
+                        "description": "设备类型 0 安卓 1 iOS 2PC",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "rechargetype",
+                        "description": "充值类型 0 充值卡 1游戏卡 2 ATM DEBIT 3 VISA MATER 4 SMS+ 5 INTERNET BANK 6 AGENT 7 Applestore 8 Paypal 9 Oceanpayment 10 Alipay",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "distributeid",
+                        "description": "应用商店渠道",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "properties": {
+                                "payurl": {
+                                    "description": "发起支付的URL地址",
+                                    "type":"string"
+                                }
+                            }
+                        }
+                    },
+                    "-1": {
+                        "description": "系统繁忙"
+                    },
+                    "400": {
+                        "description": "参数有误"
+                    },
+                    "500": {
+                        "description": "请求异常"
+                    }
+                }
+            }
+        },
+        "/api.php/Api/rechargeByAlipay": {
+            "post": {
+                "tags": ["Recharge"],
+                "operationId": "rechargeByAlipay",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "通过支付宝充值",
+                "description": "通过支付宝充值",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "userid",
+                        "description": "用户ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "amount",
+                        "description": "localmoney，本地货币金额",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "showamount",
+                        "description": "rechargeamount，充值秀币金额",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "channelid",
+                        "description": "充值渠道ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "sellerid",
+                        "description": "运营商ID 或者游戏厂家ID 或者 银行卡ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "devicetype",
+                        "description": "设备类型 0 安卓 1 iOS 2PC",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "rechargetype",
+                        "description": "充值类型 0 充值卡 1游戏卡 2 ATM DEBIT 3 VISA MATER 4 SMS+ 5 INTERNET BANK 6 AGENT 7 Applestore 8 Paypal 9 Oceanpayment 10 Alipay",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "distributeid",
+                        "description": "应用商店渠道",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "properties": {
+                                "paystring": {
+                                    "description": "发起支付的签名字符串",
+                                    "type":"string"
+                                }
+                            }
+                        }
+                    },
+                    "-1": {
+                        "description": "系统繁忙"
+                    },
+                    "400": {
+                        "description": "参数有误"
+                    },
+                    "500": {
+                        "description": "请求异常"
+                    }
+                }
+            }
+        },
+        "/api.php/Api/rechargeByPaypal": {
+            "post": {
+                "tags": ["Recharge"],
+                "operationId": "rechargeByPaypal",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "通过paypal充值",
+                "description": "通过paypal充值",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "userid",
+                        "description": "用户ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "rechargedefid",
+                        "description": "充值秀币与当地货币记录id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "devicetype",
+                        "description": "设备类型 0 安卓 1 iOS 2PC",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "rechargetype",
+                        "description": "充值类型 0 充值卡 1游戏卡 2 ATM DEBIT 3 VISA MATER 4 SMS+ 5 INTERNET BANK 6 AGENT 7 Applestore 8 Paypal 9 Oceanpayment 10 Alipay",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "distributeid",
+                        "description": "应用商店渠道",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "properties": {
+                                "paystring": {
+                                    "description": "发起支付的路径",
+                                    "type":"string"
+                                }
+                            }
+                        }
+                    },
+                    "-1": {
+                        "description": "系统繁忙"
+                    },
+                    "400": {
+                        "description": "参数有误"
+                    },
+                    "500": {
+                        "description": "请求异常"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,21 @@
+<extend name="base" />
+
+<block name="menu">
+	<div class="nav-list clear">
+		<a href="__URL__/index">{:lan('BASE_INFO', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+		<a href="__URL__/mywealth" class="active">{:lan('MY_WEALTH', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+		<a href="__URL__/myprivilege">{:lan('MY_PRIVILEGE', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+		<a href="__URL__/mycar">{:lan('MY_CAR', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+		<a href="__URL__/myfamily">{:lan('MY_FAMILY', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+	</div>
+</block>
+
+<block name="main">
+<div class="right-mywealth-main">
+
+	<p>{:lan('SHOW_MONEY_BALANCE', 'Home')}：<span>{$balanceInfo['balance']}</span><img src="/Public/Public/Images/Common/xu.jpg"></p>
+	<p>{:lan('SHOW_COIN_BALANCE', 'Home')}：<span>{$balanceInfo['show_bean']}</span><img src="/Public/Public/Images/Common/xu-bean.png"></p>
+	<p>{:lan('MY_INCOME', 'Home')}：<span>{$balanceInfo['earnmoney']}</span><img src="/Public/Public/Images/Common/xu.jpg"></p>
+
+</div>
+</block>

@@ -1,0 +1,63 @@
+<tagLib name="html" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>{:lan('ADMIN_MAN_TITLE', 'Admin')}</title>
+    <link href="__PUBLIC__/Public/statics/css/reset.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/Public/statics/css/system.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/Public/statics/css/table_form.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles1.css" title="styles1" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles2.css" title="styles2" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles3.css" title="styles3" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles4.css" title="styles4" media="screen" />
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/admin_common.js"></script>
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/styleswitch.js"></script>
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/formvalidator.js" charset="UTF-8"></script>
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/formvalidatorregex.js" charset="UTF-8"></script>
+    <script type="text/javascript">
+        window.focus();
+    </script>
+</head>
+<body>
+<style type="text/css">
+    html{_overflow-y:scroll}
+</style>
+<form action="{:U('Admin/SystemSet/update/key/'.$info['key'])}" method="post" id="myform">
+    <div class="pad-10">
+        <div class="col-tab">
+            <ul class="tabBut cu-li">
+                <li id="tab_setting_1" class="on" onclick="SwapTab('setting','on','',4,1);">{:lan('EDIT', 'Admin')}</li>
+            </ul>
+            <div id="div_setting_1" class="contentList pad-10">
+                <table width="100%"  class="table_form">
+                    <tr>
+                        <th>Key：</th>
+                        <td class="y-bg">
+                            <input type="text" class="input-text" name="key" value="{$info['key']}" <neq name="info.key" value="">readonly</neq>/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Value：</th>
+                        <td class="y-bg">
+                            <input type="text" class="input-text" name="value" value="{$info['value']}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>{:lan('REMARKS', 'Admin')}：</th>
+                        <td class="y-bg">
+                            <input type="text" class="input-text" name="remark" value="{$info['remark']}"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="bk15"></div>
+            <input name="dosubmit" type="submit" value="{:lan('SUBMIT_BUTTION', 'Admin')}" class="button">
+        </div>
+    </div>
+</form>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=7" />
+	<title></title>
+	<link href="__PUBLIC__/Public/statics/css/reset.css" rel="stylesheet" type="text/css" />
+	<link href="__PUBLIC__/Public/statics/css/system.css" rel="stylesheet" type="text/css" />
+	<link href="__PUBLIC__/Public/statics/css/table_form.css" rel="stylesheet" type="text/css" />
+	<link href="__PUBLIC__/Public/statics/css/dialog.css" rel="stylesheet" type="text/css" />
+	<link href="__PUBLIC__/Family/Css/common.css" rel="stylesheet" type="text/css" />
+	<script language="javascript" type="text/javascript" src="__PUBLIC__/Tools/Js/jquery/jquery-1.8.3.min.js"></script>
+	<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/admin_common.js"></script>
+	<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/styleswitch.js"></script>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Tools/Js/jquery/jquery.datetimepicker.css"/>
+	<script language="javascript" type="text/javascript" src="__PUBLIC__/Tools/Js/jquery/jquery.datetimepicker.js"></script>
+</head>
+<body>
+<style type="text/css">
+	html{_overflow-y:scroll}
+</style><div id="closeParentTime" style="display:none"></div>
+<div class="pad-10">
+	<div id="searchid">
+		<form name="searchform" action="" method="post">
+			<table width="100%" cellspacing="0" class="search-form">
+				<tbody>
+				<tr>
+					<td>
+						<div class="explain-col">
+							{:lan('USERNAME', 'Family')}：
+							<input name="keyword" type="text" class="input-text"
+								   onfocus="if(this.value='{:lan("INPUT_USERID_USERNMAE", "Family")}') this.value=''"
+							value="<if condition = "$_POST['keyword'] eq ''">{:lan("INPUT_USERID_USERNMAE", "Family")}
+							<else />{$_POST['keyword']}</if>" />
+							<input type="submit" name="search" class="button" value="{:lan('BTN_SEARCH', 'Family')}" />
+					</div>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		</form>
+	</div>
+	<form name="myform" action="__URL__/do_addEmcee/" method="post" id="myform">
+		<table width="100%" class="table_form contentWrap">
+			<input type="hidden" name="userid" value="{$emcee['userid']}"/>
+			<tr>
+				<td width="120">{:lan('USERNAME', 'Family')}</td>
+				<td><input type="text" value="{$emcee['username']}"  class="input-text" readonly="readonly"/></td>
+			</tr>
+			<tr>
+				<td width="120">{:lan('NICKNAME', 'Family')}</td>
+				<td><input type="text" value="{$emcee['nickname']}"  class="input-text" readonly="readonly"/></td>
+			</tr>
+		</table>
+		<div class="bk15"></div>
+		<input name="dosubmit" type="submit" value="{:lan('SUBMIT_BUTTION', 'Family')}" class="button">
+	</form>
+</div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+    <!--公用meta-->
+    <include file="Public:meta" />
+
+    <title>{:lan('ABOUT_US', 'Home')}</title>
+
+</head>
+<body>
+<!--公用头部-->
+<include file="Public:header" />
+
+<!-- 主要内容 -->
+<div class="common-wrap">
+    <div class="width">
+        <div class="register-agreement">
+            <if condition="$lantype eq 'zh'">
+                <include file="Agreement:aboutUs_zh" />
+                <elseif condition="$lantype eq 'en'"/>
+                <include file="Agreement:aboutUs_en" />
+                <else />
+                <include file="Agreement:aboutUs_vi" />
+            </if>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!--共用底部-->
+<include file="Public:bottom" />
+
+<!-- 共用登录-->
+<include file="Public:login" />
+
+<!--共用弹框-->
+<include file="Public:alert" />
+
+<!--共用js-->
+<include file="Public:javascript" />
+</body>
+</html>

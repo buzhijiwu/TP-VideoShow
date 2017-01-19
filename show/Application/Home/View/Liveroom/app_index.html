@@ -1,0 +1,1204 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="shortcut icon" href="/Public/Public/Images/favicon.ico"/>
+    <link href="__PUBLIC__/Home/Css/{:getLanguage()}/reset.css?time=201600906.css" rel="stylesheet" type="text/css" />
+    <link  href="__PUBLIC__/Home/Css/{:getLanguage()}/common.css?time=201600906.css" rel="stylesheet" type="text/css">
+    <link  href="__PUBLIC__/Home/Css/{:getLanguage()}/layout.css?time=201600906.css" rel="stylesheet" type="text/css">
+    <link  href="__PUBLIC__/Home/Css/{:getLanguage()}/liveroom.css?time=201600926.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="__PUBLIC__/Tools/Js/jquery/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/Js/live/show.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/Js/live/swfobject.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/Js/live/common.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/Js/live/socket.io.js"></script>
+    
+    <!-- cnzz统计代码 -->
+    <script>
+    var _czc = _czc || [];
+    _czc.push(["_setAccount", "{$Think.config.CNZZ_SET_ACCOUNT}"]);
+    </script>
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-75448904-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script type="text/javascript">
+        var _show={$_show};
+        var _game={$_game};
+        var _jslan="";
+        $(function(){
+            InitCache();
+            $.ajax({
+                url:"/Liveroom/getJsMultiLanguage",
+                type:"post",
+                data:{},
+                success:function(data){
+                    //alert(JSON.stringify(data));
+                    _jslan = evalJSON(data);
+                }
+            });
+		});
+	</script>
+	<volist name="equipments" id="eqip" key="es">
+		<script>
+			$(document).ready(function(){setTimeout("GiftCtrl.kaichang({$eqip.equipid},'{$eqip.commodityname}')",6000*{$es});});
+		</script>
+	</volist>
+    <title>{$emceemember['nickname']}'s {:lan("LIVEROOM", "Home")}</title>
+    <style type="text/css">
+        #gameWrap {
+            -webkit-backface-visibility: hidden;
+        }
+        #gameOpen .game-start {
+            -webkit-backface-visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+<div style="margin:0;width:0;height:0;overflow:hidden;">
+    <img src="{$Think.config.IMAGE_BASE_URL}{$emceemember['smallheadpic']}" width="300">
+</div>
+
+<div id="ChatWrap" style="position: absolute; left: 184px; top: -100000px; z-index: 99; width: 290px; height: 150px;">
+
+    <div id="flashCallChat" name="flashCallChatName"></div>
+    <script type="text/javascript">
+        swfobject.embedSWF("/Public/Public/Swf/5ShowChat.swf?roomId={$emceemember['showroomno']}&language={:getLanguage()}", "flashCallChat", 290, 150, "10.0", "", {},{wmode:"transparent", allowscriptaccess:"always"});
+
+		if ((navigator.userAgent.indexOf("Maxthon") != -1 && navigator.userAgent.indexOf("WebKit") == -1) || (navigator.userAgent.indexOf("theworld") != -1 && navigator.userAgent.indexOf("WebKit") == -1) || (navigator.userAgent.indexOf("MSIE 9.0") != -1 && navigator.userAgent.indexOf("WebKit") == -1)) {
+
+			document.write('<object classid="clsid:D27CDB6E-AE6D-22cf-96B8-444553540023" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="290" height="150" id="flashCallChat" name="flashCallChatName">');
+			document.write('<param name="movie" value="/Public/Public/Swf/5ShowChat.swf" />');
+			document.write('<param name="quality" value="high" />');
+			document.write('<embed src="/Public/Public/Swf/5ShowChat.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="290" height="150"></embed>');
+			document.write("<param name=\"flashVars\" value=\"roomId={$emceemember['showroomno']}&language={:getLanguage()}\"/>");
+			document.write('</object>');
+		}
+	</script>
+</div>
+
+<!--侧边登录栏-->
+<div class="left-side-hand">
+    <!--logo-->
+    <a class="section1" href="Index">
+        <img src="/Public/Public/Images/newImage/liveroom/liveroom-logo.png">
+    </a>
+    <!--登录、注册-->
+    <div class="section2 analysis" data-module-name="首页_登录">
+
+        <gt name="Think.session.userid" value="0">
+            <!--已登录-->
+            <div class="yes-login">
+                <eq name="Think.session.smallheadpic" value="">
+                    <img src="/Public/Public/Images/HeadImg/default.png" class="header-img"/>
+                    <else />
+                    <img src="{$Think.config.IMAGE_BASE_URL}{$Think.session.smallheadpic}" class="header-img"/>
+                </eq>
+                <div class="login-info-detail">
+                    <div class="up clear">
+                        <div class="left">
+                            <eq name="Think.session.smallheadpic" value="">
+                                <img src="/Public/Public/Images/HeadImg/default.png"/>
+                                <else />
+                                <img src="{$Think.config.IMAGE_BASE_URL}{$Think.session.smallheadpic}"/>
+                            </eq>
+                        </div>
+                        <div class="right">
+                            <p class="line1">{$Think.session.nickname}</p>
+                            <p class="line2">{:lan('MONEY_UNIT', 'Home')}:<span>{$Think.session.balance}</span></p>
+                            <div class="line3">
+                                <eq name="Think.session.isemcee" value="1">
+                                    <div class="level common-em em{$Think.session.emceelevel}"></div>
+                                </eq>
+                                <div id="userlevel" class="level common-us us{$Think.session.userlevel}"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bottom clear">
+                        <a href="{:U('Home/Usercenter/index')}" class="left analysis" data-module-name="直播间_进入个人中心" target="_blank">{:lan('GO_TO_USER_CENTER', 'Home')}</a>
+                        <a href="{:U('Home/Userhomepage/index/userid/Think.session.userid')}" class="right" target="_blank">{:lan('PERSONAL_HOMEPAGE', 'Home')}</a>
+                    </div>
+                    <button class="logout" onclick="common.logout()">{:lan('LOGOUT', 'Home')}</button>
+                </div>
+            </div>
+            <else/>
+            <!--未登录-->
+            <div class="no-login">
+                <button class="iconfont login" title='{:lan("LOGIN", "Home")}' onclick="common.showLog()">&#xe601;</button>
+                <button class="register" onclick="common.showLog({isRegister:true})">{:lan("HOME_REGISTER", "Home")}</button>
+            </div>
+        </gt>
+    </div>
+    <!--充值、商城、我要直播-->
+    <div class="section3">
+        <a href="{:U('Home/Rechargecenter/index')}" class="recharge analysis" data-module-name="直播间_充值" target="_blank">
+            <i class="iconfont">&#xe629;</i>
+            <span>
+                <i class="iconfont">&#xe62a;</i>
+                {:lan('RECHARGE', 'Home')}
+            </span>
+        </a>
+        <a href="{:U('Home/Mall')}" target="_blank" class="analysis" data-module-name="直播间_商城">
+            <i class="iconfont">&#xe630;</i>
+            <span>
+                <i class="iconfont">&#xe62a;</i>
+                {:lan('MALL', 'Home')}
+            </span>
+        </a>
+        <gt name="Think.session.userid" value="0">
+            <a id="attentionOpen" class="analysis" data-module-name="直播间_我的关注">
+                <i class="iconfont">&#xe61f;</i>
+                <gt name="livingnum" value="0">
+                    <b class="living-num">{$livingnum}</b>
+                    <else />
+                    <b class="living-num" style="display: none;">{$livingnum}</b>
+                </gt>
+                <span>
+                    <i class="iconfont">&#xe62a;</i>
+                    {:lan('ATTENTION', 'Home')}
+                </span>
+            </a>
+        </gt>
+        <a id="gameOpen" class="analysis" data-module-name="直播间_游戏">
+            <i class="iconfont">&#xe645;</i>
+            <p class="game-start dis-none"><b>Starting</b></p>
+            <span>
+                <i class="iconfont">&#xe62a;</i>
+                {:lan('GAME_12', 'Home')}
+            </span>
+        </a>
+
+        <!--<gt name="Think.session.userid" value="0">
+            <if condition="$Think.session.bigheadpic neq ''">
+                <a href="/{$Think.session.showroomno}">
+                    <i class="iconfont">&#xe634;</i>
+                    <span><i class="iconfont">&#xe62a;</i>Go live</span>
+                </a>
+                <else />
+                <a href="javascript:common.showUpload()">
+                    <i class="iconfont">&#xe634;</i>
+                    <span><i class="iconfont">&#xe62a;</i>Go live</span>
+                </a>
+            </if>
+        <else />
+            <a href="javascript:common.showLog()">
+                <i class="iconfont">&#xe634;</i>
+                <span><i class="iconfont">&#xe62a;</i>Go live</span>
+            </a>
+        </gt>-->
+    </div>
+    <!--二维码-->
+    <!--<div class="section4">
+        <i class="iconfont">&#xe62d;</i>
+        <div class="code">
+            <img src="/Public/Public/Images/Common/IOSCode.png">
+            <i class="iconfont">&#xe62a;</i>
+        </div>
+
+    </div>-->
+    <!--客服房间-->
+    <a class="section5" href="http://www.waashow.vn/19000">
+        <i class="iconfont">&#xe602;</i>
+        <div class="info">
+            <p>{:lan('CUSTOMER_SERVICE_ROOM', 'Home')}</p>
+            <i class="iconfont">&#xe62a;</i>
+        </div>
+    </a>
+</div>
+
+<!--mian-->
+<div class="liveroom-wrap">
+    <div class="width">
+        <div class="liveroom-main clear">
+
+            <!--左边信息-->
+            <div class="left">
+                <!--个人信息-->
+                <div class="section1 clear">
+                    <input type="hidden" id="waachnodepath" value="{$chatNodePath}"/>
+                    <input type="hidden" id="emceeuserid" value="{$emceemember['userid']}"/>
+                    <input type="hidden" id="showroomno" name="showroomno" value="{$emceemember['showroomno']}" />
+                    <input type="hidden" id="headerimg" name="showroomno" value="{$Think.config.IMAGE_BASE_URL}{$emceemember['bigheadpic']}" />
+                    <div class="left1">
+                        <img src="{$Think.config.IMAGE_BASE_URL}{$emceemember['smallheadpic']}" class="header-img">
+                    </div>
+                    <div class="right1">
+                        <div class="line1 clear">
+                            <span class="common-vipIcon common-vip{$emceemember['vipid']}"></span>
+                            <p class="name" title="{$emceemember['nickname']}">{$emceemember['nickname']}</p>
+                            <div class="common-family">
+                                <a class="family-style" href="{$emcee[familyinfo][href]}" target="_blank">{$emcee[familyinfo][badgehtml]}</a>
+                            </div>
+                        </div>
+                        <div class="line2 clear">
+                            <p class="id-num">
+                                <neq name="emceemember.niceno" value="">
+                                    <span class="common-vipIcon common-niceno"></span>
+                                    <span>{$emceemember['niceno']}</span>
+                                    <else/>
+                                    <span class="icon">ID</span>
+                                    <span>{$emceemember['roomno']}</span>
+                                </neq>
+                            </p>
+                            <p class="view-num">
+                                <i class="iconfont">&#xe600;</i>
+                                <span id="totalaudicount">{$emcee['totalaudicount']}</span>
+                            </p>
+                        </div>
+                        <div class="line3 clear">
+                            <span class="level common-em em{$emcee['emceelevel']}"></span>
+                            <div class="common-progress">
+                                <p style="width:{$emceemember.EmceeGrade}px"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--守护-->
+                <div class="section2 analysis" data-module-name="直播间_守护">
+                    <h2 class="title">
+                        {:lan('GUARD', 'Home')}&nbsp(<span id="guardcount">{$guardcount}</span>/20)
+                        <button data-seqid="{$guardcount+1}" class="buy-Guard" id="open">{:lan("OPEN", "Home")}</button>
+                    </h2>
+                    <div class="list-wrap">
+                        <ul id="guardUl" class="list clear">
+                            <volist name="guards" id="vo" key="k">
+                                <li id="guardli{$k}" class="guard{$vo.guardid}" data-seqid="{$k}" data-userid="{$vo.userid}" data-name="{$vo.nickname}" data-remaindays="{$vo.remaindays}" data-guardid="{$vo.guardid}">
+                                    <img src='{$Think.config.IMAGE_BASE_URL}{$vo.smallheadpic}'/>
+                                </li>
+                            </volist>
+                            <for start='0' end='$remaingurardcount'>
+                                <li id="guardli{$i + $guardcount + 1}" class="guard{$guarddef.guardid}" data-seqid="{$i + $guardcount + 1}" data-name="" data-userid="0" data-remaindays="0" data-guardid="0">
+                                    <a title="{:lan('BUYGUARD', 'Home')}">
+                                        <img src='/Public/Public/Images/HeadImg/guard_default.png'/>
+                                    </a>
+                                </li>
+                            </for>
+                        </ul>
+                        <div class="common-scrollBar">
+                            <div class="scrollBar"></div>
+                        </div>
+                    </div>
+
+                    <div class="guard-hover dis-none">
+                        <p><span id="guardhover_name"></span></p>
+                        <p>{:lan("GUARDSURPLUS", "Home")}<span id="guardhover_days"></span>{:lan("DAYS", "Home")}</p>
+                    </div>
+                </div>
+                <!--排行榜-->
+                <div class="section3 clear">
+                    <!--会员列表、用户列表-->
+                    <div class="user-list analysis" data-module-name="直播间_会员列表">
+                        <div class="title clear">
+                            <p class="active" id="memberhead">{:lan("MEMBER_LIST", "Home")}<span id="membercount"></span></p>
+                            <p id="userhead">{:lan("USER_LIST", "Home")}<span id="usercount" class="dis-none"></span></p>
+                        </div>
+                        <!--会员列表-->
+                        <div id="onlineuser" class="list-wrap vip">
+                            <ul id="memberlist" class="list user user-list-hover"></ul>
+                            <div class="common-scrollBar">
+                                <div class="scrollBar"></div>
+                            </div>
+                        </div>
+                        <!--用户列表-->
+                        <div class="list-wrap dis-none person">
+                            <ul id="userlist" class="list user user-list-hover"></ul>
+                            <div class="common-scrollBar">
+                                <div class="scrollBar"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--日排行榜、周排行榜-->
+                    <div class="user-list clear analysis" data-module-name="直播间_排行榜">
+                        <div class="title">
+                            <p class="active">{:lan("DAY", "Home")} <span>(10)</span></p>
+                            <p>{:lan("WEEK", "Home")}<span class="dis-none">(10)</span></p>
+                        </div>
+                        <!--日排行榜-->
+                        <div class="list-wrap day">
+                            <ul class="list">
+                                <volist name="roomRich_day" id="richd" key="rd" offset="0" length='1'>
+                                    <li  data-userid="{$richd.userid}" data-name="{$richd.nickname}">
+                                        <a href="{:U('Userhomepage/index/userid/'.$richd[userid])}" target="_blank">
+                                            <i class="iconfont left1">&#xe61e;</i>
+                                            <div class="header-img">
+                                                <img src="{$Think.config.IMAGE_BASE_URL}{$richd.smallheadpic}">
+                                            </div>
+                                            <div class="name">
+                                                <p class="line1">
+                                                    {$richd.nickname}
+                                                </p>
+                                                <p class="line2">
+                                                    <i class="iconfont">&#xe60a;</i><span>{$richd.spendamount}</span>
+                                                </p>
+                                            </div>
+                                            <div class="icon-vip">
+                                                <span class="common-us us{$richd.userlevel}"></span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </volist>
+                                <volist name="roomRich_day" id="richd" key="rd" offset="1" length='9'>
+                                    <li  data-userid="{$richd.userid}" data-name="{$richd.nickname}">
+                                        <a href="{:U('Userhomepage/index/userid/'.$richd[userid])}" target="_blank">
+                                            <span class="left1">{$rd+1}</span>
+                                            <div class="header-img">
+                                                <img src="{$Think.config.IMAGE_BASE_URL}{$richd.smallheadpic}">
+                                            </div>
+                                            <div class="name">
+                                                <p class="line1">
+                                                    {$richd.nickname}
+                                                </p>
+                                                <p class="line2">
+                                                    <i class="iconfont">&#xe60a;</i><span>{$richd.spendamount}</span>
+                                                </p>
+                                            </div>
+                                            <div class="icon-vip">
+                                                <span class="common-us us{$richd.userlevel}"></span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </volist>
+                            </ul>
+                            <div class="common-scrollBar">
+                                <div class="scrollBar"></div>
+                            </div>
+                        </div>
+                        <!--周排行榜-->
+                        <div class="list-wrap week dis-none">
+                            <ul class="list">
+                                <volist name="roomRich_week" id="richd" key="rd" offset="0" length='1'>
+                                    <li  data-userid="{$richd.userid}" data-name="{$richd.nickname}">
+                                        <a href="{:U('Userhomepage/index/userid/'.$richd[userid])}" target="_blank">
+                                            <i class="iconfont left1">&#xe61e;</i>
+                                            <div class="header-img">
+                                                <img src="{$Think.config.IMAGE_BASE_URL}{$richd.smallheadpic}">
+                                            </div>
+                                            <div class="name">
+                                                <p class="line1">
+                                                    {$richd.nickname}
+                                                </p>
+                                                <p class="line2">
+                                                    <i class="iconfont">&#xe60a;</i><span>{$richd.spendamount}</span>
+                                                </p>
+                                            </div>
+                                            <div class="icon-vip">
+                                                <span class="common-us us{$richd.userlevel}"></span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </volist>
+                                <volist name="roomRich_week" id="richd" key="rd" offset="1" length='9'>
+                                    <li  data-userid="{$richd.userid}" data-name="{$richd.nickname}">
+                                        <a href="{:U('Userhomepage/index/userid/'.$richd[userid])}" target="_blank">
+                                            <span class="left1">{$rd+1}</span>
+                                            <div class="header-img">
+                                                <img src="{$Think.config.IMAGE_BASE_URL}{$richd.smallheadpic}">
+                                            </div>
+                                            <div class="name">
+                                                <p class="line1">
+                                                    {$richd.nickname}
+                                                </p>
+                                                <p class="line2">
+                                                    <i class="iconfont">&#xe60a;</i><span>{$richd.spendamount}</span>
+                                                </p>
+                                            </div>
+                                            <div class="icon-vip">
+                                                <span class="common-us us{$richd.userlevel}"></span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </volist>
+
+                            </ul>
+                            <div class="common-scrollBar">
+                                <div class="scrollBar"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!--中间信息-->
+            <div class="middle">
+
+                <!--视频-->
+                <div class="section1 app" id="livebox">
+                    <div class="attention analysis" data-module-name="直播间_关注">
+                        <i class="iconfont"><eq name="member.isfriend" value="1">&#xe61f;<else/>&#xe620;</eq></i>
+                        <span>{$attentions}</span>
+                    </div>
+                    <div class="icon-area">
+                        <neq name="emcee.userid" value="{$Think.session.userid}">
+                            <div class="tip icon-group analysis" data-module-name="直播间_举报">
+                                <i class="iconfont">&#xe62c;</i>
+                            </div>
+                        </neq>
+                        <div class="share icon-group analysis" data-module-name="直播间_分享">
+                            <i class="iconfont">&#xe621;</i>
+                            <div class="share-list clear">
+                                <i class="iconfont">&#xe628;</i>
+                                <!--<div class="list">
+                                    <i class="iconfont twitter">&#xe62e;</i>
+                                    <p>Twitter</p>
+                                </div>-->
+                                <div class="list" data-share="facebook">
+                                    <i class="iconfont facebook">&#xe633;</i>
+                                    <p>Facebook</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--运营禁播-->
+                    <eq name="member.usertype" value="10">
+                        <i class="iconfont ban-open analysis" data-module-name="直播间_禁播">&#xe63a;</i>
+                    </eq>
+                </div>
+
+                <!--沙发-->
+                <div class="section2 analysis" data-module-name="直播间_沙发">
+                    <ul class="list clear app">
+                        <empty name="seats">
+                            <li id="buy_sofas1" class="buy_sofa" data-seatseqid="1" data-seatcount="0" data-totalPrice="0" data-seatuserid="0" data-sofaname=""></li>
+                            <li id="buy_sofas2" class="buy_sofa" data-seatseqid="2" data-seatcount="0" data-totalPrice="0" data-seatuserid="0" data-sofaname=""></li>
+                            <li id="buy_sofas3" class="buy_sofa" data-seatseqid="3" data-seatcount="0" data-totalPrice="0" data-seatuserid="0" data-sofaname=""></li>
+                            <li id="buy_sofas4" class="buy_sofa" data-seatseqid="4" data-seatcount="0" data-totalPrice="0" data-seatuserid="0" data-sofaname=""></li>
+                            <else />
+                            <volist name="seats" id="seat" key="m">
+                                <elt name="seat.seatuserid" value="0">
+                                    <li id="buy_sofas{$m}" class="buy_sofa" data-seatuserid="{$seat.seatuserid}" data-sofaname="" data-seatid="{$seat.seatid}" data-seatseqid="{$m}" data-seatcount="0" data-totalPrice="0"></li>
+                                    <else />
+                                    <li id="buy_sofas{$m}" class="buy_sofa" data-seatuserid="{$seat.seatuserid}" data-sofaname="{$seat.nickname}" data-seatid="{$seat.seatid}" data-seatcount="{$seat.seatcount}" data-totalPrice="{$seat.price}" data-seatseqid="{$seat.seatseqid}"><img src='{$Think.config.IMAGE_BASE_URL}{$seat.smallheadpic}'/></li>
+                                </elt>
+                            </volist>
+                        </empty>
+                    </ul>
+
+                    <!--沙发鼠标移入-->
+                    <div class="sofa-hover dis-none">
+                        <p><span id="sofatips_name"></span></p>
+                        <p>
+                            {:lan("GRABSEAT", "Home")}, {:lan("NOWPRICE", "Home")}
+                            <span id="sofatips_curprice"></span>
+                            {:lan("MONEY_UNIT", "Home")}
+                        </p>
+                    </div>
+
+                    <!--沙发弹出框-->
+                    <div class="sofa-alert dis-none">
+                        <input type="hidden" id="seatid" value="0" />
+                        <input type="hidden" id="seatseqid" value="0" />
+                        <input type="hidden" id="seatprice" value="{$seatdefine[seatprice]}" />
+                        <input type="hidden" name="seatcount" id="seatcount" value="0"/>
+                        <div class="line1">
+                            {:lan("NOWPRICE", "Home")}
+                            <span id="curTotalPrice"></span>
+                            {:lan("MONEY_UNIT", "Home")}
+                        </div>
+                        <div class="line2">
+                            {:lan("OFFER", "Home")}
+                            <div class="input-group">
+                                <input type="button" value="-" class="decrease disabled" disabled>
+                                <input class="price" type="text" name="totalPrice" id="totalPrice" value="0" readonly/>
+                                <input type="button" value="+" class="increase">
+                            </div>
+                            <button onclick="GiftCtrl.fetch_sofa();" class="buy">{:lan('BUY', 'Common')}</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!--礼物-->
+                <div class="section3 app">
+                    <div class="title clear">
+                        <volist name="giftcategory" id="gcate" key="gc">
+                            <eq name="gc" value="0">
+                                <p class="active gift-tab">{$gcate.categoryname}</p>
+                                <else />
+                                <p class="gift-tab">{$gcate.categoryname}</p>
+                            </eq>
+                        </volist>
+                    </div>
+                    <!--简单礼物-->
+                    <volist name="allgifts" id="gfs" key="cate">
+                        <div class="list-wrap gift{$cate} app <neq name='cate' value='1'>dis-none luxury</neq>">
+                            <ul class="list clear">
+                                <volist name="gfs.gifts" id="gift" key="gf">
+                                    <if condition="$gift.gifttype eq 1">
+                                        <li class="gift_box" data-price="{$gift.price}" data-giftname="{$gift.giftname}" data-gid="{$gift.gid}">
+                                            <img src="{$Think.config.IMAGE_BASE_URL}{$gift.bigimgsrc}">
+                                        </li>
+                                        <li class="free-gift" data-giftname="{$gift.giftname}" data-gid="{$gift.gid}">
+                                            <img src="{$Think.config.IMAGE_BASE_URL}{$gift.bigimgsrc}" class="dis-none">
+                                            <svg class="circle-animated">
+                                                <circle cx="0" cy="0" r="22" stroke="#4e0f1c" stroke-width="4" fill="transparent" class="path"></circle>
+                                                <circle cx="0" cy="0" r="22" stroke="#dd0f2d" stroke-width="4" fill="transparent" class="path animated-path"></circle>
+                                            </svg>
+                                            <p class="last-time">180s</p>
+                                            <p class="num">0</p>
+                                        </li>
+                                        <elseif condition="$gift.ishot eq 1"/>
+                                        <li class="gift_box" data-price="{$gift.price}" data-giftname="{$gift.giftname}" data-gid="{$gift.gid}">
+                                            <i class="iconfont">&#xe639;</i>
+                                            <img src="{$Think.config.IMAGE_BASE_URL}{$gift.bigimgsrc}"/>
+                                            <i class="iconfont serial"></i>
+                                        </li>
+                                        <else />
+                                        <li class="gift_box" data-price="{$gift.price}" data-giftname="{$gift.giftname}" data-gid="{$gift.gid}">
+                                            <img src="{$Think.config.IMAGE_BASE_URL}{$gift.bigimgsrc}"/>
+                                            <i class="iconfont serial"></i>
+                                        </li>
+                                    </if>
+                                </volist>
+                            </ul>
+                            <div class="common-scrollBar">
+                                <div class="scrollBar"></div>
+                            </div>
+                        </div>
+                    </volist>
+
+                    <!--鼠标移入效果-->
+                    <div class="gift-hover clear dis-none">
+                        <img id="giftsrcshow" src="" class="gift-img">
+                        <div class="price">
+                            <p id="gifttipname"></p>
+                            <p>{:lan("GIFTAMOUNT", "Home")}<span id="giftamountshow"></span></p>
+                            <p class="free-gift-info"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!--赠送按钮-->
+                <div class="section4 clear analysis" data-module-name="直播间_礼物赠送">
+                    <p class="line">{:lan("COUNT", "Home")}</p>
+                    <div class="num-list line">
+                        <input class="num" id="giftcount" name="giftcount" type="text" value="1" />
+                        <i class="iconfont">&#xe622;</i>
+                        <ul class="dis-none">
+                            <li data-value="8" class="">8</li>
+                            <li data-value="16" class="">16</li>
+                            <li data-value="18" class="">18</li>
+                            <li data-value="66" class="">66</li>
+                            <li data-value="88" class="">88</li>
+                            <li data-value="188" class="">188</li>
+                            <li data-value="288" class="">288</li>
+                            <li data-value="588" class="">588</li>
+                            <li data-value="888" class="">888</li>
+                        </ul>
+                    </div>
+
+                    <p class="line">To</p>
+                    <input id="giftto" type="text" class="em-name line" readonly value="{$emceemember['nickname']}"/>
+                    <button class="subm line" onclick="GiftCtrl.sendGift();">{:lan('PRESENT', 'Home')}</button>
+                </div>
+
+                <gt name="Think.session.userid" value="0">
+                    <!--facebook关注弹框-->
+                    <div class="facebook-attention-wrap">
+                        <a href="http://www.facebook.com/waashow.vn" target="_blank">www.facebook.com/waashow.vn</a>
+                        <i class="iconfont">&#xe64c;</i>
+                    </div>
+                </gt>
+            </div>
+
+            <!--右边区域-->
+            <div class="right">
+
+                <!--活动-->
+                <div class="slide-left ckone">
+                    <ul class="slide-left-wrapper clear">
+                        <volist name="activitys" id="vo">
+                            <li class="analysis" data-module-name="直播间_轮播图-{$vo[title]}">
+                                <a href="{$vo[linkurl]}" target="_blank">
+                                    <img src="{$Think.config.IMAGE_BASE_URL}{$vo[titlepic]}" alt=""/>
+                                </a>
+                            </li>
+                        </volist>
+                    </ul>
+                    <div class="slide-left-box">
+                        <div class="slide-left-boxWrap">
+                            <ul class="dot-wrap">
+                                <volist name="activitys" id="vo">
+                                    <li><em></em></li>
+                                </volist>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!--聊天框-->
+                <div class="section2 analysis" data-module-name="直播间_聊天">
+
+                    <!--聊天、礼物、游戏-->
+                    <div class="all-message">
+                        <div class="title clear">
+                            <p class="active" title="{:lan('CHATLIST', 'Home')}">
+                                <i class="iconfont">&#xe624;</i>
+                            </p>
+                            <p title="{:lan('GIFTLIST', 'Home')}">
+                                <i class="iconfont">&#xe625;</i>
+                            </p>
+                            <p title="{:lan('GAMELIST', 'Home')}">
+                                <i class="iconfont">&#xe623;</i>
+                            </p>
+                        </div>
+
+                        <!--聊天-->
+                        <div class="talk-wrap tab-message">
+                            <!--公聊-->
+                            <div class="list-wrap talk">
+
+                                <ul id="messages" class="message-ul list"></ul>
+
+                                <div class="message-btn">
+                                    <i class="iconfont clearMessage">&#xe62f;</i>
+                                    <i class="iconfont lockMessage">&#xe632;</i>
+                                    <i class="iconfont offPersonal">&#xe631;</i>
+                                </div>
+
+                                <div class="common-scrollBar">
+                                    <div class="scrollBar"></div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!--礼物-->
+                        <div id="gift_history" class="list-wrap gift-list dis-none tab-message">
+                            <table class="list">
+                                <thead>
+                                <tr>
+                                    <th>{:lan("SENDPEOPLE", "Home")}</th>
+                                    <th>{:lan("GIFTLIST", "Home")}</th>
+                                    <th>{:lan("COUNT", "Home")}</th>
+                                    <th>{:lan("RECEIVEPEOPLE", "Home")}</th>
+                                    <th>{:lan("TIME", "Home")}</th>
+                                </tr>
+                                </thead>
+                                <tbody id="gift_lists">
+                                </tbody>
+                            </table>
+
+                            <div class="common-scrollBar">
+                                <div class="scrollBar"></div>
+                            </div>
+                        </div>
+
+                        <!--游戏-->
+                        <div class="list-wrap dis-none game tab-message">
+                            <table class="list">
+                                <tr>
+									<div class="room_notice">
+										<a style="text-decoration: none; float: left;"
+											href="javascript:playFlashGames(1);"><img
+											src="/Public/Public/Images/Games/Egg/zaegg.png" width="100px"
+											alt="{:lan('PLAY_GOLDEGG', 'Home')}"><br />
+											<div style="margin:auto;text-align:center;">{:lan('PLAY_GOLDEGG', 'Home')}</div></a>
+										<div style="margin:auto; padding:8px;">
+											{:lan('PLAY_GOLDEGG_DISCRIPTION', 'Home')}
+										</div>
+										<br />
+										<div class="linediv"></div>
+									</div>
+									</tr>
+									<tr>
+									<div class="room_notice">
+										<a style="text-decoration: none; float: left;"
+											href="javascript:playFlashGames(2);"><img
+											src="/Public/Public/Images/Games/Diglett/diglett.png" width="100px"
+											alt="{:lan('PLAY_DIGLETT', 'Home')}"><br />
+											<div style="margin:auto;text-align:center;">{:lan('PLAY_DIGLETT', 'Home')}</div></a>
+										<div style="margin:auto; padding:20px;">
+											{:lan('PLAY_DIGLETT_DISCRIPTION', 'Home')}
+										</div>
+										<br />
+										<div class="linediv"></div>
+									</div>
+									</tr>
+                            </table>
+
+                            <div class="common-scrollBar">
+                                <div class="scrollBar"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--发送消息-->
+                    <div class="send-message">
+                        <input type="hidden" id="usertype" name="vipid" value="{$member['usertype']}" />
+                        <input type="hidden" id="vipid" name="vipid" value="{$member['vipid']}" />
+                        <input type="hidden" id="userid" name="userid" value="{$member['userid']}" />
+                        <div class="line1">
+                            <input id="messageinput" type="text" name="say" maxlength="140" class="input-msg">
+                            <p class="char-num"><span class="text-num">0</span><span>/140</span></p>
+                        </div>
+
+                        <div class="line2 clear">
+                            <div class="num-list line">
+                                <div class="choice-group">
+                                    <ul>
+                                        <li class="say2user"
+                                            id="say2selectuser"
+                                            data-say2uid="0"
+                                            data-say2name="All"
+                                            data-say2goodnum="0"
+                                            data-say2vipid="0"
+                                            data-say2guardid="0">All</li>
+                                    </ul>
+                                    <i class="iconfont">&#xe622;</i>
+                                </div>
+                                <ul id="say2list" class="dis-none user-say-list">
+                                    <li class="say2listitem"
+                                        data-say2uid="0"
+                                        data-say2name="All"
+                                        data-say2goodnum="0"
+                                        data-say2vipid="0"
+                                        data-say2guardid="0">All</li>
+                                    <li class="say2listitem"
+                                        data-say2uid="{$emceemember['userid']}"
+                                        data-say2name="{$emceemember['nickname']}"
+                                        data-say2goodnum="{$emceemember['showroomno']}"
+                                        data-say2guardid="0"
+                                        data-say2vipid="{$emceemember['vipid']}">{$emceemember['nickname']}</li>
+                                </ul>
+                            </div>
+                            <div class="face line analysis" data-module-name="直播间_表情">
+                                <i class="iconfont">&#xe627;</i>
+                                <ul class="dis-none clear">
+                                    <li><img src="/Public/Public/Images/Face/Joway/kisskiss.gif" alt="kisskiss" title="{:lan('KISSKISS', 'Home')}"></li>
+                                    <li><img src="/Public/Public/Images/Face/Joway/liukoushui.gif" alt="liukoushui" title="{:lan('LIUKOUSHUI', 'Home')}"></li>
+                                    <li><img src="/Public/Public/Images/Face/Joway/bigsmile.gif" alt="bigsmile" title="{:lan('DAXIAO', 'Home')}"></li>
+                                    <li><img src="/Public/Public/Images/Face/Joway/dianzan.gif" alt="dianzan" title="{:lan('DIANZAN', 'Home')}"></li>
+                                    <li><img src="/Public/Public/Images/Face/Joway/songhua.gif" alt="songhua" title="{:lan('SONGHUA', 'Home')}"></li>
+                                    <li><img src="/Public/Public/Images/Face/Joway/weiqu.gif" alt="weiqu" title="{:lan('WEIQU', 'Home')}"></li>
+                                    <li><img src="/Public/Public/Images/Face/Joway/houhouhou.gif" alt="houhouhou" title="{:lan('HOUHOUHOU', 'Home')}"></li>
+                                    <li><img src="/Public/Public/Images/Face/Joway/huaquanquan.gif" alt="huaquanquan" title="{:lan('HUAQUANQUAN', 'Home')}"></li>
+                                    <li><img src="/Public/Public/Images/Face/Joway/xianwen.gif" alt="xianwen" title="{:lan('XIANWEN', 'Home')}"></li>
+                                    <li><img src="/Public/Public/Images/Face/Joway/nonono.gif" alt="nonono" title="{:lan('NONONO', 'Home')}"></li>
+                                    <li><img src="/Public/Public/Images/Face/Joway/bigcry.gif" alt="bigcry" title="{:lan('DAKU', 'Home')}"></li>
+                                    <li><img src="/Public/Public/Images/Face/Joway/shengqi.gif" alt="shengqi" title="{:lan('SHENGQI', 'Home')}"></li>
+                                    <li><img src="/Public/Public/Images/Face/Joway/fennu.gif" alt="fennu" title="{:lan('FENNU', 'Home')}"></li>
+                                    <li><img src="/Public/Public/Images/Face/Joway/running.gif" alt="running" title="{:lan('RUNNING', 'Home')}"></li>
+                                    <li><img src="/Public/Public/Images/Face/Joway/hanhehe.gif" alt="hanhehe" title="{:lan('HAN_HEHE', 'Home')}"></li>
+                                    <li><img src="/Public/Public/Images/Face/Joway/egg.gif" alt="egg" title="{:lan('RENGEGG', 'Home')}"></li>
+                                </ul>
+                            </div>
+                            <button id="boomFlyscreen" class="line fly analysis" data-module-name="直播间_飞屏" onclick="Chat.dosendFly();">{:lan("FLYSCREEN", "Home")}</button>
+                            <button class="line subm" id="send" onclick="Chat.doSendMessage(event);">{:lan("SENDMESSAGE", "Home")}</button>
+                        </div>
+                    </div>
+
+                    <!--系统消息-->
+                    <div class="system-msg">
+                        <div class="system-overflow">
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!--个人信息弹框-->
+                <div class="user-info-detail dis-none">
+                    <img src="/Public/Public/Images/Face/Joway/running.gif" id="infoLoading" class="info-loading">
+                    <div class="top clear">
+                        <div class="left1">
+                            <img src="/Public/Public/Images/mayActive/img.jpg">
+                        </div>
+                        <div class="right1">
+
+                            <p class="name"></p>
+                            <p class="nice-num yes-nice-num dis-none">
+                                <span class="common-vipIcon common-niceno"></span>
+                                <span class="niceno"></span>
+                            </p>
+                            <p class="nice-num no-nice-num">
+                                <span class="icon">ID:</span>
+                                <span class="niceno"></span>
+                            </p>
+                            <div class="vip">
+                                <span class="common-vipIcon common-guard2"></span>
+                                <span class="common-vipIcon common-vip2"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bottom clear">
+                        <a class="button" target="_blank">{:lan("HOMEPAGE", "Home")}</a>
+                        <button class="button">{:lan("SAYTOTA", "Home")}</button>
+                        <button class="button">{:lan("KICKOUT", "Home")}</button>
+                        <button class="button">{:lan("FORBIDSAY", "Home")}</button>
+                    </div>
+                </div>
+            </div>
+
+            <!--点赞-->
+            <div class="click-like app">
+                <button class="like-btn iconfont">&#xe64d;</button>
+                <div class="like-wrap app"></div>
+                <img src="/Public/Public/Images/Common/like-person.png" class="like-person">
+            </div>
+            <!--礼物连发-->
+            <div class="serial-gift app"></div>
+        </div>
+    </div>
+</div>
+
+<!--flash动画-->
+<div class="flash-wrap">
+    <!--礼物-->
+    <div id="flashGift0"></div>
+    <!--座驾-->
+    <div id="flashCars0"></div>
+    <!--飞屏-->
+    <div id="flashFly0"></div>
+    <!--Flash 游戏-->
+    <div id="flashGames"
+		style="position: absolute; width: 460; height: 368; left: 490px; top: -10000px; z-index: 1000000">
+		<div id="flashContent" style="text-align: left;"></div>
+	</div>
+    <script>
+        //flash-礼物
+        swfobject_h.embedSWF("/Public/Public/Swf/Gifts.swf", "flashGift0",1,1,"10.0", "",{},{wmode:"transparent",allowscriptaccess:"always"});
+        //flash-飞屏;
+        swfobject_h.embedSWF("/Public/Public/Swf/FlyWord.swf", "flashFly0",1,1, "10.0", "", {},{wmode:"transparent",allowscriptaccess:"always"});
+        //flash-座驾
+        swfobject_h.embedSWF("/Public/Public/Swf/Gifts.swf", "flashCars0",1,1, "10.0", "", {},{wmode:"transparent",allowscriptaccess:"always"});
+    </script>
+</div>
+
+<!--开通守护弹框-->
+<div class="liveroom-guard-wrap dis-none">
+    <div class="guard-open">
+        <input type="hidden" id="guardseqid" name="guardseqid" value="{$guardcount+1}" />
+        <h2 class="title">
+            {:lan("BUYGUARD", "Home")}
+            <i class="iconfont">&#xe61b;</i>
+        </h2>
+        <!-- 特权展示-图片 -->
+        <div class="guard-img-list clear">
+            <div class="list">
+                <p class="icon i1"></p>
+                <p>{:lan("ENTER_WHENFULL", "Home")}</p>
+            </div>
+            <div class="list">
+                <p class="icon i2"></p>
+                <p>{:lan("LIST_FRONT", "Home")}</p>
+            </div>
+            <div class="list">
+                <p class="icon i3"></p>
+                <p>{:lan("ANTI_KICK_SHUTUP", "Home")}</p>
+            </div>
+            <div class="list">
+                <p class="icon i4"></p>
+                <p>{:lan("ENTER_PROMPT", "Home")}</p>
+            </div>
+            <div class="list">
+                <p class="icon i5"></p>
+                <p>{:lan("CHAT_EFFECTION", "Home")}</p>
+            </div>
+        </div>
+
+        <!--价格-->
+        <table>
+            <tr>
+                <td class="td1">
+                    {:lan('GUARD_EMCEE', 'Home')}：
+                </td>
+                <td class="td2">
+                    <span id="nick-name" class="nick-name">{$emceemember['nickname']}</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="td1">
+                    {:lan('GUARD_CATEGORY', 'Home')}：
+                </td>
+                <td class="td2">
+                    <volist name="guarddefs" id="gddef" key="gd">
+                        <eq name="gd" value="1">
+                            <input type="hidden" id="gdid" name="gdid" value="{$gddef.gdid}" />
+                            <input type="hidden" id="gdprice" name="gdprice" value="{$gddef.gdprice}" />
+                            <p class="guard-choice active guard-item" data-category="0" data-gdid="{$gddef.gdid}" data-gdprice="{$gddef.gdprice}">{$gddef.gdname}</p>
+                            <else />
+                            <p class="guard-choice guard-item" data-category="0" data-gdid="{$gddef.gdid}" data-gdprice="{$gddef.gdprice}">{$gddef.gdname}</p>
+                        </eq>
+                    </volist>
+                </td>
+            </tr>
+            <tr>
+                <td class="td1">
+                    {:lan('GUARD_TIME', 'Home')}：
+                </td>
+                <td class="td2">
+                    <p class="guard-time guard-item" data-category="1" data-month="1">{:lan('ONE_MONTH', 'Home')}</p>
+                    <p class="guard-time active guard-item" data-category="1" data-month="3">{:lan("THREE_MONTH", "Home")}</p>
+                    <p class="guard-time guard-item" data-category="1" data-month="6">{:lan("SIX_MONTH", "Home")}</p>
+                    <p class="guard-time guard-item" data-category="1" data-month="12">{:lan("TWELVE_MONTH", "Home")}</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="td1">
+                    {:lan('SPEND_MONEY', 'Home')}：
+                </td>
+                <td class="td2">
+                    <span class="guardcost" id="guardcost">3000</span>
+                    {:lan('MONEY_UNIT', 'Home')}
+                </td>
+            </tr>
+            <tr>
+                <td class="td1"></td>
+                <td class="td2">
+                    <input type="hidden" id="gdduration" name="gdduration" value="3" />
+                    <button class="buy-btn" onclick="GiftCtrl.buyguard();">{:lan("BUYGUARDOPER", "Home")}</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!--举报弹框-->
+<div class="liveroom-report-alert-wrap dis-none">
+    <div class="liveroom-report-alert dis-none">
+
+        <!--举报-->
+        <div class="report-alert dis-none">
+            <h1 class="title">
+                {:lan('REPORT_EMCEE', 'Home')}
+            </h1>
+
+            <ul class="list clear">
+                <li data-report="0" class="active">{:lan('OBSCENE', 'Home')}</li>
+                <li data-report="1">{:lan('ADVERTISEMENT', 'Home')}</li>
+                <li data-report="2">{:lan('POLITICS', 'Home')}</li>
+                <li data-report="3">{:lan('FRAUD', 'Home')}</li>
+                <li data-report="4">{:lan('ILLEGAL', 'Home')}</li>
+                <li data-report="5">{:lan('TORT', 'Home')}</li>
+                <li data-report="6">{:lan('SELL_FAKES', 'Home')}</li>
+                <li data-report="7">{:lan('OTHER', 'Home')}</li>
+            </ul>
+        </div>
+
+        <!--禁播-->
+        <div class="ban-alert dis-none">
+            <div class="line1 line">
+                <span class="left">{:lan('VIOLATION_REASON', 'Home')}：</span>
+                <select class="right">
+                    <volist name="baninfo.reason" id="v">
+                        <option value="{$v.key}">{$v.value}</option>
+                    </volist>
+                </select>
+            </div>
+            <div class="line2 line">
+                <span class="left">{:lan('VIOLATION_LEVEL', 'Home')}：</span>
+                <select class="right">
+                    <volist name="baninfo.level" id="v">
+                        <option value="{$v.key}">{$v.value}</option>
+                    </volist>
+                </select>
+            </div>
+            <div class="line3 line">
+                <span class="left">{:lan('BAN_TIME', 'Home')}：</span>
+                <select class="right">
+                    <volist name="baninfo.time" id="v">
+                        <option value="{$v.key}">{$v.value}</option>
+                    </volist>
+                </select>
+            </div>
+            <div class="line4 line">
+                <span class="left">{:lan('PUNISH_MONEY', 'Home')}：</span>
+                <select class="right">
+                    <volist name="baninfo.money" id="v">
+                        <option value="{$v.key}">{$v.value}</option>
+                    </volist>
+                </select>
+            </div>
+        </div>
+        <i class="close-report iconfont">&#xe61b;</i>
+        <textarea placeholder="{:lan('PLZ_INPUT_REASON', 'Home')}" class="other-cause dis-none"
+                  maxlength="140"></textarea>
+        <div class="bottom">
+            <button class="button no">{:lan('CANCEL', 'Home')}</button>
+            <button class="button yes">{:lan('SURE', 'Home')}</button>
+        </div>
+    </div>
+</div>
+
+<!--定时登录框-->
+<div class="login-other-wrap dis-none">
+    <div class="login-other">
+        <div class="icon-group clear">
+            <a href="{:U('Login/facebookLogin')}" class="link fb"></a>
+            <a href="{:U('Login/twitterLogin')}" class="link tw"></a>
+            <a href="{:U('Login/googleLogin')}" class="link gl"></a>
+            <button onclick="common.showLog()" class="link log"></button>
+            <a href="{:U('Home/Index/registerAgreement')}" class="agreement" target="_blank">{:lan("LOGIN_AGREEMENT", "Home")}</a>
+        </div>
+        <img src="/Public/Public/Images/Common/other-person.png" class="other-person">
+        <i class="iconfont close-other-login">&#xe61b;</i>
+    </div>
+</div>
+
+<!--主播分享框-->
+<div class="em-share-alert dis-none">
+    <div class="icon-group">
+        <button class="link fb iconfont active">&#xe633;</button>
+        <!--<button class="link tw iconfont">&#xe63b;</button>
+        <button class="link gl iconfont">&#xe62e;</button>-->
+    </div>
+    <p>{:lan('SHARE_EMCEE', 'Home')}</p>
+    <button class="submit">{:lan('SURE', 'Home')}</button>
+    <i class="iconfont close-em-share">&#xe61b;</i>
+</div>
+
+<!--游戏-->
+<div class="game-wrap dis-none" id="gameWrap">
+    <div class="game-wrap-border">
+        <iframe class="game-iframe" id="gameIframe"></iframe>
+    </div>
+</div>
+
+<!--游戏兑换弹框-->
+<div class="exchange-shade dis-none" id="exchangeWrap">
+    <div class="exchange-wrap">
+        <h2 class="title">{:lan('GAME_11', 'Home')}</h2>
+        <i class="iconfont close-exchange">&#xe61b;</i>
+        <p class="balance">{:lan('GAME_1', 'Home')}<span class="show-balace"></span>，{:lan('GAME_2', 'Home')}<span class="bean-balace"></span></p>
+
+        <p class="btn">
+            <button class="active">{:lan('GAME_3', 'Home')}</button>
+            <button>{:lan('GAME_4', 'Home')}</button>
+        </p>
+
+        <div class="select">
+            <span>{:lan('GAME_5', 'Home')}：</span>
+            <select></select>
+            <span class="main-color">{:lan('GAME_6', 'Home')}：</span>
+            <span class="num"></span>
+        </div>
+
+        <div class="select dis-none">
+            <span>{:lan('GAME_7', 'Home')}：</span>
+            <select></select>
+            <span class="main-color">{:lan('GAME_8', 'Home')}：</span>
+            <span class="num"></span>
+        </div>
+
+        <button class="submit" id="exchangeSubmit">{:lan('GAME_9', 'Home')}</button>
+    </div>
+</div>
+
+<!--游戏结束弹框-->
+<div class="game-over dis-none" id="gameOver">
+    <h3>{:lan('GAME_15', 'Home')}</h3>
+    <img src="" class="game-result">
+    <p class="result-msg">{:lan('GAME_10', 'Home')}</p>
+    <i class="close-game-over iconfont">&#xe61b;</i>
+</div>
+
+<!--抢庄倒计时弹框-->
+<div class="game-rob dis-none">
+    <i class="iconfont close-rob">&#xe61b;</i>
+    <p class="line1">
+        <i class="iconfont">&#xe63d;</i>
+        <span class="rob-time">3s</span>
+    </p>
+    <p class="line2">
+        {:lan('GAME_13', 'Home')}
+    </p>
+    <p class="line3">
+        ({:lan('GAME_14', 'Home')})
+    </p>
+    <p class="line4">
+        <button class="no">{:lan('CANCEL', 'Home')}</button>
+        <button class="yes">{:lan('CONFIRM', 'Home')}</button>
+    </p>
+</div>
+
+<!--关注弹框-->
+<div class="attention-alert-wrap dis-none">
+    <i class="iconfont close-attention">&#xe61b;</i>
+    <i class="iconfont triangle">&#xe62a;</i>
+    <div class="my-attention">
+        <h2 class="title">
+            <span class="square"></span>
+            <span>{:lan('MY_ATTENTION', 'Home')}</span>
+        </h2>
+        <div class="list-wrap">
+            <h2 class="dis-none">{:lan('OTHER_ATTENTION', 'Home')}</h2>
+            <ul class="list clear"></ul>
+            <div class="common-scrollBar">
+                <div class="scrollBar"></div>
+            </div>
+        </div>
+    </div>
+    <div class="recommend-attention dis-none">
+        <h2 class="title">
+            <span class="square"></span>
+            <span>{:lan('RECOMMEND_ATTENTION', 'Home')}</span>
+        </h2>
+        <div class="list-wrap">
+            <ul class="list clear"></ul>
+            <div class="common-scrollBar">
+                <div class="scrollBar"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 共用登录-->
+<include file="Public:login" />
+
+<!--共用弹框-->
+<include file="Public:alert" />
+
+<!--共用去充值弹框-->
+<include file="Public:gochargeAlert" />
+<script type="text/javascript" src="__PUBLIC__/Home/Js/common.js?time=201600922"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/Js/live/player.js?time=201600919"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/Js/live/chatRoom.js?time=201600913"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/Js/live/chatClient.js?time=201600913"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/Js/live/swfobjectforegg.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/Js/live/liveChat.js"></script>
+<script src="__PUBLIC__/Home/Js/live/liveChat.js"></script>
+
+<!-- cnzz统计代码 -->
+<div style="display:none">
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260140389'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1260140389%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+</div>
+
+<script>
+
+    $(function () {
+        common.stopMouseChioce();
+        common.slideLeft(410);
+        //facebook分享调用
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        //在该主播间今天被踢
+        var isKick = '{$isKicked}';
+        if(isKick == '1'){
+            common.alert('{:lan("YOUHAVE_BEENKICKEDOUTROOM", "Home")}');
+            history.go(-1);
+        }
+
+    })
+</script>
+</body>
+</html>

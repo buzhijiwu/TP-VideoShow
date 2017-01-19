@@ -1,0 +1,404 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, mininum-scale=1, maximum-scale=1, user-scaleable=no, target-densitydpi = high-dpi">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="shortcut icon" href="/Public/Public/Images/favicon.ico"/>
+    <link href="__PUBLIC__/Home/Css/{:getLanguage()}/app/reset.css?time=20160608.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/Home/Css/{:getLanguage()}/app/common.css?time=20160608.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/Home/Css/{:getLanguage()}/app/active.css?time=20160608.css" rel="stylesheet" type="text/css">
+    <!--<link  href="__PUBLIC__/Home/Css/{:getLanguage()}/app/active.less?time=201600509.less" rel="stylesheet" type="text/less">-->
+    <!--<script src="__PUBLIC__/Home/Css/{:getLanguage()}/less-1.6.3.min.js"></script>-->
+
+    <title>{:lan('MAY_ACTIVE_2016', 'Home')}</title>
+
+</head>
+<body class="dragon-active">
+
+<!--main-->
+<div class="common-wrap">
+    <div class="width">
+        <div class="dragon-boat-main">
+
+            <img class="title" src="/Public/Public/Images/Activity/dragonBoat/dragon-title-app.jpg">
+
+            <!--规则、榜单-->
+            <div class="tab-btn-top">
+                <button class="active">Bảng xếp hạng</button>
+                <button>Quy định trò chơi</button>
+            </div>
+
+            <!--榜单-->
+            <div class="tab-list dragon-list-wrap">
+
+                <div class="em-title">
+                    <img src="/Public/Public/Images/Activity/dragonBoat/em-top.png">
+                </div>
+
+                <div class="tab-btn clear">
+                    <p class="p1 active">Điểm tổng</p>
+                    <p class="p2">Quà tặng</p>
+                    <p class="p3">Bảng follow</p>
+                </div>
+
+                <!--总分数榜-->
+                <div class="em-active-list">
+                    <table class="list-main">
+                        <thead>
+                        <tr>
+                            <th class="td1">Xếp hạng</th>
+                            <th class="td2">Nick của idol</th>
+                            <th class="td3">Số lượng nhận được</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <volist name="topEmcTotal" id="vo" key="k">
+                            <tr>
+                                <td class="td1 <eq name="k" value="1">top1</eq>">
+                                <span <in name="k" value="1,2,3">class="top-color"</in>>{$k}</span>
+                                </td>
+                                <td class="td2">
+                                    <div>
+                                        <img src="{$vo.smallheadpic}">
+                                        <span class="common-em em{$vo.emceelevel}"></span>
+                                        <span class="name">{$vo.nickname}</span>
+                                    </div>
+                                </td>
+                                <td class="td3">
+                                    <span>{$vo.total}</span>
+                                </td>
+                            </tr>
+                        </volist>
+                        </tbody>
+                    </table>
+                    <button class="loading-more">
+                        Bấm để xem nhiều hơn
+                    </button>
+                </div>
+
+                <!--粽子礼物数-->
+                <div class="em-active-list dis-none">
+                    <table class="list-main">
+                        <thead>
+                        <tr>
+                            <th class="td1">Xếp hạng</th>
+                            <th class="td2">Nick của idol</th>
+                            <th class="td3">Số lượng nhận được</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                    <button class="loading-more">
+                        Bấm để xem nhiều hơn
+                    </button>
+                </div>
+
+                <!--关注数-->
+                <div class="em-active-list dis-none">
+                    <table class="list-main">
+                        <thead>
+                        <tr>
+                            <th class="td1">Xếp hạng</th>
+                            <th class="td2">Nick của idol</th>
+                            <th class="td3">Lượt theo dõi</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+
+                    </table>
+                    <button class="loading-more">
+                        Bấm để xem nhiều hơn
+                    </button>
+                </div>
+
+
+                <div class="em-title">
+                    <img src="/Public/Public/Images/Activity/dragonBoat/us-top.png">
+                </div>
+
+                <!--用户榜-->
+                <div class="us-active-list">
+                    <table class="list-main">
+                        <thead>
+                        <tr>
+                            <th class="td1">Xếp hạng</th>
+                            <th class="td2">Nick của idol</th>
+                            <th class="td3">Số quà đã tặng</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <volist name="topUserSentGift" id="vo" key="k">
+                            <tr>
+                                <td class="td1">
+                                <span <in name="k" value="1,2,3">class="top-color"</in>>{$k}</span>
+                                </td>
+                                <td class="td2">
+                                    <div>
+                                        <img src="{$vo.smallheadpic}">
+                                        <span class="common-em us{$vo.userlevel}"></span>
+                                        <span class="">{$vo.nickname}</span>
+                                    </div>
+                                </td>
+                                <td class="td3">
+                                    <span>{$vo.total}</span>
+                                </td>
+                            </tr>
+                        </volist>
+                        </tbody>
+                    </table>
+                    <button class="loading-more">
+                        Bấm để xem nhiều hơn
+                    </button>
+                </div>
+            </div>
+
+            <!--规则-->
+            <div class="tab-list dis-none">
+                <div class="rule clear">
+                    <ul class="list">
+                        <li>
+                            1.Tổng điểm = Số quà bánh chưng*1+lượt quan tâm*1
+                        </li>
+                        <li>
+                            2.Chú ý:Chỉ tính lượt quan tâm mới,nếu user bỏ quan tâm thì sẽ không thống kê
+                        </li>
+                        <li>
+                            (Nếu phát hiện gian lận sẽ hủy bỏ tư cách dự thi)
+                        </li>
+                        <li>
+                            Idol nhận được trên 20.000 quà bánh chưng (Icon),
+                        </li>
+                        <li>
+                            Sẽ nhận được 1 hợp bánh chưng Đoan Ngọ trị giá 200,000 vnd
+                        </li>
+                    </ul>
+
+                    <ul class="list">
+                        <li>
+                            Giải nhất：Giải nhất 900.000vnd
+                        </li>
+                        <li>
+                            Trở thành ngôi sao: Ảnh của thí sinh được lên trang bìa 7 ngày
+                        </li>
+                        <li>
+                            Giải nhì: 600.000 vnd
+                        </li>
+                        <li>
+                            Giải ba: 300.000 vnd
+                        </li>
+                        <li>
+                            Giải nhất đến giải mười Idol và khách hàng
+                        </li>
+                        <li>
+                            Phương tiện quà tặng tết đoan ngọ trong vòng một tháng
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--共用js-->
+<include file="Public:javascript" />
+<script>
+    $(function () {
+        //规则和列表切换
+        $(".dragon-boat-main .tab-btn-top").on("click","button", function () {
+            $(this).addClass("active").siblings("button").removeClass("active");
+            $(".dragon-boat-main .tab-list").eq($(this).index()).removeClass("dis-none")
+                    .siblings(".tab-list").addClass("dis-none");
+        });
+
+
+
+        var url = [
+            "{:U('Home/Activity/getTopEmcTotalList')}",//主播总榜
+            "{:U('Home/Activity/LoadTopActivityGiftList')}",//主播劳动礼物榜
+            "{:U('Home/Activity/LoadTopActivityNewFans')}"//新增粉丝榜
+        ];
+
+
+        var data ={};
+
+
+
+        $(".tab-btn").on("click","p", function () {
+            $(this).addClass("active").siblings("p").removeClass("active");
+            var n = $(this).index();
+            $(".loading-more").eq(n).show();
+            $(".em-active-list").eq(n).removeClass("dis-none").siblings(".em-active-list").addClass("dis-none");
+            loadTopHtml(n);
+        });
+
+        $(".loading-more").each(function(index){
+            if($(".list-main tbody").eq(index).find("tr").length<10){
+                $(".loading-more").eq(index).hide();
+            }
+            $(".loading-more").eq(index).on("click",function () {
+                $(this).hide();
+                if(index < 3){
+                    loadEmMoreHtml(index);
+                }else{
+                    loadUsMoreHtml();
+                }
+
+            })
+        });
+
+        //加载总榜前十列表
+        function loadTopHtml(n){
+            data ={
+                'limit_start' : 0,
+                'limit' : 10
+            };
+            $(".list-main").eq(n).find("tbody").html("<img src=\"/Public/Public/Images/Face/Joway/running.gif\" class='loading'>");
+
+            $.ajax({
+                url: url[n],
+                data: data,
+                dataType: 'json',
+                type: "post",
+                async:true,
+                success: function(res) {
+                    $(".list-main").eq(n).find("tbody").html(buildEmTopList(res));
+                    if(res.length<10){
+                        $(".loading-more").eq(n).hide();
+                    }
+                },
+                error: function(res) {
+                    console.log(res);
+                }
+            });
+        }
+        function buildEmTopList (data){
+
+            var html = "",topClass,topColor,dataType;
+
+            for(var i = 0; i < data.length ; i++) {
+                if (i == 0) {
+                    topClass = "td1 top1"
+                } else {
+                    topClass = "td1"
+                }
+                if (i < 3) {
+                    topColor = "top-color"
+                } else {
+                    topColor = ""
+                }
+                html +=
+                        "<tr>" +
+                        "<td class=\"" + topClass + "\">" +
+                        "<span class=\"" + topColor + "\">"+(i+1)+"</span>" +
+                        "</td>" +
+                        "<td class=\"td2\">" +
+                        "<div>" +
+                        "<img src=\"" + data[i].smallheadpic + "\">" +
+                        "<span class=\"common-em em" + data[i].emceelevel + "\"></span>" +
+                        "<span class='name'>" + data[i].nickname + "</span>" +
+                        "</div>" +
+                        "</td>" +
+                        "<td class=\"td3\">" +
+                        "<span>" + data[i].total + "</span>" +
+                        "</td>" +
+                        "</tr>"
+            }
+
+            return html;
+        }
+
+        //加载前三十列表
+        function loadEmMoreHtml(n){
+            data ={
+                'limit_start' : 10,
+                'limit' : 20
+            };
+            $.ajax({
+                url: url[n],
+                data: data,
+                dataType: 'json',
+                type: "post",
+                async:true,
+                success: function(res) {
+                    $(".list-main").eq(n).find("tbody").append(buildEmMoreList(res));
+                },
+                error: function(res) {
+                    console.log(res);
+                }
+            });
+        }
+        function buildEmMoreList (data){
+            var html = "";
+            for(var i = 0; i < data.length ; i++) {
+                html +=
+                        "<tr>" +
+                        "<td class=\"td1\">" +
+                        "<span>"+(i+11)+"</span>" +
+                        "</td>" +
+                        "<td class=\"td2\">" +
+                        "<div>" +
+                        "<img src=\"" + data[i].smallheadpic + "\">" +
+                        "<span class=\"common-em em" + data[i].emceelevel + "\"></span>" +
+                        "<span class='name'>" + data[i].nickname + "</span>" +
+                        "</div>" +
+                        "</td>" +
+                        "<td class=\"td3\">" +
+                        "<span>" + data[i].total + "</span>" +
+                        "</td>" +
+                        "</tr>"
+            }
+            return html;
+        }
+        //加载用户前三十列表
+        function loadUsMoreHtml(){
+            data ={
+                'limit_start' : 10,
+                'limit' : 20
+            };
+            $.ajax({
+                url: "{:U('Home/Activity/getTopUserSentGiftList')}",
+                data: data,
+                dataType: 'json',
+                type: "post",
+                async:true,
+                success: function(res) {
+                    $(".us-active-list").find("tbody").append(buildUsMoreList(res));
+                },
+                error: function(res) {
+                    console.log(res);
+                }
+            });
+        }
+        function buildUsMoreList (data){
+            var html = "";
+            for(var i = 0; i < data.length ; i++) {
+                html +=
+                        "<tr>" +
+                        "<td class=\"td1\">" +
+                        "<span>"+(i+11)+"</span>" +
+                        "</td>" +
+                        "<td class=\"td2\">" +
+                        "<div>"+
+                        "<img src=\"" + data[i].smallheadpic + "\">" +
+                        "<span class=\"common-us us" + data[i].userlevel + "\"></span>" +
+                        "<span class='name'>" + data[i].nickname + "</span>" +
+                        "</div>" +
+                        "</td>" +
+                        "<td class=\"td3\">" +
+                        "<span>" + data[i].total + "</span>" +
+                        "</td>" +
+                        "</tr>"
+            }
+            return html;
+        }
+    })
+</script>
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+<extend name="Public:list" />
+<block name="title"></block>
+<block name="css"></block>
+
+<block name="main">
+<script type="text/javascript" src="__PUBLIC__/Tools/Js/jquery/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/Js/live/show.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/Js/live/swfobject.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/Js/live/player.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/Js/live/chatRoom.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/Js/live/common.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/Js/live/socket.io.js"></script>
+<script type="text/javascript">
+  var _show='';
+</script>
+    <form action="{:U('Admin/SystemSet/umeng_sys_message/type/0/')}" method="post">
+        <div class="pad-10">
+            <div class="col-tab">
+                <p>{:lan('SYSTEM_MESSAGE', 'Admin')}：</p>
+                <p style="margin-top: 15px;">
+                    <textarea name="umeng_sysmessage" rows="10" cols="80"></textarea>
+                </p>
+                <div class="bk15"></div>
+                <input type="submit" value="{:lan('SENDMESSAGE', 'Admin')}" class="button">
+            </div>
+        </div>
+    </form>
+    <form action="{:U('Admin/SystemSet/umeng_sys_message/type/1/')}" method="post">
+        <div class="pad-10">
+            <div class="col-tab">
+                <p>{:lan('SYSTEM_MESSAGE', 'Admin')}（Tag）：</p>
+                <p style="margin-top: 15px;">
+                    <textarea name="umeng_sysmessage" rows="10" cols="80"></textarea>
+                </p>
+                <div class="bk15"></div>
+                <input type="submit" value="{:lan('SENDMESSAGE', 'Admin')}" class="button">
+            </div>
+        </div>
+    </form>
+<div class="pad-10">
+    <p>{:lan('LIVEROOM_SYS_MESSAGE_DEFINE', 'Admin')}：</p>
+    <p style="margin-top: 15px;">
+        <textarea name="sysmessage" id="sysmessage" rows="10" cols="80"></textarea>
+    </p>
+    <div class="subnav">
+        <div class="content-menu ib-a blue line-x">
+            <a href="javascript:;" class="on" onclick="notejsInit();"><em>{:lan('SENDMESSAGE', 'Admin')}</em></a>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="waachnodepath" value="{$chatNodePath}"/>
+</block>
+
+<block name="js">
+<script type="text/javascript" src="__PUBLIC__/Home/Js/live/chatClient.js"></script>
+<script src="__PUBLIC__/Home/Js/live/liveChat.js"></script>
+<script type="text/javascript">
+function notejsInit(){
+  var content = $("#sysmessage").val();
+  if (content == '') {
+      alert("{:lan('TEXT_BOX_NOT_EMPTY', 'Admin')}");  
+  } else {
+      var data =  {msg:
+        [
+          {
+            _method_:"SendMsg",
+            action:"4",
+            ct:{message:content},
+            msgtype:"2"
+          }
+        ],
+        retcode:"1",
+        retmsg:"OK"};   
+      socket.emit('sendPublicMsg', data);  
+      $("#sysmessage").val('');
+      alert("{:lan('SEND_SUCCESSFUL', 'Admin')}");      
+  }
+}
+</script>
+</block>

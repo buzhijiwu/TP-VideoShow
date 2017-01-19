@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=7" />
+<title>{:C('TITLE_CONTENT')}</title>
+<link href="__PUBLIC__/Public/statics/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Public/statics/css/system.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Public/statics/css/table_form.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles1.css" title="styles1" media="screen" />
+<link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles2.css" title="styles2" media="screen" />
+<link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles3.css" title="styles3" media="screen" />
+<link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles4.css" title="styles4" media="screen" />
+
+<js file="__PUBLIC__/Public/Js/jquery-1.7.2.min.js" />
+
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/admin_common.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/styleswitch.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/formvalidator.js" charset="UTF-8"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/formvalidatorregex.js" charset="UTF-8"></script>
+<script type="text/javascript">
+	window.focus();
+</script>
+</head>
+<body>
+<div class="subnav">
+    <div class="content-menu ib-a blue line-x">
+        </span><a href='javascript:;' class="on"><em>添加分类</em></a>    </div>
+</div>
+<style type="text/css">
+	html{_overflow-y:scroll}
+</style>
+
+<script type="text/javascript">
+<!--
+$(function() {
+	$.formValidator.initConfig({autotip:true,formid:"myform",onerror:function(msg){}});
+	
+	$("#adminname").formValidator({
+		oncorrect:' '
+	}).inputValidator({min:1,onerror:"请输入内容",empty: { leftempty: false, rightempty: false }});
+	
+	$("#adminname1").formValidator({
+		oncorrect:' '
+	}).inputValidator({min:1,onerror:"请输入内容",empty: { leftempty: false, rightempty: false }});
+	
+	$("#adminname2").formValidator({
+		oncorrect:' '
+	}).inputValidator({min:1,onerror:"请输入内容",empty: { leftempty: false, rightempty: false }});
+	$("#password").formValidator({
+		oncorrect:' '
+	}).inputValidator({min:1,onerror:"请输入内容",empty: { leftempty: false, rightempty: false }});
+})
+//-->
+</script>
+
+<div class="pad_10">
+<div class="common-form">
+<form name="myform" action="{:U('CategoryMember/addCategory')}" method="post" id="myform">
+<input type="hidden" name="postkey" value="{$Think.config.PC_KEY}" />
+<table width="100%" class="table_form contentWrap">
+<tr>
+<td width="80">分类中文名</td>
+<td>
+	<input type="text" name="adminname"  class="input-text" id="adminname" />
+</td>
+</tr>
+<if condition="$is_edit_lan neq 0">
+<tr>
+<td width="80">分类英文</td>
+<td>
+	<input type="text" name="lan_en"  class="input-text" id="adminname1" />
+</td>
+</tr>
+
+<tr>
+<td width="80">分类越南文</td>
+<td>
+	<input type="text" name="lan_vi"  class="input-text" id="adminname2" />
+</td>
+</tr>
+</if>
+<tr>
+<td>排序</td>
+<td>
+	<input size="3" type="text" name="password" class="input-text" id="password" value="" />
+</td>
+</tr>
+</table>
+    <div class="bk15"></div>
+    <input name="dosubmit" type="submit" value="提交" class="button">
+</form>
+</div>
+</div>
+</body>
+</html>

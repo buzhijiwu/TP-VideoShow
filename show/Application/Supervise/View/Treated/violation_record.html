@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="shortcut icon" href="/Public/Public/Images/favicon.ico"/>
+    <link href="/Public/Home/Css/zh/reset.css?time=20160627.css" rel="stylesheet" type="text/css" />
+    <link href="/Public/Home/Css/zh/common.css?time=20160627.css" rel="stylesheet" type="text/css">
+    <link href="/Public/Supervise/Css/style.css?time=20160627.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/Public/Public/statics/js/calendar/jscal2.css">
+    <link rel="stylesheet" type="text/css" href="/Public/Public/statics/js/calendar/border-radius.css">
+    <link rel="stylesheet" type="text/css" href="/Public/Public/statics/js/calendar/win2k.css">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+    <script type="text/javascript" src="/Public/Tools/Js/jquery/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="/Public/Home/Js/live/show.js"></script>
+    <script type="text/javascript" src="/Public/Home/Js/live/swfobject.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/Js/live/player.js"></script>
+    <script type="text/javascript" src="/Public/Home/Js/live/chatRoom.js"></script>
+    <script type="text/javascript" src="/Public/Home/Js/live/socket.io.js"></script>
+    <script type="text/javascript" src="/Public/Public/statics/js/calendar/calendar.js"></script>
+    <script type="text/javascript" src="/Public/Public/statics/js/calendar/lang/en.js"></script>
+    <script type="text/javascript">
+        var _show='';
+    </script>
+
+    <title>{:lan('VIOLATION_RECORD', 'Supervise')}</title>
+</head>
+<body>
+
+<div class="list-main">
+
+    <div id="searchid" class="header">
+        <form name="searchform" action="/Supervise/Treated/violation_record" method="get">
+            <table width="100%" cellspacing="0" class="search-table">
+                <tbody>
+                <tr>
+                    <td><div class="explain-col">{:lan('PROCESS_TIME', 'Supervise')}：
+                        <input type="text" name="start_time" id="start_time" value="<eq name='Think.get.start_time' value=''>{$now}<else />{$Think.get.start_time}</eq>" size="10" class="date input-text" readonly="">
+                        &nbsp;<script type="text/javascript">     Calendar.setup({
+                            weekNumbers: false,
+                            inputField : "start_time",
+                            trigger    : "start_time",
+                            dateFormat: "%Y-%m-%d",
+                            showTime: false,
+                            minuteStep: 1,
+                            onSelect   : function() {this.hide();}
+                        });
+                        </script>- &nbsp;
+                        <input type="text" name="end_time" id="end_time" value="<eq name='Think.get.end_time' value=''>{$now}<else />{$Think.get.end_time}</eq>" size="10" class="date input-text" readonly="">
+                        &nbsp;<script type="text/javascript">     Calendar.setup({
+                            weekNumbers: false,
+                            inputField : "end_time",
+                            trigger    : "end_time",
+                            dateFormat: "%Y-%m-%d",
+                            showTime: false,
+                            minuteStep: 1,
+                            onSelect   : function() {this.hide();}
+                        });
+                        </script>
+
+                    </div></td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="btn" style="margin-top: 20px;">{:lan('REPORTED_USER', 'Supervise')}</div>
+            <div class="search">
+                <input type="text" class="search-input" name="keyword" placeholder="{:lan('USERNAME', 'Supervise')}/{:lan('NICKNAME', 'Supervise')}/{:lan('ROOMNO', 'Supervise')}" value="{$keyword}">
+                <input type="submit" value="&#xe640;" class="search-submit iconfont">
+            </div>
+        </form>
+    </div>
+
+    <form name="myform" id="myform" action="" method="post">
+        <div class="report-table-list">
+            <table width="100%">
+                <thead>
+                <tr>
+                    <th width="70">{:lan('SYS_NUMBER', 'Supervise')}</th>
+                    <th>{:lan('REPORT_TIME', 'Supervise')}</th>
+                    <th>{:lan('REPORTED_USERNAME', 'Supervise')}</th>
+                    <th>{:lan('REPORTED_NICKNAME', 'Supervise')}</th>
+                    <th>{:lan('ROOMNO', 'Supervise')}</th>
+                    <th>{:lan('BAN_TIME', 'Supervise')}</th>
+                    <th>{:lan('PUNISH_MONEY', 'Supervise')}</th>
+                    <th>{:lan('PROCESS_TIME', 'Supervise')}</th>
+                    <th>{:lan('OPERATOR', 'Supervise')}</th>
+                    <th>{:lan('OPERATION', 'Supervise')}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <volist name="data" id="v" key="k">
+                    <tr>
+                        <td>{$k}</td>
+                        <td>{$v.createtime}</td>
+                        <td>{$v.username}</td>
+                        <td>{$v.nickname}</td>
+                        <td>{$v.showroomno}</td>
+                        <eq name="v.bantime" value="-1">
+                            <td>{:lan('NO_UPPER_LIMIT', 'Supervise')}</td>
+                            <else />
+                            <td>{$v.bantime}</td>
+                        </eq>
+                        <td>{$v.punishmoney}</td>
+                        <td>{$v.processtime}</td>
+                        <td>{$v.operation}</td>
+                        <td>
+                            <eq name="v.isopen" value="0">
+                                <a href="javascript:;" onclick="openlive({$v.banid});">{:lan('ENABLE', 'Supervise')}</a> |
+                                <else />
+                                <a href="javascript:;">{:lan('ALREADY_ENABLE', 'Supervise')}</a> |
+                            </eq>
+                            <a href="javascript:;" class="stop-live" data-banid="{$v.banid}" data-userid="{$v.userid}" data-roomno="{$v.showroomno}">{:lan('MODIFY', 'Supervise')}</a>
+                            <neq name="v.id" value="">
+                                | <a href="{:U('Supervise/Treated/violation_record_detail/banid/'.$v['banid'])}">{:lan('REDIS_KEY_DETAIL', 'Supervise')}</a>
+                            </neq>
+                            <neq name="v.pic" value="">
+                                | <a href="{:U('Supervise/Treated/violation_pic/banid/'.$v['banid'])}" target="_blank">{:lan('VIEW_EVIDENCE', 'Supervise')}</a>
+                            </neq>                            
+                        </td>
+                    </tr>
+                </volist>
+                </tbody>
+            </table>
+            <div id="pages">{$page}</div>
+        </div>
+        <input type="hidden" id="waachnodepath" value="{$chatNodePath}"/>
+    </form>
+</div>
+<!--举报弹框-->
+<div class="liveroom-report-alert-wrap dis-none">
+    <div class="liveroom-report-alert">
+        <!--禁播-->
+        <div class="ban-alert">
+            <div class="line1 line">
+                <span class="left">{:lan('VIOLATION_REASON', 'Home')}：</span>
+                <select class="right" name="type">
+                    <volist name="baninfo.reason" id="v">
+                        <option value="{$v.key}">{$v.value}</option>
+                    </volist>
+                </select>
+            </div>
+            <div class="line2 line">
+                <span class="left">{:lan('VIOLATION_LEVEL', 'Home')}：</span>
+                <select class="right" name="violatelevel">
+                    <volist name="baninfo.level" id="v">
+                        <option value="{$v.key}">{$v.value}</option>
+                    </volist>
+                </select>
+            </div>
+            <div class="line3 line">
+                <span class="left">{:lan('BAN_TIME', 'Home')}：</span>
+                <select class="right" name="bantime">
+                    <volist name="baninfo.time" id="v">
+                        <option value="{$v.key}">{$v.value}</option>
+                    </volist>
+                </select>
+            </div>
+            <div class="line4 line">
+                <span class="left">{:lan('PUNISH_MONEY', 'Home')}：</span>
+                <select class="right" name="banmoney">
+                    <volist name="baninfo.money" id="v">
+                        <option value="{$v.key}">{$v.value}</option>
+                    </volist>
+                </select>
+            </div>
+        </div>
+        <span class="close-report iconfont">&#xe61b;</span>
+        <textarea placeholder="{:lan('PLZ_INPUT_REASON', 'Home')}" class="other-cause dis-none" name="content"></textarea>
+        <div class="bottom">
+            <button class="button no">{:lan('CANCEL', 'Home')}</button>
+            <button class="button yes">{:lan('SURE', 'Home')}</button>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="__PUBLIC__/Home/Js/live/chatClient.js"></script>
+<script src="__PUBLIC__/Home/Js/live/liveChat.js"></script>
+<script src="/Public/Supervise/Js/children.js"></script>
+<script type="text/javascript">
+    function openlive(banid) {
+        if(confirm("{:lan('ENABLE', 'Supervise')}?")){
+            $.ajax({
+                url:"{:U('Supervise/Treated/open_live')}",
+                type:"POST",
+                data:{banid:banid},
+                success: function (res) {
+                    var data = JSON.parse(res);
+                    if (data.status == 1) {
+                        alert(data.message);
+                        window.location.href=window.location.href;
+                    }
+                },
+                error: function (res) {
+                    console.log(res);
+                }
+            })
+        }
+    }
+
+    //禁播弹出框
+    $(".stop-live").on("click", function () {
+        var data =  new Object();
+        var showroomno = $(this).attr("data-roomno");
+        data.roomnum  = showroomno;
+        data.ugoodnum = showroomno;
+        data.equipment = 'pc';
+        data.userid = '19';
+        socket.emit('adminUserCnn', data);  
+
+        playList._report.removeClass("dis-none");
+        playList._report.find(".liveroom-report-alert .ban-alert .line .right").eq(0).val(0);
+        playList._emceeuserid = $(this).attr('data-userid');
+        playList._banid = $(this).attr('data-banid');        
+    });
+
+    //禁播
+    $('.liveroom-report-alert-wrap .liveroom-report-alert .bottom .yes').on("click", function () {
+        var banType = $("select[name='type']").val();
+        var banContent = $.trim($("textarea[name='content']").val());
+        if(banType == 7 && banContent.length <= 0){
+            $("textarea[name='content']").focus();
+        }else{
+            var data = $("#superviseid,select[name='type'],textarea[name='content'],select[name='violatelevel'],select[name='bantime'],select[name='banmoney']").serialize();
+            data = data+'&banid='+playList._banid+"&reporteduid="+playList._emceeuserid;
+            playList.stopLiveSubmit(data);    
+            window.location.href=window.location.href;              
+        }        
+    })    
+</script>
+
+
+
+
+</body>
+</html>

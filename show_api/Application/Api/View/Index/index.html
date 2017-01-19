@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>waashow语言包翻译</title>
+		<js file="__PUBLIC__/Public/Js/jquery-1.7.2.min.js" />
+	</head>
+<body>
+<div style="margin:auto;width:1000px;height:100px;border:1px solid red;margin-top:20px;margin-bottom:40px;">
+	<ul style="height:90px;width:990px;">
+		<li class="lilan" style="">第 1 部分</li>
+		<li class="lilan" style="">第 2 部分</li>
+		<li class="lilan" style="">第 3 部分</li>
+		<li class="lilan" style="">第 4 部分</li>
+		<li class="lilan" style="">第 5 部分</li>
+		<li class="lilan" style="">第 6 部分</li>
+		<li class="lilan" style="">第 7 部分</li>
+		<li class="lilan" style="">第 8 部分</li>
+		<li class="lilan" style="">第 9 部分</li>
+		<li class="lilan" style="">第 10 部分</li>
+		<li class="lilan" style="">第 11 部分</li>
+		<li class="lilan" style="">第 12 部分</li>
+	</ul>
+</div>
+
+<form action="{:U('Index/indexForm')}" method="POST">
+	<table>
+		<tr class="thead">
+			<td>序号</td>
+			<td>中文名</td>
+			<td>越南文名</td>
+		</tr>
+		<foreach name="result" item="v">
+		<tr>
+			<td>{$key+1}</td>
+			<td>{$v['name_cn']}</td>
+			<td style="width:400px;">
+				<input type="hidden" name="di[]" value="{$v['id']}" />
+				<input size="30" type="text" name="name_vi[]" placeholder="请输入相关越南文" value="{$v['name_vi']|default=''}" />
+			</td>
+		</tr>
+		</foreach>
+	</table>
+	<input class="submit" style="margin-left:180px;margin-top:20px;" type="button" value="提 交" />
+</form>
+</body>
+</html>
+<style>
+table {border-collapse:collapse;width:1000px;margin:auto;}
+td {border:1px solid green;height:34px;}
+tr {text-align:center;}
+tr.thead {background:#CCC;font-weight:bold;}
+</style>
+<script>
+$('table tr').not('.thead').mouseover(function() {
+	$(this).css({'background':'#CCC'});
+}).mouseout(function() {
+	$(this).css({'background':'white'});
+});
+
+$('input.submit').click(function() {
+	if(!confirm('确认要提交吗?')) return false;
+	$('form').submit();
+});
+</script>
+
+<style>
+.lilan {list-style:none;float:left;border:1px solid red;width:100px;height:30px;margin-right:20px;margin-top:10px;text-align:center;line-height:30px;cursor:pointer;font-weight:bold;}
+</style>
+
+<script>
+$('.lilan').eq(0).css({'background-color':'#CCCCCC'});
+$('.lilan').click(function() {
+	$('.lilan').each(function() {
+		$(this).css({'background-color':'white'});
+	});
+	$(this).css({'background-color':'#CCCCCC'});
+});
+</script>

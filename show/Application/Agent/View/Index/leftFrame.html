@@ -1,0 +1,31 @@
+<h3 class="f14"><a href="{:U('mainFrame')}" target="right">{:lan('AGENT_HOMEPAGE', 'Agent')}</a></h3>
+<h3 class="f14"><span class="switchs cu on" title="{:lan('SPREAD_AND_SHRINK', 'Agent')}"></span>{:lan('PERSON_INFORMATION', 'Agent')}</h3>
+<ul>
+	<li id="_MP1" class="sub_menu"><a href="javascript:_MP(1,'/Agent/Index/edit_pwd/');" hidefocus="true" style="outline:none;">{:lan('CHANGE_PASSWORD', 'Agent')}</a></li>
+</ul>
+
+<h3 class="f14"><span class="switchs cu on" title="{:lan('SPREAD_AND_SHRINK', 'Agent')}"></span>{:lan('RECHARGE_MANAGE', 'Agent')}</h3>
+<ul>
+	<eq name="Think.session.agenttype" value="0">
+		<li id="_MP2" class="sub_menu"><a href="javascript:_MP(2,'/Agent/Index/recharge/');" hidefocus="true" style="outline:none;">{:lan('RECHARGE', 'Agent')}</a></li>
+	<else/>
+		<li id="_MP3" class="sub_menu"><a href="javascript:_MP(3,'/Agent/Index/postRecharge/');" hidefocus="true" style="outline:none;">{:lan('RECHARGE', 'Agent')}</a></li>
+	</eq>
+		<li id="_MP4" class="sub_menu"><a href="javascript:_MP(4,'/Agent/Index/recharge_record/');" hidefocus="true" style="outline:none;">{:lan('RECHARGE_RECORD', 'Agent')}</a></li>
+</ul>
+
+<script type="text/javascript">
+$(".switchs").each(function(i){
+	var ul = $(this).parent().next();
+	$(this).click(
+	function(){
+		if(ul.is(':visible')){
+			ul.hide();
+			$(this).removeClass('on');
+				}else{
+			ul.show();
+			$(this).addClass('on');
+		}
+	})
+});
+</script>

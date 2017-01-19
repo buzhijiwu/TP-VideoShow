@@ -1,0 +1,177 @@
+/*icon-font*/
+@font-face {font-family: "iconfont";
+    src: url('/Public/Public/iconfont/iconfont.eot?t=1462273941'); /* IE9*/
+    src: url('/Public/Public/iconfont/iconfont.eot?t=1462273941#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('/Public/Public/iconfont/iconfont.woff?t=1462273941') format('woff'), /* chrome, firefox */
+    url('/Public/Public/iconfont/iconfont.ttf?t=1462273941') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+    url('/Public/Public/iconfont/iconfont.svg?t=1462273941#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+/*@font-face {
+    font-family: 'iconfont';
+    src: url('//at.alicdn.com/t/font_1463135823_3125336.eot'); !* IE9*!
+    src: url('//at.alicdn.com/t/font_1463135823_3125336.eot?#iefix') format('embedded-opentype'), !* IE6-IE8 *!
+    url('//at.alicdn.com/t/font_1463135823_3125336.woff') format('woff'), !* chrome、firefox *!
+    url('//at.alicdn.com/t/font_1463135823_3125336.ttf') format('truetype'), !* chrome、firefox、opera、Safari, Android, iOS 4.2+*!
+    url('//at.alicdn.com/t/font_1463135823_3125336.svg#iconfont') format('svg'); !* iOS 4.1- *!
+}*/
+
+
+
+
+.iconfont {
+    font-family:"iconfont" !important;
+    font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    vertical-align:middle;
+}
+
+
+
+/*用户等级*/
+.common-us{
+    background-image:url(/Public/Public/Images/Level/level_icon.png);
+    width:40px;
+    height: 20px;
+    display: inline-block;
+}
+.us0{background-position: -21px -16px;}
+.us1{background-position: -21px -49px;}
+.us2{background-position: -21px -82px;}
+.us3{background-position: -21px -114px;}
+.us4{background-position: -21px -147px;}
+.us5{background-position: -21px -179px;}
+.us6{background-position: -21px -212px;}
+.us7{background-position: -21px -245px;}
+.us8{background-position: -21px -278px;}
+.us9{background-position: -21px -310px;}
+.us10{background-position: -21px -343px;}
+.us11{background-position: -21px -375px;}
+.us12{background-position: -21px -408px;}
+.us13{background-position: -21px -441px;}
+.us14{background-position: -21px -474px;}
+.us15{background-position: -21px -507px;}
+.us16{background-position: -21px -539px;}
+.us17{background-position: -21px -572px;}
+.us18{background-position: -21px -605px;}
+.us19{background-position: -21px -638px;}
+.us20{background-position: -21px -670px;}
+.us21{background-position: -21px -703px;}
+.us22{background-position: -21px -736px;}
+.us23{background-position: -21px -769px;}
+.us24{background-position: -21px -801px;}
+.us25{background-position: -21px -834px;}
+.us26{background-position: -21px -867px;}
+.us27{background-position: -21px -900px;}
+.us28{background-position: -21px -932px;}
+.us29{background-position: -21px -965px;}
+.us30{background-position: -21px -998px;}
+
+/*主播等级*/
+.common-em{
+    background-image:url(/Public/Public/Images/Level/level_icon.png);
+    width:40px;
+    height:20px;
+    display: inline-block;
+}
+.em0{background-position: -76px -15px;}
+.em1{background-position: -76px -49px;}
+.em2{background-position: -76px -81px;}
+.em3{background-position: -76px -114px;}
+.em4{background-position: -76px -148px;}
+.em5{background-position: -76px -181px;}
+.em6{background-position: -76px -212px;}
+.em7{background-position: -76px -245px;}
+.em8{background-position: -76px -278px;}
+.em9{background-position: -76px -310px;}
+.em10{background-position: -76px -343px;}
+.em11{background-position: -76px -375px;}
+.em12{background-position: -76px -408px;}
+.em13{background-position: -76px -442px;}
+.em14{background-position: -76px -474px;}
+.em15{background-position: -76px -507px;}
+.em16{background-position: -76px -540px;}
+.em17{background-position: -76px -572px;}
+.em18{background-position: -76px -605px;}
+.em19{background-position: -76px -638px;}
+.em20{background-position: -76px -671px;}
+.em21{background-position: -76px -703px;}
+.em22{background-position: -76px -736px;}
+.em23{background-position: -76px -769px;}
+.em24{background-position: -76px -802px;}
+.em25{background-position: -76px -834px;}
+.em26{background-position: -76px -867px;}
+.em27{background-position: -76px -900px;}
+.em28{background-position: -76px -932px;}
+.em29{background-position: -76px -964px;}
+.em30{background-position: -76px -997px;}
+
+
+/*家族字母*/
+.family-style{
+    display: inline-block;
+    width: 65px;
+    background-image: url(/Public/Public/Images/Family/tail.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    text-align: center;
+    padding-left: 13px;
+    height: 20px;
+    line-height: 20px;
+}
+.char-style1{
+    background: url(/Public/Public/Images/Family/char_style1.png) no-repeat top left;
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    margin-left: 1px;
+}
+.char-A {  background-position: 0 0;  }
+.char-B {  background-position: 0 -11px;  }
+.char-C {  background-position: 0 -22px;  }
+.char-D {  background-position: 0 -33px;  }
+.char-E {  background-position: 0 -44px;  }
+.char-F {  background-position: 0 -55px;  }
+.char-G {  background-position: 0 -66px;  }
+.char-H {  background-position: 0 -77px;  }
+.char-I {  background-position: 0 -88px;  }
+.char-J {  background-position: 0 -99px;  }
+.char-K {  background-position: 0 -110px;  }
+.char-L {  background-position: 0 -121px;  }
+.char-M {  background-position: 0 -132px;  }
+.char-N {  background-position: 0 -143px;  }
+.char-O {  background-position: 0 -154px;  }
+.char-P {  background-position: 0 -165px;  }
+.char-Q {  background-position: 0 -176px;  }
+.char-R {  background-position: 0 -187px;  }
+.char-S {  background-position: 0 -198px;  }
+.char-T {  background-position: 0 -209px;  }
+.char-U {  background-position: 0 -220px;  }
+.char-V {  background-position: 0 -231px;  }
+.char-W {  background-position: 0 -242px;  }
+.char-X {  background-position: 0 -252px;  }
+.char-Y {  background-position: 0 -264px;  }
+.char-z {  background-position: 0 -274px;  }
+
+
+/*靓号、会员、守护*/
+.common-vipIcon{
+    background-image:url(/Public/Public/Images/Level/level_icon.png);
+    width: 30px;
+    height: 20px;
+    display: inline-block;
+}
+
+.common-guard,.common-guard0,.common-guardundefined{display: none}
+.common-guard1{background-position: -145px -46px;}
+.common-guard2{background-position: -146px -16px;}
+
+.common-vip,.common-vip0,.common-vipundefined{display: none}
+.common-vip1{background-position: -148px -74px;}
+.common-vip2{background-position: -148px -104px;}
+
+.common-niceno{background-position: -148px -133px;}
+
+
+

@@ -1,0 +1,978 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "返回值说明：{'status':状态码,'message':提示信息};"
+    },
+    "tags": [
+        {"name": "LoginRegister","description": "登录注册"}
+    ],
+    "paths": {
+        "/api.php/Api/doregister": {
+            "post": {
+                "tags": ["LoginRegister"],
+                "operationId": "doregister",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "新用户注册",
+                "description": "新用户注册",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "phoneno",
+                        "description": "手机号",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "password",
+                        "description": "密码",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "countryno",
+                        "description": "国家码",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "verifycode",
+                        "description": "验证码",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "appkey",
+                        "description": "密钥",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "lastloginip",
+                        "description": "最后登录IP",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "lantype",
+                        "description": "语言类型",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "uuid",
+                        "description": "客户端设备号",
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "distributeid",
+                        "description": "应用市场渠道",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "properties": {
+                                "datalist": {
+                                    "properties": {
+                                        "userid": {
+                                            "description": "用户ID",
+                                            "type": "integer"
+                                        },
+                                        "userno": {
+                                            "description": "用户号码",
+                                            "type": "string"
+                                        },
+                                        "roomno": {
+                                            "description": "房间号",
+                                            "type": "integer"
+                                        },
+                                        "niceno": {
+                                            "description": "靓号",
+                                            "type": "string"
+                                        },
+                                        "showroomno": {
+                                            "description": "显示的房间号，有靓号显示靓号，没有靓号显示房间号",
+                                            "type": "string"
+                                        },
+                                        "familyid": {
+                                            "description": "家族ID",
+                                            "type": "string"
+                                        },
+                                        "username": {
+                                            "description": "用户名",
+                                            "type": "string"
+                                        },
+                                        "nickname": {
+                                            "description": "昵称",
+                                            "type": "string"
+                                        },
+                                        "vipid": {
+                                            "description": "VIP等级",
+                                            "type": "string"
+                                        },
+                                        "guardid": {
+                                            "description": "VIP等级",
+                                            "type": "string"
+                                        },
+                                        "userlevel": {
+                                            "description": "用户等级",
+                                            "type": "string"
+                                        },
+                                        "countrycode": {
+                                            "description": "国家码",
+                                            "type": "string"
+                                        },
+                                        "registertime": {
+                                            "description": "注册时间",
+                                            "type": "string"
+                                        },
+                                        "lastlogintime": {
+                                            "description": "最后登录时间",
+                                            "type": "string"
+                                        },
+                                        "province": {
+                                            "description": "省份（预留字段）",
+                                            "type": "string"
+                                        },
+                                        "city": {
+                                            "description": "城市（预留字段）",
+                                            "type": "string"
+                                        },
+                                        "smallheadpic": {
+                                            "description": "用户头像",
+                                            "type": "string"
+                                        },
+                                        "bigheadpic": {
+                                            "description": "主播头像",
+                                            "type": "string"
+                                        },
+                                        "lastloginip": {
+                                            "description": "登录IP",
+                                            "type": "string"
+                                        },
+                                        "isemcee": {
+                                            "description": "是否主播：0不是、1是",
+                                            "type": "string"
+                                        },
+                                        "token": {
+                                            "description": "登录信息验证token值",
+                                            "type": "string"
+                                        },
+                                        "forbidlist": {
+                                            "description": "登录用户拉黑的其他用户列表",
+                                            "schema": {
+                                                "properties": {
+
+                                                }
+                                            }
+                                        },
+                                        "emceeinfo": {
+                                            "description": "主播信息",
+                                            "schema": {
+                                                "properties": {
+
+                                                }
+                                            }
+                                        },
+                                        "usertype": {
+                                            "description": "用户类型：0普通用户、10房间管理员、20家族管理员、30运营、40应用商店渠道商",
+                                            "type": "string"
+                                        },
+                                        "balance": {
+                                            "description": "用户余额",
+                                            "type": "string"
+                                        },
+                                        "freegiftcount": {
+                                            "description": "免费礼物数量",
+                                            "type": "integer"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "-1": {
+                        "description": "系统繁忙"
+                    },
+                    "400": {
+                        "description": "参数有误"
+                    },
+                    "500": {
+                        "description": "请求异常"
+                    },
+                    "400002": {
+                        "description": "该号码已注册"
+                    },
+                    "400003": {
+                        "description": "验证码错误"
+                    }
+                }
+            }
+        },
+        "/api.php/Api/dologin": {
+            "post": {
+                "tags": ["LoginRegister"],
+                "operationId": "dologin",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "用户登录",
+                "description": "用户登录",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "phoneno",
+                        "description": "手机号",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "password",
+                        "description": "密码",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "countryno",
+                        "description": "国家码",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "lastloginip",
+                        "description": "最后登录IP",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "lantype",
+                        "description": "语言类型",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "uuid",
+                        "description": "客户端设备号",
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "distributeid",
+                        "description": "应用市场渠道",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "properties": {
+                                "datalist": {
+                                    "$ref": "#/definitions/datalist"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "参数有误"
+                    },
+                    "500": {
+                        "description": "请求异常"
+                    },
+                    "400001": {
+                        "description": "您还未登陆，请登陆"
+                    },
+                    "400004": {
+                        "description": "该号码不存在,请注册"
+                    },
+                    "400005": {
+                        "description": "您的账户已被禁用或被删除"
+                    },
+                    "400006": {
+                        "description": "密码错误"
+                    }
+                }
+            }
+        },
+        "/api.php/Api/thirdPartyLogin": {
+            "post": {
+                "tags": ["LoginRegister"],
+                "operationId": "thirdPartyLogin",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "第三方登录",
+                "description": "第三方登录",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "thirdparty",
+                        "description": "第三方id 0：自己系统 1：Facebook 2：Google 3：Twitter",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "tpuserid",
+                        "description": "系统保存的userid",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "tpusername",
+                        "description": "系统保存的用户名",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "smallheadpic",
+                        "description": "第三方头像",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "token",
+                        "description": "第三方token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "devicetype",
+                        "description": "设备类型：0.安卓，1.iOS，2.PC",
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "lastloginip",
+                        "description": "最后登录IP",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "lantype",
+                        "description": "语言类型",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "uuid",
+                        "description": "客户端设备号",
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "distributeid",
+                        "description": "应用市场渠道",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "properties": {
+                                "datalist": {
+                                    "$ref": "#/definitions/datalist"
+                                }
+                            }
+                        }
+                    },
+                    "-1": {
+                        "description": "系统繁忙"
+                    },
+                    "400": {
+                        "description": "参数有误"
+                    },
+                    "500": {
+                        "description": "请求异常"
+                    },
+                    "400005": {
+                        "description": "您的账户已被禁用或被删除"
+                    }
+                }
+            }
+        },
+        "/api.php/Api/checkUserLoginStatus": {
+            "post": {
+                "tags": ["LoginRegister"],
+                "operationId": "checkUserLoginStatus",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "验证用户登录状态",
+                "description": "验证用户登录状态",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "userid",
+                        "description": "用户userid",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "token",
+                        "description": "用户登录token值",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "properties": {
+                                "datalist": {
+                                    "$ref": "#/definitions/datalist"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "参数有误"
+                    },
+                    "500": {
+                        "description": "请求异常"
+                    },
+                    "400001": {
+                        "description": "您还未登陆，请登陆"
+                    }
+                }
+            }
+        },
+        "/api.php/Api/sendVietnamSms": {
+            "post": {
+                "tags": ["LoginRegister"],
+                "operationId": "sendVietnamSms",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "发送越南短信验证码",
+                "description": "发送越南短信验证码",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "phoneno",
+                        "description": "手机号",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "countryno",
+                        "description": "国家码",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "lantype",
+                        "description": "语言类型",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功"
+                    },
+                    "-1": {
+                        "description": "系统繁忙"
+                    },
+                    "400": {
+                        "description": "参数有误"
+                    },
+                    "500": {
+                        "description": "请求异常"
+                    },
+                    "400007": {
+                        "description": "超过当天注册短信最大发送次数"
+                    }
+                }
+            }
+        },
+        "/api.php/Api/modifyPassword": {
+            "post": {
+                "tags": ["LoginRegister"],
+                "operationId": "modifyPassword",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "修改密码",
+                "description": "修改密码",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "userid",
+                        "description": "用户userid",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "oldpwd",
+                        "description": "旧密码",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "newpwd",
+                        "description": "新密码",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "confirmpwd",
+                        "description": "确认密码",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功"
+                    },
+                    "-1": {
+                        "description": "系统繁忙"
+                    },
+                    "400": {
+                        "description": "参数有误"
+                    },
+                    "500": {
+                        "description": "请求异常"
+                    },
+                    "400008": {
+                        "description": "旧密码输入错误"
+                    },
+                    "400009": {
+                        "description": "两次密码不一致"
+                    },
+                    "400010": {
+                        "description": "不符合密码规则"
+                    }
+                }
+            }
+        },
+        "/api.php/Api/forgetPassword": {
+            "post": {
+                "tags": ["LoginRegister"],
+                "operationId": "forgetPassword",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "忘记密码",
+                "description": "忘记密码",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "phoneno",
+                        "description": "手机号",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "password",
+                        "description": "密码",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "countryno",
+                        "description": "国家码",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "verifycode",
+                        "description": "验证码",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "appkey",
+                        "description": "密钥",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功"
+                    },
+                    "-1": {
+                        "description": "系统繁忙"
+                    },
+                    "400": {
+                        "description": "参数有误"
+                    },
+                    "500": {
+                        "description": "请求异常"
+                    },
+                    "400003": {
+                        "description": "验证码错误"
+                    },
+                    "400004": {
+                        "description": "该号码不存在,请注册"
+                    },
+                    "400010": {
+                        "description": "不符合密码规则"
+                    }
+                }
+            }
+        },
+        "/api.php/Api/getCountryno": {
+            "post": {
+                "tags": ["LoginRegister"],
+                "operationId": "getCountryno",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "获取国家码列表",
+                "description": "获取国家码列表",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "lantype",
+                        "description": "语言类型",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "properties": {
+                                "datalist": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "countryid": {
+                                                "description": "国家序列ID",
+                                                "type": "integer"
+                                            },
+                                            "countryno": {
+                                                "description": "国家代码 例如：86",
+                                                "type": "string"
+                                            },
+                                            "countrycode": {
+                                                "description": "国家码 例如：CN",
+                                                "type": "string"
+                                            },
+                                            "countryname": {
+                                                "description": "国家名称",
+                                                "type": "string"
+                                            },
+                                            "countrydesc": {
+                                                "description": "国家描述",
+                                                "type": "string"
+                                            },
+                                            "language": {
+                                                "description": "国家语言",
+                                                "type": "string"
+                                            },
+                                            "landisplay": {
+                                                "description": "国家的语言展现 例如：中文",
+                                                "type": "string"
+                                            },
+                                            "lantype": {
+                                                "description": "语言类型 例如：zh",
+                                                "type": "string"
+                                            },
+                                            "isshow": {
+                                                "description": "是否显示该国家0：否1：是",
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api.php/Api/checkUsernameRegister": {
+            "post": {
+                "tags": ["LoginRegister"],
+                "operationId": "checkUsernameRegister",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "验证用户名是否已经注册",
+                "description": "验证用户名是否已经注册",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "phoneno",
+                        "description": "手机号",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "countryno",
+                        "description": "国家码",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "参数有误"
+                    },
+                    "500": {
+                        "description": "请求异常"
+                    },
+                    "400002": {
+                        "description": "该号码已注册"
+                    },
+                    "400004": {
+                        "description": "该号码不存在,请注册"
+                    }
+                }
+            }
+        }
+
+    },
+    "definitions": {
+        "datalist": {
+            "properties": {
+                "userid": {
+                    "description": "用户ID",
+                    "type": "integer"
+                },
+                "userno": {
+                    "description": "用户号码",
+                    "type": "string"
+                },
+                "username": {
+                    "description": "用户名",
+                    "type": "string"
+                },
+                "roomno": {
+                    "description": "房间号",
+                    "type": "integer"
+                },
+                "niceno": {
+                    "description": "靓号",
+                    "type": "string"
+                },
+                "nickname": {
+                    "description": "昵称",
+                    "type": "string"
+                },
+                "userlevel": {
+                    "description": "用户等级",
+                    "type": "string"
+                },
+                "smallheadpic": {
+                    "description": "用户头像",
+                    "type": "string"
+                },
+                "bigheadpic": {
+                    "description": "主播头像",
+                    "type": "string"
+                },
+                "isemcee": {
+                    "description": "是否主播：0不是、1是",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "用户状态 0：正常 1：删除",
+                    "type": "string"
+                },
+                "countrycode": {
+                    "description": "国家码",
+                    "type": "string"
+                },
+                "usertype": {
+                    "description": "用户类型：0普通用户、10房间管理员、20家族管理员、30运营、40应用商店渠道商",
+                    "type": "string"
+                },
+                "birthday": {
+                    "description": "用户生日",
+                    "type": "string"
+                },
+                "sex": {
+                    "description": "用户性别 0：男 1：女",
+                    "type": "string"
+                },
+                "showroomno": {
+                    "description": "显示的房间号，有靓号显示靓号，没有靓号显示房间号",
+                    "type": "string"
+                },
+                "vipid": {
+                    "description": "VIP等级",
+                    "type": "string"
+                },
+                "token": {
+                    "description": "登录信息验证token值",
+                    "type": "string"
+                },
+                "emceeinfo": {
+                    "description": "主播信息",
+                    "schema": {
+                        "properties": {
+                            "emceeid": {
+                                "description": "主播ID",
+                                "type": "string"
+                            },
+                            "userid": {
+                                "description": "主播的用户ID",
+                                "type": "string"
+                            },
+                            "emceelevel": {
+                                "description": "主播等级",
+                                "type": "string"
+                            },
+                            "livetype": {
+                                "description": "直播类型 0：安卓直播 1：IOS直播 2：PC直播",
+                                "type": "string"
+                            },
+                            "liveid": {
+                                "description": "直播记录ID",
+                                "type": "string"
+                            },
+                            "isliving": {
+                                "description": "是否在直播 0：否 1：是",
+                                "type": "string"
+                            },
+                            "livetime": {
+                                "description": "直播时间",
+                                "type": "string"
+                            },
+                            "audiencecount": {
+                                "description": "当前观看人数",
+                                "type": "string"
+                            },
+                            "totalaudicount": {
+                                "description": "累计的总的观看人数",
+                                "type": "string"
+                            },
+                            "fanscount": {
+                                "description": "当前总粉丝数",
+                                "type": "string"
+                            },
+                            "status": {
+                                "description": "预留字段（暂时没用到）",
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "equipmentinfo": {
+                    "description": "正在使用的座驾信息",
+                    "schema": {
+                        "properties": {
+                            "commodityid": {
+                                "description": "座驾ID",
+                                "type": "string"
+                            },
+                            "commoditytype": {
+                                "description": "座驾分类: 1 car",
+                                "type": "string"
+                            },
+                            "commodityname": {
+                                "description": "座驾名称",
+                                "type": "string"
+                            },
+                            "commoditydesc": {
+                                "description": "座驾描述",
+                                "type": "string"
+                            },
+                            "commodityprice": {
+                                "description": "座驾价格",
+                                "type": "string"
+                            },
+                            "pcsmallpic": {
+                                "description": "座驾PC端小图片",
+                                "type": "string"
+                            },
+                            "appsmallpic": {
+                                "description": "座驾APP端小图片",
+                                "type": "string"
+                            },
+                            "appbigpic": {
+                                "description": "座驾APP端大图片",
+                                "type": "string"
+                            },
+                            "commodityflashid": {
+                                "description": "座驾Flash文件名的ID字段",
+                                "type": "string"
+                            },
+                            "commodityswf": {
+                                "description": "座驾Flash文件路径",
+                                "type": "string"
+                            },
+                            "ishot": {
+                                "description": "是否热门 0不是热门 1热门",
+                                "type": "string"
+                            },
+                            "sort": {
+                                "description": "排序字段",
+                                "type": "string"
+                            },
+                            "createtime": {
+                                "description": "座驾购买时间",
+                                "type": "string"
+                            },
+                            "equipid": {
+                                "description": "用户购买的座驾的序列ID",
+                                "type": "string"
+                            },
+                            "expiretime": {
+                                "description": "座驾失效时间",
+                                "type": "string"
+                            },
+                            "isused": {
+                                "description": "座驾是否正在使用：0未使用 1使用",
+                                "type": "string"
+                            },
+                            "spendmoney": {
+                                "description": "购买该座驾花费的金额",
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "balance": {
+                    "description": "用户余额",
+                    "type": "string"
+                },
+                "spendmoney": {
+                    "description": "总消费的钱",
+                    "type": "string"
+                },
+                "earnmoney": {
+                    "description": "总挣的钱",
+                    "type": "string"
+                },
+                "freegiftcount": {
+                    "description": "免费礼物数量",
+                    "type": "integer"
+                }
+            }
+        }
+    }
+}

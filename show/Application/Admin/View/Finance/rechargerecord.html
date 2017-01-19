@@ -1,0 +1,223 @@
+﻿<tagLib name="html" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>{:lan('ADMIN_MAN_TITLE', 'Admin')}</title>
+    <link href="__PUBLIC__/Public/statics/css/reset.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/Public/statics/css/system.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/Public/statics/css/table_form.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/Public/statics/css/dialog.css" rel="stylesheet" type="text/css" />
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/dialog.js"></script>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles1.css" title="styles1" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles2.css" title="styles2" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles3.css" title="styles3" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles4.css" title="styles4" media="screen" />
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/admin_common.js"></script>
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/styleswitch.js"></script>
+
+</head>
+<body>
+<style type="text/css">
+    html{_overflow-y:scroll}
+</style><div id="closeParentTime" style="display:none"></div>
+<div class="pad-10">
+    <form name="searchform" id="searchform" action="/Admin/Finance/rechargerecord" method="get" >
+        <input type="hidden" name="searchform" value="1">
+        <table width="100%" cellspacing="0" class="search-form">
+            <tbody>
+            <tr>
+                <td>
+                    <div class="explain-col">
+                        {:lan('TRANSACTION_TIME', 'Admin')}：
+                        <link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/js/calendar/jscal2.css"/>
+                        <link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/js/calendar/border-radius.css"/>
+                        <link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/js/calendar/win2k.css"/>
+                        <script type="text/javascript" src="__PUBLIC__/Public/statics/js/calendar/calendar.js"></script>
+                        <script type="text/javascript" src="__PUBLIC__/Public/statics/js/calendar/lang/en.js"></script>
+                        <input type="text" name="start_time" id="start_time" value="{$search['start_time']}" size="10" class="date" readonly>&nbsp;<script type="text/javascript">
+                        Calendar.setup({
+                            weekNumbers: false,
+                            inputField : "start_time",
+                            trigger    : "start_time",
+                            dateFormat: "%Y-%m-%d",
+                            showTime: false,
+                            minuteStep: 1,
+                            onSelect   : function() {this.hide();}
+                        });
+                    </script>- &nbsp;<input type="text" name="end_time" id="end_time" value="{$search['end_time']}" size="10" class="date" readonly>&nbsp;<script type="text/javascript">
+                        Calendar.setup({
+                            weekNumbers: false,
+                            inputField : "end_time",
+                            trigger    : "end_time",
+                            dateFormat: "%Y-%m-%d",
+                            showTime: false,
+                            minuteStep: 1,
+                            onSelect   : function() {this.hide();}
+                        });
+                    </script>
+                        <div>
+                            {:lan('PAY_PERSON', 'Admin')}{:lan('ROOMNO', 'Admin')}/{:lan('SYS_USERNAME', 'Admin')}/{:lan('NICKNAME', 'Admin')}：
+                            <input name="username" type="text" class="input-text" value="{$search['username']}" />
+                        </div>
+                        {:lan('TARGET_OBJECT', 'Admin')}：
+                        <input name="targetname" type="text" class="input-text" value="{$search['targetname']}" />
+                        <select name="status">
+                            <option value="">{:lan('STATUS', 'Admin')}</option>
+                            <option value="0" <eq name="search.status" value="0"> selected</eq>>{:lan('FAILED', 'Admin')}</option>
+                            <option value="1" <eq name="search.status" value="1"> selected</eq>>{:lan('SUCCESSFUL', 'Admin')}</option>
+                        </select>
+                        <input type="button" class="button" onclick="form_search();" value="{:lan('BTN_SEARCH', 'Admin')}" />
+                        <div style="float:right;">
+                            <input type="button" class="button" onclick="location='/Admin/Finance/admin_recharge_record/'" value="{:lan('ADMIN_RECHARGE_RECORD', 'Admin')}">
+                            {:lan('EXPORT_DATA','Admin')}{:lan("PAGE_TOTAL", "Common")}{$export_page}{:lan("PAGE", "Common")}
+                            <input type="text" style="width:50px;" name="export_page" value="">
+                            <input type="button" class="button" onclick="export_record();" style="background-color:#00CC99;" value="{:lan('EXPORT_DATA','Admin')}">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+    <div class="subnav">
+        <form>
+            <div>
+                <table style="width:100%;">
+                    <tr>
+                        <td>
+                            <span>{:lan('TOTAL_RECHARGE_SHOWAMOUNT', 'Admin')}：</span>
+                            <b style="color:red;font-size:18px;">{$total_showamount} XU</b>
+                        </td>
+                        <td>
+                            <span>Credit Card {:lan('AMOUNT', 'Admin')}：</span>
+                            <b style="color:red;font-size:14px;">{$recharge_total_amount[0]+0} VND</b>
+                        </td>
+                        <td>
+                            <span>Game Card {:lan('AMOUNT', 'Admin')}：</span>
+                            <b style="color:red;font-size:14px;">{$recharge_total_amount[1]+0} VND</b>
+                        </td>
+                        <td>
+                            <span>ATM Debit {:lan('AMOUNT', 'Admin')}：</span>
+                            <b style="color:red;font-size:14px;">{$recharge_total_amount[2]+0} VND</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>{:lan('TOTAL_RECHARGE_AMOUNT', 'Admin')}：</span>
+                            <b style="color:red;font-size:18px;">{$total_amount} VND</b>
+                        </td>
+                        <td>
+                            <span>Visa Mater {:lan('AMOUNT', 'Admin')}：</span>
+                            <b style="color:red;font-size:14px;">{$recharge_total_amount[3]+0} VND</b>
+                        </td>
+                        <td>
+                            <span>SMS+ {:lan('AMOUNT', 'Admin')}：</span>
+                            <b style="color:red;font-size:14px;">{$recharge_total_amount[4]+0} VND</b>
+                        </td>
+                        <td>
+                            <span>Internet Bank {:lan('AMOUNT', 'Admin')}：</span>
+                            <b style="color:red;font-size:14px;">{$recharge_total_amount[5]+0} VND</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:30%;"></td>
+                        <td>
+                            <span>Agent {:lan('AMOUNT', 'Admin')}：</span>
+                            <b style="color:red;font-size:14px;">{$recharge_total_amount[6]+0} VND</b>
+                        </td>
+                        <td>
+                            <span>Applestore {:lan('AMOUNT', 'Admin')}：</span>
+                            <b style="color:red;font-size:14px;">{$recharge_total_amount[7]+0} VND</b>
+                        </td>
+                        <td>
+                            <span>Paypal {:lan('AMOUNT', 'Admin')}：</span>
+                            <b style="color:red;font-size:14px;">{$recharge_total_amount[8]+0} USD</b>
+                        </td>                        
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </div>
+    <br/>
+    <form name="myform" id="myform" action="" method="post" >
+        <div class="table-list">
+            <table width="100%">
+                <thead>
+                <tr>
+                    <th>{:lan('SYS_NUMBER', 'Admin')}</th>
+                    <th>{:lan('TRADE_TYPE', 'Admin')}</th>
+                    <th>{:lan('TRANSACTION_NO', 'Admin')}</th>
+                    <th>{:lan('TRANSACTION_TIME', 'Admin')}</th>
+                    <th>{:lan('VIRTUAL_MONEY', 'Admin')}</th>
+                    <th>{:lan('SYS_LOCAL_CURRENCY', 'Admin')}</th>
+                    <th>{:lan('LOCAL_UNIT', 'Admin')}</th>
+                    <th>{:lan('ROOMNO', 'Admin')}</th>
+                    <th>{:lan('SYS_USERNAME', 'Admin')}</th>
+                    <th>{:lan('NICKNAME', 'Admin')}</th>
+                    <th>{:lan('TARGET_OBJECT', 'Admin')}</th>
+                    <th>{:lan('TRANSACTION_STATUS', 'Admin')}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <volist name="rechargedetails" id="vo" key="k">
+                    <tr>
+                        <td align='center'>{$k}</td>
+                        <td align="center">
+                            <switch name="vo.type">
+                                <case value="0">{:lan('RECHARGE_YOURSELF', 'Admin')}</case>
+                                <case value="1">{:lan('AGENT_RECHARGE_USER', 'Admin')}</case>
+                                <case value="2">{:lan('USER_RECHARGE_OTHERS', 'Admin')}</case>
+                                <case value="3">{:lan('ADMIN_RECHARGE_AGENT', 'Admin')}</case>
+                                <case value="4">{:lan('ADMIN_RECHARGE_USER', 'Admin')}</case>
+                            </switch>
+                        </td>
+                        <td align='center'>{$vo['orderno']}</td>
+                        <td align="center">{$vo['rechargetime']}</td>
+                        <td align='center'>{$vo['showamount']}</td>
+                        <td align='center'>{$vo['amount']}</td>
+                        <td align='center'>{$vo['localunit']}</td>
+                        <td align="center">
+                            <neq name="vo.niceno" value="">{$vo['niceno']}<else/>{$vo['roomno']}</neq>
+                        </td>
+                        <td align="center">{$vo['username']}</td>
+                        <td align="center">{$vo['nickname']}</td>
+                        <td align='center'>{$vo['targetname']}</td>
+                        <td align='center'>
+                            <if condition="$vo['status']=='1'">
+                                {:lan('SUCCESSFUL', 'Admin')}
+                                <elseif condition="$vo[status]=='2'"/>
+                                {:lan('PENDING', 'Admin')}
+                                <else />
+                                {:lan('FAILED', 'Admin')}
+                            </if>
+                        </td>
+                    </tr>
+                </volist>
+
+                </tbody>
+            </table>
+            <div id="pages">{$page}</div>
+        </div>
+        <input type="hidden" id="return" name="return" value="{$_SERVER["REQUEST_URI"]|base64_encode}" >
+    </form>
+</div>
+<script type="text/javascript">
+    //条件搜索
+    function form_search(){
+        document.getElementById('searchform').action = '/Admin/Finance/rechargerecord/';
+        $('#searchform').submit();
+    }
+    //导出数据
+    function export_record(){
+        if(confirm("{:lan('CONFIRM_EXPORT_DATA','Admin')}")){
+            document.getElementById('searchform').action = '/Admin/Finance/export_rechargerecord/';
+            $('#searchform').submit();
+        }
+    }
+</script>
+</body>
+</html>

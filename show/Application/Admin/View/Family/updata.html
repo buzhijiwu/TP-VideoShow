@@ -1,0 +1,80 @@
+<extend name="Public:list" />
+<block name="title"></block>
+<block name="css"></block>
+
+<block name="main">
+<div class="pad-10">
+    <div class="content-menu ib-a line-x"><a href="javascript:;" class="on"><em>{:lan('APPROVE_INFO', 'Admin')}</em></a></div>
+  </div>
+  <form name="upForm" id="upForm" action="__URL__/updata" method="post" onsubmit="return checkForm(this)">
+    <input type="hidden" name="familyid" value="{$data.familyid}">
+    <input type="hidden" name="userid" value="{$data.userinfo.userid}">
+    <div class="pad_10">
+      <div style="overflow-y:auto;overflow-x:hidden" class="scrolltable">
+        <table width="100%" cellspacing="0" class="table_form contentWrap">
+          <tbody>
+            <tr>
+              <th width="80"> {:lan('APPROVE_STATUS', 'Admin')} </th>
+              <td><input type="text" size="50" style="height:30px;" value="
+				<switch name="data.status">    
+              		<case value="0">{:lan('WAIT_APPROVE', 'Admin')}</case>
+              		<case value="1">{:lan('PASS_APPROVE', 'Admin')}</case>
+              		<case value="2">{:lan('REJECT_APPROVE', 'Admin')}</case>
+              	</switch>" readonly="readonly" class="input-text"></td>
+            </tr>
+            <tr>
+              <th width="80"> {:lan('APPLY_TIME', 'Admin')} </th>
+              <td><input type="text" size="50" style="height:30px;" value="{$data.applytime}" readonly="readonly" class="input-text"></td>
+            </tr>
+            <tr>
+              <th width="80"> {:lan('APPLY_PERSON', 'Admin')} </th>
+              <td><input type="text" size="50" style="height:30px;" value="{$data.userinfo.nickname}" readonly="readonly" class="input-text"></td>
+            </tr>
+            <tr>
+              <th width="80"> {:lan('APPLY_PERSON_LEVEL', 'Admin')} </th>
+              <td><input type="text" size="50" style="height:30px;" value="{$data.userinfo.userlevel}" readonly="readonly" class="input-text"></td>
+            </tr>
+            <tr>
+              <th width="80"> {:lan('FAMILY_NAME', 'Admin')}</th>
+              <td><input type="text" size="50" style="height:30px;" value="{$data.familyname}" readonly="readonly" class="input-text"></td>
+            </tr>
+            <tr>
+              <th width="80"> {:lan('FAMILY_INFO', 'Admin')} </th>
+              <td><textarea rows="6" style="width:380px;" readonly="readonly">{$data.familyinfo}</textarea></td>
+            </tr>
+            <tr>
+              <th width="80"> {:lan('FAMILY_COVER', 'Admin')} </th>
+              <td><img src="{$data.familylogosrc}" height="160" width="200"></td>
+            </tr>
+            <tr>
+              <th width="80"> {:lan('APPROVE_RESULT', 'Admin')} </th>
+              <td><input type="radio" name="status" value="0" size="50" <eq name="data.status" value="0">checked=checked</eq>>
+                {:lan('WAIT_APPROVE', 'Admin')}
+                <input type="radio" name="status" value="1" size="50" <eq name="data.status" value="1">checked=checked</eq>>
+                {:lan('PASS_APPROVE', 'Admin')}
+                <input type="radio" name="status" value="2" size="50" <eq name="data.status" value="2">checked=checked</eq>>
+                {:lan('REJECT_APPROVE', 'Admin')}</td>
+            </tr>
+            <tr>
+              <th width="80"> {:lan('REASON', 'Admin')} </th>
+              <td><textarea rows="6" style="width:380px;" name="remark">{$data.remark}</textarea></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="bk10"></div>
+      <div class="btn">
+        <input type="submit" class="button" name="dosubmit" value="{:lan('SAVE', 'Admin')}" style="width:100px;height:40px;">
+      </div>
+    </div>
+  </form>
+</block>
+
+<block name="js">
+<script language="JavaScript">
+function checkForm(obj, type) {
+    upForm.title.focus()
+	return false;
+}
+</script>
+</block>

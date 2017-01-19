@@ -1,0 +1,644 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "返回值说明：{'status':状态码,'message':提示信息};"
+    },
+    "tags": [
+        {"name": "PushOrPullFlow","description": "开播推拉流相关"}
+    ],
+    "paths": {
+        "/api.php/Api/createAPPLiveroom": {
+            "post": {
+                "tags": ["PushOrPullFlow"],
+                "operationId": "createAPPLiveroom",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "创建直播",
+                "description": "主播开始直播",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "userid",
+                        "description": "用户userid",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "token",
+                        "description": "用户登录token值",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "roomno",
+                        "description": "房间号",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "devicetype",
+                        "description": "设备类型 0.安卓，1.iOS，2.PC",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "properties": {
+                                "apppushpath": {
+                                    "description": "app推流地址",
+                                    "type": "string"
+                                },
+                                "earnmoney": {
+                                    "description": "主播挣的钱",
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    },
+                    "-1": {
+                        "description": "系统繁忙"
+                    },
+                    "400": {
+                        "description": "参数有误"
+                    },
+                    "500": {
+                        "description": "请求异常"
+                    },
+                    "400001": {
+                        "description": "您还未登陆，请登陆"
+                    },
+                    "403001": {
+                        "description": "您涉嫌违规直播，有疑问请联系客服08.38.635287"
+                    }
+                }
+            }
+        },
+        "/api.php/Api/stopAPPLiveroom": {
+            "post": {
+                "tags": ["PushOrPullFlow"],
+                "operationId": "stopAPPLiveroom",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "结束直播",
+                "description": "主播结束直播",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "userid",
+                        "description": "用户userid",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "roomno",
+                        "description": "房间号",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功"
+                    },
+                    "-1": {
+                        "description": "系统繁忙"
+                    },
+                    "400": {
+                        "description": "参数有误"
+                    },
+                    "500": {
+                        "description": "请求异常"
+                    }
+                }
+            }
+        },
+        "/api.php/Api/enterToLiveRoom": {
+            "post": {
+                "tags": ["PushOrPullFlow"],
+                "operationId": "enterToLiveRoom",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "进入直播间",
+                "description": "进入直播间，获取APP拉流端地址，根据livetype 0 安卓 1IOS 2PC获取不同的拉流地址",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "userid",
+                        "description": "用户ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "token",
+                        "description": "用户登录token值",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "emceeuserid",
+                        "description": "主播ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "devicetype",
+                        "description": "设备类型 0.安卓，1.iOS，2.PC",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "properties": {
+                                "emceeUserInfo": {
+                                    "properties": {
+                                        "userid": {
+                                            "description": "用户ID",
+                                            "type": "integer"
+                                        },
+                                        "userno": {
+                                            "description": "用户号码",
+                                            "type": "string"
+                                        },
+                                        "username": {
+                                            "description": "用户名",
+                                            "type": "string"
+                                        },
+                                        "roomno": {
+                                            "description": "房间号",
+                                            "type": "integer"
+                                        },
+                                        "niceno": {
+                                            "description": "靓号",
+                                            "type": "string"
+                                        },
+                                        "nickname": {
+                                            "description": "昵称",
+                                            "type": "string"
+                                        },
+                                        "userlevel": {
+                                            "description": "用户等级",
+                                            "type": "string"
+                                        },
+                                        "smallheadpic": {
+                                            "description": "用户头像",
+                                            "type": "string"
+                                        },
+                                        "bigheadpic": {
+                                            "description": "主播头像",
+                                            "type": "string"
+                                        },
+                                        "isemcee": {
+                                            "description": "是否主播：0不是、1是",
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "description": "用户状态 0：正常 1：删除",
+                                            "type": "string"
+                                        },
+                                        "token": {
+                                            "description": "登录信息验证token值",
+                                            "type": "string"
+                                        },
+                                        "countrycode": {
+                                            "description": "国家码",
+                                            "type": "string"
+                                        },
+                                        "usertype": {
+                                            "description": "用户类型：0普通用户、10房间管理员、20家族管理员、30运营、40应用商店渠道商",
+                                            "type": "string"
+                                        },
+                                        "birthday": {
+                                            "description": "用户生日",
+                                            "type": "string"
+                                        },
+                                        "sex": {
+                                            "description": "用户性别 0：男 1：女",
+                                            "type": "string"
+                                        },
+                                        "vipid": {
+                                            "description": "VIP等级",
+                                            "type": "string"
+                                        },
+                                        "showroomno": {
+                                            "description": "显示的房间号，有靓号显示靓号，没有靓号显示房间号",
+                                            "type": "string"
+                                        },
+                                        "earnmoney": {
+                                            "description": "主播挣的钱",
+                                            "type": "string"
+                                        },
+                                        "emceeinfo": {
+                                            "description": "主播信息",
+                                            "schema": {
+                                                "properties": {
+                                                    "emceeid": {
+                                                        "description": "主播ID",
+                                                        "type": "string"
+                                                    },
+                                                    "userid": {
+                                                        "description": "主播的用户ID",
+                                                        "type": "string"
+                                                    },
+                                                    "emceelevel": {
+                                                        "description": "主播等级",
+                                                        "type": "string"
+                                                    },
+                                                    "livetype": {
+                                                        "description": "直播类型 0：安卓直播 1：IOS直播 2：PC直播",
+                                                        "type": "string"
+                                                    },
+                                                    "liveid": {
+                                                        "description": "直播记录ID",
+                                                        "type": "string"
+                                                    },
+                                                    "isliving": {
+                                                        "description": "是否在直播 0：否 1：是",
+                                                        "type": "string"
+                                                    },
+                                                    "livetime": {
+                                                        "description": "直播时间",
+                                                        "type": "string"
+                                                    },
+                                                    "audiencecount": {
+                                                        "description": "当前观看人数",
+                                                        "type": "string"
+                                                    },
+                                                    "totalaudicount": {
+                                                        "description": "累计的总的观看人数",
+                                                        "type": "string"
+                                                    },
+                                                    "fanscount": {
+                                                        "description": "当前总粉丝数",
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "description": "预留字段（暂时没用到）",
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "userInfo": {
+                                    "properties": {
+                                        "guardid": {
+                                            "description": "用户是否是该主播的守护，守护等级",
+                                            "type": "integer"
+                                        },
+                                        "iskicked": {
+                                            "description": "用户是否被踢，0否 1是",
+                                            "type": "integer"
+                                        },
+                                        "shutup_expiretime": {
+                                            "description": "禁言失效时间（秒）",
+                                            "type": "integer"
+                                        },
+                                        "isfriend": {
+                                            "description": "是否关注了该主播",
+                                            "type": "integer"
+                                        },
+                                        "spendmoney": {
+                                            "description": "用户消费的钱",
+                                            "type": "integer"
+                                        }
+                                    }
+                                },
+                                "guardandseat": {
+                                    "properties": {
+                                        "garddef": {
+                                            "description": "默认守护定义列表",
+                                            "schema": {
+                                                "type": "array",
+                                                "items": {
+                                                    "properties": {
+                                                        "gdid": {
+                                                            "description": "守护定义序列ID",
+                                                            "type": "string"
+                                                        },
+                                                        "guardid": {
+                                                            "description": "守护id",
+                                                            "type": "string"
+                                                        },
+                                                        "gdname": {
+                                                            "description": "守护名称",
+                                                            "type": "string"
+                                                        },
+                                                        "gddesc": {
+                                                            "description": "守护定义描述",
+                                                            "type": "string"
+                                                        },
+                                                        "gdduration": {
+                                                            "description": "守护定义周期 单位月",
+                                                            "type": "string"
+                                                        },
+                                                        "gdprice": {
+                                                            "description": "守护价格",
+                                                            "type": "string"
+                                                        },
+                                                        "gdbrand": {
+                                                            "description": "守护的标志图片",
+                                                            "type": "string"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "guards": {
+                                            "description": "通过主播ID，获取主播守护列表",
+                                            "schema": {
+                                                "type": "array",
+                                                "items": {
+                                                    "properties": {
+                                                        "userid": {
+                                                            "description": "用户ID",
+                                                            "type": "string"
+                                                        },
+                                                        "guardid": {
+                                                            "description": "守护id",
+                                                            "type": "string"
+                                                        },
+                                                        "effectivetime": {
+                                                            "description": "生效时间",
+                                                            "type": "string"
+                                                        },
+                                                        "expiretime": {
+                                                            "description": "失效时间",
+                                                            "type": "string"
+                                                        },
+                                                        "userlevel": {
+                                                            "description": "用户等级",
+                                                            "type": "string"
+                                                        },
+                                                        "niceno": {
+                                                            "description": "靓号",
+                                                            "type": "string"
+                                                        },
+                                                        "roomno": {
+                                                            "description": "房间号",
+                                                            "type": "string"
+                                                        },
+                                                        "nickname": {
+                                                            "description": "昵称",
+                                                            "type": "string"
+                                                        },
+                                                        "smallheadpic": {
+                                                            "description": "用户头像",
+                                                            "type": "string"
+                                                        },
+                                                        "vipid": {
+                                                            "description": "用户VIP等级",
+                                                            "type": "string"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "seatdef": {
+                                            "description": "默认沙发定义列表",
+                                            "schema": {
+                                                "type": "array",
+                                                "items": {
+                                                    "properties": {
+                                                        "seatdid": {
+                                                            "description": "沙发定义序列ID",
+                                                            "type": "string"
+                                                        },
+                                                        "seatname": {
+                                                            "description": "沙发名称",
+                                                            "type": "string"
+                                                        },
+                                                        "seatdesc": {
+                                                            "description": "沙发描述",
+                                                            "type": "string"
+                                                        },
+                                                        "seatprice": {
+                                                            "description": "沙发单价",
+                                                            "type": "string"
+                                                        },
+                                                        "seatpic": {
+                                                            "description": "沙发定义图片路径",
+                                                            "type": "string"
+                                                        },
+                                                        "lantype": {
+                                                            "description": "语言类型",
+                                                            "type": "string"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "seats": {
+                                            "description": "主播的沙发",
+                                            "schema": {
+                                                "type": "array",
+                                                "items": {
+                                                    "properties": {
+                                                        "seatid": {
+                                                            "description": "沙发ID",
+                                                            "type": "string"
+                                                        },
+                                                        "seatseqid": {
+                                                            "description": "沙发序列ID",
+                                                            "type": "string"
+                                                        },
+                                                        "userid": {
+                                                            "description": "主播的用户ID",
+                                                            "type": "string"
+                                                        },
+                                                        "seatuserid": {
+                                                            "description": "沙发上用户ID",
+                                                            "type": "string"
+                                                        },
+                                                        "seatcount": {
+                                                            "description": "沙发数量",
+                                                            "type": "string"
+                                                        },
+                                                        "price": {
+                                                            "description": "沙发价格",
+                                                            "type": "string"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "-1": {
+                        "description": "系统繁忙"
+                    },
+                    "400": {
+                        "description": "参数有误"
+                    },
+                    "500": {
+                        "description": "请求异常"
+                    },
+                    "400001": {
+                        "description": "您还未登陆，请登陆"
+                    }
+                }
+            }
+        },
+        "/api.php/Api/banAction": {
+            "post": {
+                "tags": ["PushOrPullFlow"],
+                "operationId": "banAction",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "禁播操作接口",
+                "description": "获取禁播违规列表数据",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "properties": {
+                                "banList": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "name": {
+                                                "description": "禁播违规原因",
+                                                "type": "string"
+                                            },
+                                            "list": {
+                                                "type": "array",
+                                                "items": {
+                                                    "properties": {
+                                                        "violateid": {
+                                                            "description": "违规定义ID",
+                                                            "type": "string"
+                                                        },
+                                                        "type": {
+                                                            "description": "操作 1：违规原因 2：违规程度 3：禁播时长 4：处罚秀币",
+                                                            "type": "string"
+                                                        },
+                                                        "key": {
+                                                            "description": "相应违规等级",
+                                                            "type": "string"
+                                                        },
+                                                        "value": {
+                                                            "description": "违规等级参数",
+                                                            "type": "string"
+                                                        },
+                                                        "lantype": {
+                                                            "description": "语言类型",
+                                                            "type": "string"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "-1": {
+                        "description": "系统繁忙"
+                    },
+                    "400": {
+                        "description": "参数有误"
+                    },
+                    "500": {
+                        "description": "请求异常"
+                    }
+                }
+            }
+        },
+        "/api.php/Api/doBan": {
+            "post": {
+                "tags": ["PushOrPullFlow"],
+                "operationId": "doBan",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "禁播",
+                "description": "巡管直接禁播主播",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "emceeuserid",
+                        "description": "主播ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "type",
+                        "description": "违规原因：0色情低俗 1广告骚扰 2政治敏感 3欺诈骗钱 4违法（暴力，违禁品） 5侵权 6售假 7其它",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "content",
+                        "description": "违规说明",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "violatelevel",
+                        "description": "违规等级：违规等级 0:轻微 1:一般 2:严重",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "bantime",
+                        "description": "禁播时长",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "punishmoney",
+                        "description": "处罚秀币",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "userid",
+                        "description": "处理人(管理员id)",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功"
+                    },
+                    "-1": {
+                        "description": "系统繁忙"
+                    },
+                    "400": {
+                        "description": "参数有误"
+                    },
+                    "500": {
+                        "description": "请求异常"
+                    },
+                    "400001": {
+                        "description": "您还未登陆，请登陆"
+                    }
+                }
+            }
+        }
+    }
+}

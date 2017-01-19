@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+	<!--公用meta-->
+	<include file="Public:meta" />
+
+	<title>{:lan('WEB_TITLE', 'Home')}</title>
+
+</head>
+
+<body>
+<!--公用头部-->
+<include file="Public:header" />
+
+<div class="common-wrap">
+	<div class="show-main searchEmcee">
+		<div class="width clear">
+			<p>{:lan("SEARCH", "Home")} " <i> {$searchresult.searchcond} </i> " {:lan("SEARCH_RESULT", "Home")} " <i> {$searchresult.count} </i> " {:lan("PERSON", "Home")}</p>
+			<!--左侧列表-->
+			<ul class="show-common-list clear">
+				<volist name="searchresult.emcees" id="vo">
+					<li class="list">
+						<a href="{:U('/'.$vo['showroomno'])}">
+							<eq name="emcee[isliving]" value="1">
+								<div class="icon-play">LIVE</div>
+							</eq>
+							<div class="table-cell">
+								<img class="header-img" src="{$Think.config.IMAGE_BASE_URL}{$vo[bigheadpic]}" />
+							</div>
+							<div class="line1 clear">
+								<eq name="vo[isliving]" value="1">
+									<eq name="vo['livetype']" value="2">
+										<i class="iconfont pc-icon on-live">&#xe61a;</i>
+										<else/>
+										<i class="iconfont app-icon on-live">&#xe619;</i>
+									</eq>
+									<else/>
+									<eq name="vo['livetype']" value="2">
+										<i class="iconfont pc-icon">&#xe61a;</i>
+										<else/>
+										<i class="iconfont app-icon">&#xe619;</i>
+									</eq>
+								</eq>
+								<p class="em-name" title="{$vo['nickname']}">{$vo['nickname']}</p>
+								<p class="look-num">
+									<i class="iconfont">&#xe600;</i>
+									<span class="count" title="{$vo['totalaudicount']}">{$vo['totalaudicount']}</span>
+								</p>
+							</div>
+							<div class="dark iconfont">
+								&#xe63f;
+							</div>
+						</a>
+					</li>
+				</volist>
+			</ul>
+			{$page}
+		</div>
+	</div>
+</div>
+
+<!--共用底部-->
+<include file="Public:bottom" />
+
+<!-- 共用登录-->
+<include file="Public:login" />
+
+<!--共用弹框-->
+<include file="Public:alert" />
+
+<!--共用js-->
+<include file="Public:javascript" />
+</body>
+</html>

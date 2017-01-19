@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=7" />
+<title>{:C('TITLE_CONTENT')}</title>
+<link href="__PUBLIC__/Public/statics/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Public/statics/css/system.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Public/statics/css/table_form.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles1.css" title="styles1" media="screen" />
+<link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles2.css" title="styles2" media="screen" />
+<link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles3.css" title="styles3" media="screen" />
+<link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles4.css" title="styles4" media="screen" />
+<js file="__PUBLIC__/Public/Js/jquery-1.7.2.min.js" />
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/admin_common.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/styleswitch.js"></script>
+<script type="text/javascript">
+	window.focus();
+</script>
+</head>
+<body>
+<div class="subnav">
+    <div class="content-menu ib-a blue line-x">
+    <a href='javascript:;' class="on"><em>房间列表</em></a><span>|</span><a href='__URL__/add_server/' ><em>添加房间</em></a></div>
+</div>
+<style type="text/css">
+	html{_overflow-y:scroll}
+</style><div class="pad-lr-10">
+<div class="table-list">
+
+<div class="content-menu ib-a blue line-x">
+<foreach name="categoryList" item="v">
+	<a href='javascript:;' cate="cate" <if condition="$key eq 0">class="on"</if> ><em>{$v['name']}</em></a>
+	<if condition="$key neq (count($categoryList)-1)">
+		<span>|</span>
+	</if>
+</foreach>
+</div>
+<script>
+$('a[cate=cate]').click(function() {
+	$('a[cate=cate]').each(function() {
+		$(this).removeClass('on');
+	});
+	$(this).addClass('on');
+});
+</script>
+<style>
+div.tablediv {
+	overflow-y: scroll; 
+	overflow-x: hidden; 
+	min-height: 100px; 
+	margin-top: 5px; 
+	margin-left: 12px; 
+	padding-top: -2px; 
+	padding-bottom: 5px; 
+	border: 3px solid pink; 
+}
+</style>
+
+<div class="tablediv">
+<form action="" method="post">
+<table width="100%" cellspacing="0">
+    <thead style="position:relative;z-index:1;text-align:center;">
+		<tr>
+			<th width="100" style="width:10px;">序号</th>
+			<th width="100" style="width:50px;">排序</th>
+			<th width="100">房间名称</th>
+			<th width="100">房间展示照片</th>
+			<th width="80">房间链接</th>
+			<th width="100">观众数量</th>
+			<th width="100">是否在直播</th>
+		</tr>
+	</thead>
+<tbody>
+<foreach name="roomList" item="v" >
+<tr>
+	<td align="center"><php>echo ($pageno-1)*$pagesize+$key+1;</php></td>
+	<td width="100" align="center">
+		<input type="hidden" name="rid[]" value="{$v['id']}" />
+		<input size="4" type="text" name="sort" value="{$v['sort']}" />
+	</td>
+	<td align="center" width="80">{$v['name']}</td>
+	<td align="center" width="80">
+		<img src="{$Think.config.IMAGE_BASE_URL}{$v['picpath']}" width="200" />
+	</td>
+	<td align="center" width="100">
+		<a href="javascript:edit({$vo['id']}, '{$vo['server_name']}')">修改</a> 
+		| 
+		<a href="javascript:confirmurl('__URL__/del_server/serverid/{$vo['id']}', '是否删除该服务器?')">删除</a>
+	</td>
+	<td align="center" width="80">{$v['peoplecount']}</td>
+	<td align="center" width="80">
+		<if condition="$v['is_on']">
+			<font color="Green">是</font>
+		<else />
+			<font color="Red">否</font>
+		</if>
+	</td>
+</tr>
+</foreach>
+</tbody>
+</table>
+<br>
+	<ul class="page">
+		<li style="margin-left:60px;">
+			<input style="cursor:pointer;" class="button" type="button" value="修改排序" />
+		</li>
+		<li id="lipage2">
+			<a href="javascript:;" style="color:#2E4B6A;font-weight:bold;text-decoration:none;">首页</a>
+		</li>
+		<li id="lipage3">
+			当前第 <font color="#CA5E58">{$pageno}</font> 页
+		</li>
+		<li id="lipage4">
+			<a href="javascript:;" style="color:#2E4B6A;font-weight:bold;text-decoration:none;">上一页</a>
+		</li>
+		<li id="lipage5">
+			<a href="javascript:;" style="color:#2E4B6A;font-weight:bold;text-decoration:none;">下一页</a>
+		</li>
+		<li id="lipage6">
+			<select>
+				<for start="1" end="$totalpage" comparison="elt" step="1" name="i">
+					<option value="{$i}" <if condition="$i eq $pageno">selected</if>>第 {$i} 页</option>
+				</for>
+			</select>
+		</li>
+		<li id="lipage7">
+			<a href="javascript:;" style="color:#2E4B6A;font-weight:bold;text-decoration:none;">末页</a>
+		</li>
+	</ul>
+</form>
+<script>
+//首页点击
+$('#lipage2 a').click(function() {
+	window.location.href = "{:U('CategoryMember/roomList')}?cid=";
+});
+
+//末页点击
+$('#lipage7 a').click(function() {
+	window.location.href = "{:U('CategoryMember/roomList')}?pageno={$totalpage}";
+});
+
+//上一页点击
+$('#lipage4 a').click(function() {
+	var pageno = parseInt("{$pageno}");
+	pageno--;
+	window.location.href = "{:U('CategoryMember/roomList')}?pageno="+pageno;
+});
+
+//下一页点击
+$('#lipage5 a').click(function() {
+	var pageno = parseInt("{$pageno}");
+	pageno++;
+	window.location.href = "{:U('CategoryMember/roomList')}?pageno="+pageno;
+});
+
+//select改变选择
+$('#lipage6 select').change(function() {
+	var pageno = parseInt($(this).val());
+	window.location.href = "{:U('CategoryMember/roomList')}?pageno="+pageno;
+});
+
+//如果第一页   隐藏  " 首页、上一页"
+if(parseInt("{$pageno}")==1) {
+	$('#lipage2 , #lipage4').css({'display':'none'});
+	$('#lipage3').css({'margin-left':'200px'});
+}
+
+//如果最后一页   隐藏  " 末页、下一页 "
+if(parseInt("{$pageno}")>=parseInt("{$totalpage}")) {
+	$('#lipage5 , #lipage7').css({'display':'none'});
+}
+</script>
+<style>
+ul.page {width:1130px;height:40px;border:0px solid red;}
+ul.page li {list-style:none;border:0px solid red;min-width:60px;height:20px;float:left;margin-top:10px;margin-left:30px;text-align:center;}
+#lipage2 {margin-left:150px;}
+#lipage3 {font-weight:bold;}
+</style>
+
+</div>
+</div>
+</div>
+<div id="pages"></div>
+</body>
+</html>
+<script type="text/javascript">
+<!--
+	function edit(id, name) {
+		window.top.art.dialog({title:'修改--'+name, id:'edit', iframe:'__URL__/edit_server/serverid/'+id ,width:'600px',height:'400px'}, 	function(){var d = window.top.art.dialog({id:'edit'}).data.iframe;
+		var form = d.document.getElementById('dosubmit');form.click();return false;}, function(){window.top.art.dialog({id:'edit'}).close()});
+	}
+//-->
+</script>

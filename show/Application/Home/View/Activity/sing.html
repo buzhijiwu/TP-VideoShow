@@ -1,0 +1,380 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="shortcut icon" href="/Public/Public/Images/favicon.ico"/>
+    <link href="__PUBLIC__/Home/Css/{:getLanguage()}/reset.css?time=20160509.css" rel="stylesheet" type="text/css" />
+    <link  href="__PUBLIC__/Home/Css/{:getLanguage()}/common.css?time=20160509.css" rel="stylesheet" type="text/css">
+    <link  href="__PUBLIC__/Home/Css/{:getLanguage()}/layout.css?time=20160509.css" rel="stylesheet" type="text/css">
+    <link  href="__PUBLIC__/Home/Css/{:getLanguage()}/active.css?time=20160509.css" rel="stylesheet" type="text/css">
+    <!--<link  href="__PUBLIC__/Home/Css/{:getLanguage()}/layout.less?time=20160426.less" rel="stylesheet" type="text/less">-->
+    <!--<link  href="__PUBLIC__/Home/Css/{:getLanguage()}/active.less?time=20160426.less" rel="stylesheet" type="text/less">-->
+    <!--<script src="__PUBLIC__/Home/Css/{:getLanguage()}/less-1.6.3.min.js"></script>-->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+    <title>Em hát tặng bài hát cho bác Hồ kính yêu</title>
+
+</head>
+<body class="may-sing-body">
+<!--公用头部-->
+<include file="Public:header" />
+
+<div class="common-wrap">
+    <div class="width">
+        <div class="may-sing-main">
+            <div class="title"></div>
+
+            <div class="tab-btn">
+                <button class="active">Bảng xếp hạng</button>
+                <button>Quy định trò chơi</button>
+            </div>
+
+            <div class="tab-list">
+                <div class="sing-list-wrap clear">
+                    <volist name="SingActivity" id="vo" key="k">
+                    <div class="list">
+                        <p class="top-list">
+                            NO.
+                            <span>{$k}</span>
+                        </p>
+                        <div class="list-main">
+                            <a class="line1" href="{:U('Home/Activity/sing_play/id/'.$vo['userid'])}" target="_blank">
+                                <img src="{$vo.bigheadpic}">
+                                <i class="iconfont">&#xe635;</i>
+                                <p class="name">{$vo.nickname}</p>
+                            </a>
+                            <div class="line2">
+                                Tổng số điểm:
+                                <span>{$vo.total}</span>
+                            </div>
+                            <div class="line3 clear">
+                                <div class="left">
+                                    <button class="vote" data-emcuserid="{$vo.userid}">Bỏ phiếu</button>
+                                    <div class="num">
+                                        Đã bỏ phiếu:
+                                        <p>{$vo.votecount}</p>
+                                    </div>
+                                </div>
+                                <div class="left">
+                                    <button class="share" data-emcuserid="{$vo.userid}" data-nickname="{$vo.nickname}" data-bigheadpic="{$vo.bigheadpic}">Chia sẻ</button>
+                                    <div class="num">
+                                        Đã chia sẽ:
+                                        <p>{$vo.sharecount}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </volist>
+                </div>
+                <button class="loading-more">
+                    Bấm để xem nhiều hơn
+                </button>
+            </div>
+
+
+            <div class="sing-rule tab-list dis-none">
+                <img src="/Public/Public/Images/Activity/maySing/rule.jpg">
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<input name="userid" id="userid" type="hidden" value="{$userid}" />
+
+
+<!--共用底部-->
+<include file="Public:bottom" />
+
+<!-- 共用登录-->
+<include file="Public:login" />
+
+<!--共用弹框-->
+<include file="Public:alert" />
+
+<!--共用js-->
+<include file="Public:javascript" />
+
+<script>
+    $(function () {
+    //规则和列表切换
+        $(".may-sing-main .tab-btn").on("click","button", function () {
+            $(this).addClass("active").siblings("button").removeClass("active");
+            $(".may-sing-main .tab-list").eq($(this).index()).removeClass("dis-none")
+                    .siblings(".tab-list").addClass("dis-none");
+        });
+
+
+        var pageNum = 1;
+
+        $(".loading-more").on("click", function () {
+            pageNum++;
+            $.ajax({
+                url: "{:U('Home/Activity/SingActivity')}",
+                data: {'pageno':pageNum},
+                dataType: 'json',
+                type: "post",
+                async:true,
+                success: function(data) {
+
+                    $(".may-sing-main .sing-list-wrap").append(buildHtml(data));
+
+                    if(data.length<9){
+                        $(".may-sing-main .loading-more").hide();
+                    }
+
+                },
+                error: function() {
+                }
+            });            
+        });
+
+
+        function buildHtml(data){
+            var html = "";
+
+            for(var i = 0; i < data.length; i++){
+                html +=
+                        "<div class=\"list\">"
+                        +"<p class=\"top-list\">"
+                        +"NO."
+                        +"<span>"+((pageNum-1)*9+i+1)+"</span>"
+                        +"</p>"
+                        +"<div class=\"list-main\">"
+                        +"<a class=\"line1\" href=\"{:U('Home/Activity/sing_play/id/"+data[i].userid+"')}\" target=\"_blank\">"
+                        +"<img src="+data[i].bigheadpic+">"
+                        +"<i class=\"iconfont\">&#xe635;</i>"
+                        +"<p class=\"name\">"+data[i].nickname+"</p>"
+                        +"</a>"
+                        +"<div class=\"line2\">"
+                        +"Tổng số điểm:"
+                        +"<span>"+data[i].total+"</span>"
+                        +"</div>"
+                        +"<div class=\"line3 clear\">"
+                        +"<div class=\"left\">"
+                        +"<button class='vote' data-emcuserid='"+data[i].userid+"'>Bỏ phiếu</button>"
+                        +"<div class=\"num\">"
+                        +"Đã bỏ phiếu:"
+                        +"<p>"+data[i].votecount+"</p>"
+                        +"</div>"
+                        +"</div>"
+                        +"<div class=\"left\">"
+                        +"<button class='share'>Chia sẻ</button>"
+                        +"<div class=\"num\">"
+                        +"Đã chia sẽ:"
+                        +"<p>"+data[i].sharecount+"</p>"
+                        +"</div>"
+                        +"</div>"
+                        +"</div>"
+                        +"</div>"
+                        +"</div>"
+            }
+
+            return html;
+        }
+
+        var userid = $("#userid").val();
+
+        $(".may-sing-main .sing-list-wrap").on("click",".list .list-main .line3 .left .vote",function(){
+            var that = $(this);
+            var emceeuserid=that.data('emcuserid');
+
+            var pointNum = 0,
+                shareNum = 0,
+                voteNum = 0;
+            if(userid<=0){
+                common.isLog();
+                return false;
+            }
+
+            $.ajax({
+                url: "{:U('Home/Vote/SingActivityVote')}",
+                data: {'userid':userid,'emceeuserid':emceeuserid},
+                dataType: 'json',
+                type: "post",
+                async:true,
+                success: function(res) {
+                    if(res.status == 1){
+                        common.alertAuto(false,res.message);
+
+                        voteNum = parseInt(that.siblings(".num").find("p").html())+1;
+                        pointNum = parseInt(that.parent().parent().siblings(".line2").find("span").html())+1;
+
+                        that.next(".num").find("p").html(voteNum);
+                        that.parent().parent().siblings(".line2").find("span").html(pointNum);
+                    }else{
+                        common.alertAuto(false,res.message);
+                    }
+                },
+                error: function() {
+                }
+            });    
+        })
+
+        var shareTime,now,a;
+        //前端多语言验证
+        var validate = {};
+
+        var validateData = {
+            zh:{
+                mistake2:"分享成功",
+                mistake3:"一个主播每小时只能分享一次",
+                sharecontent1:"我在waashow直播，你在哪儿？",
+                sharecontent2:"我美我在Waashow直播，你丑你在家里睡觉.",  
+                sharecontent3:"我正在waashow观看",  
+                sharecontent4:"在直播",                                  
+            },
+            vi:{
+                mistake2:"Chia sẽ thành công",
+                mistake3:"Mỗi idols một tiếng chỉ được chia sẽ một lần.",
+                sharecontent1:"tôi đang ở waashow,bạn ở đâu?",
+                sharecontent2:"Mình xinh mình live Waashow, bạn không xinh bạn ở nhà ngủ.", 
+                sharecontent3:"Tôi đang ở waashow xem idol ",  
+                sharecontent4:" live",                          
+            },
+            en:{
+                mistake2:"Chia sẽ thành công",
+                mistake3:"Mỗi idols một tiếng chỉ được chia sẽ một lần.",
+                sharecontent1:"tôi đang ở waashow,bạn ở đâu?",
+                sharecontent2:"Mình xinh mình live Waashow, bạn không xinh bạn ở nhà ngủ.",
+                sharecontent3:"Tôi đang ở waashow xem idol ",  
+                sharecontent4:" live",               
+            }
+        };
+
+        //判断浏览器语言
+        switch ($("#language").text()){
+            case "zh":
+                validate = validateData.zh;
+                break;
+            case "vi":
+                validate = validateData.vi;
+                break;
+            case "en":
+                validate = validateData.en;
+                break;
+        }    
+
+        $(".may-sing-main .sing-list-wrap").on("click",".list .list-main .line3 .left .share",function(){
+            var that = $(this);
+            var emceeuserid=that.data('emcuserid');
+            var nickname= that.data('nickname');  
+            var bigheadpic= that.data('bigheadpic'); 
+
+            if(userid<=0){
+                common.isLog();
+                return false;
+            }
+
+            $.ajax({
+                type: "post",
+                url: "/Home/Share/share_judge",
+                dataType: "json",
+                data: {
+                    'userid'  : userid,
+                    'emceeuserid' : emceeuserid,
+                    'sharetype' : 1,
+                    'is_judge' : 1
+                },
+                success: function (result) {
+                    if(result.status == 1){
+
+                        facebookshare(emceeuserid,nickname,bigheadpic,that);
+
+                    }else{
+                        common.alertAuto(false,result.message);
+                    }
+                },
+                error: function (e) {
+                    common.alertAuto(false,result.message);
+                }
+            });
+        });
+        
+        function facebookshare(b,c,d,that){
+          var emceeuserid = b; 
+          var nickname = c;  
+          var bigheadpic = d;                  
+          if(userid == emceeuserid){
+              var s = parseInt(Math.random()*2+1);
+              var sharecontent = '';
+              if (s == 1) {
+                  sharecontent = validate.sharecontent1; 
+              } else{
+                  sharecontent = validate.sharecontent2; 
+              }          
+          } 
+          else{
+              sharecontent = validate.sharecontent3+nickname+validate.sharecontent4;         
+          }
+
+          FB.init({
+            appId      : '1541809749448877',
+            xfbml      : true,
+            version    : 'v2.6',
+          });
+          
+          FB.ui({
+            method: 'feed',
+            link: 'http://waashow.vn/Home/Share/share?url='+'Home/Activity/sing_play/id/'+emceeuserid+'.html',
+            picture:'http://waashow.vn'+bigheadpic,
+            caption: window.location.href,
+            name: sharecontent,
+            description:'Waashow',
+          }, 
+            // callback
+            function(response) {
+              if (response && !response.error_message) {
+                // alert('Posting completed.');
+                $.ajax({
+                    type: "post",
+                    url: "/Home/Share/index",
+                    dataType: "json",
+                    data: {
+                        'userid'  : userid,
+                        'emceeuserid' : emceeuserid,
+                        'shareplat' : 1,
+                        'sharetype' : 1,
+                        'devicetype' : 2
+                    },
+                    success: function (result) {
+                        if(result.status == 1){
+                            common.alertAuto(false,validate.mistake2);
+
+                            var shareNum = parseInt(that.siblings(".num").find("p").html())+1;
+                            var pointNum = parseInt(that.parent().parent().siblings(".line2").find("span").html())+1;
+
+                            that.next(".num").find("p").html(shareNum);
+                            that.parent().parent().siblings(".line2").find("span").html(pointNum);
+                        }else{
+                            common.alertAuto(false,result.message);
+                        }
+                    },
+                    error: function (e) {
+                    }
+                });        
+              } else {
+                //alert('Error while posting.');
+              }
+            }
+          );    
+        }
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));            
+    })
+</script>
+</body>
+</html>

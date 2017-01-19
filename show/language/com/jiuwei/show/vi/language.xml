@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>	
+	 <showlist>
+        <authenfailed>show Tên miền chưa được ủy quyền, vui lòng liên hệ www.waashow.com</authenfailed>
+		<networkissue>Mạng xảy ra lỗi, liên kết máy chủ thất bại</networkissue>
+		<rejectconnect>Yêu cầu kết nối bị từ chối</rejectconnect>
+		<closeconreq>Yêu cầu kết nối bị đóng </closeconreq>
+		<streamissue>Thông tin mạng bị lỗi, liên kết máy chủ thất bại</streamissue>
+		<rejectstream>Yêu cầu thông tin kết nối bị từ chối</rejectstream>
+		<closestream>Yêu cầu thông tin kết nối bị đóng</closestream>
+		<usewebsee>Vui lòng xem truyền hình trực tiếp qua trang Web</usewebsee>
+		<errrefresh>Thông tin phòng bị lỗi, xin vui lòng Refresh lại trang</errrefresh>
+		<nolive>Hiện tại không có show</nolive>
+    </showlist>

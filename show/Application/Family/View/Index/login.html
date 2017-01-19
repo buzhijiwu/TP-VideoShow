@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style"  />
+    <meta content="telephone=no" name="format-detection" />
+    <title id="title">{:lan('FAMILY_MANAGEMENT', 'Agent')}</title>
+    <!--<link href="style/reset.css" rel="stylesheet" type="text/css">-->
+    <!--<link href="style/adminStyle.less" rel="stylesheet" type="text/less">-->
+    <!--<script src="style/less-1.6.3.min.js"></script>-->
+    <style>
+        /*默认样式*/
+        body,ol,ul,h1,h2,h3,h4,h5,h6,
+        p,th,td,dl,dd,label,form,fieldset,
+        legend,input,textarea,select{
+            margin:0;
+            padding:0;
+            border:0;
+            font-family: 'Microsoft YaHei',arial，Arial, Helvetica, sans-serif;
+        }
+        ul,li{list-style: none;}
+        .red{color: red}
+        h1,h2,h3,h4,h5,h6{font-weight: 500}
+        input[type=button],
+        input[type=submit],
+        input[type=file],
+        button { cursor: pointer; -webkit-appearance: none; }
+        body{
+            background:#fff;
+            -webkit-text-size-adjust:100%;
+            font-size: 12px;
+            position: relative;
+            line-height: 1;
+        }
+        b{font-weight: normal}
+        a{text-decoration:none}
+        a:hover{cursor: pointer}
+        img{border:0;vertical-align:middle;line-height: 1}
+        table{border-collapse:collapse;border-spacing:0}
+        p,div{word-wrap:break-word}
+        .clearIn,.clear:after{
+            display:block;
+            font-size:0;
+            content:" ";
+            clear:both;
+            height:0;
+            border: none;
+            padding: 0;
+            margin: 0;
+            overflow:auto;
+            float: none;!important;
+            zoom:1;
+        }
+
+        *, :after, :before{
+            box-sizing:border-box;
+            -webkit-box-sizing:border-box;
+
+        }
+        /*登录样式*/
+        .common-width {
+            width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .login-header {
+            height: 85px;
+            background-color: white;
+        }
+        .login-header .left {
+            float: left;
+            width: 160px;
+            height: 50px;
+            margin-top: 17px;
+        }
+        .login-header .right {
+            float: right;
+        }
+        .login-header .right select {
+            margin-top: 22px;
+            border: 1px solid #e3e3e3;
+            padding: 0 20px;
+            width: 120px;
+            line-height: 40px;
+            text-align: center;
+            height: 40px;
+        }
+        .login-header .right select:focus {
+            outline: none;
+        }
+        .login-content {
+            height: 500px;
+            background-image: url("/Public/Admin/image/l-bg.png");
+            background-size: cover;
+            background-position: center center;
+        }
+        .login-content .common-width {
+            position: relative;
+        }
+        .login-content .main {
+            position: absolute;
+            right: 0;
+            height: 380px;
+            top: 50px;
+            width: 350px;
+            padding: 25px;
+            background-color: white;
+        }
+        .login-content .main .section1 .left {
+            font-size: 16px;
+            color: #2d2d2d;
+            float: left;
+            line-height: 28px;
+        }
+        .login-content .main .section1 .right {
+            float: right;
+            padding: 7px 12px 7px 35px;
+            border: 1px solid #df9c1f;
+            color: #df9c1f;
+            background-image: url("/Public/Admin/image/login1.png");
+            font-size: 12px;
+            background-repeat: no-repeat;
+            background-position: 12px 7px;
+        }
+        .login-content .main .section2 {
+            margin-top: 23px;
+        }
+        .login-content .main .section2 .input-list {
+            height: 40px;
+            border: 1px solid #dbdbdb;
+            width: 300px;
+            margin-bottom: 20px;
+        }
+        .login-content .main .section2 .input-list .icon {
+            display: block;
+            width: 38px;
+            height: 38px;
+            float: left;
+            background-size: 38px 38px;
+        }
+        .login-content .main .section2 .input-list.username .icon {
+            background-image: url("/Public/Admin/image/l-name.png");
+        }
+        .login-content .main .section2 .input-list.password .icon {
+            background-image: url("/Public/Admin/image/l-password.png");
+        }
+        .login-content .main .section2 .input-list.code {
+            width: 200px;
+            position: relative;
+        }
+        .login-content .main .section2 .input-list.code .icon {
+            background-image: url("/Public/Admin/image/l-password.png");
+        }
+        .login-content .main .section2 .input-list.code input {
+            width: 145px;
+        }
+        .login-content .main .section2 .input-list.code .code-img {
+            position: absolute;
+            width: 90px;
+            height: 39px;
+            margin-left: 10px;
+            right: -100px;
+            top: -1px;
+        }
+        .login-content .main .section2 .input-list input {
+            height: 38px;
+            padding-left: 15px;
+            font-size: 14px;
+            width: 245px;
+        }
+        .login-content .main .section2 .input-list input:focus {
+            outline: none;
+        }
+        .login-content .main .error-messages {
+            color: red;
+            height: 15px;
+            line-height: 15px;
+            margin-bottom: 10px;
+        }
+        .login-content .main .error-messages .message {
+            display: none;
+        }
+        .login-content .main .remember {
+            display: block;
+            color: #787878;
+            margin-bottom: 15px;
+        }
+        .login-content .main .remember:hover {
+            cursor: pointer;
+        }
+        .login-content .main .remember input {
+            position: relative;
+            top: 2px;
+        }
+        .login-content .main .login-submit {
+            width: 300px;
+            height: 40px;
+            border-radius: 4px;
+            background-color: #ff5011;
+            color: white;
+            font-size: 16px;
+            border: none;
+            box-shadow: none;
+        }
+        .login-content .main .login-submit:hover {
+            background-color: #eb4d11;
+        }
+        .login-footer {
+            height: 150px;
+            text-align: center;
+            background-color: white;
+        }
+        .login-footer img {
+            height: 78px;
+            width: 1170px;
+        }
+        .login-footer p {
+            color: #7a7a7a;
+            font-size: 12px;
+        }
+
+    </style>
+</head>
+<body>
+<!--头部-->
+    <div class="login-header">
+        <div class="common-width clear">
+            <img src="/Public/Public/Images/Logo/pcweblog.png" class="left">
+            <!--<div class="right">
+                <select>
+                    <option value="1">English</option>
+                    <option value="86">中文</option>
+                    <option value="84">越南</option>
+                </select>
+            </div>-->
+        </div>
+    </div>
+<!--内容-->
+    <div class="login-content">
+        <div class="common-width">
+            <form class="main" action="{:U('dologin')}" method="post" name="myform">
+                <!--顶部文字-->
+                <div class="section1 clear">
+                    <h2 class="left">{:lan('ACCOUNT_LOGIN', 'Agent')}</h2>
+                    <h3 class="right">
+                        {:lan('FAMILY_MANAGEMENT', 'Agent')}
+                    </h3>
+                </div>
+                <!--输入框-->
+                <div class="section2">
+                    <div class="input-list username">
+                        <i class="icon"></i>
+                        <input type="text"
+                               placeholder="{:lan('PLZ_INPUT_USER_NAME', 'Agent')}"
+                               name="username"
+                               maxlength="30"/>
+                    </div>
+                    <div class="input-list password">
+                        <i class="icon"></i>
+                        <input type="password"
+                               placeholder="{:lan('PLEASE_INPUT_PASSWORD', 'Agent')}"
+                               name="password"
+                               maxlength="30"/>
+                    </div>
+                    <div class="input-list code">
+                        <i class="icon"></i>
+                        <input type="text"
+                               placeholder="{:lan('PLEASE_INPUT_VERIFYCODE', 'Agent')}"
+                               name="code"
+                               maxlength="4"/>
+                        <img src="{:U('verify')}" alt="{:lan('ADMIN_VERIFYCODE', 'Agent')}" class="code-img">
+                    </div>
+                </div>
+                <!--提示语-->
+                <div class="error-messages">
+                    <p class="message">
+                        <span class="red">*</span>
+                        <span class="message-content"></span>
+                    </p>
+                </div>
+
+                <!--提交按钮-->
+                <input type="submit" value="{:lan('ADMIN_LOGIN', 'Agent')}" class="login-submit">
+            </form>
+        </div>
+    </div>
+<!--底部-->
+    <div class="login-footer">
+        <div class="common-width">
+            <img src="/Public/Admin/image/footer-bg.png">
+            <p>版权所有 哇秀网 Copyright2016 All Rights Reserved 京ICP备111111111号 京公网安备11111111111111号 苏州小灵猫信息科技有限公司</p>
+        </div>
+    </div>
+
+
+<!--js-->
+<script src="/Public/Admin/Js/jquery-1.8.3.min.js"></script>
+<script>
+    $(function () {
+        var url = "{:U('verify')}";
+        if( url.indexOf('?')>0){
+            $('.code-img').attr("src", url+'&random='+Math.random());
+        }else{
+            $('.code-img').attr("src", url.replace(/\?.*$/,'')+'?'+Math.random());
+        }            
+    }) 
+
+    $('.code-img').click(function() {
+        var url = "{:U('verify')}";
+        if( url.indexOf('?')>0){
+            $('.code-img').attr("src", url+'&random='+Math.random());
+        }else{
+            $('.code-img').attr("src", url.replace(/\?.*$/,'')+'?'+Math.random());
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+    <!--公用meta-->
+    <include file="Public:meta" />
+
+    <title>{:lan('SYSTEM_NOTICE', 'Home')}</title>
+
+</head>
+<body>
+<!--公用头部-->
+<include file="Public:header" />
+
+<!-- 主要内容 -->
+<div class="common-wrap">
+    <div class="width">
+        <div class="register-agreement">
+            <h1>
+                {$announceinfo.title}
+            </h1>
+            {$announceinfo.content}
+        </div>
+    </div>
+</div>
+
+<!--共用底部-->
+<include file="Public:bottom" />
+
+<!-- 共用登录-->
+<include file="Public:login" />
+
+<!--共用弹框-->
+<include file="Public:alert" />
+
+<!--共用js-->
+<include file="Public:javascript" />
+</body>
+</html>

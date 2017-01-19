@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="shortcut icon" href="/Public/Public/Images/favicon.ico"/>
+    <link href="/Public/Home/Css/zh/reset.css?time=20160627.css" rel="stylesheet" type="text/css" />
+    <link href="/Public/Home/Css/zh/common.css?time=20160627.css" rel="stylesheet" type="text/css">
+    <link href="/Public/Supervise/Css/style.css?time=20160627.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/Public/Public/statics/js/calendar/jscal2.css">
+    <link rel="stylesheet" type="text/css" href="/Public/Public/statics/js/calendar/border-radius.css">
+    <link rel="stylesheet" type="text/css" href="/Public/Public/statics/js/calendar/win2k.css">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+    <script type="text/javascript" src="/Public/Tools/Js/jquery/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="/Public/Home/Js/live/show.js"></script>
+    <script type="text/javascript" src="/Public/Home/Js/live/swfobject.js"></script>
+    <script type="text/javascript" src="/Public/Home/Js/live/chatRoom.js"></script>
+    <script type="text/javascript" src="/Public/Home/Js/live/socket.io.js"></script>
+    <script type="text/javascript" src="/Public/Public/statics/js/calendar/calendar.js"></script>
+    <script type="text/javascript" src="/Public/Public/statics/js/calendar/lang/en.js"></script>
+
+    <title>{:lan('VIOLATION_RECORD', 'Supervise')}</title>
+</head>
+<body>
+
+<div class="list-main">
+
+    <div id="searchid" class="header">
+        <div class="btn" style="margin-top: 20px;">
+            {:lan('REPORT_USER', 'Supervise')}
+        </div>    
+        <form name="searchform" action="/Supervise/Treated/violation_record_detail" method="get">
+            <div class="search">
+                <input type="hidden" name="banid" value="{$banid}" />
+                <input type="text" name="keyword" value="{$keyword}" class="search-input" placeholder="{:lan('USERNAME', 'Supervise')}/{:lan('NICKNAME', 'Supervise')}/{:lan('ROOMNO', 'Supervise')}">
+                <input type="submit" value="&#xe640;" class="search-submit iconfont">
+            </div>
+        </form>
+    </div>
+
+    <form name="myform" id="myform" action="" method="post">
+        <div class="report-table-list">
+            <table width="100%">
+                <thead>
+                <tr>
+                    <th width="40">{:lan('SYS_NUMBER', 'Supervise')}</th>
+                    <th>{:lan('REPORT_TIME', 'Supervise')}</th>
+                    <th>{:lan('REPORT_USERNAME', 'Supervise')}</th>
+                    <th>{:lan('REPORT_NICKNAME', 'Supervise')}</th>
+                    <th>{:lan('ROOMNO', 'Supervise')}</th>
+                    <th>{:lan('REPORT_REASON', 'Supervise')}</th>
+                    <th>{:lan('OPERATION', 'Supervise')}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <volist name="data" id="v" key="k">
+                    <tr>
+                        <input type="hidden" name="reportid[]" value="{$v.reportid}" />
+                        <td>{$k}</td>
+                        <td>{$v.createtime}</td>
+                        <td>{$v.username}</td>
+                        <td>{$v.nickname}</span></td>
+                        <td>{$v.showroomno}</span></td>
+                        <td>
+                            <switch name="v.type">
+                                <case value="0">{:lan('OBSCENE', 'Supervise')}</case>
+                                <case value="1">{:lan('ADVERTISEMENT', 'Supervise')}</case>
+                                <case value="2">{:lan('POLITICS', 'Supervise')}</case>
+                                <case value="3">{:lan('FRAUD', 'Supervise')}</case>
+                                <case value="4">{:lan('ILLEGAL', 'Supervise')}</case>
+                                <case value="5">{:lan('TORT', 'Supervise')}</case>
+                                <case value="6">{:lan('SELL_FAKES', 'Supervise')}</case>
+                                <default />{:lan('OTHER', 'Supervise')}: {$v.content}
+                            </switch>
+                        </td>
+                        <td>
+                            <if condition="($v.video neq '') OR ($v.pic neq '') "><a href="{:U('Supervise/Treated/report_video/reportid/'.$v['reportid'])}" target="_blank">{:lan('VIEW_EVIDENCE', 'Supervise')}</a> | </if>
+                            <a href="{:U('/'.$showroomno)}" target="_blank">{:lan('ENTER_LIVEROOM', 'Supervise')}</a>
+                        </td>
+                    </tr>
+                </volist>
+                </tbody>
+            </table>
+            <div id="pages">{$page}</div>
+        </div>
+    </form>
+</div>
+
+
+
+
+
+</body>
+</html>

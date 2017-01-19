@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Chat Platform</title>
+<script type="text/javascript" src="__PUBLIC__/Tools/Js/jquery/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/Js/live/socket.io.js"></script>
+<script>
+
+var validate = {};
+
+var validateData = {
+    zh:{
+    	//问候
+    	chat0:"好",
+        chat1:"你好",
+        chat2:"你好吗",
+        chat3:"[joway:kisskiss]",
+        chat4:"我喜欢你",
+        chat5:"我爱你",
+        chat6:"[joway:kisskiss]",
+        chat7:"你好漂亮",
+        chat8:"Hi",
+        chat9:"Hello",
+        chat10:"Nice to meet you",
+        chat11:"I like you",
+        chat12:"I love you",
+        chat13:"[joway:kisskiss]",
+        chat14:"[joway:kisskiss]",
+        chat15:"[joway:liukoushui]",
+        chat16:"[joway:bigsmile]",
+        chat17:"[joway:dianzan]",
+        chat18:"[joway:songhua]",
+        chat19:"[joway:weiqu]",
+        chat20:"[joway:huaquanquan]",
+        chat21:"[joway:xianwen]",
+        chat22:"[joway:running]",
+        chat23:"[joway:kisskiss]",
+        
+        //询问
+        chat121:"好久不见",
+        chat122:"好想你",
+        chat123:"I miss you",
+        chat124:"你叫什么名字?",
+        chat125:"唱一首好听的歌曲?",
+        chat126:"最近好啊?",
+        chat127:"最近还好吗?",
+        chat128:"有去哪边旅游吗?",
+        chat129:"假日有去哪玩吗?",
+        chat130:"你可以唱一首歌送我吗?",
+        chat131:"你可以跳舞吗?",
+        chat132:"你可以给我你的名字吗?",
+        chat133:"你的fb是什么?",
+        chat134:"主播好漂亮",
+        chat135:"你唱歌好好听",
+        chat136:"你有上音乐学校吗，为什么唱歌那么好听",
+        chat137:"很hot",
+        chat138:"谢谢你唱歌送我"
+    },
+    vi:{
+    	//问候
+    	chat0:"chào",
+        chat1:"chào Idol",
+        chat2:"em có khỏe không",
+        chat3:"[joway:kisskiss]",
+        chat4:"Mình thích bạn",
+        chat5:"anh yêu em",
+        chat6:"[joway:kisskiss]",
+        chat7:"em rất là đẹp",
+        chat8:"Hi",
+        chat9:"Hello",
+        chat10:"Nice to meet you",
+        chat11:"I like you",
+        chat12:"I love you",
+        chat13:"[joway:kisskiss]",
+        chat14:"[joway:kisskiss]",
+        chat15:"[joway:liukoushui]",
+        chat16:"[joway:bigsmile]",
+        chat17:"[joway:dianzan]",
+        chat18:"[joway:songhua]",
+        chat19:"[joway:weiqu]",
+        chat20:"[joway:huaquanquan]",
+        chat21:"[joway:xianwen]",
+        chat22:"[joway:running]",
+        chat23:"[joway:kisskiss]",
+        
+        //询问
+        chat121:"anh thích em",
+        chat122:"anh rất nhớ em",
+        chat123:"I miss you",
+        chat124:"Bạn tên gì",
+        chat125:"hát bài gì hay hay đi",
+        chat126:"dạo này sao rùi",
+        chat127:"dạo này khỏe ko",
+        chat128:"có đi du lịch đâu ko nè",
+        chat129:"lễ có đi đâu chơi hog",
+        chat130:"bạn có thể hát tặng mình bài hát được không",
+        chat131:"Bạn có thể nhảy được không",
+        chat132:"Bạn có thê cho mình biết tên không",
+        chat133:"Facebook bạn là gì vậy",
+        chat134:"Idol xinh quá",
+        chat135:"bạn hát hay quá",
+        chat136:"idol có học ở nhạc viện nào ko mà hát hay vậy",
+        chat137:"hot quá",
+        chat138:"Cảm ơn bạn đã hát tặng mình"
+    },
+    en:{
+    	//问候
+    	chat0:"Ok",
+        chat1:"Hi",
+        chat2:"How are you",
+        chat3:"[joway:kisskiss]",
+        chat4:"I like you",
+        chat5:"I love you",
+        chat6:"[joway:kisskiss]",
+        chat7:"You are so beautiful",
+        chat8:"Hi",
+        chat9:"Hello",
+        chat10:"Nice to meet you",
+        chat11:"I like you",
+        chat12:"I love you",
+        chat13:"[joway:kisskiss]",
+        chat14:"[joway:kisskiss]",
+        chat15:"[joway:liukoushui]",
+        chat16:"[joway:bigsmile]",
+        chat17:"[joway:dianzan]",
+        chat18:"[joway:songhua]",
+        chat19:"[joway:weiqu]",
+        chat20:"[joway:huaquanquan]",
+        chat21:"[joway:xianwen]",
+        chat22:"[joway:running]",
+        chat23:"[joway:kisskiss]",
+        
+        //询问
+        chat121:"No meet long time",
+        chat122:"I miss you very much",
+        chat123:"I miss you",
+        chat124:"What's your name",
+        chat125:"Sing a song",
+        chat126:"How are you",
+        chat127:"What about you recently",
+        chat128:"Do you go to travel",
+        chat129:"Do you go out to play",
+        chat130:"Can you sing a song for me",
+        chat131:"Can you dance",
+        chat132:"Can you give me your name",
+        chat133:"What's your facebook?",
+        chat134:"Idol ,you are beautiful",
+        chat135:"you sing very well",
+        chat136:"Do you learn the music at school, why you sing so great",
+        chat137:"very hot",
+        chat138:"Thanks for your song"
+    }
+};
+
+
+/* switch ($("#language").text()){
+        case "zh":
+            validate = validateData.zh;
+            break;
+        case "vi":
+            validate = validateData.vi;
+            break;
+        case "en":
+            validate = validateData.en;
+            break;
+} */
+
+validate = validateData.vi;
+
+function getNowFormatDate() {
+    var date = new Date();
+    var seperator1 = "-";
+    var seperator2 = ":";
+    var month = date.getMonth() + 1;
+    var strDate = date.getDate();
+    if (month >= 1 && month <= 9) {
+        month = "0" + month;
+    }
+    if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+    }
+    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+            + " " + date.getHours() + seperator2 + date.getMinutes()
+            + seperator2 + date.getSeconds();
+    return currentdate;
+}    
+
+var enterroomno={$enterroomno};
+//console.log(enterroomno);
+try{
+	//连接socket服务器 生产 125.212.248.104  测试192.168.10.253  http://127.0.0.1:1717  47.88.148.143 103.6.130.233
+	var socket = new io("http://103.6.130.233:8366");
+	
+	socket.on('connecting', function() {
+	    //console.log("connecting ...");
+	});
+
+	socket.on('connect', function() {
+		//console.log("connect ...");
+		$.ajax({
+			url: '/index.php/Admin/Chatfake/getRandomMember',
+			data: {enterroomno:enterroomno},
+			dataType: 'json',
+			type: "post",
+			cache : false,
+			success: function(data) {
+				var members= data.members;
+				
+				var userinfo = {};
+				var msginfo = {};
+				var leaveMsg = {};
+				var msgno = 0;
+				var leaveno = 0;
+				
+				console.log("1Date=" + getNowFormatDate());
+				
+				for (var i = 0; i < members.length; i++) {
+					userinfo[i] = {
+							userid       :members[i].userid,
+							enterroomno  :members[i].enterroomno,
+							nickname     :members[i].nickname,
+							useravatar   :members[i].smallheadpic,
+							goodnum      :members[i].showroomno,
+							usertype     :members[i].usertype,
+							emceelevel   :members[i].emceelevel,
+							richlevel    :members[i].userlevel,
+							vipid        :members[i].vipid,
+							guardid      :members[i].guardid,
+							spendmoney   :members[i].spendmoney,
+							familyname   :'',
+							sortnum      :members[i].userlevel,
+							devicetype   :members[i].devicetype
+					};
+					
+					//JSON.parse(jsonstr); //可以将json字符串转换成json对象 
+			        //JSON.stringify(jsonobj); //可以将json对象转换成json对符串
+			        			        			        
+					var leavect = '{"useravatar":"' + userinfo[i].useravatar
+					    + '","familyname":"'+ ''
+					    + '","emceelevel":"'+ userinfo[i].emceelevel 
+					    + '","richlevel":"'+ userinfo[i].richlevel
+						+ '","goodnum":"' + userinfo[i].goodnum
+			            + '","userid":"'+ userinfo[i].userid +'","nickname":"' + userinfo[i].nickname
+			            + '","vipid":"'+ userinfo[i].vipid + '","guardid":"'+ userinfo[i].guardid
+			            + '","devicetype":"'+ userinfo[i].devicetype
+			          + '"}';
+			        leaveMsg[leaveno++] = '{"msg":[{"_method_":"SendMsg","action":"1","ct":'+ leavect 
+			          + ',"msgtype":"0"}],"retcode":"1","retmsg":"OK"}';
+					
+					
+			        if(userinfo[i].userid > 0){
+			        	var msginum = Math.round(Math.random()*3) + 1;
+			        	
+			        	for(var msgi=0; msgi < msginum; msgi++){
+			        		var action = 0;
+			        		var chatNum = Math.round(Math.random()*23);
+			        		var msgct = '{"message":"' + validate["chat" + chatNum]+'","goodnum":"' + userinfo[i].goodnum
+					          + '","userid":"'+ userinfo[i].userid +'","nickname":"' + userinfo[i].nickname
+					          + '","vipid":"'+ userinfo[i].vipid + '","guardid":"'+ userinfo[i].guardid 
+					          + '"}';
+					        if(chatNum == 3 || chatNum == 6 || (chatNum >= 13 && chatNum <= 23)){
+					        	action = 3;
+					        }
+				        	msginfo[msgno++] = '{"msg":[{"_method_":"SendMsg","action":"' +  action
+				        		+ '","ct":'+ msgct 
+					            + ',"msgtype":"2"}],"retcode":"1","retmsg":"OK"}';
+			        	}
+			        }
+				}
+				
+				function excuteSetJoin(randomnum, i, varuserinfo)
+				{
+					setTimeout(function(){
+						//console.log(i + "=" + JSON.stringify(varuserinfo));
+						console.log("join=" + i + "=" + getNowFormatDate());
+						socket.emit('fakeconn', varuserinfo);
+	                },randomnum*1000);
+				}
+				
+				function excuteSetChat(randomsno, i,  varmsginfo)
+				{					
+					setTimeout(function(){
+						//console.log("chat=" + i + "=" + varmsginfo + "=" + getNowFormatDate());
+						console.log("chat=" + i + "=" + getNowFormatDate());
+						socket.emit('sendPublicMsg', varmsginfo);
+	                },randomsno*1000);
+				}
+				
+				for(var joini in userinfo){
+					var randomnum = 36*joini + 6 + Math.round(Math.random()*20);
+					excuteSetJoin(randomnum, joini, userinfo[joini]);
+				}
+				
+				console.log(msgno + "=" + leaveno);
+				
+				for(var chati in msginfo){
+					var randomsno = 48 + chati*48 + Math.round(Math.random()*20);
+					excuteSetChat(randomsno, chati, msginfo[chati]);
+					
+					/* if(chati == (msgno-1)){
+						for(var leavei in leaveMsg){
+							//console.log("leavei="+leavei);
+							var randleaveno = 66 + leavei*20 + Math.round(Math.random()*60);
+							excuteSetChat(randleaveno, leavei, leaveMsg[leavei]);
+						}
+					} */
+					
+					if(chati == Math.round(msgno/2)){
+						for(var sjoini in userinfo){
+							var secjoinnum = 1800 + sjoini*38 + Math.round(Math.random()*30);
+							excuteSetJoin(secjoinnum, sjoini, userinfo[sjoini]);
+						}
+					}
+				}
+			},error: function(err) {
+				console.log(err);
+			}
+		});
+	});
+
+	socket.on('connect_failed', function() {
+	    //console.log("connect_failed ...");
+	});
+
+	socket.on('disconnect', function() {
+	    //console.log("disconnect ...");
+	});
+
+	socket.on('reconnect', function() {
+	    //console.log("reconnect ...");
+	});
+
+
+	}catch(e){
+		alert(e);
+	}
+
+setTimeout(function(){
+	 console.log("2Date=" + getNowFormatDate());
+	 window.open("/index.php/Admin/Chatfake/index");
+},86*60*1000);
+
+setTimeout(function(){
+	console.log("3Date=" + getNowFormatDate());
+	window.opener=null;
+	window.open('','_self');
+	window.close();
+},88*60*1000); 
+
+	
+</script>
+</head>
+<body>
+
+</body>
+</html>

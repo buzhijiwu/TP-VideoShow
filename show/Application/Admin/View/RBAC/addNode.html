@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=7" />
+<title>{:C('TITLE_CONTENT')}</title>
+<link href="__PUBLIC__/Public/statics/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Public/statics/css/system.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Public/statics/css/table_form.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles1.css" title="styles1" media="screen" />
+<link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles2.css" title="styles2" media="screen" />
+<link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles3.css" title="styles3" media="screen" />
+<link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles4.css" title="styles4" media="screen" />
+<js href="__PUBLIC__/Public/Js/jquery-1.7.2.min.js" />
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/admin_common.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/styleswitch.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/formvalidator.js" charset="UTF-8"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/formvalidatorregex.js" charset="UTF-8"></script>
+<script type="text/javascript">
+	window.focus();
+</script>
+</head>
+<body>
+<div class="subnav">
+    <div class="content-menu ib-a blue line-x">
+        <a href='javascript:;' class="on"><em>添加权限</em></a></div>
+</div>
+<style type="text/css">
+	html{_overflow-y:scroll}
+</style>
+<script type="text/javascript">
+$(function() {
+	$.formValidator.initConfig({autotip:true,formid:"myform",onerror:function(msg){}});
+	
+	$("#nodename").formValidator({
+		oncorrect:' '
+	}).inputValidator({min:1,onerror:"请输入内容",empty: { leftempty: false, rightempty: false }});
+	
+	/*$("#add").formValidator({
+		oncorrect:' '
+	}).inputValidator({min:1,onerror:"请输入内容",empty: { leftempty: false, rightempty: false }});*/
+	
+	$("#sort").formValidator({
+		oncorrect:' '
+	}).inputValidator({min:1,onerror:"请输入内容",empty: { leftempty: false, rightempty: false }});
+})
+</script>
+<div class="pad_10">
+<div class="common-form">
+<form name="myform" action="{:U('RBAC/addNode')}" method="post" id="myform">
+<table width="100%" class="table_form contentWrap">
+<tr>
+<td width="80">权限名</td> 
+<td>
+	<input type="text" name-="nodename" name="name"  class="input-text" id="nodename">
+</td>
+</tr>
+<tr>
+<td>路径</td> 
+<td>
+	<input size="30" type="text" name="address" class="input-text" id="add" value="">
+</td>
+</tr>
+<tr>
+<td>所属上级权限</td>
+<td>
+	<select id="nodeselect" name="parent">
+		<option value="0-0">请选择上级权限</option>
+		<option value="0">顶级目录</option>
+		<foreach name="nodeList" item="v" >
+			<if condition="$v['level'] neq 2">
+			<option value="{$v['id']}">{:str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',$v['level'])}{$v['menuname']}</option>
+			</if>
+		</foreach>
+	</select>
+	<span id="span_select" style="background:url(/Public/Admin/Images/msg_bg.png) no-repeat;margin-left:15px;display:inline-block;min-width:50px;height:20px;border:0px solid red;display:none;"><font style="margin-left:20px;" color='red';>请选择所属权限</font></span>
+</td>
+</tr>
+<tr>
+<td>排序</td> 
+<td>
+	<input id="sort" size="3" type="text" name="sort" class="input-text" value="" />
+</td>
+</tr>
+<tr>
+	<td style="width:120px;">
+		是否显示在菜单左侧
+	</td>
+	<td class="check">
+		<label style="margin-right:25px;color:purple;font-weight:bold;"><input checked type="checkbox" name="ismenu" value="1" />显示</label>
+		<label style="color:green;font-weight:bold;"><input type="checkbox" name="ismenu" value="0" />不显示</label>
+	</td>
+</tr>
+</table>
+    <div class="bk15"></div>
+    <input name="dosubmit" type="submit" value="提交" class="button">
+</form>
+</div>
+</div>
+<script>
+$('td.check input[name=ismenu]').click(function() {
+	if($(this).get(0).checked) {
+		$('td.check input[name=ismenu]').each(function() {
+			$(this).get(0).checked = false;
+		});
+		$(this).get(0).checked = true;
+	} else {
+		return false;
+	}
+});
+
+$('#myform').submit(function() {
+	if( $('#nodeselect').val() == '0-0' ) {
+		$('#span_select').show().fadeOut(1500);
+		return false;
+	}
+});
+</script>
+</body>
+</html>

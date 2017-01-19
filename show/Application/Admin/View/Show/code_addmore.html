@@ -1,0 +1,99 @@
+<extend name="Public:list" />
+<block name="title"></block>
+<block name="css"></block>
+
+<block name="main">
+
+	<script>
+		$(function(){
+
+			$.formValidator.initConfig({formid:"myform",autotip:true,onerror:function(msg,obj){window.top.art.dialog({content:msg,lock:true,width:'200',height:'50'}, function(){this.close();$(obj).focus();})}});
+			$("#niceno").formValidator({
+						onshow:"{:lan('NICE_NUMBER', 'Admin')}",
+						onfocus:"{:lan('NICE_NUMBER', 'Admin')}",
+						oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"})
+					.inputValidator({min:1,onerror:"{:lan('NICE_NUMBER', 'Admin')}"})
+					.regexValidator({regexp:"num",datatype:"enum",onerror:"{:lan('PLZ_INPUT_NUMBER', 'Admin')}"});
+			$("#price").formValidator({
+						onshow:"{:lan('PRICE', 'Admin')}",
+						onfocus:"{:lan('PRICE', 'Admin')}",
+						oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"})
+					.inputValidator({min:1,onerror:"{:lan('PRICE', 'Admin')}"})
+					.regexValidator({regexp:"num",datatype:"enum",onerror:"{:lan('PLZ_INPUT_NUMBER', 'Admin')}"});
+		})
+	</script>
+<div class="subnav">
+  <div class="content-menu ib-a blue line-x"><a href="__URL__/code_manager"><em>{:lan('ALL_NICENO_LIST', 'Admin')}</em></a><span>|</span><a href="javascript:;" class="on"><em>{:lan('ADD_NICENO_MORE', 'Admin')}</em></a></div>
+</div>
+<style type="text/css">
+	html{_overflow-y:scroll}
+</style>
+<div class="pad_10">
+  <div class="common-form">
+    <form name="myform" action="" method="post" id="myform">
+      <table class="table_form contentWrap" width="100%">
+        <tbody>
+          <tr>
+            <td width="80">{:lan('NICENO_RANGE', 'Admin')}</td>
+            <td><input class="input-text" name="startnum"  size="5" type="text">
+              -
+              <input class="input-text" name="endnum"  size="5" type="text">
+            </td>
+          </tr>
+          <tr>
+            <td>{:lan('PRICE', 'Admin')}</td>
+            <td><input name="price" id="price" class="input-text" type="text">
+          </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="bk15"></div>
+      <input name="dosubmit" value="{:lan('SUBMIT_BUTTION', 'Admin')}" class="button add" type="button">
+    </form>
+  </div>
+  <div class="msg" style=" width: 500px; height: 50px; line-height: 50px; vertical-align: middle; "></div>
+</div>
+</block>
+
+<block name="js">
+<script type="text/javascript">
+$('.add').click(function(){
+	var startnum = $('[name=startnum]').val(),
+			endnum = $('[name=endnum]').val(),
+			price = $('[name=price]').val();
+
+	    if(startnum==''||isNaN(startnum)){
+	    	alert('{:lan('STARTNO_IS_NUMBER', 'Admin')}'); return false;
+	    }
+	    if(endnum==''||isNaN(endnum)){
+	    	alert('{:lan('ENDNO_IS_NUMBER', 'Admin')}'); return false;
+	    }
+	    if(parseInt(startnum)>=parseInt(endnum)){
+	    	alert('{:lan('ENDNO_GT_STARTNO', 'Admin')}'); return false;
+	    }
+	    if(price<0){
+	    	alert('{:lan('PRICE_NOT_NEGATIVE', 'Admin')}'); return false;
+	    }
+	    window.setInterval(function(){
+	    	var endno = parseInt(endnum)+1;
+	    	if(startnum!=endno){
+		    	$.post('',{
+		    		niceno : startnum,
+		    		price : price   	
+			    },function(r){
+                    var startno = parseInt(startnum)-1;
+			    	if(r.status==1){
+							$('.msg').text('{:lan('NICE_NUMBER', 'Admin')}:'+startno+'{:lan('LAN_DO_SUCCESS', 'Admin')}...');
+						}else{
+							$('.msg').text('{:lan('NICE_NUMBER', 'Admin')}:'+startno+'{:lan('EXISTS', 'Admin')}...');
+						}
+						
+			    })    	
+		    }else{
+		    	window.location.href='__URL__/code_manager'; 
+		    }
+		    startnum++;
+	    },300);	       
+})
+</script>
+</block>

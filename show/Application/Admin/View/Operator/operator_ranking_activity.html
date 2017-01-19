@@ -1,0 +1,179 @@
+<tagLib name="html" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>{:lan('ADMIN_MAN_TITLE', 'Admin')}</title>
+    <link href="__PUBLIC__/Public/statics/css/reset.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/Public/statics/css/system.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/Public/statics/css/table_form.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/Public/statics/css/dialog.css" rel="stylesheet" type="text/css" />
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/dialog.js"></script>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles1.css" title="styles1" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles2.css" title="styles2" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles3.css" title="styles3" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles4.css" title="styles4" media="screen" />
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/admin_common.js"></script>
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/styleswitch.js"></script>
+
+</head>
+<body>
+<style type="text/css">
+    html{_overflow-y:scroll}
+</style><div id="closeParentTime" style="display:none"></div>
+<div class="pad-10">
+    <form id="searchform" name="searchform" action="/Admin/Operator/operator_ranking_activity/" method="get">
+        <input type="hidden" name="searchform" value="1">
+        <table width="100%" cellspacing="0" class="search-form">
+            <tbody>
+            <tr>
+                <td>
+                    <div class="explain-col">
+                        <link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/js/calendar/jscal2.css"/>
+                        <link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/js/calendar/border-radius.css"/>
+                        <link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/js/calendar/win2k.css"/>
+                        <script type="text/javascript" src="__PUBLIC__/Public/statics/js/calendar/calendar.js"></script>
+                        <script type="text/javascript" src="__PUBLIC__/Public/statics/js/calendar/lang/en.js"></script>
+                        {:lan('TIME', 'Admin')}：
+                        <input type="text" name="time" id="time" value="{$search['time']}" size="10" class="date" readonly>
+                        <script type="text/javascript">
+                            Calendar.setup({
+                                weekNumbers: false,
+                                inputField : "time",
+                                trigger    : "time",
+                                dateFormat: "%Y-%m-%d",
+                                showTime: false,
+                                minuteStep: 1,
+                                onSelect   : function() {this.hide();}
+                            });
+                        </script>
+                        <select name="type">
+                            <option value="">{:lan('MAY_ACTIVITY_TOP_LIST', 'Home')}</option>
+                            <option value="1" <eq name="search.type" value="1"> selected</eq> >{:lan('EMCEE_EARN_TOP', 'Home')}</option>
+                            <option value="2" <eq name="search.type" value="2"> selected</eq> >{:lan('TOP_EMLIVETIME_LIST', 'Home')}</option>
+                            <option value="3" <eq name="search.type" value="3"> selected</eq> >{:lan('TOP_NEWATT_LIST', 'Home')}</option>
+                            <option value="4" <eq name="search.type" value="4"> selected</eq> >{:lan('TOP_CONSUME_LIST', 'Home')}</option>
+                            <option value="6" <eq name="search.type" value="6"> selected</eq> >{:lan('TOP_SPORTGAME_LIST', 'Home')}</option>
+                            <option value="7" <eq name="search.type" value="7"> selected</eq> >{:lan('TOP_EMCEE_FREE_GIFT_LIST', 'Home')}</option>
+                        </select>
+                        <input type="submit" class="button" value="{:lan('BTN_SEARCH', 'Admin')}" />
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+    <form>
+        <div class="table-list">
+            <table width="100%">
+                <thead>
+                <tr>
+                    <th style="width:10%;">{:lan('MAY_ACTIVITY_TOP_LIST','Home')}</th>
+                    <th style="width:5%;">{:lan('MAY_TOP_LIST','Home')}</th>
+                    <th style="width:10%;">{:lan('ROOMNO','Admin')}</th>
+                    <th style="width:15%;">{:lan('USERNAME','Admin')}</th>
+                    <th style="width:20%;">{:lan('NICKNAME','Admin')}</th>
+                    <th style="width:20%;">{:lan('RANKING_VALUE','Admin')}</th>
+                    <th>{:lan('TIME','Admin')}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!--主播收入-->
+                <volist name="list[1]" id="vo" key="k">
+                    <tr>
+                        <td align='center'>{:lan('EMCEE_EARN_TOP','Home')}</td>
+                        <td align='center'>{$vo['rank']}</td>
+                        <td align='center'>{$vo['roomno']}</td>
+                        <td align='center'>{$vo['username']}</td>
+                        <td align='center'>{$vo['nickname']}</td>
+                        <td align='center'>{$vo['value']} {:lan('MONEY_UNIT','Admin')}</td>
+                        <td align='center'>{$vo['starttime']} - {$vo['endtime']}</td>
+                    </tr>
+                </volist>
+                <notempty name="list[1]"><tr><td colspan="7"></td></tr></notempty>
+                <!--用户消费-->
+                <volist name="list[4]" id="vo" key="k">
+                    <tr>
+                        <td align='center'>{:lan('TOP_CONSUME_LIST','Home')}</td>
+                        <td align='center'>{$vo['rank']}</td>
+                        <td align='center'>{$vo['roomno']}</td>
+                        <td align='center'>{$vo['username']}</td>
+                        <td align='center'>{$vo['nickname']}</td>
+                        <td align='center'>{$vo['value']} {:lan('MONEY_UNIT','Admin')}</td>
+                        <td align='center'>{$vo['starttime']} - {$vo['endtime']}</td>
+                    </tr>
+                </volist>
+                <notempty name="list[4]"><tr><td colspan="7"></td></tr></notempty>
+                <!--新增关注-->
+                <volist name="list[3]" id="vo" key="k">
+                    <tr>
+                        <td align='center'>{:lan('TOP_NEWATT_LIST','Home')}</td>
+                        <td align='center'>{$vo['rank']}</td>
+                        <td align='center'>{$vo['roomno']}</td>
+                        <td align='center'>{$vo['username']}</td>
+                        <td align='center'>{$vo['nickname']}</td>
+                        <td align='center'>{$vo['value']}</td>
+                        <td align='center'>{$vo['starttime']} - {$vo['endtime']}</td>
+                    </tr>
+                </volist>
+                <notempty name="list[3]"><tr><td colspan="7"></td></tr></notempty>
+                <!--直播时长-->
+                <volist name="list[2]" id="vo" key="k">
+                    <tr>
+                        <td align='center'>{:lan('TOP_EMLIVETIME_LIST','Home')}</td>
+                        <td align='center'>{$vo['rank']}</td>
+                        <td align='center'>{$vo['roomno']}</td>
+                        <td align='center'>{$vo['username']}</td>
+                        <td align='center'>{$vo['nickname']}</td>
+                        <td align='center'>{$vo['value']}</td>
+                        <td align='center'>{$vo['starttime']} - {$vo['endtime']}</td>
+                    </tr>
+                </volist>
+                <notempty name="list[2]"><tr><td colspan="7"></td></tr></notempty>
+                <!--用户在线时长-->
+                <volist name="list[5]" id="vo" key="k">
+                    <tr>
+                        <td align='center'>{:lan('TOP_USONLINETIME_LIST','Home')}</td>
+                        <td align='center'>{$vo['rank']}</td>
+                        <td align='center'>{$vo['roomno']}</td>
+                        <td align='center'>{$vo['username']}</td>
+                        <td align='center'>{$vo['nickname']}</td>
+                        <td align='center'>{$vo['value']}</td>
+                        <td align='center'>{$vo['starttime']} - {$vo['endtime']}</td>
+                    </tr>
+                </volist>
+                <notempty name="list[5]"><tr><td colspan="7"></td></tr></notempty>
+                <!--运动大师-->
+                <volist name="list[6]" id="vo" key="k">
+                    <tr>
+                        <td align='center'>{:lan('TOP_SPORTGAME_LIST','Home')}</td>
+                        <td align='center'>{$vo['rank']}</td>
+                        <td align='center'>{$vo['roomno']}</td>
+                        <td align='center'>{$vo['username']}</td>
+                        <td align='center'>{$vo['nickname']}</td>
+                        <td align='center'>{$vo['value']}</td>
+                        <td align='center'>{$vo['starttime']} - {$vo['endtime']}</td>
+                    </tr>
+                </volist>
+                <notempty name="list[6]"><tr><td colspan="7"></td></tr></notempty>
+                <!--主播免费礼物-->
+                <volist name="list[7]" id="vo" key="k">
+                    <tr>
+                        <td align='center'>{:lan('TOP_EMCEE_FREE_GIFT_LIST','Home')}</td>
+                        <td align='center'>{$vo['rank']}</td>
+                        <td align='center'>{$vo['roomno']}</td>
+                        <td align='center'>{$vo['username']}</td>
+                        <td align='center'>{$vo['nickname']}</td>
+                        <td align='center'>{$vo['value']}</td>
+                        <td align='center'>{$vo['starttime']} - {$vo['endtime']}</td>
+                    </tr>
+                </volist>
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>
+</body>
+</html>

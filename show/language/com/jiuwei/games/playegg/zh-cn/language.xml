@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+    <showlist>
+		<nologin>您尚未登录</nologin>
+		<noenoughvm>您的秀币不足，砸一次蛋需花费</noenoughvm>
+		<virtualmoney>秀币</virtualmoney>
+		<notwinning>很遗憾，未砸中</notwinning>
+		<congratulation>恭喜，获得秀币</congratulation>
+		<award>奖励</award>
+		<errretry>系统出错，请稍候再试</errretry>
+		<commuerretry>通信失败，请重试</commuerretry>
+		<repeattext>再来一次</repeattext>
+		<wantaward>我要领奖</wantaward>
+		<exittext>退出游戏</exittext>
+		<winningfirst>哈哈，中奖了！感谢您的参与，请去领奖!一等奖1000秀币</winningfirst>
+		<winningsec>哈哈，中奖了！感谢您的参与，请去领奖!二等奖500秀币</winningsec>
+		<winningthird>哈哈，中奖了！感谢您的参与，请去领奖!三等奖200秀币</winningthird>
+        <winningforth>哈哈，中奖了！感谢您的参与，请去领奖!四等奖100秀币</winningforth>
+		<tomorrowretry>您今天砸蛋次数超过3次，请明天再来！</tomorrowretry>
+		<seetomorrow>明天再来</seetomorrow>
+    </showlist>

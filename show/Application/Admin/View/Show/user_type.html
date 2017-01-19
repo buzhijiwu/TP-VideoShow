@@ -1,0 +1,83 @@
+<extend name="Public:list" />
+<block name="title"></block>
+<block name="css"></block>
+
+<block name="main">
+<div class="subnav">
+  <div class="content-menu ib-a blue line-x">
+  	<a href='/admin.php/show/user_type/type/2' <eq name="Think.get.type" value="2">class="on"</eq>><em>{:lan('ALL_TYPE', 'Admin')}</em></a>
+  	<span>|</span>
+  	<a href='/admin.php/show/user_type/type/0' <eq name="Think.get.type" value="0">class="on"</eq>><em>{:lan('PC_TYPE', 'Admin')}</em></a>
+  	<span>|</span>
+  	<a href='/admin.php/show/user_type/type/1' <eq name="Think.get.type" value="1">class="on"</eq>><em>{:lan('APP_TYPE', 'Admin')}</em></a>
+  	<span>|</span>
+  	<a href='__URL__/user_typeUp' ><em>{:lan('ADD_MAIN_TYPE', 'Admin')}</em></a>
+  </div>
+</div>
+<style type="text/css">
+	html{_overflow-y:scroll}
+</style>
+<form name="myform" action="" method="post">
+  <div class="pad_10">
+    <div class="explain-col"> <a href="/Admin/index.php/Index/cache_all/">{:lan('REMINDER', 'Admin')}{:lan('AFTER_ADD_MODIFY', 'Admin')}</a></div>
+    <div class="bk10"></div>
+    <div class="table-list">
+      <table width="100%" cellspacing="0" >
+        <thead>
+          <tr>
+            <th width="38">{:lan('SORT', 'Admin')}</th>
+            <th>ID</th>
+            <th>{:lan('TYPE_NAME', 'Admin')}</th>
+            <th>{:lan('IS_SHOW', 'Admin')}</th>
+            <th>{:lan('CREATE_TIME', 'Admin')}</th>
+            <th>{:lan('OPERATION', 'Admin')}</th>
+          </tr>
+        </thead>
+        <tbody>
+        	<volist name="data" id="v">
+        	<eq name="v.parentid" value="0">
+        		<tr>
+	            <td><input type="hidden" name="id[]" value="{$v.categoryid}" />
+	              <input name='sort[]' type='text' size='3' value='{$v.sort}' class='input-text-c'></td>
+	            <td align='center'>{$v.categoryid}</td>
+	            <td align='center'>{$v.categoryname}</td>
+	            <td align='center'><eq name="v.athomepage" value="0">{:lan('NO', 'Admin')}<else/>{:lan('YES', 'Admin')}</eq></td>
+	            <td align='center'>{$v.createtime}</td>
+	            <td align='center' >
+	            	<a href="__URL__/user_typeUp/pid/{$v.categoryid}">{:lan('ADD_SUB_TYPE', 'Admin')}</a> | 
+	            	<a href="__URL__/user_typeUp/pid/{$v.parentid}/id/{$v.ecateid}">{:lan('MODIFY', 'Admin')}</a>
+	            </td>
+	          </tr>
+    			</eq> 
+    			<volist name="v.sub" id="o">
+    				<tr>
+	            <td><input type="hidden" name="id[]" value="{$o.ecateid}" />
+	              <input name='sort[]' type='text' size='3' value='{$o.sort}' class='input-text-c'></td>
+	            <td align='center'>{$o.categoryid}</td>
+	            <td align='center'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─ {$o.categoryname}</td>
+	            <td align='center'><eq name="o.athomepage" value="0">{:lan('NO', 'Admin')}<else/>{:lan('YES', 'Admin')}</eq></td>
+	            <td align='center'>{$o.createtime}</td>
+	            <td align='center' >
+	            	<a href="__URL__/user_typeUp/pid/{$o.parentid}/id/{$o.ecateid}">{:lan('MODIFY', 'Admin')}</a> | 
+	            	<a href="javascript:confirmurl('__URL__/delOne/db/6015/id/{$o.ecateid}','{:lan('CONFIRM_DELETE', 'Admin')}')">{:lan('BTN_DELETE', 'Admin')}</a>
+	            </td>
+	          </tr>
+    			</volist> 
+          </volist>
+        </tbody>
+      </table>
+      <div class="btn">
+        <input type="submit" class="button" name="dosubmit" value="{:lan('SORT', 'Admin')}" />
+      </div>
+    </div>
+  </div>
+  </div>
+</form>
+
+</block>
+
+<block name="js">
+<script language="JavaScript">
+	window.top.$('#display_center_id').css('display','none');
+</script>
+</block>

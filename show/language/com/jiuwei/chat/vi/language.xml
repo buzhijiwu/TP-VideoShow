@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>	
+	 <showlist>
+		<websiteissue>Kết nối mạng bị lỗi, vui lòng refresh và thử lại </websiteissue>
+		<authenfailed>ChatTên miền không được ủy quyền！Vui lòng liên hệ với trang chủ www.waashow.com để được ủy quyền</authenfailed>
+		<regsuccess>Đăng ký thành công</regsuccess>
+		<regfailed>Đăng ký không thành công，vui lòng kiểm tra chức năng có tồn tại không</regfailed>
+		<alreadlogin>Đăng nhập tài khoản</alreadlogin>
+		<evictroom>Bạn bị đuổi ra khỏi phòng</evictroom>
+		<wish>Mong muốn của tôi</wish>
+		<wantget>Hôm nay tôi muốn nhận được</wantget>
+		<geunit>chiếc</geunit>
+		<peohotrec>Người chào hàng</peohotrec>
+		<spend>Chi phí</spend>
+		<grabsofa>Lấy 1 chiếc sofa thành công</grabsofa>
+		<userdesc>Người sử dụng</userdesc>
+		<leftroom>Rời khỏi phòng</leftroom>
+		<sendto>Tặng</sendto>
+		<sendflyscreen>Tặng 1 chiếc màn hình</sendflyscreen>
+		<tempvisitor>Du khách</tempvisitor>
+    </showlist>

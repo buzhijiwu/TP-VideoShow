@@ -1,0 +1,91 @@
+<extend name="Public:list" />
+<block name="title"></block>
+<block name="css"></block>
+
+<block name="main">
+
+  <script>
+    $(function(){
+
+      $.formValidator.initConfig({formid:"upForm",autotip:true,onerror:function(msg,obj){window.top.art.dialog({content:msg,lock:true,width:'200',height:'50'}, function(){this.close();$(obj).focus();})}});
+      $("#username").formValidator({
+                onshow:"{:lan('USERNAME', 'Admin')}",
+                onfocus:"{:lan('USERNAME', 'Admin')}",
+                oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"})
+              .inputValidator({min:1,onerror:"{:lan('USERNAME', 'Admin')}"});
+      $("#password").formValidator({
+                onshow:"{:lan('SYS_PWD', 'Admin')}",
+                onfocus:"{:lan('SYS_PWD', 'Admin')}",
+                oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"})
+              .inputValidator({min:1,onerror:"{:lan('SYS_PWD', 'Admin')}"});
+      $("#pwdconfirm").formValidator({
+                onshow:"{:lan('SYS_REPWD', 'Admin')}",
+                onfocus:"{:lan('SYS_REPWD', 'Admin')}",
+                oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"})
+              .inputValidator({min:1,onerror:"{:lan('SYS_REPWD', 'Admin')}"})
+              .compareValidator({
+                desid: "password",
+                operateor: "=",
+                onerror: "{:lan('TWICE_PWD_NOTSAME', 'Admin')}"
+              });
+      $("#email").formValidator({
+                onshow:"{:lan('MOBILE', 'Admin')}",
+                onfocus:"{:lan('MOBILE', 'Admin')}",
+                oncorrect:"{:lan('INPUT_SUCCESS', 'Admin')}"})
+              .inputValidator({min:1,onerror:"{:lan('MOBILE', 'Admin')}"})
+              .regexValidator({regexp:"num",datatype:"enum",onerror:"{:lan('INPUT_YOUR_USERNAME', 'Admin')}"});
+    })
+  </script>
+
+
+  <div class="subnav">
+  <div class="content-menu ib-a blue line-x"><a href="__URL__/user_manager"><em>{:lan('ALL_USER_LIST', 'Admin')}</em></a><span>|</span><a href="javascript:;" class="on"><em>{:lan('ADD_USER', 'Admin')}</em></a></div>
+</div>
+<style type="text/css">
+	html{_overflow-y:scroll}
+</style>
+<div class="pad_10">
+  <div class="common-form">
+    <form name="myform" action="" method="post" id="myform">
+      <table width="100%" class="table_form contentWrap">
+        <tbody>
+          <tr>
+            <td width="80">{:lan('USERNAME', 'Admin')}</td>
+            <td><input type="text" name="username" class="input-text" id="username"></td>
+          </tr>
+          <tr>
+            <td>{:lan('SYS_PWD', 'Admin')}</td>
+            <td><input type="password" name="password" class="input-text" id="password" value=""></td>
+          </tr>
+          <tr>
+            <td>{:lan('SYS_REPWD', 'Admin')}</td>
+            <td><input type="password" name="repassword" class="input-text" id="pwdconfirm" value=""></td>
+          </tr>
+          <tr>
+            <td>{:lan('MOBILE', 'Admin')}</td>
+            <td><input type="text" name="userno" class="input-text" id="email"></td>
+          </tr>
+          <tr>
+			  <td> {:lan('COUNTRY_CODE', 'Admin')} </td>
+			  <td>
+			  	<select name="countrycode">
+			      <option value=""> {:lan('PLEASE_CHOOSE', 'Admin')} </option>	
+			      <volist name="data.country" id="v">
+			      <option value="{$v.countryno}">{$v.countryname} </option>		
+			      </volist>
+			    </select>
+			  </td>
+			</tr>
+        </tbody>
+      </table>
+      <div class="bk15"></div>
+      <input name="dosubmit" type="submit" value="{:lan('SUBMIT_LABEL', 'Admin')}" class="button">
+    </form>
+  </div>
+</div>
+
+</block>
+
+<block name="js">
+</block>
+

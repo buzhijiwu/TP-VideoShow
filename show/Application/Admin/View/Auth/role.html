@@ -1,0 +1,48 @@
+<extend name="Public:list" />
+<block name="title">{:lan('ROLE_LIST', 'Admin')}</block>
+<block name="css"></block>
+
+<block name="main">
+<div class="subnav">
+  <div class="content-menu ib-a blue line-x">
+  	<a href="__URL__/role" <eq name="Think.get.type" value="">class="on"</eq> ><em>{:lan('ROLE_LIST', 'Admin')}</em></a><span>|</span>
+  	<a href="__URL__/role_up"><em>{:lan('ADD_ROLE', 'Admin')}</em></a>
+  </div>
+</div>
+<form name="myform" id="myform" action="__URL__/delAll" method="post" >
+    <div class="table-list">
+      <table width="100%">
+        <thead>
+          <tr>
+      		<th width="60">{:lan('ROLE_NUMBER', 'Admin')}</th>
+      		<th align="center">{:lan('ROLE_NAME', 'Admin')}</th>
+      		<th align="center">{:lan('ROLE_DESCRIPTION', 'Admin')}</th>
+      		<th align="center">{:lan('UPDATE_TIME', 'Admin')}</th>
+      		<th align="center">{:lan('OPERATION', 'Admin')}<th>
+          </tr>
+        </thead>
+        <tbody>
+          <volist name="data" id="v">
+            <tr>
+              <td align='center'>{$v.roleid}</td>
+              <td align='center'>{$v.rolename}</td>
+              <td align='center'>{$v.remark}</td>
+              <td align="center">{$v.createtime}</td>
+              <td align="center">
+              	<a href="__URL__/auth/id/{$v.roleid}/name/{$v.rolename}">{:lan('AUTHORITY', 'Admin')}</a> | <a href="__URL__/role_up/id/{$v.rid}">{:lan('MODIFY', 'Admin')}</a><neq name="v.rid" value="0"> | <a href="javascript:confirmurl('__URL__/delOne/db/4004/id/{$v.rid}', '{:lan('WEATHER_DEL_RECORD', 'Admin')}')">{:lan('BTN_DELETE', 'Admin')}</a></neq> 
+			  </td>
+            </tr>
+          </volist>
+        </tbody>
+      </table>
+    </div>
+</form>
+</block>
+
+<block name="js">
+<script type="text/javascript">
+function confirm_delete(){
+	if(confirm('{:lan('CONFIRM_DELETE', 'Admin')}')) $('#myform').submit();
+}
+</script>
+</block>

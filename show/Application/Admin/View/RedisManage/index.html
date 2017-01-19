@@ -1,0 +1,113 @@
+<tagLib name="html" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>{:lan('ADMIN_MAN_TITLE', 'Admin')}</title>
+    <link href="__PUBLIC__/Public/statics/css/reset.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/Public/statics/css/system.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/Public/statics/css/table_form.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/Public/statics/css/dialog.css" rel="stylesheet" type="text/css" />
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/dialog.js"></script>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles1.css" title="styles1" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles2.css" title="styles2" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles3.css" title="styles3" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles4.css" title="styles4" media="screen" />
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/admin_common.js"></script>
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/styleswitch.js"></script>
+
+</head>
+<body>
+<style type="text/css">
+    html{_overflow-y:scroll}
+</style><div id="closeParentTime" style="display:none"></div>
+<div class="pad-10">
+    <div class="content-menu ib-a blue line-x">
+        <a class="add fb" onclick="refresh_redis()"><em>{:lan('REFRESH_REDIS','Admin')}</em></a>
+    </div>
+
+    <form name="myform" id="myform" action="{:U('Admin/RedisManage/refresh_keys')}" method="post" >
+        <div class="table-list">
+            <table width="100%">
+                <thead>
+                <tr>
+                    <th width="16"><input class="inputcheckbox " type="checkbox" value="" id="check_box" onclick="selectall('keys[]');"></th>
+                    <th>{:lan('REDIS_KEY_TYPE','Admin')}</th>
+                    <th align='left'>{:lan('REDIS_KEY_NAME','Admin')}</th>
+                    <th align='left'>{:lan('REDIS_KEY_REMARK','Admin')}</th>
+                    <th width="200">{:lan('OPERATION','Admin')}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <foreach  name="RedisKeys.Keys" item="vo" key="k">
+                    <tr>
+                        <td align="center"><input class="inputcheckbox " name="keys[]" value="{$k}" type="checkbox"></td>
+                        <td align='center'>Key</td>
+                        <td>{$k}</td>
+                        <td>{$vo.remark}</td>
+                        <td align='center'>
+                            <a href="{:U('Admin/RedisManage/key_detail/key/'.$k)}">{:lan('REDIS_KEY_DETAIL','Admin')}</a>
+                            <eq name="vo.refresh" value="1">
+                                | <a onclick="refresh_key('{$k}');" style="color:green;">{:lan('REDIS_KEY_REFRESH','Admin')}</a>
+                                <else/>
+                                | <span style="color:red;">{:lan('REDIS_KEY_REFRESH','Admin')}</span>
+                            </eq>
+                        </td>
+                    </tr>
+                </foreach >
+                <foreach  name="RedisKeys.hKeys" item="vo" key="k">
+                    <tr>
+                        <td align="center"><input class="inputcheckbox " name="keys[]" value="{$k}" type="checkbox"></td>
+                        <td align='center'>HashKey</td>
+                        <td>{$k}</td>
+                        <td>{$vo.remark}</td>
+                        <td align='center'>
+                            <a href="{:U('Admin/RedisManage/hKey_detail/key/'.$k)}">{:lan('REDIS_KEY_DETAIL','Admin')}</a>
+                            <eq name="vo.refresh" value="1">
+                                | <a onclick="refresh_key('{$k}');" style="color:green;">{:lan('REDIS_KEY_REFRESH','Admin')}</a>
+                                <else/>
+                                | <span style="color:red;">{:lan('REDIS_KEY_REFRESH','Admin')}</span>
+                            </eq>
+                        </td>
+                    </tr>
+                </foreach >
+                </tbody>
+            </table>
+            <div class="btn">
+                <label for="check_box">{:lan('ALL_OR_CANCEL','Admin')}</label>
+                <input id="delbutton" type="button" disabled="disabled" class="button common-disabled" value="{:lan('REDIS_KEY_REFRESH','Admin')}" onclick="refresh_keys()"/>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    //刷新所有key
+    function refresh_redis(){
+        if(confirm("{:lan('CONFIRM_REFRESH','Admin')}")){
+            window.location.href = "{:U('Admin/RedisManage/refresh_redis')}";
+        }
+    }
+    //批量刷新keys
+    function refresh_keys(){
+        if(confirm("{:lan('CONFIRM_REFRESH','Admin')}")){
+            $('#myform').submit();
+        }
+    }
+    //刷新key
+    function refresh_key(key){
+        if(confirm("{:lan('CONFIRM_REFRESH','Admin')}")){
+            window.location.href = "{:U('Admin/RedisManage/refresh_key/key/"+key+"/')}";
+        }
+    }
+    $(".inputcheckbox").click(function () {
+        if($('.inputcheckbox:checked').length>0){
+            $('#delbutton').attr("disabled",false).removeClass("common-disabled");
+        }else{
+            $('#delbutton').attr("disabled",true).addClass("common-disabled");
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+<head>
+
+    <!--公用meta-->
+    <include file="Public:meta" />
+
+    <title>{:lan('TOP_LIST', 'Home')}</title>
+
+</head>
+
+<body>
+
+<!--公用头部-->
+<include file="Public:header" />
+
+
+<!--主要内容-->
+<div class="common-wrap">
+    <div class="topList-main">
+        <div class="width clear">
+
+            <!--主播收入榜-->
+            <div class="section">
+                <h2 class="title">
+                    <i class="iconfont">&#xe63c;</i>
+                    <span>{:lan('EMCEE_EARN_TOP', 'Home')}</span>
+                </h2>
+                <div class="rank-list">
+                    <div class="tab-buttons clear">
+                        <p class="active">{:lan("DAY", "Home")}</p>
+                        <p>{:lan("WEEK", "Home")}</p>
+                        <p>{:lan("MONTH", "Home")}</p>
+                        <p>{:lan("TOTAL", "Home")}</p>
+                    </div>
+                    <div class="list-main"></div>
+                </div>
+            </div>
+
+            <!--用户消费榜-->
+            <div class="section">
+                <h2 class="title">
+                    <i class="iconfont">&#xe63c;</i>
+                    <span>{:lan("TOP_CONSUME_LIST", "Home")}</span>
+                </h2>
+                <div class="rank-list">
+                    <div class="tab-buttons clear">
+                        <p class="active">{:lan("DAY", "Home")}</p>
+                        <p>{:lan("WEEK", "Home")}</p>
+                        <p>{:lan("MONTH", "Home")}</p>
+                        <p>{:lan("TOTAL", "Home")}</p>
+                    </div>
+                    <div class="list-main"></div>
+                </div>
+            </div>
+
+            <!--新增用户关注榜-->
+            <div class="section">
+                <h2 class="title">
+                    <i class="iconfont">&#xe63c;</i>
+                    <span>{:lan("TOP_NEWATT_LIST", "Home")}</span>
+                </h2>
+                <div class="rank-list">
+                    <div class="tab-buttons clear">
+                        <p class="active">{:lan("DAY", "Home")}</p>
+                        <p>{:lan("WEEK", "Home")}</p>
+                        <p>{:lan("MONTH", "Home")}</p>
+                        <p>{:lan("TOTAL", "Home")}</p>
+                    </div>
+                    <div class="list-main"></div>
+                </div>
+            </div>
+
+            <!--主播直播时长榜-->
+            <div class="section">
+                <h2 class="title">
+                    <i class="iconfont">&#xe63c;</i>
+                    <span>{:lan("TOP_EMLIVETIME_LIST", "Home")}</span>
+                </h2>
+                <div class="rank-list">
+                    <div class="tab-buttons clear">
+                        <p class="active">{:lan("DAY", "Home")}</p>
+                        <p>{:lan("WEEK", "Home")}</p>
+                        <p>{:lan("MONTH", "Home")}</p>
+                        <p>{:lan("TOTAL", "Home")}</p>
+                    </div>
+                    <div class="list-main"></div>
+                </div>
+            </div>
+
+            <!--主播免费礼物榜-->
+            <div class="section">
+                <h2 class="title">
+                    <i class="iconfont">&#xe63c;</i>
+                    <span>{:lan("TOP_EMCEE_FREE_GIFT_LIST", "Home")}</span>
+                </h2>
+                <div class="rank-list">
+                    <div class="tab-buttons clear">
+                        <p class="active">{:lan("DAY", "Home")}</p>
+                        <p>{:lan("WEEK", "Home")}</p>
+                        <p>{:lan("MONTH", "Home")}</p>
+                        <p>{:lan("TOTAL", "Home")}</p>
+                    </div>
+                    <div class="list-main"></div>
+                </div>
+            </div>
+
+            <!--运动会参与排行榜-->
+            <div class="section">
+                <h2 class="title">
+                    <i class="iconfont">&#xe63c;</i>
+                    <span>{:lan("TOP_SPORTGAME_LIST", "Home")}</span>
+                </h2>
+                <div class="rank-list">
+                    <div class="tab-buttons clear">
+                        <p class="active">{:lan("DAY", "Home")}</p>
+                        <p>{:lan("WEEK", "Home")}</p>
+                        <p>{:lan("MONTH", "Home")}</p>
+                        <p>{:lan("TOTAL", "Home")}</p>
+                    </div>
+                    <div class="list-main"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--共用底部-->
+<include file="Public:bottom" />
+
+<!-- 共用登录-->
+<include file="Public:login" />
+
+<!--共用弹框-->
+<include file="Public:alert" />
+
+<!--共用js-->
+<include file="Public:javascript" />
+
+<script>
+    (function () {
+        var range = ["d","w","m","all"],
+            url = ['/Home/Toplist/LoadTopEmceeList','/Home/Toplist/LoadRichList','/Home/Toplist/LoadNewUserFansList','/Home/Toplist/LoadEmceeLiveTimeList','/Home/Toplist/LoadEmceeFreeGiftList','/Home/Toplist/LoadSportMastersList'];
+        for(var i =0; i < $(".topList-main .section").length; i++){
+            (function (i) {
+                topList.topLIstSection.find(".list-main").eq(i)
+                        .html("<img src=\"/Public/Public/Images/Face/Joway/running.gif\" class='loading'>");
+                $.ajax({
+                    url: url[i],
+                    data: {range:"d"},
+                    dataType: 'json',
+                    type: "post",
+                    cache : false,
+                    success: function(data) {
+                        topList.topLIstSection.find(".list-main").eq(i)
+                                .html(topList.buildLoadList(data,i));
+                    },error: function(data) {
+                        console.log(data);
+                    }
+                });
+            })(i);
+        }
+    })();
+</script>
+
+
+</body>
+</html>

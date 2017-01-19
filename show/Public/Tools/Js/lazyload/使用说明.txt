@@ -1,0 +1,15 @@
+1
+2
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="jquery.lazyload.js"></script>
+你必须改变图片的标签。图像的地址必须放在data-original属性上。给懒加载图像一个特定的class（例如:lazy）。这样你可以很容易地进行图像插件捆绑。代码如下：
+
+1
+<img class="lazy" alt="" width="640" height="480" data-original="img/example.jpg" />
+1
+2
+3
+$(function() {
+    $("img.lazy").lazyload();
+});
+这将使所有 class 为 lazy 的图片将被延迟加载.

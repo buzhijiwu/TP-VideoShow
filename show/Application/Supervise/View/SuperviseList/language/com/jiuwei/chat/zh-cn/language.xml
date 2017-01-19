@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+    <showlist>
+		<websiteissue>网站连接异常，请刷新重试</websiteissue>
+		<authenfailed>Chat域名没经过授权！请联系 官方 www.waashow.com进行授权</authenfailed>
+		<regsuccess>函数注册成功</regsuccess>
+		<regfailed>函数注册失败，请检查函数是否存在</regfailed>
+		<alreadlogin>该用户已登录</alreadlogin>
+		<evictroom>你被踢出本房间</evictroom>
+		<wish>我的心愿</wish>
+		<wantget>我今天希望得到</wantget>
+		<geunit>个</geunit>
+		<peohotrec>人热捧</peohotrec>
+		<spend>花了</spend>
+		<grabsofa>个沙发抢座成功</grabsofa>
+		<userdesc>用户</userdesc>
+		<leftroom>离开房间了</leftroom>
+		<sendto>送给</sendto>
+		<sendflyscreen>送了1个飞屏</sendflyscreen>
+		<tempvisitor>游客</tempvisitor>
+    </showlist>

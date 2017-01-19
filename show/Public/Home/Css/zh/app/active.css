@@ -1,0 +1,982 @@
+/*定义公用样式*/
+.txt-over {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.app-common-alert {
+  position: fixed;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  height: 100%;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+}
+.app-common-alert .alert-animate {
+  position: absolute;
+  width: 80%;
+  left: 10%;
+  min-height: 100px;
+  padding: 35px 10px;
+  background-color: #fff;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  top: 200px;
+}
+.app-common-alert .alert-animate .alert-main {
+  line-height: 25px;
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+}
+#app-common-footer {
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  font-size: 18px;
+  color: #fff;
+  background-color: #FF5e5c;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+}
+#app-common-footer:hover {
+  background-color: #FF3330;
+}
+.may-active {
+  background-image: url("/Public/Public/Images/mayActive/app-bg.jpg");
+  background-size: 100% auto;
+}
+.mayActive-main-app {
+  padding-bottom: 20px;
+}
+.mayActive-main-app .marginTop {
+  margin-top: 40px;
+}
+.mayActive-main-app .active-title {
+  width: 100%;
+}
+.mayActive-main-app .tab-btn {
+  margin: 36px 5% 32px 5%;
+  width: 90%;
+  background-color: #721191;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+.mayActive-main-app .tab-btn p {
+  float: left;
+  width: 33.33%;
+  font-size: 16px;
+  text-align: center;
+  color: #bc7fcf;
+}
+.mayActive-main-app .tab-btn p.active {
+  color: #fbcc30;
+}
+.mayActive-main-app .active-top-list {
+  border: 1px dashed #721191;
+  width: 90%;
+  margin: 0 5%;
+  padding: 20px 2%;
+}
+.mayActive-main-app .active-top-list .active-icon {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-size: 20px auto;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.mayActive-main-app .active-top-list .active-icon.icon-em {
+  background-image: url("/Public/Public/Images/mayActive/icon-em.jpg");
+}
+.mayActive-main-app .active-top-list .active-icon.icon-us {
+  background-image: url("/Public/Public/Images/mayActive/icon-us.jpg");
+}
+.mayActive-main-app .active-top-list .active-icon.icon-click {
+  background-image: url("/Public/Public/Images/mayActive/icon-click-app.jpg");
+  background-size: 20px 20px;
+}
+.mayActive-main-app .active-top-list .active-icon.icon-gui {
+  background-image: url("/Public/Public/Images/mayActive/icon-gui-app.png");
+}
+.mayActive-main-app .active-top-list .active-icon.icon-star {
+  background-image: url("/Public/Public/Images/mayActive/icon-star.png");
+  background-size: 16px 16px;
+}
+.mayActive-main-app .active-top-list .active-icon.icon-gift {
+  background-image: url("/Public/Public/Images/mayActive/active-gift.png");
+  background-size: 25px 25px;
+}
+.mayActive-main-app .active-top-list .list-title {
+  text-align: center;
+  font-size: 20px;
+  color: #8427a2;
+  font-weight: bold;
+}
+.mayActive-main-app .active-top-list .em-active-list .em-tab-btn {
+  margin-top: 20px;
+}
+.mayActive-main-app .active-top-list .em-active-list .em-tab-btn p {
+  float: left;
+  width: 25%;
+  text-align: center;
+  height: 30px;
+  line-height: 30px;
+  color: #8427a2;
+  font-size: 16px;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+.mayActive-main-app .active-top-list .em-active-list .em-tab-btn p.active {
+  color: #fff;
+  background-color: #721191;
+}
+.mayActive-main-app .active-top-list .em-active-list .em-tab-list {
+  margin-top: 20px;
+}
+.mayActive-main-app .active-top-list .em-active-list .em-tab-list .list-main tr .td1 {
+  width: 60px;
+}
+.mayActive-main-app .active-top-list .em-active-list .em-tab-list .list-main tr .td2 {
+  width: 50%;
+}
+.mayActive-main-app .active-top-list .em-active-list .em-tab-list .list-main tr .td3 {
+  width: 50%;
+}
+.mayActive-main-app .active-top-list .em-active-list .em-tab-list .list-main tr th {
+  text-align: center;
+  padding: 5px 0;
+  font-size: 14px;
+  font-weight: normal;
+  background-color: #f79910;
+  color: #fff;
+}
+.mayActive-main-app .active-top-list .em-active-list .em-tab-list .list-main tr td {
+  vertical-align: middle;
+  padding: 10px 0;
+}
+.mayActive-main-app .active-top-list .em-active-list .em-tab-list .list-main tr td.td1 {
+  text-align: center;
+}
+.mayActive-main-app .active-top-list .em-active-list .em-tab-list .list-main tr td.td1 .header-img-wrap {
+  position: relative;
+  width: 60px;
+  height: 40px;
+}
+.mayActive-main-app .active-top-list .em-active-list .em-tab-list .list-main tr td.td1 .header-img-wrap .header-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+}
+.mayActive-main-app .active-top-list .em-active-list .em-tab-list .list-main tr td.td1 .header-img-wrap .rank {
+  position: absolute;
+  display: block;
+  width: 18px;
+  height: 18px;
+  text-align: center;
+  line-height: 18px;
+  background-color: #9c42b9;
+  color: #fff;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  left: 35px;
+  top: 25px;
+}
+.mayActive-main-app .active-top-list .em-active-list .em-tab-list .list-main tr td.td1 .header-img-wrap .rank.high-top {
+  background-color: #f79910;
+}
+.mayActive-main-app .active-top-list .em-active-list .em-tab-list .list-main tr td.td2 {
+  text-align: center;
+}
+.mayActive-main-app .active-top-list .em-active-list .em-tab-list .list-main tr td.td2 .name {
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 80%;
+  margin-left: 10%;
+}
+.mayActive-main-app .active-top-list .em-active-list .em-tab-list .list-main tr td.td2 .name:hover {
+  color: #9c42b9 ;
+}
+.mayActive-main-app .active-top-list .em-active-list .em-tab-list .list-main tr td.td3 {
+  text-align: center;
+}
+.mayActive-main-app .active-top-list .em-active-list .em-tab-list .list-main tr td.td3 .point {
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 14px;
+}
+.mayActive-main-app .active-top-list .em-active-list .em-tab-list .click-load-more {
+  margin: 5px 0;
+  text-align: center;
+}
+.mayActive-main-app .active-top-list .em-active-list .em-tab-list .click-load-more .icon-click {
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+}
+.mayActive-main-app .active-top-list .em-active-list .em-tab-list .click-load-more span {
+  font-size: 14px;
+  margin-left: 10px;
+  color: #721191;
+}
+.mayActive-main-app .active-top-list .txt-list {
+  margin-top: 15px;
+}
+.mayActive-main-app .active-top-list .txt-list li {
+  line-height: 30px;
+  padding: 0 4%;
+  display: table;
+  font-size: 14px;
+  color: #8427a2;
+}
+.mayActive-main-app .active-top-list .txt-list li.info {
+  color: #f79910;
+}
+.mayActive-main-app .active-top-list .txt-list li .left {
+  display: table-cell;
+}
+.mayActive-main-app .active-top-list .txt-list li .left span {
+  width: 18px;
+  height: 18px;
+  line-height: 18px;
+  text-align: center;
+  background-color: #9c42b9;
+  color: #fff;
+  display: block;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  font-size: 14px;
+}
+.mayActive-main-app .active-top-list .txt-list li .right {
+  display: table-cell;
+  padding-left: 10px;
+}
+.may-sing-main {
+  background-color: #0d1136 ;
+  padding-bottom: 5px;
+}
+.may-sing-main .title {
+  width: 100%;
+}
+.may-sing-main .tab-btn {
+  margin: 10px auto;
+  padding: 0 15%;
+  width: 100%;
+}
+.may-sing-main .tab-btn button {
+  height: 35px;
+  width: 49%;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  background-color: #313a93;
+  color: #fff;
+  box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.5);
+  font-size: 12px;
+  font-weight: bold;
+  margin-right: 2%;
+  float: left;
+}
+.may-sing-main .tab-btn button:last-child {
+  margin-right: 0;
+}
+.may-sing-main .tab-btn button.active {
+  background-color: #fff;
+  color: #313a93;
+}
+.may-sing-main .sing-list-wrap {
+  padding: 0 20px;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding-bottom: 10px;
+}
+.may-sing-main .sing-list-wrap .list {
+  float: left;
+  width: 48%;
+  margin: 0 1%;
+}
+.may-sing-main .sing-list-wrap .list .top-list {
+  line-height: 30px;
+  height: 30px;
+  font-size: 14px;
+  color: #fff;
+  text-align: center;
+}
+.may-sing-main .sing-list-wrap .list .top-list span {
+  color: #FF5e5c;
+  font-size: 16px;
+}
+.may-sing-main .sing-list-wrap .list .list-main {
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  overflow: hidden;
+  border: 2px solid #aaa;
+}
+.may-sing-main .sing-list-wrap .list .list-main:nth-child(2n) {
+  margin-right: 0;
+}
+.may-sing-main .sing-list-wrap .list .list-main .line1 {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  display: block;
+}
+.may-sing-main .sing-list-wrap .list .list-main .line1:hover {
+  cursor: pointer;
+}
+.may-sing-main .sing-list-wrap .list .list-main .line1:hover .name {
+  color: #FF5e5c;
+}
+.may-sing-main .sing-list-wrap .list .list-main .line1 img {
+  width: 100%;
+}
+.may-sing-main .sing-list-wrap .list .list-main .line1 .iconfont {
+  position: absolute;
+  display: block;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  font-size: 30px;
+  color: rgba(0, 0, 0, 0.6);
+  top: 50%;
+  left: 50%;
+  margin-top: -20px;
+  margin-left: -20px;
+}
+.may-sing-main .sing-list-wrap .list .list-main .line1 .name {
+  line-height: 20px;
+  height: 20px;
+  font-size: 12px;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding-left: 2%;
+}
+.may-sing-main .sing-list-wrap .list .list-main .line2 {
+  padding: 5px 0;
+  line-height: 20px;
+  height: 50px;
+  font-size: 14px;
+  background-color: #fff;
+  padding-left: 2%;
+  text-align: center;
+}
+.may-sing-main .sing-list-wrap .list .list-main .line2 p {
+  color: #FF5e5c;
+}
+.may-sing-main .sing-list-wrap .list .list-main .line3 {
+  background-color: #fff;
+  padding: 15px 2% 5px 2%;
+}
+.may-sing-main .sing-list-wrap .list .list-main .line3 .left {
+  float: left;
+  width: 50%;
+  text-align: center;
+}
+.may-sing-main .sing-list-wrap .list .list-main .line3 .left button {
+  height: 25px;
+  line-height: 25px;
+  font-size: 12px;
+  color: #fff;
+  background-color: #FF5e5c;
+  width: 96%;
+  border-radius: 2px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  margin: 0 2%;
+}
+.may-sing-main .sing-list-wrap .list .list-main .line3 .left button:hover {
+  background-color: #FF3330;
+}
+.may-sing-main .sing-list-wrap .list .list-main .line3 .left .num {
+  margin-top: 5px;
+  font-size: 12px;
+  line-height: 20px;
+  height: 40px;
+}
+.may-sing-main .sing-rule .line {
+  width: 90%;
+  margin: 20px auto;
+  padding: 10px 2%;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fdf5bd;
+  font-size: 12px;
+  line-height: 20px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  overflow: hidden;
+}
+.may-sing-main .sing-rule .line li {
+  margin-bottom: 15px;
+}
+.may-sing-main .sing-rule .line li p {
+  padding-left: 3%;
+  margin-bottom: 5px;
+}
+.may-sing-main .sing-rule table {
+  width: 90%;
+  margin: 20px auto;
+  padding: 25px 2% 0 2%;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fdf5bd;
+  font-size: 12px;
+  line-height: 20px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  overflow: hidden;
+}
+.may-sing-main .sing-rule table tr td {
+  padding: 7px;
+}
+.may-sing-main .sing-rule table tr td:first-child {
+  width: 30px;
+  text-align: center;
+  color: #fff;
+}
+.may-sing-main .sing-rule table tr td:last-child {
+  width: 100%;
+}
+.may-sing-main .loading-more {
+  display: block;
+  margin: 10px auto 5px auto;
+  width: 60%;
+  height: 40px;
+  background-color: #313a93;
+  color: #fff;
+  font-weight: bold;
+  font-size: 14px;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+}
+.may-sing-main .loading-more:hover {
+  background-color: #fff;
+  color: #313a93 ;
+}
+@media screen and (max-width: 360px) {
+  .may-sing-main .sing-list-wrap .list .list-main .line3 {
+    background-color: #fff;
+    padding: 15px 2% 5px 2%;
+  }
+  .may-sing-main .sing-list-wrap .list .list-main .line3 .left {
+    width: 100%;
+    text-align: center;
+  }
+  .may-sing-main .sing-list-wrap .list .list-main .line3 .left button {
+    height: 25px;
+    line-height: 25px;
+    font-size: 12px;
+    color: #fff;
+    background-color: #FF5e5c;
+    width: 96%;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    margin: 0 2%;
+  }
+  .may-sing-main .sing-list-wrap .list .list-main .line3 .left button:hover {
+    background-color: #FF3330;
+  }
+  .may-sing-main .sing-list-wrap .list .list-main .line3 .left .num {
+    margin-bottom: 5px;
+    font-size: 12px;
+    line-height: 20px;
+    height: 40px;
+  }
+}
+.dragon-active {
+  background-image: url("/Public/Public/Images/Activity/dragonBoat/dragon-bg.jpg");
+  background-size: 100% 100%;
+}
+.dragon-boat-main .title {
+  width: 100%;
+}
+.dragon-boat-main .tab-btn-top {
+  margin: 20px auto;
+  padding: 0 5%;
+  width: 100%;
+}
+.dragon-boat-main .tab-btn-top button {
+  height: 35px;
+  width: 48%;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  background-color: #9fc644;
+  color: #fff;
+  box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.5);
+  font-size: 14px;
+  font-weight: bold;
+}
+.dragon-boat-main .tab-btn-top button:first-child {
+  margin-right: 2%;
+}
+.dragon-boat-main .tab-btn-top button.active {
+  background-color: #fff;
+  color: #9fc644;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .em-title {
+  text-align: center;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .em-title img {
+  width: 50%;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .tab-btn {
+  height: 25px;
+  line-height: 25px;
+  margin-top: 10px;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .tab-btn p {
+  float: left;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  color: #9fc644;
+  font-size: 12px;
+  width: 29%;
+  margin: 0 2%;
+  text-align: center;
+  text-shadow: 0 0 5px #ffffff;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .tab-btn p:hover {
+  cursor: pointer;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .tab-btn p.active {
+  background-color: #9fc644;
+  color: #fff;
+  text-shadow: none;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .em-active-list,
+.dragon-boat-main .tab-list.dragon-list-wrap .us-active-list {
+  width: 96%;
+  margin: 10px auto;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .em-active-list .list-main tr th,
+.dragon-boat-main .tab-list.dragon-list-wrap .us-active-list .list-main tr th {
+  background-color: #9fc644;
+  padding: 5px 0;
+  color: #fff;
+  font-size: 12px;
+  font-weight: normal;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .em-active-list .list-main tr:nth-child(even),
+.dragon-boat-main .tab-list.dragon-list-wrap .us-active-list .list-main tr:nth-child(even) {
+  background-color: #EBF3D9;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .em-active-list .list-main tr:nth-child(odd),
+.dragon-boat-main .tab-list.dragon-list-wrap .us-active-list .list-main tr:nth-child(odd) {
+  background-color: #fff;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .em-active-list .list-main tr td,
+.dragon-boat-main .tab-list.dragon-list-wrap .us-active-list .list-main tr td {
+  text-align: center;
+  padding: 5px 0;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .em-active-list .list-main tr td.td1 span,
+.dragon-boat-main .tab-list.dragon-list-wrap .us-active-list .list-main tr td.td1 span {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  background-color: #b753eb;
+  color: #fff;
+  line-height: 30px;
+  text-align: center;
+  font-size: 18px;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .em-active-list .list-main tr td.td1 span.top-color,
+.dragon-boat-main .tab-list.dragon-list-wrap .us-active-list .list-main tr td.td1 span.top-color {
+  background-color: #fbcc30;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .em-active-list .list-main tr td.td2,
+.dragon-boat-main .tab-list.dragon-list-wrap .us-active-list .list-main tr td.td2 {
+  text-align: left;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .em-active-list .list-main tr td.td2 div,
+.dragon-boat-main .tab-list.dragon-list-wrap .us-active-list .list-main tr td.td2 div {
+  display: block;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .em-active-list .list-main tr td.td2 div img,
+.dragon-boat-main .tab-list.dragon-list-wrap .us-active-list .list-main tr td.td2 div img {
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin-right: 5px;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .em-active-list .list-main tr td.td2 div span.name,
+.dragon-boat-main .tab-list.dragon-list-wrap .us-active-list .list-main tr td.td2 div span.name {
+  font-size: 12px;
+  color: #ba6ed2;
+  margin-left: 5px;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .em-active-list .list-main tr td.td3,
+.dragon-boat-main .tab-list.dragon-list-wrap .us-active-list .list-main tr td.td3 {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .em-active-list .list-main tr td.td3 span,
+.dragon-boat-main .tab-list.dragon-list-wrap .us-active-list .list-main tr td.td3 span {
+  font-size: 12px;
+  color: #ba6ed2;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .em-active-list .list-main tr .td1,
+.dragon-boat-main .tab-list.dragon-list-wrap .us-active-list .list-main tr .td1 {
+  width: 25%;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .em-active-list .list-main tr .td2,
+.dragon-boat-main .tab-list.dragon-list-wrap .us-active-list .list-main tr .td2 {
+  width: 50%;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .em-active-list .list-main tr .td3,
+.dragon-boat-main .tab-list.dragon-list-wrap .us-active-list .list-main tr .td3 {
+  width: 25%;
+}
+.dragon-boat-main .tab-list.dragon-list-wrap .em-active-list .list-main tbody .loading,
+.dragon-boat-main .tab-list.dragon-list-wrap .us-active-list .list-main tbody .loading {
+  display: block;
+  width: 150px;
+  height: auto;
+  margin-top: 20px;
+  margin-left: 90px;
+}
+.dragon-boat-main .tab-list .rule {
+  margin-top: 30px;
+}
+.dragon-boat-main .tab-list .rule .list {
+  width: 90%;
+  margin: 20px 5%;
+  border: 3px solid #fff;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  padding: 3%;
+  background-color: #9ac440;
+}
+.dragon-boat-main .tab-list .rule .list li {
+  line-height: 30px;
+  padding: 0 3%;
+  color: #fff;
+  font-size: 14px;
+}
+.dragon-boat-main .loading-more {
+  display: block;
+  margin: 20px auto;
+  width: 70%;
+  height: 35px;
+  background-color: #9fc644;
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+}
+.dragon-boat-main .loading-more:hover {
+  background-color: #fff;
+  color: #9fc644 ;
+}
+.iphone-main-app {
+  width: 100%;
+  background-image: url("/Public/Public/Images/Activity/iPhone/iPhone-app-active-bg.jpg");
+  background-size: cover;
+  background-position: center top;
+  padding-bottom: 42px;
+}
+.iphone-main-app .header-title {
+  width: 100%;
+  height: auto;
+}
+.iphone-main-app .title1 {
+  width: 53%;
+  display: block;
+  margin: 0 auto;
+}
+.iphone-main-app .rule {
+  width: 88.5%;
+  margin: 16px auto 0 auto;
+  background-image: url("/Public/Public/Images/Activity/iPhone/iPhone-app-rule-bg.png");
+  background-size: 100% auto;
+  background-position: center top;
+  border: 1px dashed #43adf9;
+  padding-bottom: 22px;
+  padding-top: 19px;
+}
+.iphone-main-app .rule p {
+  padding-left: 5%;
+  padding-right: 5%;
+  color: #fff;
+  font-size: 14px;
+  line-height: 18px;
+}
+.iphone-main-app .rule p.ma-t-12 {
+  margin-top: 12px;
+}
+.iphone-main-app .rule p.yellow {
+  color: #faf60f;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 18px;
+  text-align: center;
+}
+.iphone-main-app .rule p.orange {
+  color: #ffae00;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 20px;
+  margin-top: 15px;
+}
+.iphone-main-app .rule p .red {
+  color: #fe48bf;
+}
+.iphone-main-app .title2 {
+  width: 85%;
+  display: block;
+  margin: 33px auto 0 auto;
+}
+.iphone-main-app table {
+  width: 88%;
+  margin: 17px 6% 0 6%;
+}
+.iphone-main-app table .td1 {
+  width: 60px;
+}
+.iphone-main-app table .td2 {
+  width: 55%;
+}
+.iphone-main-app table .td3 {
+  width: 45%;
+}
+.iphone-main-app table thead tr th {
+  height: 20px;
+  vertical-align: middle;
+  font-size: 12px;
+  color: #fff;
+  background-color: #43adf9;
+  font-weight: normal;
+}
+.iphone-main-app table tbody tr:nth-child(even) {
+  background-color: rgba(67, 173, 249, 0.3);
+}
+.iphone-main-app table tbody tr td {
+  height: 42px;
+  vertical-align: middle;
+}
+.iphone-main-app table tbody tr td.td1 {
+  padding-left: 15px;
+}
+.iphone-main-app table tbody tr td.td1 .header-img {
+  width: 36px;
+  height: 36px;
+  position: relative;
+  display: block;
+}
+.iphone-main-app table tbody tr td.td1 .header-img img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+}
+.iphone-main-app table tbody tr td.td1 .header-img .rank {
+  position: absolute;
+  right: -5px;
+  bottom: -2px;
+  background-color: #43adf9;
+  color: #fff;
+  display: block;
+  width: 18px;
+  height: 18px;
+  font-size: 12px;
+  text-align: center;
+  line-height: 18px;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+}
+.iphone-main-app table tbody tr td.td1 .header-img .rank.top {
+  background-color: #f79910;
+}
+.iphone-main-app table tbody tr td.td2 {
+  padding-left: 5%;
+}
+.iphone-main-app table tbody tr td.td2 .name {
+  color: #fff;
+  font-size: 12px;
+  width: 58%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: inline-block;
+}
+.iphone-main-app table tbody tr td.td3 {
+  text-align: center;
+  color: #fff;
+  font-size: 14px;
+}
+.ipad-main-app {
+  width: 100%;
+  background-image: url("/Public/Public/Images/Activity/iPhone/iPhone-app-active-bg.jpg");
+  background-size: cover;
+  background-position: center top;
+  padding-bottom: 42px;
+}
+.ipad-main-app .header-title {
+  width: 100%;
+  height: auto;
+}
+.ipad-main-app .title1 {
+  width: 53%;
+  display: block;
+  margin: 0 auto;
+}
+.ipad-main-app .rule {
+  width: 88.5%;
+  margin: 16px auto 0 auto;
+  background-image: url("/Public/Public/Images/Activity/iPhone/iPhone-app-rule-bg.png");
+  background-size: 100% auto;
+  background-position: center top;
+  border: 1px dashed #43adf9;
+  padding-bottom: 22px;
+  padding-top: 19px;
+}
+.ipad-main-app .rule p {
+  padding-left: 5%;
+  padding-right: 5%;
+  color: #fff;
+  font-size: 14px;
+  line-height: 18px;
+}
+.ipad-main-app .rule p.ma-t-12 {
+  margin-top: 12px;
+}
+.ipad-main-app .rule p.yellow {
+  color: #faf60f;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 18px;
+  text-align: center;
+}
+.ipad-main-app .rule p.orange {
+  color: #ffae00;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 20px;
+  margin-top: 20px;
+}
+.ipad-main-app .rule p .red {
+  color: #fe48bf;
+}
+.ipad-main-app .title2 {
+  width: 85%;
+  display: block;
+  margin: 33px auto 0 auto;
+}
+.ipad-main-app table {
+  width: 88%;
+  margin: 17px 6% 0 6%;
+}
+.ipad-main-app table .td1 {
+  width: 60px;
+}
+.ipad-main-app table .td2 {
+  width: 55%;
+}
+.ipad-main-app table .td3 {
+  width: 45%;
+}
+.ipad-main-app table thead tr th {
+  height: 20px;
+  vertical-align: middle;
+  font-size: 12px;
+  color: #fff;
+  background-color: #43adf9;
+  font-weight: normal;
+}
+.ipad-main-app table tbody tr:nth-child(even) {
+  background-color: rgba(67, 173, 249, 0.3);
+}
+.ipad-main-app table tbody tr td {
+  height: 42px;
+  vertical-align: middle;
+}
+.ipad-main-app table tbody tr td.td1 {
+  padding-left: 15px;
+}
+.ipad-main-app table tbody tr td.td1 .header-img {
+  width: 36px;
+  height: 36px;
+  position: relative;
+  display: block;
+}
+.ipad-main-app table tbody tr td.td1 .header-img img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+}
+.ipad-main-app table tbody tr td.td1 .header-img .rank {
+  position: absolute;
+  right: -5px;
+  bottom: -2px;
+  background-color: #43adf9;
+  color: #fff;
+  display: block;
+  width: 18px;
+  height: 18px;
+  font-size: 12px;
+  text-align: center;
+  line-height: 18px;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+}
+.ipad-main-app table tbody tr td.td1 .header-img .rank.top {
+  background-color: #f79910;
+}
+.ipad-main-app table tbody tr td.td2 {
+  padding-left: 5%;
+}
+.ipad-main-app table tbody tr td.td2 .name {
+  color: #fff;
+  font-size: 12px;
+  width: 58%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: inline-block;
+}
+.ipad-main-app table tbody tr td.td3 {
+  text-align: center;
+  color: #fff;
+  font-size: 14px;
+}

@@ -1,0 +1,52 @@
+<extend name="base" />
+
+<block name="menu">
+	<div class="nav-list clear">
+		<a href="__URL__/index">{:lan('BASE_INFO', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+		<a href="__URL__/mywealth">{:lan('MY_WEALTH', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+		<a href="__URL__/myprivilege">{:lan('MY_PRIVILEGE', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+		<a href="__URL__/mycar" class="active">{:lan('MY_CAR', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+		<a href="__URL__/myfamily">{:lan('MY_FAMILY', 'Home')}<i class="iconfont">&#xe60c;</i></a>
+	</div>
+</block>
+
+<block name="main">
+
+	<div class="right-mycar-main">
+		<empty name="equipments">
+			<!-- 无座驾 -->
+			<div class="common-no-data">
+				<img src="/Public/Public/Images/newImage/common/al-cry.png">
+				<h1>{:lan('NO_CAR_INFO', 'Home')}</h1>
+				<div class="buy-vip-btn">
+					<a href="{:U('Mall/equipmentlist')}">{:lan('NO_CAR_TIPS', 'Home')}</a>
+				</div>
+			</div>
+			<ul class="no-car-list clear">
+				<volist name="randcars" id="vo">
+					<li>
+						<a href="{:U('Mall/equipmentlist')}">
+							<p>{$vo[commodityname]}</p>
+							<img src="{$vo[pcsmallpic]}" class="car-img">
+						</a>
+					</li>
+				</volist>
+			</ul>
+		<else/>
+			<!--有座驾-->
+			<div class="equipment-list clear">
+				<volist name="equipments" id="vo">
+					<div data-commodityid="{$vo['commodityid']}" <eq name="vo[isused]" value="1">class="list active"<else/>class="list"</eq>>
+						<h3 class="car-name">{$vo[commodityname]}</h3>
+						<img src="{$vo[pcbigpic]}" class="car-img">
+						<img src="/Public/Public/Images/Store/line.png" class="hr">
+                        <p>{:lan('DUE_TIME','Home')}</p>
+                        <p>{$vo['expiretime']}</p>
+						<i class="icon-yes"></i>
+					</div>
+				</volist>
+			</div>
+			<div class="common-page">{$page}</div>
+		</empty>
+	</div>
+</block>

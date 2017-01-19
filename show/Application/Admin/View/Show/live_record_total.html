@@ -1,0 +1,91 @@
+<extend name="Public:list" />
+<block name="title"></block>
+<block name="css"></block>
+
+<block name="main">
+<div class="subnav">
+  <div class="content-menu ib-a blue line-x"><a href="{:U('Admin/Show/live_record')}" class="on"><em>List</em></a><a style="margin-left: 10px;" href="javascript:;" class="on"><em>Total</em></a></div>
+</div>
+<style type="text/css">
+	html{_overflow-y:scroll}
+</style>
+<div id="searchid" style="display:none">
+	<form name="searchform" action="/Admin/Show/live_record_total" method="get" >
+		<table width="100%" cellspacing="0" class="search-form">
+			<tbody>
+			<tr>
+				<td>
+					<div class="explain-col">
+					    {:lan('LIVE_TIME', 'Admin')}：
+                        <input type="text" name="starttime" id="starttime" value="{$Think.get.starttime}" size="10" class="date" readonly>
+                                &nbsp;<script type="text/javascript">			Calendar.setup({
+	                    	weekNumbers: false,
+	                        inputField : "starttime",
+	                        trigger    : "starttime",
+	                        dateFormat: "%Y-%m-%d",
+	                        showTime: false,
+	                        minuteStep: 1,
+	                        onSelect   : function() {this.hide();}
+	                    	});
+                        </script>- &nbsp;
+                                <input type="text" name="endtime" id="endtime" value="{$Think.get.endtime}" size="10" class="date" readonly>
+                                &nbsp;<script type="text/javascript">			Calendar.setup({
+	                    	weekNumbers: false,
+	                        inputField : "endtime",
+	                        trigger    : "endtime",
+	                        dateFormat: "%Y-%m-%d",
+	                        showTime: false,
+	                        minuteStep: 1,
+	                        onSelect   : function() {this.hide();}
+	                    	});
+                        </script>
+						{:lan('USERNAME', 'Admin')}：
+						<input name="keyword" type="text" class="input-text" onfocus="if(this.value='{:lan('SEARCH_EMCEE_OR_ROOM', 'Admin')}')this.value=''" <neq name="{keyword}" value="">value="{$keyword}"<else />value="{:lan('SEARCH_EMCEE_OR_ROOM', 'Admin')}"</neq> />
+						<input type="submit" name="search" class="button" value="{:lan('BTN_SEARCH', 'Admin')}" />
+					</div>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</form>
+	<script>
+		$('#searchid').css('display','');
+	</script>
+</div>
+<div class="pad_10">
+<div class="common-form">
+<form name="myform" action="__URL__/do_emcee_settlement/" method="post" id="myform">
+
+		<table width="100%" class="table_form contentWrap">
+			<tr>
+				<td width="130" align="center">{:lan('USERNAME', 'Admin')}</td>
+				<td><input type="text" name="username"  value="{$liverecord['username']}" readonly="readonly"></td>
+			</tr>
+			<tr>
+				<td width="130" align="center">{:lan('NICKNAME', 'Admin')}</td>
+				<td><input type="text" name="nickname"  value="{$liverecord['nickname']}" readonly="readonly"></td>
+			</tr>
+			<tr>
+				<td width="130" align="center">{:lan('ROOMNO', 'Admin')}</td>
+				<td><input type="text" name="showroomno"  value="{$liverecord['showroomno']}" readonly="readonly"></td>
+
+			</tr>
+			<tr>
+				<td width="130" align="center">{:lan('LIVE_LENGTH', 'Admin')}</td>
+				<td><input type="text" name="livelength"  value="{$liverecord['livelength']}" readonly="readonly">{:lan('MINUTE', 'Admin')}</td>
+			</tr>						
+		</table>
+		<div class="bk15"></div>
+
+</form>
+</div>
+
+</block>
+
+<block name="js">
+<script type="text/javascript">
+function confirm_delete(){
+	if(confirm('{:lan('CONFIRM_DELETE', 'Admin')}')) $('#myform').submit();
+}
+</script>
+</block>

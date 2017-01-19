@@ -1,0 +1,123 @@
+<extend name="Public:list" />
+<block name="title"></block>
+<block name="css"></block>
+
+<block name="main">
+<div class="content-menu ib-a blue line-x"><a class="add fb" href="/Admin/index.php/Index/add_user/"><em>添加用户</em></a><span>|</span><a href="javascript:;" onclick="javascript:$('#searchid').css('display','');"><em>搜索</em></a></div>
+  <div id="searchid" style="display:none">
+    <form name="searchform" action="" method="get" >
+      <table width="100%" cellspacing="0" class="search-form">
+        <tbody>
+          <tr>
+            <td><div class="explain-col"> 注册时间：
+                <link rel="stylesheet" type="text/css" href="/Public/statics/js/calendar/jscal2.css"/>
+                <link rel="stylesheet" type="text/css" href="/Public/statics/js/calendar/border-radius.css"/>
+                <link rel="stylesheet" type="text/css" href="/Public/statics/js/calendar/win2k.css"/>
+                <script type="text/javascript" src="/Public/statics/js/calendar/calendar.js"></script><script type="text/javascript" src="/Public/statics/js/calendar/lang/en.js"></script>
+                <input type="text" name="start_time" id="start_time" value="" size="10" class="date" readonly>
+                &nbsp;<script type="text/javascript">			Calendar.setup({
+			weekNumbers: false,
+		    inputField : "start_time",
+		    trigger    : "start_time",
+		    dateFormat: "%Y-%m-%d",
+		    showTime: false,
+		    minuteStep: 1,
+		    onSelect   : function() {this.hide();}
+			});
+        </script>- &nbsp;
+                <input type="text" name="end_time" id="end_time" value="" size="10" class="date" readonly>
+                &nbsp;<script type="text/javascript">			Calendar.setup({
+			weekNumbers: false,
+		    inputField : "end_time",
+		    trigger    : "end_time",
+		    dateFormat: "%Y-%m-%d",
+		    showTime: false,
+		    minuteStep: 1,
+		    onSelect   : function() {this.hide();}
+			});
+        </script>
+                <input name="keyword" type="text" class="input-text" onfocus="if(this.value='请输入用户ID或用户名')this.value=''" value="请输入用户ID或用户名" />
+                是否签约：
+                <select name="sign">
+                  <option value="">不限</option>
+                  <option value="y" >已签约</option>
+                  <option value="n" >未签约</option>
+                  <option value="i" >审核中</option>
+                </select>
+                主播代理：
+                <select name="emceeagent">
+                  <option value="">不限</option>
+                  <option value="y" >是</option>
+                  <option value="n" >否</option>
+                </select>
+                充值代理：
+                <select name="payagent">
+                  <option value="">不限</option>
+                  <option value="y" >是</option>
+                  <option value="n" >否</option>
+                </select>
+                <input type="submit" name="search" class="button" value="搜索" />
+              </div></td>
+          </tr>
+        </tbody>
+      </table>
+      <input type="hidden" name="__hash__" value="1c0212181718fbe98054a3f7b81dc518_2abb414ea69ad6bd6c21262abbedef73" />
+    </form>
+  </div>
+  <form name="myform" id="myform" action="/Admin/index.php/Index/opt_user/" method="post" >
+    <div class="table-list">
+      <table width="100%">
+        <thead>
+          <tr>
+            <th width="16"><input type="checkbox" value="" id="check_box" onclick="selectall('ids[]');"></th>
+            <th width="40">ID</th>
+            <th width="100">头像</th>
+            <th width="100">用户名</th>
+            <th width="100">昵称</th>
+            <th width="100">所在地</th>
+            <th width="40">年龄</th>
+            <th width="40">性别</th>
+            <th width="100">秀币</th>
+            <th width="80">秀豆</th>
+            <th width="118">注册时间</th>
+            <th width="50">状态</th>
+            <th>管理操作</th>
+          </tr>
+        </thead>
+        <tbody>
+        	<volist name="data.list" id="v">
+          <tr>
+            <td align="center"><input class="inputcheckbox " name="ids[]" value="{$v.userid}" type="checkbox"></td>
+            <td align='center' >{$v.userid}</td>
+            <td align="center" width="100"><img src="{$Think.config.IMAGE_BASE_URL}{$v.smallheadpic}" style=" width: 60px; height: 60px;"></td>
+            <td align='center'><span style="" >{$v.username}</span></td>
+            <td align='center'>{$v.nickname}</td>
+            <td align='center'>-</td>
+            <td align='center'>0		岁 </td>
+            <td align='center'></td>
+            <td align='center'>{$v.balance.balance}</td>
+            <td align='center'>{$v.balance.point}</td>
+            <td align='center'>{$v.registertime}</td>
+            <td align='center'><font color="#FF6600">未审核</font><br>
+              未签约</td>
+            <td align='center'><a href="/Admin/index.php/Index/opt_user/action/audit/userid/1115/return/L0FkbWluL2luZGV4LnBocC9JbmRleC9hZG1pbl91c2VyLw==">启用</a> | <a href="javascript:edit(1115, 'shaqiuhe_1993')">修改</a> | <a href="javascript:confirmurl('/Admin/index.php/Index/del_user/userid/1115/return/L0FkbWluL2luZGV4LnBocC9JbmRleC9hZG1pbl91c2VyLw==', '是否删除该用户?')">删除</a></td>
+          </tr>
+          </volist>
+        </tbody>
+      </table>
+      <div class="btn">
+        <label for="check_box">{:lan('BTN_ALL', 'Admin')}/{:lan('BTN_CANCEL', 'Admin')}</label>
+        <input type="button" class="button" value="{:lan('BTN_DELETE', 'Admin')}" onClick="myform.action='__URL__/delAll/';return confirm_delete()"/>
+      </div>
+      <div id="pages">{$data.page}</div>
+    </div>
+  </form>
+</block>
+
+<block name="js">
+<script type="text/javascript">
+function confirm_delete(){
+	if(confirm('确认删除吗？')) $('#myform').submit();
+}
+</script>
+</block>

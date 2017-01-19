@@ -1,0 +1,72 @@
+<extend name="Public:list" />
+<block name="title"></block>
+<block name="css"></block>
+
+<block name="main">
+  <div id="searchid">
+    <form name="searchform" action="/Admin/Operator/operator_familylist" method="get" >
+      <table width="100%" cellspacing="0" class="search-form">
+        <tbody>
+          <tr>
+            <td><div class="explain-col">
+                {:lan('FAMILY_NAME', 'Admin')}：
+                <input type="text" name="familyname" class="input-text" value="{$familyname}" />
+                <input type="hidden" name="userid" class="input-text" value="{$userid}" />                
+                <input type="submit" name="search" class="button" value="{:lan('SEARCH', 'Admin')}" />
+              </div></td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+  <style>
+  #myform th, #myform td { text-align: center;}
+  </style>
+  <form name="myform" id="myform" action="" method="post" >
+    <div class="table-list">
+      <table width="100%">
+        <thead>
+          <tr>
+            <th width="40">{:lan('SYS_NUMBER', 'Admin')}</th>
+            <th>{:lan('FAMILY_NAME', 'Admin')}</th>            
+            <th>{:lan('EMCEE_NUMBER', 'Admin')}</th>
+            <th>{:lan('FAMILY_USER_LASTLOGINTIME', 'Admin')}</th>
+            <th>{:lan('LASTDAY_EMCEE_EARN', 'Admin')}</th>
+            <th>{:lan('LASTDAY_LIVE_EMCEE_NUMBER', 'Admin')}</th>
+            <th>{:lan('FAMILY_USER_NICKNAME', 'Admin')}</th>
+            <th>{:lan('FAMILY_USER_CONTRACTNO', 'Admin')}</th>            
+            <th>{:lan('OPERATION', 'Admin')}</th>                        
+          </tr>
+        </thead>
+        <tbody>
+          <volist name="data" id="v" key="k">
+          <tr>
+            <td>{$k}</td>
+            <td>{$v.familyname}</td>            
+            <td>{$v.emceecount}</td>
+            <td>
+              <eq name="v.lastlogintime" value="">
+              ----
+              <else />
+              {$v.lastlogintime}
+              </eq>
+            </td>            
+            <td>{$v.emceeearn}</td>
+            <td>{$v.liveemceecount}</td>   
+            <td>{$v.nickname}</td>  
+            <td>{$v.userno}</td>  
+            <td>
+              <!-- <a href="{:U('Admin/Operator/modify_operator/familyid/'.$v['familyid'])}">{:lan('MODIFY_OPERATOR', 'Admin')}</a> -->
+              <a href="javascript:;">{:lan('MODIFY_OPERATOR', 'Admin')}</a>
+            </td>            
+          </tr>
+          </volist>
+        </tbody>
+      </table>
+      <div id="pages">{$page}</div>
+    </div>
+  </form>
+</block>
+
+<block name="js">
+</block>

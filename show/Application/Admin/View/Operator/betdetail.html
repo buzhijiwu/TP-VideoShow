@@ -1,0 +1,41 @@
+<extend name="Public:list" />
+<block name="title"></block>
+<block name="css"></block>
+
+<block name="main">
+  <style>
+  #myform th, #myform td { text-align: center;}
+  </style>
+  <div class="table-list">
+    <table width="100%">
+      <thead>
+        <tr>
+          <th width="40">{:lan('SYS_NUMBER', 'Admin')}</th>
+          <th>{:lan('PLAYER_NICKNAME', 'Admin')}</th>                       
+          <th>{:lan('PLAYER_ROOMNO', 'Admin')}</th>
+          <th>{:lan('BET_BALL_NAME', 'Admin')}</th>
+          <th>{:lan('VALUE_OF_BET', 'Admin')}</th>          
+        </tr>
+      </thead>
+      <tbody>
+        <volist name="data" id="v" key="k">
+        <tr>
+          <td align="center">{$k}</td>
+          <td align="center">{$v.nickname}</td>  
+          <neq name="v.niceno" value="">          
+          <td align="center">{$v.niceno}</td>
+          <else />
+          <td align="center">{$v.roomno}</td>
+          </neq>
+          <td align="center">{$v.name}</td>
+          <td align="center">{$v.showbean}</td>          
+        </tr>
+        </volist>
+      </tbody>
+    </table>
+    <!-- <div id="pages">{$page}</div> -->
+  </div>
+</block>
+
+<block name="js">
+</block>

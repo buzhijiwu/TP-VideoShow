@@ -1,0 +1,52 @@
+<!--充值左边列表-->
+<ul class="left">
+	<li class="<eq name='rechargemenu' value='1'>active</eq>">
+	<a href="{:U('index')}">{:lan('CALL_CARD_RECHARGE', 'Home')}
+		<i class="iconfont">&#xe60d;</i>
+	</a>
+	</li>
+	<li class="<eq name='rechargemenu' value='2'>active</eq>">
+	<a href="{:U('game_card')}">{:lan('GAME_CARD_RECHARGE', 'Home')}
+		<i class="iconfont">&#xe60d;</i>
+	</a>
+	</li>
+	<li class="<eq name='rechargemenu' value='3'>active</eq>">
+	<a href="{:U('savings_card')}">{:lan('SAVE_CARD_RECHARGE', 'Home')}
+		<i class="iconfont">&#xe60d;</i>
+	</a>
+	</li>
+	<li class="<eq name='rechargemenu' value='4'>active</eq>">
+	<a href="{:U('credit_card')}">{:lan('CREDIT_CARD_RECHARGE', 'Home')}
+		<i class="iconfont">&#xe60d;</i>
+	</a>
+	</li>
+	<li class="<eq name='rechargemenu' value='5'>active</eq>">
+	<a href="{:U('internet_banking')}">
+		Internet Banking
+		<i class="iconfont">&#xe60d;</i>
+	</a>
+	</li>
+	<li class="<eq name='rechargemenu' value='6'>active</eq>">
+	<a href="{:U('sms')}">
+		SMS
+		<i class="iconfont">&#xe60d;</i>
+	</a>
+	</li>
+	<li class="<eq name='rechargemenu' value='7'>active</eq>">
+    <a href="{:U('paypal')}">{:lan('PAYPAL_RECHARGE', 'Home')}
+        <i class="iconfont">&#xe60d;</i>
+    </a>
+    </li>
+	<li class="<eq name='rechargemenu' value='8'>active</eq>">
+    <a href="{:U('oceanpayment')}">{:lan('OCEANPAYMENT_RECHARGE', 'Home')}
+        <i class="iconfont">&#xe60d;</i>
+    </a>
+    </li>
+    <if condition="($Think.cookie.WaashowLanguage eq 'zh') OR ($Think.cookie.WaashowLanguage eq 'en') ">
+        <li class="<eq name='rechargemenu' value='9'>active</eq>">
+            <a href="{:U('paydollar')}">{:lan('PAYDOLLAR_RECHARGE', 'Home')}
+                <i class="iconfont">&#xe60d;</i>
+            </a>
+        </li>
+    </if>
+</ul>

@@ -1,0 +1,598 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "返回值说明：{'status':状态码,'message':提示信息,'datalist':返回的数据};"
+    },
+    "tags": [
+        {"name": "Spend","description": "消费"}
+    ],
+    "paths": {
+        "/api.php/Api/buyVip": {
+            "post": {
+                "tags": ["Spend"],
+                "operationId": "buyVip",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "购买VIP",
+                "description": "购买VIP",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "userid",
+                        "description": "用户userid",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "vipid",
+                        "description": "会员id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "duration",
+                        "description": "时长 月",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "properties": {
+                                "status": {
+                                    "description": "状态码",
+                                    "type":"integer"
+                                },
+                                "message": {
+                                    "description": "返回消息",
+                                    "type":"string"
+                                },
+                                "balance": {
+                                    "description": "用户秀币余额",
+                                    "type":"string"
+                                }
+                            }
+                        }
+                    },
+                    "-1": {
+                        "description": "系统繁忙"
+                    },
+                    "400": {
+                        "description": "参数有误"
+                    },
+                    "500": {
+                        "description": "请求异常"
+                    },
+                    "400001": {
+                        "description": "您还未登陆，请登陆"
+                    },
+                    "405001": {
+                        "description": "余额不足"
+                    }
+                }
+            }
+        },
+        "/api.php/Api/buyEquipment": {
+            "post": {
+                "tags": ["Spend"],
+                "operationId": "buyEquipment",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "购买座驾",
+                "description": "购买座驾",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "userid",
+                        "description": "用户userid",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "comid",
+                        "description": "座驾id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "duration",
+                        "description": "时长 月",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "properties": {
+                                "status": {
+                                    "description": "状态码",
+                                    "type":"integer"
+                                },
+                                "message": {
+                                    "description": "返回消息",
+                                    "type":"string"
+                                },
+                                "balance": {
+                                    "description": "用户秀币余额",
+                                    "type":"string"
+                                },
+                                "equipnumber": {
+                                    "description": "用户当前拥有的座驾数量",
+                                    "type":"string"
+                                }
+                            }
+                        }
+                    },
+                    "-1": {
+                        "description": "系统繁忙"
+                    },
+                    "400": {
+                        "description": "参数有误"
+                    },
+                    "500": {
+                        "description": "请求异常"
+                    },
+                    "400001": {
+                        "description": "您还未登陆，请登陆"
+                    },
+                    "405001": {
+                        "description": "余额不足"
+                    }
+                }
+            }
+        },
+        "/api.php/Api/buyNiceno": {
+            "post": {
+                "tags": ["Spend"],
+                "operationId": "buyNiceno",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "购买靓号",
+                "description": "购买靓号",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "userid",
+                        "description": "用户userid",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "niceno",
+                        "description": "靓号",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "duration",
+                        "description": "时长 月",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "properties": {
+                                "status": {
+                                    "description": "状态码",
+                                    "type":"integer"
+                                },
+                                "message": {
+                                    "description": "返回消息",
+                                    "type":"string"
+                                },
+                                "balance": {
+                                    "description": "用户秀币余额",
+                                    "type":"string"
+                                }
+                            }
+                        }
+                    },
+                    "-1": {
+                        "description": "系统繁忙"
+                    },
+                    "400": {
+                        "description": "参数有误"
+                    },
+                    "500": {
+                        "description": "请求异常"
+                    },
+                    "400001": {
+                        "description": "您还未登陆，请登陆"
+                    },
+                    "405001": {
+                        "description": "余额不足"
+                    },
+                    "405002": {
+                        "description": "该靓号已被购买"
+                    }
+                }
+            }
+        },
+        "/api.php/Api/buyGuard": {
+            "post": {
+                "tags": ["Spend"],
+                "operationId": "buyGuard",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "购买守护",
+                "description": "购买守护",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "userid",
+                        "description": "用户userid",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "emceeuserid",
+                        "description": "主播userid",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "guardid",
+                        "description": "守护id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "duration",
+                        "description": "守护时长 月",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "price",
+                        "description": "总金额",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "properties": {
+                                "status": {
+                                    "description": "状态码",
+                                    "type":"integer"
+                                },
+                                "message": {
+                                    "description": "返回消息",
+                                    "type":"string"
+                                },
+                                "balance": {
+                                    "description": "用户秀币余额",
+                                    "type":"string"
+                                }
+                            }
+                        }
+                    },
+                    "-1": {
+                        "description": "系统繁忙"
+                    },
+                    "400": {
+                        "description": "参数有误"
+                    },
+                    "500": {
+                        "description": "请求异常"
+                    },
+                    "400001": {
+                        "description": "您还未登陆，请登陆"
+                    },
+                    "405001": {
+                        "description": "余额不足"
+                    }
+                }
+            }
+        },
+        "/api.php/Api/buySeat": {
+            "post": {
+                "tags": ["Spend"],
+                "operationId": "buySeat",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "购买沙发",
+                "description": "购买沙发",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "userid",
+                        "description": "坐沙发用户id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "emceeuserid",
+                        "description": "主播userid",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "seatseqid",
+                        "description": "座位序列ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "price",
+                        "description": "总金额",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "properties": {
+                                "status": {
+                                    "description": "状态码",
+                                    "type":"integer"
+                                },
+                                "message": {
+                                    "description": "返回消息",
+                                    "type":"string"
+                                },
+                                "balance": {
+                                    "description": "用户秀币余额",
+                                    "type":"string"
+                                }
+                            }
+                        }
+                    },
+                    "-1": {
+                        "description": "系统繁忙"
+                    },
+                    "400": {
+                        "description": "参数有误"
+                    },
+                    "500": {
+                        "description": "请求异常"
+                    },
+                    "400001": {
+                        "description": "您还未登陆，请登陆"
+                    },
+                    "405001": {
+                        "description": "余额不足"
+                    },
+                    "405003": {
+                        "description": "该沙发已被其他用户更高价格购买"
+                    }
+                }
+            }
+        },
+        "/api.php/Api/sendGift": {
+            "post": {
+                "tags": ["Spend"],
+                "operationId": "sendGift",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "赠送礼物",
+                "description": "赠送礼物",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "userid",
+                        "description": "送礼物用户id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "emceeuserid",
+                        "description": "主播userid",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "giftid",
+                        "description": "礼物id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "giftcount",
+                        "description": "礼物数量",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "properties": {
+                                "status": {
+                                    "description": "状态码",
+                                    "type":"integer"
+                                },
+                                "message": {
+                                    "description": "返回消息",
+                                    "type":"string"
+                                },
+                                "balance": {
+                                    "description": "用户秀币余额",
+                                    "type":"string"
+                                }
+                            }
+                        }
+                    },
+                    "-1": {
+                        "description": "系统繁忙"
+                    },
+                    "400": {
+                        "description": "参数有误"
+                    },
+                    "500": {
+                        "description": "请求异常"
+                    },
+                    "400001": {
+                        "description": "您还未登陆，请登陆"
+                    },
+                    "405001": {
+                        "description": "余额不足"
+                    }
+                }
+            }
+        },
+        "/api.php/Api/sendFreeGift": {
+            "post": {
+                "tags": ["Spend"],
+                "operationId": "sendFreeGift",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "赠送免费礼物",
+                "description": "赠送免费礼物",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "userid",
+                        "description": "送礼物用户id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "emceeuserid",
+                        "description": "主播userid",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "giftid",
+                        "description": "礼物id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "giftcount",
+                        "description": "礼物数量",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "properties": {
+                                "status": {
+                                    "description": "状态码",
+                                    "type":"integer"
+                                },
+                                "message": {
+                                    "description": "返回消息",
+                                    "type":"string"
+                                },
+                                "balance": {
+                                    "description": "用户秀币余额",
+                                    "type":"string"
+                                }
+                            }
+                        }
+                    },
+                    "-1": {
+                        "description": "系统繁忙"
+                    },
+                    "400": {
+                        "description": "参数有误"
+                    },
+                    "500": {
+                        "description": "请求异常"
+                    },
+                    "400001": {
+                        "description": "您还未登陆，请登陆"
+                    }
+                }
+            }
+        },
+        "/api.php/Api/sendFlyScreen": {
+            "post": {
+                "tags": ["Spend"],
+                "operationId": "sendFlyScreen",
+                "consumes": [ "application/json"],
+                "produces": ["application/json"],
+                "summary": "发飞屏",
+                "description": "发飞屏",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "userid",
+                        "description": "发飞屏用户id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "emceeuserid",
+                        "description": "直播间主播userid",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "properties": {
+                                "status": {
+                                    "description": "状态码",
+                                    "type":"integer"
+                                },
+                                "message": {
+                                    "description": "返回消息",
+                                    "type":"string"
+                                },
+                                "balance": {
+                                    "description": "用户秀币余额",
+                                    "type":"string"
+                                }
+                            }
+                        }
+                    },
+                    "-1": {
+                        "description": "系统繁忙"
+                    },
+                    "400": {
+                        "description": "参数有误"
+                    },
+                    "500": {
+                        "description": "请求异常"
+                    },
+                    "405001": {
+                        "description": "余额不足"
+                    },
+                    "400001": {
+                        "description": "您还未登陆，请登陆"
+                    }
+                }
+            }
+        }
+    }
+}

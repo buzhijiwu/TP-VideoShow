@@ -1,0 +1,113 @@
+<tagLib name="html" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>{:lan('ADMIN_MAN_TITLE', 'Admin')}</title>
+    <link href="__PUBLIC__/Public/statics/css/reset.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/Public/statics/css/system.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/Public/statics/css/table_form.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/Public/statics/css/dialog.css" rel="stylesheet" type="text/css" />
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/dialog.js"></script>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles1.css" title="styles1" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles2.css" title="styles2" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles3.css" title="styles3" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles4.css" title="styles4" media="screen" />
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/admin_common.js"></script>
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/styleswitch.js"></script>
+
+</head>
+<body>
+<style type="text/css">
+    html{_overflow-y:scroll}
+</style><div id="closeParentTime" style="display:none"></div>
+<div class="pad-10">
+    <form id="searchform" name="searchform" action="/Admin/Finance/family_settlement_deatil/" method="get">
+        <input type="hidden" name="operatorid" value="{$search['operatorid']}">
+        <table width="100%" cellspacing="0" class="search-form">
+            <tbody>
+            <tr>
+                <td>
+                    <div class="explain-col">
+                        <link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/js/calendar/jscal2.css"/>
+                        <link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/js/calendar/border-radius.css"/>
+                        <link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/js/calendar/win2k.css"/>
+                        <script type="text/javascript" src="__PUBLIC__/Public/statics/js/calendar/calendar.js"></script>
+                        <script type="text/javascript" src="__PUBLIC__/Public/statics/js/calendar/lang/en.js"></script>
+                        {:lan('TIME', 'Admin')}：
+                        <input type="text" name="settlement_month" id="settlement_month" value="{$search['settlement_month']}" size="10" class="date" readonly>
+                        <script type="text/javascript">
+                            Calendar.setup({
+                                weekNumbers: false,
+                                inputField : "settlement_month",
+                                trigger    : "settlement_month",
+                                dateFormat: "%Y-%m",
+                                showTime: false,
+                                minuteStep: 1,
+                                onSelect   : function() {this.hide();}
+                            });
+                        </script>
+                        {:lan('FAMILY_NAME', 'Admin')}：
+                        <input name="familyname" type="text" class="input-text" value="{$search['familyname']}" />
+                        <select name="status">
+                            <option value="">{:lan('SETTLEMENT_STATUS', 'Admin')}</option>
+                            <option value="0" <eq name="search.status" value="0"> selected</eq> >{:lan('NOT_SETTLEMENT', 'Admin')}</option>
+                            <option value="1" <eq name="search.status" value="1"> selected</eq> >{:lan('HAVE_SETTLEMENT', 'Admin')}</option>
+                        </select>
+                        <input type="submit" class="button"  value="{:lan('BTN_SEARCH', 'Admin')}" />
+                        <div style="float:right;">
+                            <input type="button" class="button" onclick="history.go(-1);" value="{:lan('BACK','Home')}">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+    <form id="myform" action="" method="post" enctype="multipart/form-data">
+        <div class="table-list">
+            <table width="100%">
+                <thead>
+                <tr>
+                    <th>{:lan('TIME', 'Admin')}</th>
+                    <th>{:lan('FAMILY_NAME', 'Admin')}</th>
+                    <th>{:lan('FAMILY_EMCEE_EARN', 'Admin')}(VND)</th>
+                    <th>{:lan('RATIO', 'Admin')}</th>
+                    <th>{:lan('FAMILY_SETTLEMENT', 'Admin')}(VND)</th>
+                    <th>{:lan('SETTLEMENT_STATUS', 'Admin')}</th>
+                    <th>{:lan('OPERATION', 'Admin')}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <volist name="list" id="vo" key="k">
+                    <tr>
+                        <td align='center'>{$vo['earntime']}</td>
+                        <td align="center">{$vo['familyname']}</td>
+                        <td align="center">{$vo['settlement_money']/$vo['ratio']}</td>
+                        <td align='center'>{$vo['ratio']*100}%</td>
+                        <td align='center'>{$vo['settlement_money']}</td>
+                        <td align='center'>
+                            <if condition="$vo['status'] == '1'">
+                                <span style="color:green;">{:lan('HAVE_SETTLEMENT', 'Admin')}</span>
+                                <else/>
+                                <span style="color:red;">{:lan('NOT_SETTLEMENT', 'Admin')}</span>
+                            </if>
+                        </td>
+                        <td align='center'>
+                            <a href="{:U('Admin/Finance/emecc_settlement_deatil/familyid/'.$vo['familyid'].'/settlement_month/'.$search['settlement_month'])}">
+                                <input type="button" style="background-color:#169BD5;" class="button" value="{:lan('EMCEE_DETAIL', 'Admin')}">
+                            </a>
+                        </td>
+                    </tr>
+                </volist>
+                </tbody>
+            </table>
+            <div id="pages">{$page}</div>
+        </div>
+        <input type="hidden" id="return" name="return" value="{$_SERVER["REQUEST_URI"]|base64_encode}" >
+    </form>
+</div>
+</body>
+</html>

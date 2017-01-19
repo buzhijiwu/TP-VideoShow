@@ -1,0 +1,97 @@
+﻿<tagLib name="html" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<meta http-equiv="X-UA-Compatible" content="IE=7" /> 
+<title>{:lan('ADMIN_MAN_TITLE', 'Admin')}</title>
+<link href="__PUBLIC__/Public/statics/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Public/statics/css/system.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Public/statics/css/table_form.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Public/statics/css/dialog.css" rel="stylesheet" type="text/css" />
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/dialog.js"></script>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles1.css" title="styles1" media="screen" />
+<link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles2.css" title="styles2" media="screen" />
+<link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles3.css" title="styles3" media="screen" />
+<link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/Public/statics/css/style/styles4.css" title="styles4" media="screen" />
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/jquery.min.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/admin_common.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/Public/statics/js/styleswitch.js"></script>
+
+</head> 
+<body> 
+<style type="text/css"> 
+	html{_overflow-y:scroll}
+</style><div id="closeParentTime" style="display:none"></div> 
+<div class="pad-10"> 
+<div class="content-menu ib-a blue line-x"> 
+<a class="add fb" href="__URL__/add_announce/"><em>{:lan('ADD_ANNOUNCE','Admin')}</em></a>
+</div> 
+
+<form name="myform" id="myform" action="__URL__/del_multi_announce/" method="post" >
+<div class="table-list"> 
+    <table width="100%"> 
+        <thead> 
+            <tr> 
+			 <th width="16"><input class="inputcheckbox " type="checkbox" value="" id="check_box" onclick="selectall('ids[]');"></th>
+			<th width="80">{:lan('ANNOUNCE_ID','Admin')}</th>
+            <th align="">{:lan('TITLE','Admin')}</th>
+            <th width="120">{:lan('CREATE_TIME','Admin')}</th>
+            <th width="50">{:lan('STATUS','Admin')}</th>
+			<th width="120">{:lan('OPERATION','Admin')}</th>
+            </tr> 
+        </thead> 
+<tbody> 
+	<volist name="announces" id="vo">
+	<tr> 
+		<td align="center"><input class="inputcheckbox " name="ids[]" value="{$vo['announceid']}" type="checkbox"></td>
+		<td align='center'>{$vo['announceid']}</td>
+        <td align="center">{$vo['title']}</td> 
+		<td align='center'>{$vo['createtime']}</td>
+		<td align="center">
+			<if condition="$vo['status']=='0'">
+                {:lan('NOT_START', 'Admin')}
+			<elseif condition="$vo['status']=='1'"/>
+				{:lan('UNDERWAY', 'Admin')}
+			<elseif condition="$vo['status']=='2'"/>
+				{:lan('FINISH', 'Admin')}
+			</if>
+		</td>
+		<td align='center'>
+			<a href="__URL__/edit_announce/announceid/{$vo['announceid']}">{:lan('MODIFY','Admin')}</a> | <a href="javascript:confirmurl('__URL__/del_announce/announceid/{$vo['announceid']}/return/{$_SERVER["REQUEST_URI"]|base64_encode}', '{:lan('CONFIRM_DELETE','Admin')}')">{:lan('BTN_DELETE','Admin')}</a>
+		</td>
+	</tr> 
+	</volist>
+             
+     </tbody> 
+     </table> 
+    <div class="btn"><label for="check_box">{:lan('ALL_OR_CANCEL','Admin')}</label>
+		<input id="delbutton" type="button" disabled="disabled" class="button common-disabled" value="{:lan('BTN_DELETE','Admin')}" onclick="myform.action='__URL__/del_multi_announce/';return confirm_delete()"/>
+		
+	</div> 
+    <div id="pages">{$page}</div> 
+</div> 
+<input type="hidden" id="return" name="return" value="{$_SERVER["REQUEST_URI"]|base64_encode}" >
+</form>
+</div> 
+<script type="text/javascript"> 
+<!--
+function confirm_delete()
+{
+	if(confirm('{:lan('CONFIRM_DELETE','Admin')}')) $('#myform').submit();
+}
+$(".inputcheckbox").click(function () {
+	if($('.inputcheckbox:checked').length>0)
+	{
+		$('#delbutton').attr("disabled",false).removeClass("common-disabled");
+	}
+	else
+	{
+		$('#delbutton').attr("disabled",true).addClass("common-disabled");
+	}
+});
+
+//-->
+</script> 
+</body> 
+</html>

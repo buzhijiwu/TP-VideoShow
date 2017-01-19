@@ -1,0 +1,342 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, mininum-scale=1, maximum-scale=1, user-scaleable=no,  target-densitydpi = high-dpi">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="shortcut icon" href="/Public/Public/Images/favicon.ico"/>
+    <link href="__PUBLIC__/Home/Css/{:getLanguage()}/app/reset.css?time=201600509.css" rel="stylesheet" type="text/css" />
+    <link  href="__PUBLIC__/Home/Css/{:getLanguage()}/app/common.css?time=201600509.css" rel="stylesheet" type="text/css">
+    <link  href="__PUBLIC__/Home/Css/{:getLanguage()}/layout.css?time=201600509.css" rel="stylesheet" type="text/css">
+    <link  href="__PUBLIC__/Home/Css/{:getLanguage()}/app/active.css?time=201600509.css" rel="stylesheet" type="text/css">
+    <!--<link  href="__PUBLIC__/Home/Css/{:getLanguage()}/app/active.less?time=201600509.less" rel="stylesheet" type="text/less">-->
+    <!--<script src="__PUBLIC__/Home/Css/{:getLanguage()}/less-1.6.3.min.js"></script>-->
+
+    <title>Em hát tặng bài hát cho bác Hồ kính yêu</title>
+
+</head>
+<body>
+<div class="may-sing-main">
+    <img class="title" src="/Public/Public/Images/Activity/maySing/app-sing-title.jpg">
+
+    <div class="tab-btn clear">
+        <button class="active">Bảng xếp hạng</button>
+        <button>Quy định trò chơi</button>
+    </div>
+
+    <div class="tab-list">
+        <div class="sing-list-wrap clear">
+            <volist name="SingActivity" id="vo" key="k">
+                <div class="list">
+                    <p class="top-list">
+                        NO.
+                        <span>{$k}</span>
+                    </p>
+                    <div class="list-main">
+                        <a class="line1" href="{:U('Home/Activity/sing_play/type/app/id/'.$vo['userid'])}">
+                            <img src="{$vo.bigheadpic}">
+                            <i class="iconfont">&#xe635;</i>
+                            <p class="name">{$vo.nickname}</p>
+                        </a>
+                        <div class="line2">
+                            Tổng số điểm:
+                            <p>{$vo.total}</p>
+                        </div>
+                        <div class="line3 clear">
+                            <div class="left">
+                                <button class="vote" data-emcuserid="{$vo.userid}">Bỏ phiếu</button>
+                                <div class="num">
+                                    Đã bỏ phiếu:
+                                    <p>{$vo.votecount}</p>
+                                </div>
+                            </div>
+                            <div class="left">
+                                <button class="share" data-emcuserid="{$vo.userid}" data-k="{$k}">Chia sẻ</button>
+                                <div class="num">
+                                    Đã chia sẽ:
+                                    <p>{$vo.sharecount}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </volist>
+        </div>
+        <button class="loading-more">
+            Bấm để xem nhiều hơn
+        </button>
+    </div>
+
+    <div class="sing-rule tab-list dis-none">
+        <ul class="line">
+            <li>
+                1、Idol ghi hình lại 1 bài hát về Bác Hồ.
+            </li>
+            <li>
+                2、Yêu cầu hát lời bài hát, hình ảnh rõ ràng.
+            </li>
+            <li>
+                3、Thí sinh cao điểm nhất được quyết định bởi số phiếu bầu chọn của khán giả.
+            </li>
+            <li>
+                4、Thời gian bình chọn: 9h00 ngày 18/5/2016 đến 23h00 ngày 20/5/2016
+            </li>
+            <li>
+                5、Quy tắc bầu chọn：
+            </li>
+            <li>
+                <p>
+                    a. Mỗi ID khách hàng mỗi ngày có thể bầu chọn 10 phiếu cho thí sinh,
+                    thí sinh không thể tự mình bầu chọn cho chính mình.
+                </p>
+                <p>
+                    b. Mỗi clip được chia sẻ 1 lần được 1 điểm.
+                    Tổng điểm xếp hạng của thí sinh=Số phiếu bầu chọn+Số lượt chia sẽ
+                    (bầu chọn tính 1 điểm, chia sẽ tính 2 điêm)
+                </p>
+            </li>
+        </ul>
+        <table class="line1">
+            <tr>
+                <td>
+                    <i class="iconfont">&#xe637;</i>
+                </td>
+                <td>
+                    Giải Nhất: Idol được yêu thích nhất (Tiền thưởng: 3.000.000 VND) +
+                    Giấy Khen
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <i class="iconfont">&#xe637;</i>
+                </td>
+                <td>
+                    Giải Nhì: Idol phong cách nhất (Tiền thưởng: 2.000.000 VND) +
+                    Giấy khen
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <i class="iconfont">&#xe637;</i>
+                </td>
+                <td>
+                    Giải Ba: Idol có tiềm năng nhất (Tiền Thưởng: 1.000.000 VND) +
+                    Giấy Khen
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <i class="iconfont">&#xe637;</i>
+                </td>
+                <td>
+                    Cùng với trang web tuyên truyền quảng bá banner
+                </td>
+            </tr>
+        </table>
+
+    </div>
+
+</div>
+
+<input name="userid" id="userid" type="hidden" value="{$userid}" />
+
+<!--共用js-->
+<include file="Public:javascript" />
+
+
+<!--app弹框-->
+<include file="Public:appAlert" />
+<script>
+    var that;
+    var timer = null;
+    var shareStatus;
+
+    //防止没有图片时，布局错乱
+    $(".may-sing-main .sing-list-wrap .list .list-main .line1").each(function (index) {
+        $(this).height($(this).width()*200/268);
+    });
+
+
+    //规则和列表切换
+    $(".may-sing-main .tab-btn").on("click","button", function () {
+        $(this).addClass("active").siblings("button").removeClass("active");
+        $(".may-sing-main .tab-list").eq($(this).index()).removeClass("dis-none")
+                .siblings(".tab-list").addClass("dis-none");
+    });
+
+
+    var pageNum = 1;
+
+    $(".loading-more").on("click", function () {
+        pageNum++;
+        $.ajax({
+            url: "{:U('Home/Activity/SingActivity')}",
+            data: {'pageno':pageNum,'pagesize':6},
+            dataType: 'json',
+            type: "post",
+            async:true,
+            success: function(data) {
+
+                $(".may-sing-main .sing-list-wrap").append(buildHtml(data));
+
+                if(data.length<6){
+                    $(".may-sing-main .loading-more").hide();
+                }
+
+                //防止没有图片时，布局错乱
+                $(".may-sing-main .sing-list-wrap .list .list-main .line1").each(function (index) {
+                    $(this).height($(this).width()*200/268);
+                });
+
+            },
+            error: function() {
+            }
+        });
+    });
+
+
+    function buildHtml(data){
+        var html = "";
+
+        for(var i = 0; i < data.length; i++){
+            html +=
+                    "<div class=\"list\">"
+                    +"<p class=\"top-list\">"
+                    +"NO."
+                    +"<span>"+((pageNum-1)*6+i+1)+"</span>"
+                    +"</p>"
+                    +"<div class=\"list-main\">"
+                    +"<a class=\"line1\" href=\"{:U('Home/Activity/sing_play/type/app/id/"+data[i].userid+"')}\">"
+                    +"<img src="+data[i].bigheadpic+">"
+                    +"<i class=\"iconfont\">&#xe635;</i>"
+                    +"<p class=\"name\">"+data[i].nickname+"</p>"
+                    +"</a>"
+                    +"<div class=\"line2\">"
+                    +"Tổng số điểm:"
+                    +"<p>"+data[i].total+"</p>"
+                    +"</div>"
+                    +"</div>"
+                    +"</div>"
+                    +"</div>"
+        }
+
+        return html;
+    }
+
+    validate = validateData.vi;
+
+    $(".may-sing-main .sing-list-wrap").on("click"," .list .list-main .line3 .left .vote",function(){
+
+        that = $(this);
+
+        appIsLogin("vote");
+
+    });
+
+    $(".may-sing-main .sing-list-wrap").on("click",".list .list-main .line3 .left .share",function(){
+
+        that = $(this);
+
+        var index = that.index();
+
+        var emceeuserid=that.data('emcuserid');
+
+        var bigheaderpic="/Public/Public/Images/Virheadpic/120120/119.png";
+
+        var str =
+                '{"success":"shareSuccess","fail":"shareFail","emceeuserid":"'+
+                emceeuserid+'","bigheaderpic":"'+bigheaderpic+'","sharetype":"2"}';
+
+        if(navigator.platform != "iPhone"){
+            window.JavaScriptLocalObj.shareByAndroid(str);
+        }else{
+            thirdShare(str);
+        }
+    });
+    function shareSuccess(){
+        clearTimeout(timer);
+
+        var data = JSON.parse(appData);
+        var emceeuserid=that.data('emcuserid');
+
+        $.ajax({
+            type: "post",
+            url: "/Home/Share/index",
+            dataType: "json",
+            data: {
+                'userid'  : data.userid,
+                'emceeuserid' : emceeuserid,
+                'shareplat' : 1,
+                'sharetype' : 2,
+                'devicetype' : 2
+            },
+            success: function (result) {
+                if(result.status == 1){
+
+                    var shareNum = (parseInt(that.siblings(".num").find("p").html())+1).toString();
+                     var pointNum = (parseInt(that.parent().parent().siblings(".line2").find("p").html())+2).toString();
+
+                     that.next(".num").find("p").html(shareNum);
+                     that.parent().parent().siblings(".line2").find("p").html(pointNum);
+
+                    $(".app-common-alert").removeClass("dis-none").find(".msg").html(validate.mistake44);
+                    timer = setTimeout(function () {
+                        $(".app-common-alert").addClass("dis-none")
+                    },1000);
+                }else{
+                    $(".app-common-alert").removeClass("dis-none").find(".msg").html(result.message);
+                    timer = setTimeout(function () {
+                        $(".app-common-alert").addClass("dis-none")
+                    },1000);
+                }
+            },
+            error: function (e) {
+            }
+        });
+
+    }
+
+    function shareFail(){
+        $(".app-common-alert").removeClass("dis-none").find(".msg").html(validate.sharecontent5);
+        timer = setTimeout(function () {
+            $(".app-common-alert").addClass("dis-none")
+        },1000);
+    }
+
+    function vote (){
+        var data = JSON.parse(appData);
+        var emceeuserid=that.data('emcuserid');
+        var pointNum = 0,
+                shareNum = 0,
+                voteNum = 0;
+        $.ajax({
+            url: "{:U('Home/Vote/SingActivityVote')}",
+            data: {'userid':data.userid,'emceeuserid':emceeuserid},
+            dataType: 'json',
+            type: "post",
+            async:true,
+            success: function(res) {
+                if(res.status == 1){
+                    alert(res.message);
+                    voteNum = parseInt(that.siblings(".num").find("p").html())+1;
+                    pointNum = parseInt(that.parent().parent().siblings(".line2").find("p").html())+1;
+                    that.next(".num").find("p").html(voteNum);
+                    that.parent().parent().siblings(".line2").find("p").html(pointNum);
+                }else{
+                    alert(res.message);
+                }
+
+            },
+            error: function(res) {
+
+            }
+        });
+    }
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,326 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=7" />
+<title>{:C('TITLE_CONTENT')}</title>
+
+<css file="__PUBLIC__/Old/statics/css/reset.css" />
+<css file="__PUBLIC__/Old/statics/css/system.css" />
+<css file="__PUBLIC__/Old/statics/css/table_form.css" />
+<css file="__PUBLIC__/Old/statics/css/style/styles1.css" />
+<css file="__PUBLIC__/Old/statics/css/style/styles2.css" />
+<css file="__PUBLIC__/Old/statics/css/style/styles3.css" />
+<css file="__PUBLIC__/Old/statics/css/style/styles4.css" />
+
+<js file="/Public/Admin/Js/jquery-1.8.3.min.js" />
+<js file="__PUBLIC__/Tools/Js/layer/layer/layer.js" />
+<js file="__PUBLIC__/Tools/Js/laydate/laydate.js" />
+<js file="__PUBLIC__/Admin/Js/Function/pageAjax.js" />
+
+</head>
+<body>
+
+
+<div class="table-list">
+<input style="border:1px solid #CCE;margin-left:10px;margin-top:10px;margin-bottom:10px;" type="text" id="search_true_name" placeholder="请输入要搜索的真实姓名" />
+<input type="button" id="search_btnok" value="搜 索" class="button" />
+<input type="button" id="all_btnok" value="查看全部" class="button" />
+<span class="fspan">
+	<table class="table_data"  width="100%" cellspacing="0">
+		<thead>
+			<tr>
+				<th>{:lan('SYS_NUMBER')}</th>  {/*序号*/}
+				<th>{:lan('SYS_USERNAME')}</th>  {/*用户名*/}
+				<th>{:lan('SYS_REALNAME')}</th>  {/*真实姓名*/}
+				<th>{:lan('SYS_ROLER')}</th>   {/*所属角色*/}
+				<th>{:lan('SYS_POSITION')}</th>   {/*所属职位*/}
+				<th>{:lan('SYS_TELNUM')}</th>   {/*联系号码*/}
+				<th>{:lan('SYS_ADDRESS')}</th>   {/*联系地址*/}
+				<th>{:lan('SYS_LASTLOGINTIME')}</th>  {/*最后登录时间*/}
+				<th>{:lan('SYS_LASTLOGINIP')}</th>   {/*最后登录IP*/}
+				<th>{:lan('SYS_ACCOUNTCREATETIME')}</th>   {/*账号创建时间*/}
+				<th>{:lan('SYS_DOSTH')}</th>   {/*相关操作*/}
+			</tr>
+		</thead>
+		<tbody>
+		<foreach name="managerList" item="v" >
+			<tr adminid="{$v.adminid}">
+				<td align="center">{$key+1}</td>
+				<td class="adminname" align="center">{$v.adminname}</td>
+				<td class="realname" align="center">{$v.realname}</td>
+				<td class="rolename" align="center"><if condition="!isset($v['rolename'])"><b style="color:red;">超级管理员</b><else />{$v.rolename}</if></td>
+				<td class="position" align="center">{$v.position}</td>
+				<td class="contactno" align="center">{$v.contactno}</td>
+				<td class="address" align="center">{$v.address}</td>
+				<td class="lastlogintime" align="center">
+					<if condition="!$v['lastlogintime']">
+						<b style="color:green;">暂无登录记录</b>
+					<else />
+						{$v['lastlogintime']}
+					</if>
+				</td>
+				<td class="lastloginip" align="center">
+				<if condition="!$v['lastloginip']">
+					<b style="color:green;">暂无登录记录</b>
+				<else />
+					{$v['lastloginip']}
+				</if>
+				</td>
+				<td class="createtime" align="center">{$v.createtime}</td>
+				<td align="center">
+					<a uname="{$v['realname']}" adminid="{$v['adminid']}" class="a_edit" href="javascript:;" style="margin-right:15px;">修改</a>
+					<if condition="$v['adminid'] neq 1" >
+					<a uname="{$v['realname']}" adminid="{$v['adminid']}" class="a_delete" href="javascript:;">删除</a>
+					</if>
+				</td>
+			</tr>
+		</foreach>
+		</tbody>
+	</table>
+</span>
+	</div>
+
+<ul class="page">
+		<li style="margin-left:60px;"></li>
+		<li id="lipage2">
+			<a pageno="2" href="javascript:;" style="color:#2E4B6A;font-weight:bold;text-decoration:none;">首页</a>
+		</li>
+		<li id="lipage3">
+			共 <font id="font_pageno" color="#CA5E58">{$totalpage}</font> 页
+		</li>
+		<li id="lipage4">
+			<a href="javascript:;" style="color:#2E4B6A;font-weight:bold;text-decoration:none;">上一页</a>
+		</li>
+		<li id="lipage5">
+			<a pageno="1" href="javascript:;" style="color:#2E4B6A;font-weight:bold;text-decoration:none;">下一页</a>
+		</li>
+		<li id="lipage6">
+		<font style="color:#2E4B6A;font-weight:bold;text-decoration:none;">当前：</font>
+			<select pageno="1">
+				<for start="1" end="$totalpage" comparison="elt" step="1" name="i">
+					<option value="{$i}" <if condition="$i eq $pageno">selected</if>>第 {$i} 页</option>
+				</for>
+			</select>
+		</li>
+		<li id="lipage7">
+			<a href="javascript:;" style="color:#2E4B6A;font-weight:bold;text-decoration:none;">末页</a>
+		</li>
+	</ul>
+</body>
+<script>
+$('#lipage2 , #lipage4').hide();
+$('#lipage3').css({'margin-left':'240px'});
+
+
+$('#lipage6 select').change(function() {
+	var pageno = parseInt($(this).attr('pageno'));
+	var pageno_val = parseInt($(this).val());
+	var type = pageno>pageno_val ? 1 : 2 ;
+	//alert('pageno_val:'+pageno_val+'--pageno:'+pageno);
+	ajaxPage("{:U('RBAC/managerList')}",$(this),type,1);
+});
+
+//点击下一页
+$(document).on('click','#lipage5 a',function() {
+	ajaxPage("{:U('RBAC/managerList')}",$(this),2);
+	var pageno = parseInt($('#lipage6 select').attr('pageno'));
+	$('#lipage6 select').attr('pageno',pageno+1);
+});
+
+//点击上一页
+$(document).on('click','#lipage4 a',function() {
+	ajaxPage("{:U('RBAC/managerList')}",$(this),1);
+	var pageno = parseInt($('#lipage6 select').attr('pageno'));
+	$('#lipage6 select').attr('pageno',pageno-1);
+});
+
+//点击首页
+$(document).on('click','#lipage2 a,#all_btnok',function() {
+	var $data = {
+		'action' : 'page',
+		'pageno' : 1
+	};
+	$('#search_true_name').val('');
+	clickIndex("{:U('RBAC/managerList')}",$data,1);
+	$('ul.page').show();
+});
+
+//点击末页
+$(document).on('click','#lipage7 a',function() {
+	var $data = {
+		'action' : 'page',
+		'pageno' : parseInt("{$totalpage}")
+	};
+	clickIndex("{:U('RBAC/managerList')}",$data,2);
+});
+</script>
+<style>
+ul.page {width:1130px;height:40px;border:0px solid red;margin-top:20px;}
+ul.page li {list-style:none;border:0px solid red;min-width:60px;height:20px;float:left;margin-top:10px;margin-left:30px;text-align:center;}
+#lipage2 {margin-left:150px;}
+#lipage3 {font-weight:bold;}
+</style>
+<script>
+//弹出一个页面层
+$(document).on('click','a.a_edit',function() {
+	var uname = $(this).attr('uname');
+	var adminid = $(this).attr('adminid');
+	var loading = {};
+	//layer.close(index)  AJAX回调关闭
+	var $data = {
+		'adminid' : adminid
+	};
+	$.ajax({
+		'url' : "{:U('RBAC/managerList')}",
+		'type' : 'POST',
+		dataType : 'json',
+		'data' : $data,
+		beforeSend : function() {
+			loading = layer.load(3);
+		},
+		complete : function () {
+			layer.close(loading);
+		},
+		success : function (a) {
+			//getWindow('张迪',html,a);
+			if(a.status=='error') {
+				layer.close(loading);
+				layer.alert(a.message, {icon: 2});
+				return;
+			}
+			delnull(a);
+			completeWindow(uname,adminid,a);
+		}
+	});
+});
+
+
+
+$(document).on('click','a.a_delete',function() {
+	var adminid = $(this).attr('adminid');
+	var $thi = $(this);
+	layer.msg('确定要删除吗？', {
+	    time: 0 //不自动关闭
+	    ,btn: ['是', '否']
+	    ,yes: function(index) {
+	        layer.close(index);
+	        if(adminid==1) {
+	        	layer.msg('超级管理员不允许删除', {icon: 2});
+	        } else {
+	        	$.ajax({
+	        		'url' : "{:U('RBAC/managerList')}",
+	        		'type' : 'POST',
+	        		data : {'adminid':adminid,action : 'delete','pageno':$('#lipage5 a').attr('pageno')},
+	        		dataType : 'json',
+	        		beforeSend : function() {
+						loading = layer.load(3);
+					},
+					complete : function () {
+						layer.close(loading);
+					},
+					success : function (a) {
+						if(a.status=='error') {
+							layer.msg(a.message, {icon: 2});
+							return;
+						}
+						afterDel(a);
+						/*$thi.parents('tr').eq(0).slideUp(100,function() {
+							$(this).remove();
+							//弹出 '删除成功'
+							layer.msg('删除成功', {icon: 1,time:1000});
+						});*/
+					}
+	        	});
+	        }
+	    }
+	});
+});
+</script>
+<style>
+#window tr {height:30px;}
+</style>
+
+<script>
+//点击 '提交修改' 时
+$(document).on('click','.button_',function() {
+	var $thi = $(this);
+	var table = $thi.parents('span.fspan').eq(0).find('table').eq(0);
+	var realname = table.find('input[name=realname]').eq(0).val();
+	var $password = table.find('input[name=password]').eq(0).val();
+	var $cpassword = table.find('input[name=cpassword]').eq(0).val();
+	var position = table.find('input[name=position]').eq(0).val();
+	var roleid = table.find('select[name=role]').eq(0).val();
+	var contactno = table.find('input[name=contactno]').eq(0).val();
+	var address = table.find('input[name=address]').eq(0).val();
+	var $data = {
+		'action' : 'toEdit',  //提交修改
+		'adminid' : $thi.attr('adminid'),
+		'password' : $password,
+		'cpassword' : $cpassword,
+		'realname' : realname,
+		'position' : position,
+		'roleid' : roleid,
+		'contactno' : contactno,
+		'address' : address,
+	};
+	$.ajax({
+		'url' : "{:U('RBAC/managerList')}",
+		'type' : 'POST',
+		dataType : 'json',
+		'data' : $data,
+		beforeSend : function() {
+			loading = layer.load(3);
+		},
+		complete : function () {
+			layer.close(loading);
+		},
+		success : function (a) {
+			layer.close(loading);
+			layer.closeAll();
+			if(a.status=='error') {
+				layer.alert(a.message, {icon: 2});
+				return;
+			}
+			delnull(a.datalist);
+			$('table.table_data').find('tr').each(function() {
+				if($(this).attr('adminid')==a.datalist.adminid) {
+					$(this).find('td.realname').eq(0).text(a.datalist.realname);
+					$(this).find('td.position').eq(0).text(a.datalist.position);
+					$(this).find('td.rolename').eq(0).text(a.datalist.rolename);
+					if(!a.datalist.rolename)
+						$(this).find('td.rolename').eq(0).html('<b style="color:red;">超级管理员</b>');
+					$(this).find('td.contactno').eq(0).text(a.datalist.contactno);
+					$(this).find('td.address').eq(0).text(a.datalist.address);
+					return false;
+				}
+			});
+			layer.msg('操作成功', {icon: 1,time:1000});
+		}
+	});
+});
+$('#search_btnok').click(function() {
+	var content = $.trim($('#search_true_name').val());
+	if(content=='') {
+		$('#search_true_name').val('');
+		layer.alert('请输入搜索内容', {icon: 2,title:'提示信息'});
+		return;
+	}
+	searchName("{:U('RBAC/managerList')}",content);
+});
+
+$(document).on('click','ul.page a',function() {
+	$('#search_true_name').val('');
+});
+$(document).on('change','ul.page select',function() {
+	$('#search_true_name').val('');
+});
+</script>
+<if condition="$totalpage ELT 1" >
+<style>
+#lipage5 , #lipage6 , #lipage7 {display:none;}
+</style>
+<script>
+$('#lipage3').css({'margin-left':'400px'});
+</script>
+</if>

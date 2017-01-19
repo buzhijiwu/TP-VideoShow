@@ -1,0 +1,299 @@
+<include file="index" />
+
+<input type="hidden" value="{$Think.session.userid}" id="userid">
+<input type="hidden" value="{$Think.session.bigheadpic}" id="bigheadpic">
+
+<style>
+    .login-other-wrap {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background-color: rgba(0, 0, 0, 0.4);
+        z-index: 999;
+    }
+    .login-other-wrap .login-other {
+        position: absolute;
+        bottom: 95px;
+        width: 705px;
+        height: 570px;
+        left: 50%;
+        margin-left: -410px;
+        background-image: url("/Public/Public/Images/Common/other-login-bg.png");
+        background-position: 0 0;
+    }
+    .login-other-wrap .login-other .close-other-login {
+        position: absolute;
+        top: 95px;
+        left: 500px;
+        font-size: 24px;
+        z-index: 10;
+    }
+    .login-other-wrap .login-other .close-other-login:hover {
+        cursor: pointer;
+    }
+    .login-other-wrap .login-other .icon-group {
+        position: absolute;
+        top: 215px;
+        left: 230px;
+        width: 260px;
+        z-index: 9;
+    }
+    .login-other-wrap .login-other .icon-group .link {
+        float: left;
+        width: 65px;
+        height: 50px;
+        background-image: url("/Public/Public/Images/Common/other-login-bg.png");
+    }
+    .login-other-wrap .login-other .icon-group .link.fb {
+        background-position: 6px -573px;
+    }
+    .login-other-wrap .login-other .icon-group .link.tw {
+        background-position: -61px -573px;
+    }
+    .login-other-wrap .login-other .icon-group .link.gl {
+        background-position: -130px -573px;
+    }
+    .login-other-wrap .login-other .icon-group .link.log {
+        background-position: -202px -573px;
+    }
+    .login-other-wrap .login-other .icon-group .agreement {
+        position: absolute;
+        top: 130px;
+        left: 32px;
+        text-align: center;
+        width: 194px;
+        color: #aaa;
+    }
+    .login-other-wrap .login-other .icon-group .agreement:hover {
+        color: #fff;
+        text-decoration: underline;
+    }
+    .login-other-wrap .login-other .other-person {
+        position: absolute;
+        top: -10px;
+        left: 395px;
+        z-index: 8;
+    }
+    /*上传封面*/
+    .upLoad-img-alert-wrap{
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top:0;
+        left:0;
+        background-color: rgba(0,0,0,0.4);
+        z-index: 1000;
+    }
+    .upLoad-img-alert{
+        width: 600px;
+        padding: 20px;
+        position: absolute;
+        top:50%;
+        left: 50%;
+        margin-top: -250px;
+        margin-left: -300px;
+        background-color: rgba(245,245,245,0.9);
+        border-radius: 10px;
+    }
+    .upLoad-img-alert .container{
+        width: 330px;
+        margin: 0 auto;
+    }
+    .upLoad-img-alert .container .imageBox{
+        height: 230px;
+        width:330px ;
+        border:1px solid #ccc;
+    }
+    .upLoad-img-alert .container .imageBox .thumbBox{
+        border-color: #333;
+    }
+    .upLoad-img-alert .container .info{
+        line-height: 50px;
+        font-size: 20px;
+        height: 50px;
+        text-align: center;
+        color: #777;
+    }
+    .upLoad-img-alert .container .action{
+        width: 330px;
+    }
+    .upLoad-img-alert hr{
+        width: 600px;
+        margin-top: 30px;
+        margin-left: -20px;
+        border: none;
+        border-top:1px solid #ccc;
+    }
+    .upLoad-img-alert .button{
+        width: 330px;
+        height: 40px;
+        border-radius: 5px;
+        margin: 20px auto;
+        background-color: #FF5e5c;
+        display: block;
+        color: #fff;
+        font-size: 18px;
+    }
+    .upLoad-img-alert .button:hover{
+        background-color:#FF3330 ;
+    }
+    .upLoad-img-alert .colse-upLoad-img{
+        font-size: 20px;
+        color: #FF5e5c;
+        top:10px;
+        right: 10px;
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        line-height: 40px;
+        display: block;
+        position: absolute;
+    }
+    .upLoad-img-alert .colse-upLoad-img:hover{
+        cursor: pointer;
+    }
+</style>
+<link rel="stylesheet" href="/Public/Tools/Js/cropper/css/style.css" type="text/css" />
+<script type="text/javascript" src="/Public/Tools/Js/cropper/js/cropbox.js"></script>
+
+
+<!--定时登录框-->
+<div class="login-other-wrap dis-none">
+    <div class="login-other">
+        <div class="icon-group clear">
+            <a href="{:U('Login/facebookLogin4Recruit')}" class="link fb"></a>
+            <a href="{:U('Login/twitterLogin4Recruit')}" class="link tw"></a>
+            <a href="{:U('Login/googleLogin4Recruit')}" class="link gl"></a>
+            <button onclick="common.showLog()" class="link log"></button>
+            <a href="{:U('Home/Index/registerAgreement')}" class="agreement" target="_blank">{:lan("LOGIN_AGREEMENT", "Home")}</a>
+        </div>
+        <img src="/Public/Public/Images/Common/other-person.png" class="other-person">
+        <i class="iconfont close-other-login">&#xe61b;</i>
+    </div>
+</div>
+
+<!--上传封面-->
+<div class="upLoad-img-alert-wrap dis-none">
+    <div class="upLoad-img-alert">
+        <div class="container">
+            <div class="imageBox imageBoxtwo">
+                <div class="thumbBox thumbBoxtwo"></div>
+                <div class="spinner" style="display: none"></div>
+            </div>
+            <p class="info">{:lan('UPLOAD_INFO', 'Home')}</p>
+            <div class="action">
+                <div class="new-contentarea tc">
+                    <a href="javascript:void(0)" class="upload-img">
+                        <label for="upload-file">{:lan('SELECT_PIC', 'Home')}</label>
+                    </a>
+                    <input type="file" class="" name="upload-file" id="upload-file"  accept="image/png,image/jpg,image/jpeg"/>
+                </div>
+                <input type="button" id="btnZoomIn" class="Btnsty_peyton" value="+"  >
+                <input type="button" id="btnZoomOut" class="Btnsty_peyton" value="-" >
+            </div>
+        </div>
+        <hr>
+        <i class="colse-upLoad-img iconfont">&#xe61b;</i>
+        <button id="saveheadpic" class="save-header-img button">{:lan('SAVE', 'Home')}</button>
+    </div>
+
+</div>
+
+<script>
+    $(function () {
+
+        if($("#bigheadpic").val()){
+            window.location.href = "/{$Think.session.showroomno}"
+        }else if($("#userid").val()>0 && !$("#bigheadpic").val()){
+            $(".login-other-wrap").addClass("dis-none");
+            $(".upLoad-img-alert-wrap").removeClass("dis-none");
+        }else{
+            $(".login-other-wrap").removeClass("dis-none");
+            $(".upLoad-img-alert-wrap").addClass("dis-none");
+        }
+
+        $(".login-other .close-other-login").on("click", function () {
+            $(".login-other-wrap").addClass("dis-none");
+        });
+
+        $(".upLoad-img-alert-wrap .colse-upLoad-img").on("click", function () {
+            $(".upLoad-img-alert-wrap").addClass("dis-none");
+        });
+
+
+        var options =
+        {
+            thumbBox: '.thumbBox',
+            spinner: '.spinner',
+            imgSrc: ''
+        };
+        var cropper = $('.upLoad-img-alert .imageBox').cropbox(options,true);
+
+        var bigheadpic = "{$bigheadpic}";
+        var img = cropper.getDataURL(bigheadpic);
+        cropper.noZoom();
+
+        $('.upLoad-img-alert #upload-file').on('change', function () {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                options.imgSrc = e.target.result;
+                cropper = $('.upLoad-img-alert .imageBox').cropbox(options,true);
+            };
+            reader.readAsDataURL(this.files[0]);
+            // this.files = [];
+            setTimeout(function () {
+                previePic()
+            }, 150);
+        });
+        $('.upLoad-img-alert #btnCrop').on('click', function () {
+            previePic();
+        });
+
+        $('.upLoad-img-alert #btnZoomIn').on('click', function () {
+            cropper.zoomIn();
+            previePic();
+        });
+        $('.upLoad-img-alert #btnZoomOut').on('click', function () {
+            cropper.zoomOut();
+            previePic();
+        });
+
+        $('.upLoad-img-alert .imageBox').bind('mousewheel DOMMouseScroll mousemove', function () {
+            previePic();
+        });
+
+        //第一次加载图片
+        function fisrtLoadImg(){
+            var url = $(".imageBox.imageBoxtwo").css("background-image");
+            img = url.substring(5,url.length-2);
+        }
+        fisrtLoadImg();
+
+
+        function previePic() {
+            img = cropper.getDataURL();
+        }
+        $('.upLoad-img-alert #saveheadpic').on('click', function () {
+            $.ajax({
+                type: "post",
+                url: "/Usercenter/modBigHeadpic/",
+                dataType: "json",
+                data: {"headpic": img},
+                success: function (result) {
+                    if (result.status == 0) {
+                        common.alertAuto(false,result.msg, function () {
+                            window.location.href = "/{$Think.session.showroomno}"
+                        });
+                    }else{
+                        common.alertAuto(false,result.msg);
+                    }
+                },
+                error: function (e) {
+
+                }
+            });
+        })
+    })
+</script>

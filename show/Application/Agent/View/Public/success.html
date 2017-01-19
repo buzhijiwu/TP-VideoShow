@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html>
+<head>
+<title>页面提示</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv='Refresh' content='{$waitSecond};URL={$jumpUrl}'>
+<style>
+html, body{margin:0; padding:0; border:0 none;font:14px Tahoma,Verdana;line-height:150%;background:white}
+a{text-decoration:none; color:#ff5e5c;}
+a:hover{color: #e55755;text-decoration: underline}
+div.message{margin:10% auto 0px auto;clear:both;padding:5px; text-align:center;}
+.message-bg-success{
+	background-image: url("../../../../Public/Public/Images/Admin/success.png");
+	background-position: center center;
+	height: 300px;
+	background-repeat: no-repeat;
+	position: relative;
+	width: 820px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.message-bg-success .success{
+	line-height: 80px;
+	font-size: 28px;
+	color: #ff5e5c;
+	position: absolute;
+	top: 110px;
+	left:340px;
+}
+.message-bg-error{
+	background-image: url("../../../../Public/Public/Images/Admin/fail.png");
+	background-position: center center;
+	height: 300px;
+	background-repeat: no-repeat;
+	position: relative;
+	width: 820px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.message-bg-error .error{
+	line-height: 80px;
+	font-size: 28px;
+	color: #ff5e5c;
+	position: absolute;
+	top: 110px;
+	left:340px;
+}
+div.msg{margin:20px 0px}
+</style>
+</head>
+<body>
+<div class="message">
+	<div class="msg">
+	<present name="message" >
+		<div class="message-bg-success">
+			<p class="success">{:lan('OPERATION_SUCCESSFUL', 'Admin')}{$message}</p>
+		</div>
+	<else/>
+		<div class="message-bg-error">
+			<p class="error">{:lan('OPERATION_FAILED', 'Admin')}{$error}</p>
+		</div>
+	</present>
+	</div>
+	<div class="tip">
+	<present name="closeWin" >
+		{:lan('PAGE_AUTO_CLOSE', 'Admin')}，{:lan('NOT_WANT_WAIT', 'Admin')} <a href="{$jumpUrl}">{:lan('HERE', 'Admin')}</a> {:lan('CLOSE', 'Admin')}
+	<else/>
+	<script>
+	setTimeout(function() {
+		window.location.href = "{$jumpUrl}";
+	},3000);
+	</script>
+		{:lan('PAGE_AUTO_CLOSE', 'Admin')}，{:lan('NOT_WANT_WAIT', 'Admin')} <a href="{$jumpUrl}">{:lan('HERE', 'Admin')}</a> {:lan('JUMP', 'Admin')}
+	</present>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<extend name="Public:list" />
+<block name="title"></block>
+<block name="css"></block>
+
+<block name="main">
+  <div id="searchid">
+    <form name="searchform" action="/Admin/Show/user_sign_audit" method="get" >
+      <table width="100%" cellspacing="0" class="search-form">
+        <tbody>
+          <tr>
+            <tr>
+            <td><div class="explain-col"> {:lan('REGISTER_TIME', 'Admin')}：
+               <input type="text" name="start_time" id="start_time" value="{$Think.get.start_time}" size="10" class="date" readonly>
+                &nbsp;<script type="text/javascript">			Calendar.setup({
+			weekNumbers: false,
+		    inputField : "start_time",
+		    trigger    : "start_time",
+		    dateFormat: "%Y-%m-%d",
+		    showTime: false,
+		    minuteStep: 1,
+		    onSelect   : function() {this.hide();}
+			});
+        </script>- &nbsp;
+                <input type="text" name="end_time" id="end_time" value="{$Think.get.end_time}" size="10" class="date" readonly>
+                &nbsp;<script type="text/javascript">			Calendar.setup({
+			weekNumbers: false,
+		    inputField : "end_time",
+		    trigger    : "end_time",
+		    dateFormat: "%Y-%m-%d",
+		    showTime: false,
+		    minuteStep: 1,
+		    onSelect   : function() {this.hide();}
+			});
+        </script>
+                {:lan('USERNAME', 'Admin')}/{:lan('NICKNAME', 'Admin')}/{:lan('ROOMNO', 'Admin')}：
+                <input name="keyword" type="text" class="input-text" value="{$keyword}" />
+                <input type="submit" name="search" class="button" value="{:lan('SEARCH', 'Admin')}" />
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+  <style>
+  #myform th, #myform td { text-align: center;}
+  </style>
+  <form name="myform" id="myform" action="" method="post" >
+    <div class="table-list">
+      <table width="100%">
+        <thead>
+          <tr>
+            <th width="16"><input type="checkbox" value="" id="check_box" onclick="selectall('ids[]');"></th>
+            <th width="40">ID</th>
+            <th>{:lan('HEADPHOTO', 'Admin')}</th>
+            <th>{:lan('USERNAME', 'Admin')}</th>
+            <th>{:lan('NICKNAME', 'Admin')}</th>
+            <th>{:lan('ROOMNO', 'Admin')}</th>            
+            <th>{:lan('SEX', 'Admin')}</th>
+            <th>{:lan('REGISTER_TIME', 'Admin')}</th>
+            <th>{:lan('OPERATION', 'Admin')}</th>
+          </tr>
+        </thead>
+        <tbody>
+        	<volist name="data.list" id="v">
+          <tr>
+            <td><input class="inputcheckbox " name="ids[]" value="{$v.userid}" type="checkbox"></td>
+            <td >{$v.userid}</td>
+            <td width="100"><img src="{$Think.config.IMAGE_BASE_URL}{$v.smallheadpic}" style=" width: 60px; height: 60px;"></td>
+            <td><span style="" >{$v.username}</span></td>
+            <td>{$v.nickname}</td>
+            <td>{$v.roomno}</td>            
+            <td><eq name="v.sex" value="0">{:lan('MALE', 'Admin')}<else/>{:lan('FEMALE', 'Admin')}</eq></td>
+            <td>{$v.registertime}</td>
+            <td>
+            	<a href="__URL__/user_audit_edit/id/{$v.userid}">{:lan('AUDIT_SIGN', 'Admin')}</a>
+            </td>
+          </tr>
+          </volist>
+        </tbody>
+      </table>
+      <div id="pages">{$data.page}</div>
+    </div>
+  </form>
+</block>
+
+<block name="js">
+<script type="text/javascript">
+function confirm_delete(){
+	if(confirm('{:lan('CONFIRM_DELETE', 'Admin')}')) $('#myform').submit();
+}
+</script>
+</block>
